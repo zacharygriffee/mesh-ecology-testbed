@@ -47,6 +47,11 @@ See:
 - [docs/doctrine-boundary.md](docs/doctrine-boundary.md)
 - [docs/design-note.md](docs/design-note.md)
 - [docs/phases.md](docs/phases.md)
+- [docs/resident-lab.md](docs/resident-lab.md)
+- [docs/mature-vs-cold.md](docs/mature-vs-cold.md)
+- [docs/api/resident-lab.md](docs/api/resident-lab.md)
+- [docs/timing-buckets.md](docs/timing-buckets.md)
+- [docs/getting-started-plan.md](docs/getting-started-plan.md)
 
 ## Quick Start
 
