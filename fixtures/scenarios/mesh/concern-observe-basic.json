@@ -1,0 +1,55 @@
+{
+  "id": "concern-observe-basic",
+  "title": "Concern observe basic",
+  "backendTargets": ["mesh"],
+  "description": "Disposable local mesh run with one discovery surface, one concern surface, one observer client, and one seed publication.",
+  "lab": {
+    "transport": {
+      "kind": "fakeswarm"
+    }
+  },
+  "concerns": [
+    {
+      "label": "testbed-basic",
+      "advertiseOnDiscovery": true
+    }
+  ],
+  "observerClients": [
+    {
+      "id": "sdk-observer-1",
+      "kind": "mesh-sdk",
+      "discoverySource": "lab-discovery"
+    }
+  ],
+  "seedPublications": [
+    {
+      "type": "job-work",
+      "cap": "cap/testbed/concern-observe-basic",
+      "jobMeta": {
+        "scenario": "concern-observe-basic"
+      },
+      "pubMeta": {
+        "scenario": "concern-observe-basic",
+        "source": "mesh-lab"
+      }
+    }
+  ],
+  "expectedObservationWindows": [
+    {
+      "kind": "state",
+      "expect": {
+        "discoveryScan": true,
+        "minimumConcerns": 1,
+        "minimumJobs": 1,
+        "minimumPubs": 1
+      }
+    },
+    {
+      "kind": "trace",
+      "expect": {
+        "stage": "pub_present_rat_missing"
+      }
+    }
+  ]
+}
+

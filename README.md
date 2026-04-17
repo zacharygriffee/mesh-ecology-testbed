@@ -94,7 +94,23 @@ Scenarios:
 - Use the scenario picker in the browser to publish example payloads and watch observations arrive live over SSE.
 - `npm run example:session` runs a small scripted local session against the HTTP API.
 - `npm run example:plurality` runs the plurality scenario from a script.
+- `npm run lab:run -- concern-observe-basic` runs the first real local mesh lab scenario and writes artifacts under `.lab/runs/`.
 - `npm test` validates the core local participation flows.
+
+## Real Mesh Lab Requirement
+
+The real mesh lab lane depends on a sibling `mesh-ecology` checkout.
+
+Default expectation:
+
+- `../mesh-ecology` exists beside this repo
+- `../mesh-ecology` has had `npm install` run
+
+Override path:
+
+```bash
+MESH_ECOLOGY_ROOT=/abs/path/to/mesh-ecology npm run lab:run -- concern-observe-basic
+```
 
 ## API Surface
 

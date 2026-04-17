@@ -13,7 +13,12 @@
     "start": "node src/server.js",
     "test": "node --test",
     "example:session": "node scripts/example-session.mjs",
-    "example:plurality": "node scripts/example-session.mjs scoring-plurality-delay"
+    "example:plurality": "node scripts/example-session.mjs scoring-plurality-delay",
+    "lab:run": "node scripts/lab-run-scenario.mjs",
+    "lab:clean": "node scripts/lab-clean.mjs"
+  },
+  "dependencies": {
+    "fakeswarm": "^0.2.1",
+    "hypercore-id-encoding": "^1.3.0"
   }
 }
-
