@@ -1,0 +1,9 @@
+{
+  "id": "basic-organism",
+  "label": "Basic organism",
+  "wrapperKind": "runner",
+  "role": "org",
+  "classification": "canonical-actor",
+  "behavior": "single-job-publisher"
+}
+

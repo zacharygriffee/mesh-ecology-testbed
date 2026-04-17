@@ -44,3 +44,6 @@ export function removeRunRoot(runRoot) {
   fs.rmSync(runRoot, { recursive: true, force: true });
 }
 
+export function getActorStoreRoot(layout, actorId) {
+  return path.join(layout.storesDir, actorId);
+}

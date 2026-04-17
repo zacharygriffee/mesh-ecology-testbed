@@ -1,0 +1,9 @@
+{
+  "id": "basic-ratifier",
+  "label": "Basic ratifier",
+  "wrapperKind": "runner",
+  "role": "ratifier",
+  "classification": "canonical-actor",
+  "behavior": "default-ratifier"
+}
+

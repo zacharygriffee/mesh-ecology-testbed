@@ -95,6 +95,7 @@ Scenarios:
 - `npm run example:session` runs a small scripted local session against the HTTP API.
 - `npm run example:plurality` runs the plurality scenario from a script.
 - `npm run lab:run -- concern-observe-basic` runs the first real local mesh lab scenario and writes artifacts under `.lab/runs/`.
+- `npm run lab:run -- organism-ratifier-basic` runs the first actor-backed real mesh lab scenario with one organism and one ratifier.
 - `npm test` validates the core local participation flows.
 
 ## Real Mesh Lab Requirement
@@ -113,8 +114,10 @@ Accepted fallback:
 Override path:
 
 ```bash
-MESH_ECOLOGY_ROOT=/abs/path/to/mesh-ecology npm run lab:run -- concern-observe-basic
+MESH_ECOLOGY_ROOT=/abs/path/to/mesh-v0-2 npm run lab:run -- organism-ratifier-basic
 ```
+
+The real mesh lab lane is slower than the synthetic testbed lane. Real discovery, concern bring-up, actor warm-up, and observer materialization can take tens of seconds in this environment.
 
 ## API Surface
 

@@ -1,0 +1,78 @@
+{
+  "id": "organism-ratifier-basic",
+  "title": "Organism and ratifier basic",
+  "backendTargets": ["mesh"],
+  "description": "Disposable local mesh run with one concern, one observer client, one runner-backed organism, one runner-backed ratifier, and one seed job.",
+  "lab": {
+    "transport": {
+      "kind": "fakeswarm"
+    }
+  },
+  "concerns": [
+    {
+      "label": "testbed-actor-basic",
+      "advertiseOnDiscovery": true
+    }
+  ],
+  "observerClients": [
+    {
+      "id": "sdk-observer-1",
+      "kind": "mesh-sdk",
+      "discoverySource": "lab-discovery"
+    }
+  ],
+  "actors": [
+    {
+      "id": "organism-1",
+      "descriptor": "basic-organism",
+      "config": {
+        "warmN": 1,
+        "warmupBudget": {
+          "maxTicks": 0,
+          "maxMs": 0,
+          "minViewReadable": true
+        },
+        "publishCap": "cap/testbed/organism-basic"
+      }
+    },
+    {
+      "id": "ratifier-1",
+      "descriptor": "basic-ratifier",
+      "config": {
+        "warmN": 1,
+        "warmupBudget": {
+          "maxTicks": 0,
+          "maxMs": 0,
+          "minViewReadable": false
+        }
+      }
+    }
+  ],
+  "seedPublications": [
+    {
+      "type": "job-only",
+      "cap": "cap/testbed/job-basic",
+      "jobMeta": {
+        "scenario": "organism-ratifier-basic"
+      }
+    }
+  ],
+  "expectedObservationWindows": [
+    {
+      "kind": "state",
+      "expect": {
+        "minimumConcerns": 1,
+        "minimumJobs": 1,
+        "minimumPubs": 1,
+        "minimumRats": 1
+      }
+    },
+    {
+      "kind": "trace",
+      "expect": {
+        "stage": "rat_present"
+      }
+    }
+  ]
+}
+

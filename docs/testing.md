@@ -24,6 +24,7 @@ npm test
 npm run dev
 npm run example:session
 npm run lab:run -- concern-observe-basic
+npm run lab:run -- organism-ratifier-basic
 ```
 
 ## Test Classification
@@ -34,7 +35,12 @@ npm run lab:run -- concern-observe-basic
 
 ## Real Mesh Lab Note
 
-The concern-observation lab scenario uses actual `mesh-ecology` concern and discovery surfaces plus an SDK observer client.
+The real mesh lab lane currently includes:
+
+- `concern-observe-basic` for concern discovery, publication, state, and trace observation
+- `organism-ratifier-basic` for one concern, one observer client, one runner-backed organism, and one runner-backed ratifier
+
+These scenarios use actual `mesh-ecology` concern and discovery surfaces plus an SDK observer client. The actor-backed scenario also boots a canonical concern `STATE` row before seeding jobs so runner warm-up matches upstream expectations.
 
 It requires:
 
@@ -43,3 +49,5 @@ It requires:
 - `npm install` already run in that sibling repo
 
 Use `MESH_ECOLOGY_ROOT` to override the default sibling path when needed.
+
+Expect this lane to run materially slower than the synthetic testbed tests. Real actor bring-up and mesh observation materialization can take on the order of one to two minutes in this environment.

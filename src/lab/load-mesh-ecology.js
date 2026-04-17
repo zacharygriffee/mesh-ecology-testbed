@@ -14,13 +14,15 @@ export async function loadMeshEcology(meshRootInput) {
     discoveryMod,
     concernMod,
     sdkCoreMod,
-    sdkPlatformMod
+    sdkPlatformMod,
+    runnerMod
   ] = await Promise.all([
     importModule(path.join(meshRoot, "src/ensureCorestore.js")),
     importModule(path.join(meshRoot, "src/discovery.js")),
     importModule(path.join(meshRoot, "src/concern.js")),
     importModule(path.join(meshRoot, "packages/mesh-sdk/src/core/createMeshClientCore.js")),
-    importModule(path.join(meshRoot, "packages/mesh-sdk/src/platform/node/index.js"))
+    importModule(path.join(meshRoot, "packages/mesh-sdk/src/platform/node/index.js")),
+    importModule(path.join(meshRoot, "src/agent/runner.js"))
   ]);
 
   function createMeshClient(config = {}) {
@@ -55,6 +57,8 @@ export async function loadMeshEcology(meshRootInput) {
     ensureConcernSurface: concernMod.ensureConcernSurface,
     createJob: concernMod.createJob,
     publishJobWork: concernMod.publishJobWork,
-    createMeshClient
+    OP: concernMod.OP,
+    createMeshClient,
+    createRunner: runnerMod.createRunner
   };
 }
