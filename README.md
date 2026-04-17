@@ -46,6 +46,7 @@ See:
 - [docs/repo-boundary.md](docs/repo-boundary.md)
 - [docs/doctrine-boundary.md](docs/doctrine-boundary.md)
 - [docs/design-note.md](docs/design-note.md)
+- [docs/phases.md](docs/phases.md)
 
 ## Quick Start
 
