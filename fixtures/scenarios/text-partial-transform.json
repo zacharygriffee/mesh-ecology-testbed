@@ -1,0 +1,11 @@
+{
+  "id": "text-partial-transform",
+  "title": "Text partial transform",
+  "concern": "text/transform",
+  "description": "A text publication that produces a partial observation and a later final transform response.",
+  "actorIds": ["partial-responder", "transform-responder"],
+  "payloadTemplate": {
+    "text": "Mesh ecology testbed keeps observations explicit."
+  }
+}
+

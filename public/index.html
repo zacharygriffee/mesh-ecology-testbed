@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>mesh-ecology-testbed</title>
+    <link rel="stylesheet" href="/app.css">
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <p class="eyebrow">Local Participation Testbed</p>
+        <h1>Observe local mesh-shaped behavior without pretending it is the mesh.</h1>
+        <p class="lede">
+          Publish to a controlled concern surface, then watch local observations arrive from tutorial actors.
+          This surface is for local probe/test behavior only.
+        </p>
+        <div class="hero-meta" id="hero-meta"></div>
+      </header>
+
+      <main class="layout">
+        <section class="panel compose-panel">
+          <div class="panel-head">
+            <h2>Scenario</h2>
+            <button id="reset-button" class="secondary-button" type="button">Reset feed</button>
+          </div>
+
+          <label class="field">
+            <span>Choose scenario</span>
+            <select id="scenario-select"></select>
+          </label>
+
+          <div class="field field-inline">
+            <div>
+              <span>Concern</span>
+              <p id="concern-label" class="badge badge-concern"></p>
+            </div>
+            <div>
+              <span>Posture</span>
+              <p class="badge badge-posture">local probe/test</p>
+            </div>
+          </div>
+
+          <label class="field">
+            <span>Payload</span>
+            <textarea id="payload-input" spellcheck="false"></textarea>
+          </label>
+
+          <div class="actions">
+            <button id="publish-button" type="button">Publish To Concern</button>
+            <p id="publish-status" class="status-text"></p>
+          </div>
+
+          <div class="scenario-summary">
+            <h3>Scenario intent</h3>
+            <p id="scenario-description"></p>
+          </div>
+        </section>
+
+        <section class="panel catalog-panel">
+          <div class="panel-head">
+            <h2>Catalog</h2>
+          </div>
+          <div id="catalog-concerns" class="catalog-grid"></div>
+          <div id="catalog-actors" class="catalog-grid"></div>
+        </section>
+
+        <section class="panel observations-panel">
+          <div class="panel-head">
+            <h2>Observation Feed</h2>
+            <p class="panel-note">Events are local observations, not shared truth.</p>
+          </div>
+          <div id="feed" class="feed"></div>
+        </section>
+      </main>
+    </div>
+
+    <template id="feed-item-template">
+      <article class="feed-item">
+        <header>
+          <div class="feed-line">
+            <span class="kind-tag"></span>
+            <span class="actor-tag"></span>
+            <span class="domain-tag"></span>
+          </div>
+          <p class="feed-meta"></p>
+        </header>
+        <p class="feed-note"></p>
+        <pre class="feed-payload"></pre>
+      </article>
+    </template>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
+

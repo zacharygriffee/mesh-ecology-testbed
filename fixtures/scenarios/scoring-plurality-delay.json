@@ -1,0 +1,16 @@
+{
+  "id": "scoring-plurality-delay",
+  "title": "Scoring plurality and delay",
+  "concern": "scoring/estimate",
+  "description": "A scoring publication that receives competing local estimates plus one delayed response.",
+  "actorIds": ["plural-responder/low", "plural-responder/high", "delayed-responder"],
+  "payloadTemplate": {
+    "subject": "battery profile",
+    "evidence": [
+      "usage is bursty",
+      "conditions vary by edge location",
+      "operators want a bounded local estimate"
+    ]
+  }
+}
+

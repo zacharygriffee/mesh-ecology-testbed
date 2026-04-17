@@ -1,0 +1,12 @@
+{
+  "id": "math-basic-deterministic",
+  "title": "Math baseline",
+  "concern": "math/basic",
+  "description": "A stable math publication that receives one deterministic local final response.",
+  "actorIds": ["deterministic-responder"],
+  "payloadTemplate": {
+    "operation": "add",
+    "operands": [2, 3, 5]
+  }
+}
+

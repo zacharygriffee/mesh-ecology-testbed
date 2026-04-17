@@ -1,0 +1,14 @@
+{
+  "id": "anomaly-domain-mismatch",
+  "title": "Anomaly and domain mismatch",
+  "concern": "anomaly/testing",
+  "description": "A tutorial anomaly case where a local actor emits a deliberate domain mismatch observation.",
+  "actorIds": ["domain-mismatch-responder"],
+  "payloadTemplate": {
+    "sample": {
+      "kind": "unexpected-shape",
+      "value": 42
+    }
+  }
+}
+
