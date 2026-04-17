@@ -43,6 +43,7 @@ The resulting rule here is simple:
 
 See:
 
+- [docs/getting-started.md](docs/getting-started.md)
 - [docs/repo-boundary.md](docs/repo-boundary.md)
 - [docs/doctrine-boundary.md](docs/doctrine-boundary.md)
 - [docs/design-note.md](docs/design-note.md)
