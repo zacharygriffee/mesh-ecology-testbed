@@ -332,3 +332,6 @@ The next practical implementation steps should be:
 4. Add behavior capture artifacts for event classes, sequence shape, and timing envelope.
 5. Use those captures to define the first parity target for the synthetic lane.
 
+Execution detail for Phases 2 through 4:
+
+- [phase-2-4-plan.md](./phase-2-4-plan.md)
