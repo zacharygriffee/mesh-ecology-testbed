@@ -15,6 +15,7 @@
     "example:session": "node scripts/example-session.mjs",
     "example:plurality": "node scripts/example-session.mjs scoring-plurality-delay",
     "lab:run": "node scripts/lab-run-scenario.mjs",
+    "lab:serve": "node scripts/lab-serve.mjs",
     "lab:clean": "node scripts/lab-clean.mjs"
   },
   "dependencies": {

@@ -96,6 +96,7 @@ Scenarios:
 - `npm run example:plurality` runs the plurality scenario from a script.
 - `npm run lab:run -- concern-observe-basic` runs the first real local mesh lab scenario and writes artifacts under `.lab/runs/`.
 - `npm run lab:run -- organism-ratifier-basic` runs the first actor-backed real mesh lab scenario with one organism and one ratifier.
+- `npm run lab:serve` starts a resident local lab host for repeated local tests, labs, and debugging against an already-up test surface.
 - `npm test` validates the core local participation flows.
 
 ## Real Mesh Lab Requirement
@@ -118,6 +119,40 @@ MESH_ECOLOGY_ROOT=/abs/path/to/mesh-v0-2 npm run lab:run -- organism-ratifier-ba
 ```
 
 The real mesh lab lane is slower than the synthetic testbed lane. Real discovery, concern bring-up, actor warm-up, and observer materialization can take tens of seconds in this environment.
+
+## Resident Lab Host
+
+`npm run lab:serve` is a local-only resident lab host.
+
+Use it when you want:
+
+- a mature local test surface that stays up between test runs
+- local debugging against warmed concern and actor participation
+- repeated app tests without paying full cold mesh bring-up each time
+
+It is intentionally not postured as a mesh runtime. It is a local lab host that keeps a controlled real-mesh-backed test surface available for tests, labs, and debugging.
+
+Current control surface:
+
+- `GET /api/health`
+- `GET /api/status`
+- `GET /api/events`
+- `GET /api/state`
+- `GET /api/trace?jobKey=...`
+- `POST /api/jobs`
+- `POST /api/jobs/:jobKey/pubs`
+- `POST /api/restart`
+
+Readiness gates:
+
+- `mesh.ready`: concern/discovery/observer are up and visible
+- `actors.ready`: configured actors are warmed
+- `mature.ready`: the resident lab is ready for mature-mesh-style app testing
+
+Default intent:
+
+- app-facing local tests should usually wait for `mature.ready`
+- separate cold-start or degraded tests can intentionally interact before readiness
 
 ## API Surface
 

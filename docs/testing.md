@@ -25,6 +25,7 @@ npm run dev
 npm run example:session
 npm run lab:run -- concern-observe-basic
 npm run lab:run -- organism-ratifier-basic
+npm run lab:serve
 ```
 
 ## Test Classification
@@ -51,3 +52,21 @@ It requires:
 Use `MESH_ECOLOGY_ROOT` to override the default sibling path when needed.
 
 Expect this lane to run materially slower than the synthetic testbed tests. Real actor bring-up and mesh observation materialization can take on the order of one to two minutes in this environment.
+
+## Resident Lab Host Note
+
+The resident lab host is for local testing, labs, and debugging against a mature local test surface.
+
+It should be treated as:
+
+- a long-lived local lab host
+- a way to separate cold bring-up tax from app-relevant participation timing
+- a convenience surface for repeated local mesh-facing app tests
+
+It should not be treated as:
+
+- a mesh runtime
+- a production participation surface
+- proof that a real remote mesh is healthy
+
+When using `npm run lab:serve`, prefer waiting for `mature.ready` from `GET /api/status` before running ordinary app-facing tests. Use pre-readiness interaction only for explicit cold-start or degraded-condition testing.
