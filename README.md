@@ -103,8 +103,12 @@ The real mesh lab lane depends on a sibling `mesh-ecology` checkout.
 
 Default expectation:
 
-- `../mesh-ecology` exists beside this repo
-- `../mesh-ecology` has had `npm install` run
+- `../mesh-v0-2` exists beside this repo
+- `../mesh-v0-2` has had `npm install` run
+
+Accepted fallback:
+
+- `../mesh-ecology`
 
 Override path:
 

@@ -38,7 +38,8 @@ The concern-observation lab scenario uses actual `mesh-ecology` concern and disc
 
 It requires:
 
-- a sibling `mesh-ecology` checkout by default at `../mesh-ecology`
+- a sibling checkout by default at `../mesh-v0-2`
+- `../mesh-ecology` is also accepted as a fallback sibling path
 - `npm install` already run in that sibling repo
 
 Use `MESH_ECOLOGY_ROOT` to override the default sibling path when needed.

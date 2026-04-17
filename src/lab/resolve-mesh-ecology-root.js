@@ -4,13 +4,25 @@ import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(here, "../..");
-const defaultRoot = path.resolve(repoRoot, "../mesh-ecology");
+const defaultCandidates = [
+  path.resolve(repoRoot, "../mesh-v0-2"),
+  path.resolve(repoRoot, "../mesh-ecology")
+];
 
 export function resolveMeshEcologyRoot(input = process.env.MESH_ECOLOGY_ROOT) {
-  const meshRoot = path.resolve(input || defaultRoot);
-  if (!fs.existsSync(meshRoot)) {
-    throw new Error(`mesh-ecology root not found at ${meshRoot}`);
+  if (input) {
+    const explicitRoot = path.resolve(input);
+    if (!fs.existsSync(explicitRoot)) {
+      throw new Error(`mesh-ecology root not found at ${explicitRoot}`);
+    }
+    return explicitRoot;
   }
-  return meshRoot;
-}
 
+  for (const candidate of defaultCandidates) {
+    if (fs.existsSync(candidate)) return candidate;
+  }
+
+  throw new Error(
+    `mesh-ecology root not found. Tried: ${defaultCandidates.join(", ")}`
+  );
+}
