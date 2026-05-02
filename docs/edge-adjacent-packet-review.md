@@ -12,6 +12,20 @@ The fixture currently lives at:
 It is copied from Edge Phase 109 for hermetic tests only. Testbed does not fetch
 it from Edge at runtime.
 
+## Fixture Naming
+
+Static copied fixtures should stay under:
+
+`test/fixtures/edge-adjacent-packets/`
+
+Use phase-specific names when a fixture is copied from an Edge review loop:
+
+`phase-<number>-<short-purpose>-fixture.json`
+
+Malformed and incomplete review cases should usually be table-driven mutations
+inside testbed tests instead of many static JSON files. The valid Phase 109
+fixture remains static so the golden review expectation has one stable input.
+
 ## What The Fixture Is
 
 The fixture is an Edge-side draft review packet for the `testbed` ecosystem
@@ -98,15 +112,88 @@ Ordinary validation failures do not throw. Testbed emits a review-only evidence
 artifact with a blocked, malformed, incomplete, or unsupported status and
 reason codes.
 
-Examples:
+Reason-code matrix:
 
-- `edge_packet_target_repo_mismatch`
-- `edge_packet_seam_mismatch`
-- `edge_packet_missing_contract_ref`
-- `edge_packet_missing_correlation_refs`
-- `edge_packet_claims_adjacent_acceptance`
-- `edge_packet_implies_execution`
-- `edge_packet_contract_metadata_incomplete`
+| Reason code | Review status |
+| --- | --- |
+| `edge_packet_review_ready` | `review_ready` |
+| `edge_packet_missing_or_malformed` | `packet_malformed` |
+| `edge_packet_target_repo_mismatch` | `unsupported_target` |
+| `edge_packet_seam_mismatch` | `unsupported_target` |
+| `edge_packet_target_surface_mismatch` | `review_blocked` |
+| `edge_packet_claims_adjacent_acceptance` | `review_blocked` |
+| `edge_packet_missing_draft_authority_boundary` | `review_blocked` |
+| `edge_packet_implies_execution` | `review_blocked` |
+| `edge_packet_missing_correlation_refs` | `packet_incomplete` |
+| `edge_packet_missing_contract_ref` | `packet_incomplete` |
+| `edge_packet_contract_metadata_incomplete` | `packet_incomplete` |
+
+Precedence:
+
+1. Unsupported target evidence wins over incomplete or blocked evidence.
+2. Incomplete packet evidence wins over ordinary blocked review evidence.
+3. Passive evidence flags remain passive in every failure mode.
+
+Examples of passive flags that must remain false include `edgeMutationPerformed`,
+`runnerRequired`, `schedulerRequired`, `liveDiscoveryRequired`, and
+`meshPublicationImplied`.
+
+## Evidence Labels
+
+Future local fixture review labels should use testbed-owned vocabulary:
+
+```json
+{
+  "evidenceKind": "local_fixture_review",
+  "outcome": "passed | blocked | malformed | incomplete | unsupported",
+  "scenarioId": "edge-adjacent-packet-review"
+}
+```
+
+Existing Phase 109 compatibility fixtures may still carry `fixture_proof`.
+Within this repo, `fixture_proof` means deterministic local fixture proof only.
+It does not mean production proof, mesh truth, Edge acceptance, or adjacent
+acceptance.
+
+## Review Evidence And Proof
+
+Review evidence is the testbed-owned artifact produced after reading a static
+packet fixture. It records whether the fixture is review-ready, blocked,
+malformed, incomplete, or unsupported.
+
+Fixture proof is the local observation that deterministic testbed fixtures and
+tests behaved as expected. It is scoped to this repository and the copied static
+inputs.
+
+Production proof is out of scope. This path does not prove real mesh behavior,
+runtime readiness, operator acceptance, or correctness outside the local
+testbed fixture review.
+
+## Future Rehearsals
+
+For future adjacent packet rehearsals, testbed may validate:
+
+- static fixture readability
+- required local correlation refs
+- target repo, seam, and target surface fit
+- contract metadata completeness
+- review-only and evidence-only doctrine flags
+- malformed and incomplete packet handling
+- local scenario evidence label shape
+- deterministic golden response shape
+
+Testbed must not own:
+
+- Edge schema authority
+- Edge acceptance
+- Edge ledger truth
+- production readiness
+- adjacent acceptance for other repos
+- orchestration authority
+- runner or scheduler behavior
+- live discovery behavior
+- mesh publication behavior
+- cross-repo proof semantics
 
 ## Boundary
 

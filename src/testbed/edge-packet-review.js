@@ -17,6 +17,7 @@ const PASSIVE_FLAGS = Object.freeze({
   callsAdjacentRepo: false,
   executesAction: false,
   schedulesWork: false,
+  liveDiscoveryRequired: false,
   publishesToMesh: false,
   infersAdjacentTruth: false,
   infersMeshParticipation: false
