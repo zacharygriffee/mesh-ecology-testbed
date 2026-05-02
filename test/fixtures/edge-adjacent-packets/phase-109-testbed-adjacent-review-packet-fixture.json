@@ -1,0 +1,264 @@
+{
+  "artifactKind": "edge_ecosystem_testbed_packet_fixture_review_export",
+  "schemaVersion": "edge_ecosystem_testbed_packet_fixture_review.v1",
+  "fixtureId": "edge-ecosystem-testbed-packet-fixture-review:2026-05-02T10:00:00.000Z",
+  "createdAt": "2026-05-02T10:00:00.000Z",
+  "fixtureScope": "edge_side_testbed_packet_review_only",
+  "targetRepo": "mesh-ecology-testbed",
+  "seamId": "testbed",
+  "ecosystemSeamId": "testbed",
+  "packetSet": {
+    "artifactKind": "edge_ecosystem_adjacent_implementation_packet_set",
+    "schemaVersion": "edge_ecosystem_adjacent_implementation_packet_set.v1",
+    "packetSetId": "edge-ecosystem-adjacent-packets:2026-05-02T10:00:00.000Z",
+    "packetCount": 1,
+    "packetRefs": [
+      "edge-ecosystem-adjacent-packet:001:testbed:2026-05-02T10:00:00.000Z"
+    ],
+    "seamIds": [
+      "testbed"
+    ],
+    "targetRepos": [
+      "mesh-ecology-testbed"
+    ],
+    "draftOnly": true,
+    "reviewOnly": true,
+    "adjacentAccepted": false,
+    "adjacentAcceptanceClaimed": false,
+    "callsAdjacentRepo": false,
+    "executesAction": false,
+    "schedulesWork": false,
+    "publishesToMesh": false,
+    "infersAdjacentTruth": false,
+    "infersMeshParticipation": false
+  },
+  "packet": {
+    "artifactKind": "edge_ecosystem_adjacent_implementation_packet",
+    "schemaVersion": "edge_ecosystem_adjacent_implementation_packet.v1",
+    "packetId": "edge-ecosystem-adjacent-packet:001:testbed:2026-05-02T10:00:00.000Z",
+    "createdAt": "2026-05-02T10:00:00.000Z",
+    "seamId": "testbed",
+    "ecosystemSeamId": "testbed",
+    "targetRepo": "mesh-ecology-testbed",
+    "targetSurface": "testbed_evidence_labels",
+    "packetStatus": "ready_for_handoff_review",
+    "packetCompleteness": "contract_backed",
+    "sourceContractRef": "edge-ecosystem-handoff-contract:001:testbed:2026-05-02T10:00:00.000Z",
+    "sourceContractSetRef": "edge-ecosystem-handoff-contracts:2026-05-02T10:00:00.000Z",
+    "sourceLedgerRef": "edge-ecosystem-state-ledger:2026-05-02T10:00:00.000Z",
+    "sourceReadinessRollupRef": "edge-ecosystem-readiness:2026-05-02T10:00:00.000Z",
+    "sourceEvidenceRefs": [
+      "edge-ecosystem-evidence:testbed:edge-testbed-evidence:phase-109-testbed-adjacent-packet:2026-05-02T10:00:00.000Z",
+      "edge-ecosystem-evidence:testbed:testbed-evidence:phase-109:passed",
+      "edge-testbed-evidence:phase-109-testbed-adjacent-packet:2026-05-02T10:00:00.000Z",
+      "testbed-evidence:phase-109:passed"
+    ],
+    "sourceWorkPacketRefs": [
+      "edge-ecosystem-work-packet:edge-ecosystem-next-action:001:review_ready_seam:testbed:2026-05-02T10:00:00.000Z"
+    ],
+    "sourceNextActionRefs": [
+      "edge-ecosystem-next-action:001:review_ready_seam:testbed:2026-05-02T10:00:00.000Z"
+    ],
+    "sourceLedgerEventRefs": [
+      "edge-ecosystem-ledger-event:001:evidence_import_recorded:testbed:2026-05-02T10:00:00.000Z",
+      "edge-ecosystem-ledger-event:002:evidence_import_recorded:testbed:2026-05-02T10:00:00.000Z",
+      "edge-ecosystem-ledger-event:003:readiness_state_observed:testbed:2026-05-02T10:00:00.000Z",
+      "edge-ecosystem-ledger-event:004:readiness_state_changed:testbed:2026-05-02T10:00:00.000Z",
+      "edge-ecosystem-ledger-event:005:next_action_selected:testbed:2026-05-02T10:00:00.000Z",
+      "edge-ecosystem-ledger-event:006:work_packet_recorded:testbed:2026-05-02T10:00:00.000Z",
+      "edge-ecosystem-ledger-event:007:handoff_contract_drafted:testbed:2026-05-02T10:00:00.000Z"
+    ],
+    "sourceLedgerDeltaRefs": [
+      "edge-ecosystem-ledger-delta:001:readiness_state_changed:testbed:2026-05-02T10:00:00.000Z"
+    ],
+    "contractSnapshot": {
+      "contractId": "edge-ecosystem-handoff-contract:001:testbed:2026-05-02T10:00:00.000Z",
+      "schemaVersion": "edge_ecosystem_handoff_contract.v1",
+      "seamId": "testbed",
+      "ecosystemSeamId": "testbed",
+      "targetRepo": "mesh-ecology-testbed",
+      "targetSurface": "testbed_evidence_labels",
+      "contractStatus": "ready_for_handoff_review",
+      "readinessState": "ready_for_operator_review",
+      "expectedRequestArtifactKind": "edge_testbed_evidence_request",
+      "expectedRequestRequiredFields": [
+        "requestId",
+        "scenarioId",
+        "evidenceKind"
+      ],
+      "expectedReceiptArtifactKind": "edge_testbed_evidence_label_import",
+      "expectedReceiptRequiredFields": [
+        "importId",
+        "scenarioId",
+        "outcome",
+        "evidenceKind"
+      ],
+      "allowedReceiptStatuses": [
+        "imported",
+        "passed",
+        "failed",
+        "malformed",
+        "unsupported",
+        "testbed_evidence_available",
+        "testbed_evidence_blocked"
+      ],
+      "correlationFields": [
+        "requestId",
+        "importId",
+        "scenarioId",
+        "evidenceKind"
+      ],
+      "edgeAuthorityBoundary": "Edge may request and import testbed labels as local review evidence only.",
+      "adjacentAuthorityBoundary": "Testbed owns fixture execution, labels, proof status, and separation from production mesh proof.",
+      "acceptanceSemantics": {
+        "edgeDraftOnly": true,
+        "adjacentAccepted": false,
+        "acceptanceRequiresAdjacentEvidence": true,
+        "readinessEffect": "operator_guidance_only",
+        "truthEffect": "none"
+      }
+    },
+    "readinessSnapshot": {
+      "seamId": "testbed",
+      "ecosystemSeamId": "testbed",
+      "readinessState": "ready_for_operator_review",
+      "readinessIsOperatorGuidanceOnly": true,
+      "adjacentTruthClaimed": false,
+      "infersAdjacentTruth": false
+    },
+    "historySummary": {
+      "schemaVersion": "edge_ecosystem_ledger_history_view.v1",
+      "ledgerRef": "edge-ecosystem-state-ledger:2026-05-02T10:00:00.000Z",
+      "eventCount": 7,
+      "deltaCount": 1,
+      "filteredEventCount": 7,
+      "filteredDeltaCount": 1,
+      "historyIsReviewOnly": true,
+      "replaySupported": false,
+      "adjacentTruthClaimed": false
+    },
+    "expectedRequestArtifactKind": "edge_testbed_evidence_request",
+    "expectedRequestRequiredFields": [
+      "requestId",
+      "scenarioId",
+      "evidenceKind"
+    ],
+    "expectedReceiptArtifactKind": "edge_testbed_evidence_label_import",
+    "expectedReceiptRequiredFields": [
+      "importId",
+      "scenarioId",
+      "outcome",
+      "evidenceKind"
+    ],
+    "allowedReceiptStatuses": [
+      "imported",
+      "passed",
+      "failed",
+      "malformed",
+      "unsupported",
+      "testbed_evidence_available",
+      "testbed_evidence_blocked"
+    ],
+    "correlationFields": [
+      "requestId",
+      "importId",
+      "scenarioId",
+      "evidenceKind"
+    ],
+    "edgeAuthorityBoundary": "Edge may request and import testbed labels as local review evidence only.",
+    "adjacentAuthorityBoundary": "Testbed owns fixture execution, labels, proof status, and separation from production mesh proof.",
+    "acceptanceSemantics": {
+      "edgeDraftOnly": true,
+      "adjacentAccepted": false,
+      "acceptanceRequiresAdjacentEvidence": true,
+      "readinessEffect": "operator_guidance_only",
+      "truthEffect": "none"
+    },
+    "packetIsEdgeDraftOnly": true,
+    "packetIsReviewOnly": true,
+    "adjacentAccepted": false,
+    "adjacentAcceptanceClaimed": false,
+    "adjacentRepoOwnsAuthority": true,
+    "callsAdjacentRepo": false,
+    "executesAction": false,
+    "schedulesWork": false,
+    "publishesToMesh": false,
+    "infersAdjacentTruth": false,
+    "infersMeshParticipation": false
+  },
+  "reviewChecklist": [
+    "target_repo_is_testbed",
+    "seam_is_testbed",
+    "required_packet_fields_present",
+    "correlation_refs_sufficient",
+    "contract_metadata_complete",
+    "wording_is_not_command_todo_or_execution",
+    "fixture_consumption_only",
+    "malformed_packets_remain_review_only",
+    "no_edge_mutation_or_callback_required"
+  ],
+  "expectedTestbedEvidenceResponseShape": {
+    "artifactKind": "testbed_adjacent_packet_review_evidence",
+    "schemaVersion": "testbed_adjacent_packet_review_evidence.v1",
+    "expectationIsEdgeSideOnly": true,
+    "notAcceptedAdjacentSchema": true,
+    "testbedOwnsArtifactKind": true,
+    "testbedOwnsSchemaVersion": true,
+    "packetRef": "edge-ecosystem-adjacent-packet:001:testbed:2026-05-02T10:00:00.000Z",
+    "sourceContractRef": "edge-ecosystem-handoff-contract:001:testbed:2026-05-02T10:00:00.000Z",
+    "sourceEvidenceRefs": [
+      "edge-ecosystem-evidence:testbed:edge-testbed-evidence:phase-109-testbed-adjacent-packet:2026-05-02T10:00:00.000Z",
+      "edge-ecosystem-evidence:testbed:testbed-evidence:phase-109:passed",
+      "edge-testbed-evidence:phase-109-testbed-adjacent-packet:2026-05-02T10:00:00.000Z",
+      "testbed-evidence:phase-109:passed"
+    ],
+    "status": "testbed_review_ready",
+    "evidenceLabel": {
+      "evidenceKind": "fixture_proof",
+      "outcome": "passed",
+      "scenarioId": "phase-109-testbed-adjacent-packet"
+    },
+    "correlationRefs": {
+      "packetRef": "edge-ecosystem-adjacent-packet:001:testbed:2026-05-02T10:00:00.000Z",
+      "sourceContractRef": "edge-ecosystem-handoff-contract:001:testbed:2026-05-02T10:00:00.000Z",
+      "sourceLedgerRef": "edge-ecosystem-state-ledger:2026-05-02T10:00:00.000Z",
+      "sourceReadinessRollupRef": "edge-ecosystem-readiness:2026-05-02T10:00:00.000Z"
+    },
+    "reviewOnly": true,
+    "evidenceOnly": true,
+    "noProductionProofClaimed": true,
+    "noMeshTruthClaimed": true,
+    "noEdgeAuthorityGranted": true,
+    "executionImplied": false
+  },
+  "stopGoDecision": {
+    "artifactKind": "edge_ecosystem_testbed_packet_stop_go_decision",
+    "decision": "go_for_testbed_repo_review",
+    "readyToHandToTestbed": true,
+    "blockers": [],
+    "acceptanceCriteria": [
+      "Testbed reads the packet as an input fixture only.",
+      "Testbed validates packetRef, sourceContractRef, and correlation refs.",
+      "Testbed emits a testbed-owned evidence artifact with its own schemaVersion.",
+      "Testbed marks malformed or incomplete packets rejected or review-only.",
+      "Testbed response claims no production proof, mesh truth, Edge authority, or execution authorization.",
+      "Edge can import the response later as evidence only."
+    ],
+    "reviewOnly": true,
+    "edgeDecisionOnly": true,
+    "adjacentAccepted": false,
+    "adjacentAcceptanceClaimed": false,
+    "callsAdjacentRepo": false,
+    "executesAction": false,
+    "schedulesWork": false,
+    "publishesToMesh": false,
+    "infersAdjacentTruth": false,
+    "infersMeshParticipation": false
+  },
+  "packetIsEdgeDraftOnly": true,
+  "adjacentAccepted": false,
+  "adjacentAcceptanceClaimed": false,
+  "adjacentRepoOwnsAuthority": true,
+  "noExecutionAuthorized": true,
+  "noSchedulerRunnerLiveDiscoveryOrMeshPublication": true
+}
