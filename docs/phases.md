@@ -38,7 +38,7 @@ Purpose:
 
 This lane is:
 
-- the behavior source of truth for this repo's fidelity targets
+- the calibration reference for this repo's fidelity targets
 - a measurement environment, not production truth
 
 ### Parity Calibration
