@@ -7,6 +7,7 @@ import { createObservationCapture } from "./observation-capture.js";
 import { loadMeshEcology } from "./load-mesh-ecology.js";
 import { closeSwarm, flushAll } from "./swarm.js";
 import { waitFor } from "./wait-for.js";
+import { fakeswarmMeshSurfaceProofScope } from "./proof-scope.js";
 import { launchActor } from "../actors/launch-actor.js";
 
 async function closeMaybe(resource) {
@@ -107,6 +108,7 @@ export async function runConcernObserveBasicScenario({
       scenarioId: scenario.id,
       meshRoot: mesh.meshRoot,
       transport: "fakeswarm",
+      proofScope: fakeswarmMeshSurfaceProofScope(),
       bootstrapTopic: idEncoding.encode(bootstrapTopic),
       discoveryKey: idEncoding.encode(resources.discovery.key),
       concernKey: idEncoding.encode(resources.concern.key),
@@ -181,6 +183,7 @@ export async function runConcernObserveBasicScenario({
       ok: true,
       scenarioId: scenario.id,
       topology,
+      proofScope: topology.proofScope,
       assertions: {
         discoveryScan: finalState.topology.discoveryScan === true,
         minimumConcerns: finalState.concerns.length >= 1,
@@ -327,6 +330,7 @@ export async function runOrganismRatifierBasicScenario({
       scenarioId: scenario.id,
       meshRoot: mesh.meshRoot,
       transport: "fakeswarm",
+      proofScope: fakeswarmMeshSurfaceProofScope(),
       bootstrapTopic: idEncoding.encode(bootstrapTopic),
       discoveryKey: idEncoding.encode(resources.discovery.key),
       concernKey: idEncoding.encode(resources.concern.key),
@@ -409,6 +413,7 @@ export async function runOrganismRatifierBasicScenario({
       ok: true,
       scenarioId: scenario.id,
       topology,
+      proofScope: topology.proofScope,
       assertions: {
         minimumConcerns: finalState.concerns.length >= 1,
         minimumJobs: (concernRow?.counts?.jobs ?? 0) >= 1,

@@ -7,6 +7,7 @@ import { createObservationCapture } from "./observation-capture.js";
 import { loadMeshEcology } from "./load-mesh-ecology.js";
 import { closeSwarm, flushAll } from "./swarm.js";
 import { waitFor } from "./wait-for.js";
+import { fakeswarmMeshSurfaceProofScope } from "./proof-scope.js";
 import { launchActor } from "../actors/launch-actor.js";
 
 async function closeMaybe(resource) {
@@ -124,6 +125,7 @@ export function createResidentLab({
       mode: "resident-service",
       meshRoot: mesh.meshRoot,
       transport: "fakeswarm",
+      proofScope: fakeswarmMeshSurfaceProofScope(),
       bootstrapTopic: idEncoding.encode(bootstrapTopic),
       discoveryKey: idEncoding.encode(resources.discovery.key),
       concernKey: idEncoding.encode(resources.concern.key),
@@ -398,6 +400,7 @@ export function createResidentLab({
         topologyPath: layout.topologyPath
       },
       topology: state.topology,
+      proofScope: state.topology?.proofScope || fakeswarmMeshSurfaceProofScope(),
       lastPublishedJobKey: state.lastPublishedJobKey,
       actorStatuses: resources.actors.map((runtime) => runtime.snapshot()),
       recentEvents: capture.events.slice(-20)

@@ -16,6 +16,12 @@ test("resident lab reaches mature readiness and supports mature-mesh job flow", 
     assert.equal(status.readiness.mesh.ready, true);
     assert.equal(status.readiness.actors.ready, true);
     assert.equal(status.readiness.mature.ready, true);
+    assert.equal(status.proofScope.proofKind, "mesh_surface_local_lab");
+    assert.equal(status.proofScope.transport, "fakeswarm");
+    assert.equal(status.proofScope.contactSeam, "deterministic_local_fakeswarm");
+    assert.equal(status.proofScope.decentralizedSeam, "deferred");
+    assert.equal(status.proofScope.distributedReadinessClaimed, false);
+    assert.deepEqual(status.topology.proofScope, status.proofScope);
     assert.ok(typeof status.timings.coldMeshBringupMs === "number");
     assert.ok(typeof status.timings.coldMatureReadyMs === "number");
 

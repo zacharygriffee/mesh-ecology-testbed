@@ -34,7 +34,7 @@ This document maps repo-local terms to Origin Shape posture so agents do not inf
 | organism | composition | shared candidate / high-drift | actor-backed organism | Use when the real mesh lab actually runs organism-shaped actors. |
 | ratifier | composition | shared candidate / high-drift | actor-backed ratifier | Use when the real mesh lab actually runs ratifier-shaped actors. |
 | resident lab host | scaffold | adopted repo term | local lab service | Keep; label as local-only convenience. |
-| real mesh lab | layer expression | adopted repo term | mesh lab lane | Keep; evidence source for fidelity targets, not production proof. |
+| mesh-surface local lab | layer expression | adopted repo term | real mesh lab | Keep; evidence source for fidelity targets, not production or distributed-readiness proof. |
 | synthetic lane | scaffold | adopted repo term | synthetic backend | Keep; local deterministic fixture path. |
 | fixture proof | evidence | compatibility alias / high-drift | fixture evidence | Prefer `fixture evidence`; avoid proof unless scoped. |
 | mesh lab evidence | evidence | shared candidate | real lab evidence | Keep; local observed real-mesh-backed evidence only. |
@@ -52,6 +52,7 @@ This document maps repo-local terms to Origin Shape posture so agents do not inf
 | --- | --- | --- | --- |
 | `http://localhost:4318` | Browser-facing synthetic testbed server. | Local HTTP can look like durable transport canon. | Label as local dev/test scaffold. |
 | `http://127.0.0.1:4328` | Resident lab host API. | Local service endpoint can look like mesh runtime API. | Keep as local lab service transport scaffold. |
+| `fakeswarm` | Deterministic local contact seam for mesh-surface lab scenarios. | Can look like decentralized contact proof if unlabeled. | Label as local deterministic seam; decentralized seam is deferred. |
 | `.lab/runs/` | Disposable lab run artifacts. | Files can become accidental substrate. | Keep replaceable; call local artifact scaffold. |
 | `observations.ndjson` | Local observation capture inside lab runs. | JSONL evidence can look like durable substrate. | Keep as local evidence scaffold, not truth. |
 | `MESH_ECOLOGY_ROOT` | Adjacent mesh-v0-2 path override. | Local path can look like dependency canon. | Keep operator-local path scaffold. |
@@ -69,7 +70,7 @@ This document maps repo-local terms to Origin Shape posture so agents do not inf
 - `surface`: qualify as `local test surface`, `concern surface`, or `discovery surface`.
 - `profile`: qualify as `instability profile` or `timing profile`; do not let it collide with target profiles in Edge/Discovery Ops UI.
 - `mature`: readiness gate only; not completion or production readiness.
-- `real mesh lab`: evidence source for local fidelity, not deployment proof.
+- `mesh-surface local lab` / `real mesh lab`: evidence source for local fidelity, not deployment or distributed-readiness proof.
 
 ## Terms Not To Rename Yet
 
@@ -88,6 +89,7 @@ This document maps repo-local terms to Origin Shape posture so agents do not inf
 | fixture proof | evidence | mapped alias | fixture evidence | Prefer fixture evidence in new docs; keep old phrase readable. |
 | observation | evidence | mapped alias | local observation | Use local observation when scope matters. |
 | resident lab host | scaffold | stable layer expression | local lab service | Keep as repo-owned scaffold term. |
+| real mesh lab | layer expression | compatibility alias | mesh-surface local lab | Prefer mesh-surface local lab in new docs so decentralized contact is not implied. |
 | backendTargets | scaffold | compatibility alias | runner target lane | Do not export as shared target vocabulary. |
 | instability profile | pressure | shared candidate | degraded profile | Candidate for Origin Shape pressure mapping later. |
 

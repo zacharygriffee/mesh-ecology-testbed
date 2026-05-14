@@ -100,14 +100,14 @@ Scenarios:
 - Use the scenario picker in the browser to publish example payloads and watch observations arrive live over SSE.
 - `npm run example:session` runs a small scripted local session against the HTTP API.
 - `npm run example:plurality` runs the plurality scenario from a script.
-- `npm run lab:run -- concern-observe-basic` runs the first real local mesh lab scenario and writes artifacts under `.lab/runs/`.
-- `npm run lab:run -- organism-ratifier-basic` runs the first actor-backed real mesh lab scenario with one organism and one ratifier.
+- `npm run lab:run -- concern-observe-basic` runs the first mesh-surface local lab scenario and writes artifacts under `.lab/runs/`.
+- `npm run lab:run -- organism-ratifier-basic` runs the first actor-backed mesh-surface local lab scenario with one organism and one ratifier.
 - `npm run lab:serve` starts a resident local lab host for repeated local tests, labs, and debugging against an already-up test surface.
 - `npm test` validates the core local participation flows.
 
-## Real Mesh Lab Requirement
+## Mesh-Surface Local Lab Requirement
 
-The real mesh lab lane depends on a sibling `mesh-ecology` checkout.
+The mesh-surface local lab lane depends on a sibling `mesh-ecology` checkout.
 
 Default expectation:
 
@@ -124,7 +124,17 @@ Override path:
 MESH_ECOLOGY_ROOT=/abs/path/to/mesh-v0-2 npm run lab:run -- organism-ratifier-basic
 ```
 
-The real mesh lab lane is slower than the synthetic testbed lane. Real discovery, concern bring-up, actor warm-up, and observer materialization can take tens of seconds in this environment.
+The mesh-surface local lab lane is slower than the synthetic testbed lane. It uses real discovery, concern bring-up, actor warm-up, and observer materialization, but its current contact seam is deterministic local `fakeswarm`.
+
+Proof scope emitted by lab topology and status:
+
+- `proofKind: "mesh_surface_local_lab"`
+- `transport: "fakeswarm"`
+- `contactSeam: "deterministic_local_fakeswarm"`
+- `decentralizedSeam: "deferred"`
+- `distributedReadinessClaimed: false`
+
+Passing this lane proves local mesh-surface behavior under the lab seam. It does not prove decentralized contact, NAT traversal, public discovery, or distributed readiness.
 
 ## Resident Lab Host
 
@@ -151,7 +161,7 @@ Current control surface:
 
 Readiness gates:
 
-- `mesh.ready`: concern/discovery/observer are up and visible
+- `mesh.ready`: concern/discovery/observer are up and visible inside the local lab seam
 - `actors.ready`: configured actors are warmed
 - `mature.ready`: the resident lab is ready for mature-mesh-style app testing
 

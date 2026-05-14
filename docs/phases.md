@@ -29,7 +29,7 @@ This lane is:
 - fast
 - non-authoritative for real mesh behavior by itself
 
-### Real Mesh Lab
+### Mesh-Surface Local Lab
 
 Purpose:
 
@@ -40,6 +40,9 @@ This lane is:
 
 - the calibration reference for this repo's fidelity targets
 - a measurement environment, not production truth
+- currently backed by deterministic local `fakeswarm`, so decentralized contact and distributed readiness remain out of scope
+
+Older notes may call this the `real mesh lab`; read that as the mesh-surface local lab unless a document explicitly adds a decentralized transport seam.
 
 ### Parity Calibration
 
@@ -58,7 +61,7 @@ This lane is:
 Use these terms consistently:
 
 - `fixture proof`: synthetic local scenario behavior is correct relative to its declared fixture
-- `mesh lab evidence`: actual behavior observed from real local mesh participation
+- `mesh lab evidence`: actual behavior observed from mesh-surface local participation
 - `parity evidence`: comparison between synthetic and real-mesh runs for the same scenario class
 - `app compatibility evidence`: proof that a specific app handles the observed lifecycle and degraded conditions correctly
 

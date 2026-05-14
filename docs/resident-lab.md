@@ -28,7 +28,7 @@ It should be spoken about as a `resident lab host` or `local lab service`, not a
 
 ## Lifecycle
 
-The host starts an internal real local mesh lab using:
+The host starts an internal mesh-surface local lab using:
 
 - discovery host
 - concern host
@@ -38,6 +38,22 @@ The host starts an internal real local mesh lab using:
 It then warms in the background while exposing a local HTTP control surface.
 
 The control surface may be up before the lab is mature. That is intentional.
+
+## Proof Scope
+
+The resident host reports proof scope through `GET /api/status` and the topology artifact:
+
+```json
+{
+  "proofKind": "mesh_surface_local_lab",
+  "transport": "fakeswarm",
+  "contactSeam": "deterministic_local_fakeswarm",
+  "decentralizedSeam": "deferred",
+  "distributedReadinessClaimed": false
+}
+```
+
+This means the host proves local mesh-surface behavior under a deterministic local lab seam. It does not claim decentralized contact, public discovery, NAT traversal, or distributed readiness.
 
 ## Readiness Gates
 
@@ -55,6 +71,7 @@ The resident host exposes three readiness gates through `GET /api/status`.
 `mature.ready`
 - the resident host is ready for ordinary mature-mesh-style local tests
 - this is the usual gate app-facing tests should wait for
+- this is local lab readiness, not production or distributed readiness
 
 ## Typical Use
 

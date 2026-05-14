@@ -58,9 +58,9 @@ What this shows you:
 
 This lane is the fastest way to understand the repo.
 
-## First Real Local Lab Run
+## First Mesh-Surface Local Lab Run
 
-If you want the real local mesh-backed lane, make sure the sibling checkout exists:
+If you want the mesh-surface local lab lane, make sure the sibling checkout exists:
 
 - `../mesh-v0-2`
 
@@ -82,7 +82,17 @@ Wait for:
 
 - `readiness.mature.ready` to become `true`
 
-At that point the local lab host is up, the concern is visible, and the configured actors are warmed.
+At that point the local lab host is up, the concern is visible, and the configured actors are warmed inside the deterministic local `fakeswarm` seam.
+
+The status response includes:
+
+- `proofKind: "mesh_surface_local_lab"`
+- `transport: "fakeswarm"`
+- `contactSeam: "deterministic_local_fakeswarm"`
+- `decentralizedSeam: "deferred"`
+- `distributedReadinessClaimed: false`
+
+That posture is deliberate: this is useful local mesh-surface evidence, not distributed-readiness proof.
 
 ## First Mature-Mesh Test Flow
 

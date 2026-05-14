@@ -13,6 +13,8 @@ The aim is to get `mesh-ecology-testbed` from a synthetic local harness to a rep
 - measure what real mesh behavior looks like locally
 - reuse the same scenario declarations across synthetic and real-mesh lanes
 
+Proof-scope note: this plan predates the explicit proof-scope fields. Current lab runs are mesh-surface local lab evidence backed by deterministic local `fakeswarm`; decentralized contact and distributed readiness are deferred unless a later packet adds an explicit real transport seam.
+
 ## Guiding Rules
 
 - `mesh-ecology-testbed` remains adjacent and must not redefine mesh physics.
@@ -372,4 +374,3 @@ Do not absorb these yet:
 - repo-wide confidence gates
 
 Those belong later, after real mesh lab behavior is observable and scenario declarations are stable.
-

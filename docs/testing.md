@@ -34,14 +34,24 @@ npm run lab:serve
 - they are valuable regression checks
 - they are not canonical mesh proof
 
-## Real Mesh Lab Note
+## Mesh-Surface Local Lab Note
 
-The real mesh lab lane currently includes:
+The mesh-surface local lab lane currently includes:
 
 - `concern-observe-basic` for concern discovery, publication, state, and trace observation
 - `organism-ratifier-basic` for one concern, one observer client, one runner-backed organism, and one runner-backed ratifier
 
 These scenarios use actual `mesh-ecology` concern and discovery surfaces plus an SDK observer client. The actor-backed scenario also boots a canonical concern `STATE` row before seeding jobs so runner warm-up matches upstream expectations.
+
+Current proof scope:
+
+- `proofKind: mesh_surface_local_lab`
+- `transport: fakeswarm`
+- `contactSeam: deterministic_local_fakeswarm`
+- `decentralizedSeam: deferred`
+- `distributedReadinessClaimed: false`
+
+This lane is a real mesh-surface local lab, not a distributed-readiness proof. It exercises real concern/discovery/actor mechanics through deterministic local `fakeswarm`; decentralized contact through Hyperswarm/HyperDHT/protomux-style seams remains deferred to upstream transport lanes.
 
 It requires:
 
@@ -68,5 +78,6 @@ It should not be treated as:
 - a mesh runtime
 - a production participation surface
 - proof that a real remote mesh is healthy
+- proof of decentralized contact or distributed readiness
 
 When using `npm run lab:serve`, prefer waiting for `mature.ready` from `GET /api/status` before running ordinary app-facing tests. Use pre-readiness interaction only for explicit cold-start or degraded-condition testing.

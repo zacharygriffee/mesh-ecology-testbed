@@ -26,7 +26,7 @@ Example:
 
 ## GET /api/status
 
-Returns resident host lifecycle state, readiness gates, timing buckets, topology, and current actor statuses.
+Returns resident host lifecycle state, readiness gates, timing buckets, topology, proof scope, and current actor statuses.
 
 Key fields:
 
@@ -37,12 +37,31 @@ Key fields:
 - `timings.coldMeshBringupMs`
 - `timings.coldActorsReadyMs`
 - `timings.coldMatureReadyMs`
+- `proofScope.proofKind`
+- `proofScope.transport`
+- `proofScope.contactSeam`
+- `proofScope.decentralizedSeam`
+- `proofScope.distributedReadinessClaimed`
 - `topology`
 - `actorStatuses`
 
 Typical app-facing use:
 
 - poll until `readiness.mature.ready === true`
+
+Current proof scope values:
+
+```json
+{
+  "proofKind": "mesh_surface_local_lab",
+  "transport": "fakeswarm",
+  "contactSeam": "deterministic_local_fakeswarm",
+  "decentralizedSeam": "deferred",
+  "distributedReadinessClaimed": false
+}
+```
+
+The readiness fields describe the local lab seam only. They do not claim distributed readiness.
 
 ## GET /api/events
 
