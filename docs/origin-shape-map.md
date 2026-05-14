@@ -52,7 +52,7 @@ This document maps repo-local terms to Origin Shape posture so agents do not inf
 | --- | --- | --- | --- |
 | `http://localhost:4318` | Browser-facing synthetic testbed server. | Local HTTP can look like durable transport canon. | Label as local dev/test scaffold. |
 | `http://127.0.0.1:4328` | Resident lab host API. | Local service endpoint can look like mesh runtime API. | Keep as local lab service transport scaffold. |
-| `fakeswarm` | Deterministic local contact seam for mesh-surface lab scenarios. | Can look like decentralized contact proof if unlabeled. | Label as local deterministic seam; decentralized seam is deferred. |
+| `fakeswarm` | Deterministic local contact seam for mesh-surface lab scenarios. | Can look like decentralized contact proof if unlabeled. | Label as local deterministic seam; decentralized seam is deferred until mesh-v0-2 exposes a direct contact proof lane. |
 | `.lab/runs/` | Disposable lab run artifacts. | Files can become accidental substrate. | Keep replaceable; call local artifact scaffold. |
 | `observations.ndjson` | Local observation capture inside lab runs. | JSONL evidence can look like durable substrate. | Keep as local evidence scaffold, not truth. |
 | `MESH_ECOLOGY_ROOT` | Adjacent mesh-v0-2 path override. | Local path can look like dependency canon. | Keep operator-local path scaffold. |
@@ -70,7 +70,7 @@ This document maps repo-local terms to Origin Shape posture so agents do not inf
 - `surface`: qualify as `local test surface`, `concern surface`, or `discovery surface`.
 - `profile`: qualify as `instability profile` or `timing profile`; do not let it collide with target profiles in Edge/Discovery Ops UI.
 - `mature`: readiness gate only; not completion or production readiness.
-- `mesh-surface local lab` / `real mesh lab`: evidence source for local fidelity, not deployment or distributed-readiness proof.
+- `mesh-surface local lab` / `real mesh lab`: evidence source for local fidelity, not deployment or distributed-readiness proof; next decentralized contact evidence should come from the mesh-v0-2 proof lane, not from a Testbed-only transport invention.
 
 ## Terms Not To Rename Yet
 

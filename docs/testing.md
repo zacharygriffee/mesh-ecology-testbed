@@ -53,6 +53,19 @@ Current proof scope:
 
 This lane is a real mesh-surface local lab, not a distributed-readiness proof. It exercises real concern/discovery/actor mechanics through deterministic local `fakeswarm`; decentralized contact through Hyperswarm/HyperDHT/protomux-style seams remains deferred to upstream transport lanes.
 
+## Contact Proof Follow-Up Readiness
+
+The next Testbed contact lab should not invent its own decentralized seam. It should wait for `mesh-v0-2` to implement the direct contact proof lane described in `docs/dev/contact-proof-lane.md`, then consume that lane as upstream evidence.
+
+Until that lane exists, Testbed should keep emitting:
+
+- `transport: fakeswarm`
+- `contactSeam: deterministic_local_fakeswarm`
+- `decentralizedSeam: deferred`
+- `distributedReadinessClaimed: false`
+
+This keeps Testbed useful for local mesh-surface behavior while preventing the deterministic lab seam from becoming accidental proof of HyperDHT, Protomux RPC, NAT traversal, or distributed readiness.
+
 It requires:
 
 - a sibling checkout by default at `../mesh-v0-2`
