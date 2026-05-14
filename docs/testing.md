@@ -55,16 +55,18 @@ This lane is a real mesh-surface local lab, not a distributed-readiness proof. I
 
 ## Contact Proof Follow-Up Readiness
 
-The next Testbed contact lab should not invent its own decentralized seam. It should wait for `mesh-v0-2` to implement the direct contact proof lane described in `docs/dev/contact-proof-lane.md`, then consume that lane as upstream evidence.
+Testbed does not invent its own decentralized seam. It consumes the `mesh-v0-2` direct contact proof lane described in `docs/dev/contact-proof-lane.md` as upstream evidence.
 
-Until that lane exists, Testbed should keep emitting:
+The Testbed-owned consumer in `src/testbed/contact-proof-evidence.js` reads the `mesh_contact_proof_evidence` shape and emits `testbed_contact_proof_evidence` as review evidence only.
+
+The mesh-surface local lab still emits:
 
 - `transport: fakeswarm`
 - `contactSeam: deterministic_local_fakeswarm`
 - `decentralizedSeam: deferred`
 - `distributedReadinessClaimed: false`
 
-This keeps Testbed useful for local mesh-surface behavior while preventing the deterministic lab seam from becoming accidental proof of HyperDHT, Protomux RPC, NAT traversal, or distributed readiness.
+This keeps Testbed useful for local mesh-surface behavior while preventing the deterministic lab seam from becoming accidental proof of HyperDHT, Protomux RPC, NAT traversal, or distributed readiness. Direct contact evidence comes from the upstream mesh-v0-2 proof lane, not from Testbed's `fakeswarm` lab seam.
 
 It requires:
 
