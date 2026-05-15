@@ -206,6 +206,33 @@ single-writer projection loop as review evidence only: Edge emits the log entry,
 causal-substrate maps it to happening refs, and Testbed pressures that mapping
 without turning it into local-layer truth.
 
+## Local-Layer Frontier Candidate Review
+
+Testbed consumes causal-substrate's
+`causal-substrate/local-layer-frontier-candidate-evidence/v1` output as a
+review evidence lane for the Spine collaborative causality candidate. The
+consumer in `src/testbed/local-layer-frontier-candidate-evidence.js` validates
+the causal-substrate artifact without calling causal-substrate, opening
+Autobase, opening Corestore, writing continuity records, or accepting canonical
+history.
+
+This review accepts the evidence only when it preserves:
+
+- writer refs
+- head refs
+- linearized entry refs
+- causal frontier refs
+- source projection event refs
+- source happening refs
+- Autobase or equivalent linearization as the collaborative ordering candidate
+- wall-clock time as observation metadata, not causal order
+
+It blocks boundary overclaims, HTTP/SSH/local path seam refs, missing
+writer/head/frontier/source refs, wall-clock ordering drift, canonical-history
+acceptance, layer settlement claims, truth claims, authority claims, and mesh
+publication claims. This keeps the next Autobase step from inventing
+collaborative causality semantics inside backend code.
+
 It requires:
 
 - a sibling checkout by default at `../mesh-v0-2`
