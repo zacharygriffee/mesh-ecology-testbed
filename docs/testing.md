@@ -133,6 +133,42 @@ The Testbed evidence does not write a projection log, install a storage backend,
 claim local-layer durability, execute Edge, or make the local JSON status export
 into substrate.
 
+## Local-Layer Projection Log Review
+
+Testbed also pressure-checks Edge's first single-writer projection-log proof as
+review evidence only. The consumer in
+`src/testbed/local-layer-projection-log-evidence.js` validates the exported
+`edge_projection_event_log_entry.v0` shape without opening Corestore, running
+Edge, or treating a local store root as an integration seam.
+
+This review accepts the narrow proof only when it preserves:
+
+- one semantic namespace prefix:
+  `mesh-ecology > local-layer > projection-event > v0 > producer-mesh-ecology-edge > projection-operator-situation-view`
+- a source-referenced Spine projection event inside the log entry
+- matching projection event id, projection ref, and payload hash
+- `singleWriterLocalCorestoreProof=true`
+- `writesProjectionLog=true`
+- `replicatedLocalLayerState=false`
+- `autobaseBackend=false`
+- `hyperbeeIndex=false`
+- `httpSeam=false`
+- `sshSeam=false`
+- `localStoreRootIsIntegrationSeam=false`
+
+It blocks:
+
+- URL, path, localhost, IP, SSH, or HTTP scaffold values in namespace or
+  transport refs
+- storage, transport, or local-store seam overclaims
+- missing source refs
+- embedded payload promotion
+- truth, completion, authority, or replicated-state claims
+
+The review does not prove multi-device replication. It only makes the current
+single-writer Corestore proof harder to accidentally promote into Autobase,
+Hyperbee, HTTP/SSH, or local-file substrate before those lanes exist.
+
 It requires:
 
 - a sibling checkout by default at `../mesh-v0-2`
