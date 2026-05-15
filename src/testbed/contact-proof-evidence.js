@@ -45,6 +45,10 @@ function capabilityAdvertisement(proof) {
   return isPlainObject(proof?.capabilityAdvertisement) ? proof.capabilityAdvertisement : null;
 }
 
+function appendLogRefs(proof) {
+  return isPlainObject(proof?.appendLogRefs) ? proof.appendLogRefs : null;
+}
+
 function advertisedCapabilities(proof) {
   const advertisement = capabilityAdvertisement(proof);
   return Array.isArray(advertisement?.capabilities)
@@ -197,6 +201,7 @@ export function buildTestbedContactProofEvidence({
   const capability = capabilityDescriptor(contactProof);
   const sourceProfile = contactProofSourceProfile(contactProof);
   const advertisement = capabilityAdvertisement(contactProof);
+  const appendRefs = appendLogRefs(contactProof);
   const advertised = advertisedCapabilities(contactProof);
 
   return Object.freeze({
@@ -211,6 +216,12 @@ export function buildTestbedContactProofEvidence({
     sourceArtifactKind: nonEmptyString(contactProof?.artifactKind),
     sourceSchema: nonEmptyString(contactProof?.schema),
     sourceProofKind: nonEmptyString(contactProof?.proofKind),
+    proofId: nonEmptyString(contactProof?.proofId),
+    payloadHash: nonEmptyString(contactProof?.payloadHash),
+    payloadHashAlgorithm: nonEmptyString(contactProof?.payloadHashAlgorithm),
+    appendLogEntryId: nonEmptyString(appendRefs?.entryId),
+    capabilityAdvertisementRef: nonEmptyString(appendRefs?.capabilityAdvertisementRef),
+    selectedTransportRef: nonEmptyString(appendRefs?.selectedTransportRef),
     participantA: nonEmptyString(contactProof?.participantA),
     participantB: nonEmptyString(contactProof?.participantB),
     operation: nonEmptyString(contactProof?.operation),

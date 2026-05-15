@@ -70,6 +70,12 @@ inline `capabilityDescriptor` as fallback posture. It blocks overclaims such as
 treating the direct-peer proof as a mesh-layer default or required discovery
 proof.
 
+When the producer includes append-log-ready fields, Testbed preserves
+`proofId`, `payloadHash`, `payloadHashAlgorithm`, `appendLogRefs.entryId`,
+`appendLogRefs.capabilityAdvertisementRef`, and
+`appendLogRefs.selectedTransportRef` without treating those refs as runtime
+execution or distributed readiness.
+
 The mesh-surface local lab still emits:
 
 - `transport: fakeswarm`
