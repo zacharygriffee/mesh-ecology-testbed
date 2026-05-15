@@ -76,6 +76,10 @@ When the producer includes append-log-ready fields, Testbed preserves
 `appendLogRefs.selectedTransportRef` without treating those refs as runtime
 execution or distributed readiness.
 
+Current contact-proof review requires those producer-owned proof/hash/append-log
+refs to be present. If the append-log refs claim truth or completion, Testbed
+blocks the evidence instead of treating the proof as visible.
+
 The static fixture at
 `test/fixtures/cross-repo-contact-proof/platform-edge-causal-testbed-handoff.json`
 is the current golden handoff packet for the repo family. It shows the same

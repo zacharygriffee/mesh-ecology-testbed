@@ -308,6 +308,37 @@ test("contact proof consumer handles malformed and incomplete proof inputs", () 
   assertPassiveEvidence(incomplete);
 });
 
+test("contact proof consumer requires producer-owned append-log proof refs", () => {
+  const proof = validPlatformContactProof();
+  delete proof.proofId;
+  delete proof.payloadHash;
+  delete proof.appendLogRefs;
+
+  const evidence = build(proof);
+
+  assert.equal(evidence.reviewStatus, TESTBED_CONTACT_PROOF_STATUSES.CONTACT_PROOF_INCOMPLETE);
+  assert.equal(evidence.reasonCodes.includes("contact_proof_proof_id_missing"), true);
+  assert.equal(evidence.reasonCodes.includes("contact_proof_payload_hash_missing"), true);
+  assert.equal(evidence.reasonCodes.includes("contact_proof_append_log_refs_missing"), true);
+  assert.equal(evidence.testbedExecutedContact, false);
+  assert.equal(evidence.meshTruthClaimed, false);
+  assertPassiveEvidence(evidence);
+});
+
+test("contact proof consumer blocks append-log proof refs that claim truth or completion", () => {
+  const proof = validPlatformContactProof();
+  proof.appendLogRefs.truthClaimed = true;
+  proof.appendLogRefs.completionClaimed = true;
+
+  const evidence = build(proof);
+
+  assert.equal(evidence.reviewStatus, TESTBED_CONTACT_PROOF_STATUSES.CONTACT_PROOF_BLOCKED);
+  assert.equal(evidence.reasonCodes.includes("contact_proof_append_log_refs_claim_truth_or_completion"), true);
+  assert.equal(evidence.distributedReadinessProofClaimed, false);
+  assert.equal(evidence.completionClaimed, false);
+  assertPassiveEvidence(evidence);
+});
+
 test("contact proof status vocabulary is testbed-owned and bounded", () => {
   assert.deepEqual(listTestbedContactProofStatuses(), [
     "contact_proof_visible",

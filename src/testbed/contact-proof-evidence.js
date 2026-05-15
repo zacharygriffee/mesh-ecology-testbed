@@ -127,8 +127,25 @@ function validateContactProof(proof) {
   if (!nonEmptyString(proof.operation)) reasonCodes.push("contact_proof_operation_missing");
   if (!nonEmptyString(proof.requestId)) reasonCodes.push("contact_proof_request_missing");
   if (!nonEmptyString(proof.responseId)) reasonCodes.push("contact_proof_response_missing");
+  if (!nonEmptyString(proof.proofId)) reasonCodes.push("contact_proof_proof_id_missing");
+  if (!nonEmptyString(proof.payloadHash)) reasonCodes.push("contact_proof_payload_hash_missing");
+  if (!nonEmptyString(proof.payloadHashAlgorithm)) reasonCodes.push("contact_proof_payload_hash_algorithm_missing");
   if (!transport) reasonCodes.push("contact_proof_transport_missing");
   if (!readiness) reasonCodes.push("contact_proof_readiness_missing");
+  const appendRefs = appendLogRefs(proof);
+  if (
+    !appendRefs ||
+    !nonEmptyString(appendRefs.entryId) ||
+    !nonEmptyString(appendRefs.sourceRepo) ||
+    !nonEmptyString(appendRefs.sourceArtifactKind) ||
+    !nonEmptyString(appendRefs.sourceSchema) ||
+    !nonEmptyString(appendRefs.selectedTransportRef)
+  ) {
+    reasonCodes.push("contact_proof_append_log_refs_missing");
+  }
+  if (appendRefs?.truthClaimed === true || appendRefs?.completionClaimed === true) {
+    reasonCodes.push("contact_proof_append_log_refs_claim_truth_or_completion");
+  }
 
   if (transport && (
     transport.transportKind !== EXPECTED_TRANSPORT_KIND ||
