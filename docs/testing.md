@@ -55,14 +55,20 @@ This lane is a real mesh-surface local lab, not a distributed-readiness proof. I
 
 ## Contact Proof Follow-Up Readiness
 
-Testbed does not invent its own decentralized seam. It consumes the `mesh-v0-2` direct contact proof lane described in `docs/dev/contact-proof-lane.md` as upstream evidence.
+Testbed does not invent its own decentralized seam. It consumes producer-owned
+direct contact proof lanes as upstream evidence, starting with the `mesh-v0-2`
+direct contact proof lane described in `docs/dev/contact-proof-lane.md` and the
+`mesh-ecology-platform` local-service proof lane.
 
 The Testbed-owned consumer in `src/testbed/contact-proof-evidence.js` reads the
-`mesh_contact_proof_evidence` shape and emits `testbed_contact_proof_evidence`
-as review evidence only. When the upstream proof includes a
-`capabilityDescriptor`, Testbed preserves the descriptor posture and blocks
-overclaims such as treating the direct-peer proof as a mesh-layer default or
-required discovery proof.
+`mesh_contact_proof_evidence` and
+`platform_local_service_contact_proof_evidence` shapes and emits
+`testbed_contact_proof_evidence` as review evidence only. When the upstream
+proof includes `capabilityAdvertisement.capabilities[]`, Testbed treats the
+advertised participant capability as the preferred descriptor and preserves the
+inline `capabilityDescriptor` as fallback posture. It blocks overclaims such as
+treating the direct-peer proof as a mesh-layer default or required discovery
+proof.
 
 The mesh-surface local lab still emits:
 
