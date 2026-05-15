@@ -57,7 +57,12 @@ This lane is a real mesh-surface local lab, not a distributed-readiness proof. I
 
 Testbed does not invent its own decentralized seam. It consumes the `mesh-v0-2` direct contact proof lane described in `docs/dev/contact-proof-lane.md` as upstream evidence.
 
-The Testbed-owned consumer in `src/testbed/contact-proof-evidence.js` reads the `mesh_contact_proof_evidence` shape and emits `testbed_contact_proof_evidence` as review evidence only.
+The Testbed-owned consumer in `src/testbed/contact-proof-evidence.js` reads the
+`mesh_contact_proof_evidence` shape and emits `testbed_contact_proof_evidence`
+as review evidence only. When the upstream proof includes a
+`capabilityDescriptor`, Testbed preserves the descriptor posture and blocks
+overclaims such as treating the direct-peer proof as a mesh-layer default or
+required discovery proof.
 
 The mesh-surface local lab still emits:
 
@@ -67,6 +72,16 @@ The mesh-surface local lab still emits:
 - `distributedReadinessClaimed: false`
 
 This keeps Testbed useful for local mesh-surface behavior while preventing the deterministic lab seam from becoming accidental proof of HyperDHT, Protomux RPC, NAT traversal, or distributed readiness. Direct contact evidence comes from the upstream mesh-v0-2 proof lane, not from Testbed's `fakeswarm` lab seam.
+
+`src/testbed/transport-lane-evidence.js` provides the comparison shape used for
+this distinction:
+
+- HyperDHT direct peer + Protomux RPC can be recorded as bounded direct contact
+  when upstream proof succeeds.
+- Hyperswarm discovery is recorded as observation, plural evidence, or bounded
+  absence within an observation window.
+- Neither lane becomes production readiness, mesh truth, or completion inside
+  Testbed.
 
 It requires:
 

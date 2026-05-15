@@ -20,6 +20,23 @@ function validContactProof() {
     participantA: "mesh-contact-host",
     participantB: "mesh-contact-client",
     operation: "capability.echo",
+    capabilityDescriptor: {
+      capability: "contact-proof",
+      methodName: "capability.echo",
+      dispatchCommand: "@mesh-contact/capability-echo",
+      requestEncoding: "@mesh-contact/contact-proof-request",
+      responseEncoding: "@mesh-contact/contact-proof-response",
+      protocolFamily: "mesh-contact-proof",
+      protocolSchema: "mesh-v0-2/contact-proof/direct-peer/v1",
+      ownerRepo: "mesh-v0-2",
+      proofScope: "bounded_direct_participant_contact",
+      transportKind: "protomux-rpc",
+      contactSeam: "hyperdht_direct_peer",
+      localLayerDefault: true,
+      meshLayerDefault: false,
+      discoveryRequired: false,
+      participantContact: true
+    },
     requestId: "mesh-contact-request:a",
     responseId: "mesh-contact-response:a",
     selectedTransport: {
@@ -76,6 +93,17 @@ test("valid mesh-v0-2 contact proof is consumed as upstream evidence only", () =
   assert.equal(evidence.sourceArtifactKind, "mesh_contact_proof_evidence");
   assert.equal(evidence.sourceSchema, "mesh-v0-2/contact-proof/direct-peer/v1");
   assert.equal(evidence.sourceProofKind, "mesh_contact_direct_peer_lab");
+  assert.equal(evidence.hasCapabilityDescriptor, true);
+  assert.equal(evidence.capability, "contact-proof");
+  assert.equal(evidence.capabilityMethodName, "capability.echo");
+  assert.equal(evidence.capabilityOwnerRepo, "mesh-v0-2");
+  assert.equal(evidence.capabilityProofScope, "bounded_direct_participant_contact");
+  assert.equal(evidence.capabilityTransportKind, "protomux-rpc");
+  assert.equal(evidence.capabilityContactSeam, "hyperdht_direct_peer");
+  assert.equal(evidence.capabilityLocalLayerDefault, true);
+  assert.equal(evidence.capabilityMeshLayerDefault, false);
+  assert.equal(evidence.capabilityDiscoveryRequired, false);
+  assert.equal(evidence.capabilityParticipantContact, true);
   assert.equal(evidence.transportKind, "protomux-rpc");
   assert.equal(evidence.contactSeam, "hyperdht_direct_peer");
   assert.equal(evidence.transportScope, "isolated_local_hyperdht");
@@ -108,6 +136,19 @@ test("contact proof consumer blocks non-direct or wrong transport seams", () => 
 
   assert.equal(evidence.reviewStatus, TESTBED_CONTACT_PROOF_STATUSES.CONTACT_PROOF_BLOCKED);
   assert.equal(evidence.reasonCodes.includes("contact_proof_direct_seam_mismatch"), true);
+  assertPassiveEvidence(evidence);
+});
+
+test("contact proof consumer blocks capability descriptor overclaims", () => {
+  const proof = validContactProof();
+  proof.capabilityDescriptor.meshLayerDefault = true;
+  proof.capabilityDescriptor.discoveryRequired = true;
+
+  const evidence = build(proof);
+
+  assert.equal(evidence.reviewStatus, TESTBED_CONTACT_PROOF_STATUSES.CONTACT_PROOF_BLOCKED);
+  assert.equal(evidence.reasonCodes.includes("contact_proof_capability_mesh_layer_overclaim"), true);
+  assert.equal(evidence.reasonCodes.includes("contact_proof_capability_discovery_overclaim"), true);
   assertPassiveEvidence(evidence);
 });
 

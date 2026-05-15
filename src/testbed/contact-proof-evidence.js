@@ -13,6 +13,10 @@ const EXPECTED_SCHEMA = "mesh-v0-2/contact-proof/direct-peer/v1";
 const EXPECTED_PROOF_KIND = "mesh_contact_direct_peer_lab";
 const EXPECTED_TRANSPORT_KIND = "protomux-rpc";
 const EXPECTED_CONTACT_SEAM = "hyperdht_direct_peer";
+const EXPECTED_CAPABILITY = "contact-proof";
+const EXPECTED_CAPABILITY_METHOD = "capability.echo";
+const EXPECTED_CAPABILITY_OWNER = "mesh-v0-2";
+const EXPECTED_CAPABILITY_SCOPE = "bounded_direct_participant_contact";
 
 function isPlainObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
@@ -30,6 +34,10 @@ function readinessEvidence(proof) {
   return isPlainObject(proof?.readinessEvidence) ? proof.readinessEvidence : null;
 }
 
+function capabilityDescriptor(proof) {
+  return isPlainObject(proof?.capabilityDescriptor) ? proof.capabilityDescriptor : null;
+}
+
 function validateContactProof(proof) {
   const reasonCodes = [];
   if (!isPlainObject(proof)) {
@@ -41,6 +49,7 @@ function validateContactProof(proof) {
 
   const transport = selectedTransport(proof);
   const readiness = readinessEvidence(proof);
+  const capability = capabilityDescriptor(proof);
 
   if (proof.artifactKind !== EXPECTED_ARTIFACT_KIND) reasonCodes.push("contact_proof_artifact_kind_mismatch");
   if (proof.schema !== EXPECTED_SCHEMA) reasonCodes.push("contact_proof_schema_mismatch");
@@ -64,12 +73,26 @@ function validateContactProof(proof) {
     reasonCodes.push("contact_proof_claims_distributed_readiness");
   }
 
+  if (capability) {
+    if (capability.capability !== EXPECTED_CAPABILITY) reasonCodes.push("contact_proof_capability_mismatch");
+    if (capability.methodName !== EXPECTED_CAPABILITY_METHOD) reasonCodes.push("contact_proof_capability_method_mismatch");
+    if (capability.ownerRepo !== EXPECTED_CAPABILITY_OWNER) reasonCodes.push("contact_proof_capability_owner_mismatch");
+    if (capability.proofScope !== EXPECTED_CAPABILITY_SCOPE) reasonCodes.push("contact_proof_capability_scope_mismatch");
+    if (capability.transportKind !== EXPECTED_TRANSPORT_KIND) reasonCodes.push("contact_proof_capability_transport_mismatch");
+    if (capability.contactSeam !== EXPECTED_CONTACT_SEAM) reasonCodes.push("contact_proof_capability_seam_mismatch");
+    if (capability.localLayerDefault !== true) reasonCodes.push("contact_proof_capability_local_layer_missing");
+    if (capability.meshLayerDefault === true) reasonCodes.push("contact_proof_capability_mesh_layer_overclaim");
+    if (capability.discoveryRequired === true) reasonCodes.push("contact_proof_capability_discovery_overclaim");
+    if (capability.participantContact !== true) reasonCodes.push("contact_proof_capability_participant_contact_missing");
+  }
+
   if (proof.meshTruthClaimed === true || proof.completionClaimed === true || proof.claimsCausalTruth === true) {
     reasonCodes.push("contact_proof_claims_truth_or_completion");
   }
 
   if (reasonCodes.some((code) =>
     code.includes("mismatch") ||
+    code.includes("overclaim") ||
     code.includes("distributed_readiness") ||
     code.includes("truth_or_completion")
   )) {
@@ -107,6 +130,7 @@ export function buildTestbedContactProofEvidence({
   const validation = validateContactProof(contactProof);
   const transport = selectedTransport(contactProof);
   const readiness = readinessEvidence(contactProof);
+  const capability = capabilityDescriptor(contactProof);
 
   return Object.freeze({
     artifactKind: "testbed_contact_proof_evidence",
@@ -121,6 +145,17 @@ export function buildTestbedContactProofEvidence({
     participantA: nonEmptyString(contactProof?.participantA),
     participantB: nonEmptyString(contactProof?.participantB),
     operation: nonEmptyString(contactProof?.operation),
+    capability: nonEmptyString(capability?.capability),
+    capabilityMethodName: nonEmptyString(capability?.methodName),
+    capabilityOwnerRepo: nonEmptyString(capability?.ownerRepo),
+    capabilityProofScope: nonEmptyString(capability?.proofScope),
+    capabilityTransportKind: nonEmptyString(capability?.transportKind),
+    capabilityContactSeam: nonEmptyString(capability?.contactSeam),
+    capabilityLocalLayerDefault: capability?.localLayerDefault === true,
+    capabilityMeshLayerDefault: capability?.meshLayerDefault === true,
+    capabilityDiscoveryRequired: capability?.discoveryRequired === true,
+    capabilityParticipantContact: capability?.participantContact === true,
+    hasCapabilityDescriptor: capability !== null,
     requestId: nonEmptyString(contactProof?.requestId),
     responseId: nonEmptyString(contactProof?.responseId),
     transportKind: nonEmptyString(transport?.transportKind),
