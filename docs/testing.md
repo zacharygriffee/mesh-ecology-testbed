@@ -76,6 +76,12 @@ When the producer includes append-log-ready fields, Testbed preserves
 `appendLogRefs.selectedTransportRef` without treating those refs as runtime
 execution or distributed readiness.
 
+The static fixture at
+`test/fixtures/cross-repo-contact-proof/platform-edge-causal-testbed-handoff.json`
+is the current golden handoff packet for the repo family. It shows the same
+Platform proof refs preserved through Edge readiness, Causal Substrate evidence,
+and Testbed review evidence.
+
 The mesh-surface local lab still emits:
 
 - `transport: fakeswarm`

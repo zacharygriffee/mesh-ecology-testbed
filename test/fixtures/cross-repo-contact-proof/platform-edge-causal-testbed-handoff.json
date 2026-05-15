@@ -1,0 +1,167 @@
+{
+  "artifactKind": "cross_repo_contact_proof_handoff_fixture",
+  "schema": "mesh-ecology-testbed/cross-repo-contact-proof-handoff/v1",
+  "fixtureId": "cross-repo-contact-proof:platform-edge-causal-testbed:001",
+  "createdAt": "2026-05-15T12:00:00.000Z",
+  "handoffPath": [
+    "mesh-ecology-platform:producer-proof",
+    "mesh-ecology-edge:readiness-receipt",
+    "causal-substrate:evidence-artifact",
+    "mesh-ecology-testbed:review-evidence"
+  ],
+  "producerProof": {
+    "artifactKind": "platform_local_service_contact_proof_evidence",
+    "schema": "mesh-ecology-platform/local-service-contact-proof/direct-peer/v1",
+    "proofId": "platform-local-service-contact-proof:bbbbbbbbbbbbbbbb",
+    "payloadHashAlgorithm": "sha256-canonical-json",
+    "payloadHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "appendLogRefs": {
+      "entryId": "platform-contact-proof-entry:bbbbbbbbbbbbbbbb",
+      "sourceRepo": "mesh-ecology-platform",
+      "sourceArtifactKind": "platform_local_service_contact_proof_evidence",
+      "sourceSchema": "mesh-ecology-platform/local-service-contact-proof/direct-peer/v1",
+      "proofKind": "platform_local_service_contact_direct_peer_lab",
+      "requestRef": "platform-contact-request:a",
+      "responseRef": "platform-contact-response:a",
+      "capabilityAdvertisementRef": "platform-capabilities-response:a",
+      "selectedTransportRef": "protomux-rpc:hyperdht_direct_peer",
+      "parentRefs": [],
+      "truthClaimed": false,
+      "completionClaimed": false
+    },
+    "protocolFamily": "mesh-contact-proof",
+    "protocolSchema": "mesh-v0-2/contact-proof/direct-peer/v1",
+    "requestEncoding": "@mesh-contact/contact-proof-request",
+    "responseEncoding": "@mesh-contact/contact-proof-response",
+    "dispatchCommand": "@mesh-contact/capability-echo",
+    "capabilitiesRequestEncoding": "@mesh-contact/participant-capabilities-request",
+    "capabilitiesResponseEncoding": "@mesh-contact/participant-capabilities-response",
+    "capabilitiesDispatchCommand": "@mesh-contact/participant-capabilities-get",
+    "proofKind": "platform_local_service_contact_direct_peer_lab",
+    "transportKind": "protomux-rpc",
+    "contactSeam": "hyperdht_direct_peer",
+    "participantA": "platform-local-service-contact-host",
+    "participantB": "platform-local-service-contact-client",
+    "operation": "platform.localService.capabilityEcho",
+    "capabilityDescriptor": {
+      "capability": "platform-local-service-contact-proof",
+      "methodName": "platform.localService.capabilityEcho",
+      "ownerRepo": "mesh-ecology-platform",
+      "proofScope": "bounded_platform_local_service_contact",
+      "transportKind": "protomux-rpc",
+      "contactSeam": "hyperdht_direct_peer",
+      "localLayerDefault": true,
+      "meshLayerDefault": false,
+      "discoveryRequired": false,
+      "participantContact": true
+    },
+    "capabilityAdvertisement": {
+      "responseId": "platform-capabilities-response:a",
+      "requestId": "platform-capabilities-request:a",
+      "participant": "platform-local-service-contact-host",
+      "protocolFamily": "mesh-contact-proof",
+      "protocolSchema": "mesh-v0-2/contact-proof/direct-peer/v1",
+      "capabilities": [
+        {
+          "capability": "platform-local-service-contact-proof",
+          "methodName": "platform.localService.capabilityEcho",
+          "ownerRepo": "mesh-ecology-platform",
+          "proofScope": "bounded_platform_local_service_contact",
+          "transportKind": "protomux-rpc",
+          "contactSeam": "hyperdht_direct_peer",
+          "localLayerDefault": true,
+          "meshLayerDefault": false,
+          "discoveryRequired": false,
+          "participantContact": true
+        }
+      ]
+    },
+    "requestId": "platform-contact-request:a",
+    "responseId": "platform-contact-response:a",
+    "selectedTransport": {
+      "transportKind": "protomux-rpc",
+      "contactSeam": "hyperdht_direct_peer",
+      "transportRole": "proof_lane",
+      "scope": "isolated_local_hyperdht",
+      "scaffoldTransport": false,
+      "compatibilityAlias": false,
+      "productionPreferred": false,
+      "operatorSupplied": false,
+      "portExposureRequired": false,
+      "participantContact": true
+    },
+    "readinessEvidence": {
+      "readinessScope": "direct_peer_contact",
+      "distributedReadinessClaimed": false,
+      "serviceBackendClaimed": false
+    },
+    "contactAttempted": true,
+    "contactSucceeded": true,
+    "distributedReadinessClaimed": false,
+    "meshTruthClaimed": false,
+    "completionClaimed": false
+  },
+  "edgeReadinessReceipt": {
+    "artifactKind": "edge_remote_target_readiness_receipt",
+    "schemaVersion": "edge_remote_target_readiness_receipt.v1",
+    "selectedReadinessEvidence": "contact_proof",
+    "contactProofState": "preferred_contact_proof_observed",
+    "contactProofSourceKind": "platform_local_service_contact_proof",
+    "contactProofProofId": "platform-local-service-contact-proof:bbbbbbbbbbbbbbbb",
+    "contactProofPayloadHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "contactProofPayloadHashAlgorithm": "sha256-canonical-json",
+    "contactProofAppendLogEntryId": "platform-contact-proof-entry:bbbbbbbbbbbbbbbb",
+    "contactProofCapabilityAdvertisementRef": "platform-capabilities-response:a",
+    "contactProofSelectedTransportRef": "protomux-rpc:hyperdht_direct_peer",
+    "repoToRepoSeam": false,
+    "participantToParticipantSeam": false,
+    "truthClaimed": false,
+    "completionClaimed": false
+  },
+  "causalEvidenceArtifact": {
+    "artifactKind": "causal-mesh-contact-proof-evidence",
+    "schema": "causal-substrate/mesh-contact-proof-evidence/v1",
+    "source": {
+      "sourceRepo": "mesh-ecology-platform",
+      "sourceArtifactKind": "platform_local_service_contact_proof_evidence",
+      "sourceSchema": "mesh-ecology-platform/local-service-contact-proof/direct-peer/v1",
+      "sourceProfile": "platform_local_service_contact"
+    },
+    "contactRefs": {
+      "proofId": "platform-local-service-contact-proof:bbbbbbbbbbbbbbbb",
+      "payloadHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "payloadHashAlgorithm": "sha256-canonical-json",
+      "appendLogEntryId": "platform-contact-proof-entry:bbbbbbbbbbbbbbbb",
+      "proofKind": "platform_local_service_contact_direct_peer_lab",
+      "requestId": "platform-contact-request:a",
+      "responseId": "platform-contact-response:a",
+      "capabilityAdvertisementRef": "platform-capabilities-response:a",
+      "selectedTransportRef": "protomux-rpc:hyperdht_direct_peer"
+    },
+    "boundary": {
+      "evidenceOnly": true,
+      "performsContact": false,
+      "claimsCausalTruth": false,
+      "acceptsCanonicalBranch": false,
+      "claimsDistributedReadiness": false
+    }
+  },
+  "testbedEvidence": {
+    "artifactKind": "testbed_contact_proof_evidence",
+    "schemaVersion": "testbed_contact_proof_evidence.v1",
+    "reviewStatus": "contact_proof_visible",
+    "sourceRepo": "mesh-ecology-platform",
+    "sourceProfile": "platform_local_service_contact",
+    "proofId": "platform-local-service-contact-proof:bbbbbbbbbbbbbbbb",
+    "payloadHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "payloadHashAlgorithm": "sha256-canonical-json",
+    "appendLogEntryId": "platform-contact-proof-entry:bbbbbbbbbbbbbbbb",
+    "capabilityAdvertisementRef": "platform-capabilities-response:a",
+    "selectedTransportRef": "protomux-rpc:hyperdht_direct_peer",
+    "testbedExecutedContact": false,
+    "testbedOwnsTransport": false,
+    "distributedReadinessProofClaimed": false,
+    "meshTruthClaimed": false,
+    "completionClaimed": false
+  }
+}
