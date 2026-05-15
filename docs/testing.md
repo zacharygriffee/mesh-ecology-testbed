@@ -147,6 +147,11 @@ This review accepts the narrow proof only when it preserves:
   `mesh-ecology > local-layer > projection-event > v0 > producer-mesh-ecology-edge > projection-operator-situation-view`
 - a source-referenced Spine projection event inside the log entry
 - matching projection event id, projection ref, and payload hash
+- `appendedAt` as operator-local wall-clock observation metadata, not causal
+  order
+- local causal order from single-writer sequence and event refs
+- collaborative causal order pointing toward Autobase or equivalent
+  linearization instead of wall-clock timestamp comparison
 - `singleWriterLocalCorestoreProof=true`
 - `writesProjectionLog=true`
 - `replicatedLocalLayerState=false`
@@ -163,11 +168,43 @@ It blocks:
 - storage, transport, or local-store seam overclaims
 - missing source refs
 - embedded payload promotion
+- wall-clock-as-causal-order drift
 - truth, completion, authority, or replicated-state claims
 
 The review does not prove multi-device replication. It only makes the current
 single-writer Corestore proof harder to accidentally promote into Autobase,
 Hyperbee, HTTP/SSH, or local-file substrate before those lanes exist.
+
+## Local-Layer Projection Happening Map Review
+
+Testbed consumes causal-substrate's
+`causal-substrate/edge-projection-log-happening-map/v1` output as a separate
+review evidence lane. The consumer in
+`src/testbed/local-layer-projection-happening-map-evidence.js` validates the
+causal-substrate artifact without executing Edge, calling causal-substrate,
+opening Corestore, replaying Edge's projection log, writing continuity records,
+or accepting canonical history.
+
+This review accepts the map only when:
+
+- causal-substrate keeps the artifact review-only and evidence-only
+- Edge remains the declared source repo and `edge_projection_event_log_entry.v0`
+  remains the source schema
+- happening refs preserve source entry, projection event, projection, payload
+  hash, namespace, source, transport, sequence, and observation-time refs
+- wall-clock temporal refs are explicitly observation metadata, not causal
+  order
+- single-writer order comes from sequence and refs
+- collaborative causal order points toward Autobase or equivalent linearization
+- causal-substrate does not open Edge Corestore, replay the log, write
+  continuity records, start a backend, publish to mesh, claim causal truth, or
+  accept canonical history
+
+It blocks namespace, transport, local-store, wall-clock causal-order, canonical
+history, truth, authority, and boundary overclaims. This closes the current
+single-writer projection loop as review evidence only: Edge emits the log entry,
+causal-substrate maps it to happening refs, and Testbed pressures that mapping
+without turning it into local-layer truth.
 
 It requires:
 

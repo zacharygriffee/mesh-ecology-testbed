@@ -63,6 +63,13 @@ function validLogEntry() {
     schemaVersion: "edge_projection_event_log_entry.v0",
     entryId: `projection-log-entry:${event.eventId}:0`,
     sequence: 0,
+    appendedAt: "2026-05-15T13:00:01.000Z",
+    timePosture: {
+      appendedAtMeaning: "operator_local_wall_clock_observation_metadata",
+      localCausalOrderSource: "single_writer_sequence_and_event_refs",
+      wallClockDefinesCausalOrder: false,
+      collaborativeCausalOrderRequiresAutobaseOrEquivalent: true
+    },
     projectionEventId: event.eventId,
     projectionEventSchema: event.schemaVersion,
     projectionRef: event.projectionRef,
@@ -136,6 +143,7 @@ test("valid Edge projection log entry is consumed as review evidence only", () =
   assert.deepEqual(evidence.reasonCodes, ["projection_log_visible"]);
   assert.equal(evidence.sourceArtifactKind, "edge_projection_event_log_entry");
   assert.equal(evidence.sourceSchemaVersion, "edge_projection_event_log_entry.v0");
+  assert.equal(evidence.sourceAppendedAt, "2026-05-15T13:00:01.000Z");
   assert.equal(evidence.sourceProjectionEventSchema, "mesh-ecology-spine/local-layer-projection-event/v0");
   assert.equal(evidence.sourceProducerRepo, "mesh-ecology-edge");
   assert.equal(evidence.sourceRefCount, 3);
@@ -143,12 +151,30 @@ test("valid Edge projection log entry is consumed as review evidence only", () =
   assert.deepEqual(evidence.namespaceParts, evidence.expectedNamespacePrefix);
   assert.equal(evidence.singleWriterLocalCorestoreProof, true);
   assert.equal(evidence.writesProjectionLog, true);
+  assert.equal(evidence.appendedAtMeaning, "operator_local_wall_clock_observation_metadata");
+  assert.equal(evidence.localCausalOrderSource, "single_writer_sequence_and_event_refs");
+  assert.equal(evidence.wallClockDefinesCausalOrder, false);
+  assert.equal(evidence.collaborativeCausalOrderRequiresAutobaseOrEquivalent, true);
   assert.equal(evidence.replicatedLocalLayerState, false);
   assert.equal(evidence.autobaseBackend, false);
   assert.equal(evidence.hyperbeeIndex, false);
   assert.equal(evidence.httpSeam, false);
   assert.equal(evidence.sshSeam, false);
   assert.equal(evidence.localStoreRootIsIntegrationSeam, false);
+  assertPassiveEvidence(evidence);
+});
+
+test("projection log evidence blocks wall-clock timestamp as causal order", () => {
+  const entry = validLogEntry();
+  entry.timePosture.wallClockDefinesCausalOrder = true;
+  entry.timePosture.collaborativeCausalOrderRequiresAutobaseOrEquivalent = false;
+
+  const evidence = build(entry);
+
+  assert.equal(evidence.reviewStatus, TESTBED_LOCAL_LAYER_PROJECTION_LOG_STATUSES.PROJECTION_LOG_BLOCKED);
+  assert.equal(evidence.reasonCodes.includes("projection_log_time_posture_missing_or_unsafe"), true);
+  assert.equal(evidence.wallClockDefinesCausalOrder, true);
+  assert.equal(evidence.collaborativeCausalOrderRequiresAutobaseOrEquivalent, false);
   assertPassiveEvidence(evidence);
 });
 

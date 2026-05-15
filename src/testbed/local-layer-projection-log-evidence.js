@@ -40,6 +40,10 @@ function logPosture(entry) {
   return isPlainObject(entry?.logPosture) ? entry.logPosture : {};
 }
 
+function timePosture(entry) {
+  return isPlainObject(entry?.timePosture) ? entry.timePosture : {};
+}
+
 function nonClaims(entry) {
   return isPlainObject(entry?.nonClaims) ? entry.nonClaims : {};
 }
@@ -123,6 +127,7 @@ function validateProjectionLogEntry({ logEntry, requiredSourceRefs = [] } = {}) 
   const sourceRefs = stringArray(logEntry.sourceRefs);
   const transportRefs = stringArray(logEntry.transportRefs);
   const posture = logPosture(logEntry);
+  const time = timePosture(logEntry);
   const claims = nonClaims(logEntry);
   const event = projectionEvent(logEntry);
   const eventReasonCodes = validateProjectionEventInsideLog(event);
@@ -132,6 +137,15 @@ function validateProjectionLogEntry({ logEntry, requiredSourceRefs = [] } = {}) 
   if (logEntry.schemaVersion !== EXPECTED_SCHEMA_VERSION) reasonCodes.push("projection_log_schema_mismatch");
   if (!nonEmptyString(logEntry.entryId)) reasonCodes.push("projection_log_entry_id_missing");
   if (!Number.isInteger(logEntry.sequence) || logEntry.sequence < 0) reasonCodes.push("projection_log_sequence_invalid");
+  if (!nonEmptyString(logEntry.appendedAt)) reasonCodes.push("projection_log_appended_at_missing");
+  if (
+    time.appendedAtMeaning !== "operator_local_wall_clock_observation_metadata" ||
+    time.localCausalOrderSource !== "single_writer_sequence_and_event_refs" ||
+    time.wallClockDefinesCausalOrder !== false ||
+    time.collaborativeCausalOrderRequiresAutobaseOrEquivalent !== true
+  ) {
+    reasonCodes.push("projection_log_time_posture_missing_or_unsafe");
+  }
   if (!nonEmptyString(logEntry.projectionEventId)) reasonCodes.push("projection_log_projection_event_id_missing");
   if (logEntry.projectionEventSchema !== EXPECTED_PROJECTION_EVENT_SCHEMA) reasonCodes.push("projection_log_projection_event_schema_mismatch");
   if (!nonEmptyString(logEntry.projectionRef)) reasonCodes.push("projection_log_projection_ref_missing");
@@ -180,6 +194,7 @@ function validateProjectionLogEntry({ logEntry, requiredSourceRefs = [] } = {}) 
     code.includes("claims") ||
     code.includes("scaffold") ||
     code.includes("seam") ||
+    code.includes("time_posture") ||
     code.includes("embeds_payload")
   )) {
     return Object.freeze({
@@ -222,6 +237,7 @@ export function buildTestbedLocalLayerProjectionLogEvidence({
     sourceArtifactKind: nonEmptyString(logEntry?.artifactKind),
     sourceSchemaVersion: nonEmptyString(logEntry?.schemaVersion),
     sourceEntryId: nonEmptyString(logEntry?.entryId),
+    sourceAppendedAt: nonEmptyString(logEntry?.appendedAt),
     sourceProjectionEventId: nonEmptyString(logEntry?.projectionEventId),
     sourceProjectionEventSchema: nonEmptyString(logEntry?.projectionEventSchema),
     sourceProjectionRef: nonEmptyString(logEntry?.projectionRef),
@@ -237,6 +253,10 @@ export function buildTestbedLocalLayerProjectionLogEvidence({
     expectedNamespacePrefix: EXPECTED_NAMESPACE_PREFIX,
     singleWriterLocalCorestoreProof: logPosture(logEntry).singleWriterLocalCorestoreProof === true,
     writesProjectionLog: logPosture(logEntry).writesProjectionLog === true,
+    appendedAtMeaning: nonEmptyString(timePosture(logEntry).appendedAtMeaning),
+    localCausalOrderSource: nonEmptyString(timePosture(logEntry).localCausalOrderSource),
+    wallClockDefinesCausalOrder: timePosture(logEntry).wallClockDefinesCausalOrder === true,
+    collaborativeCausalOrderRequiresAutobaseOrEquivalent: timePosture(logEntry).collaborativeCausalOrderRequiresAutobaseOrEquivalent === true,
     replicatedLocalLayerState: logPosture(logEntry).replicatedLocalLayerState === true,
     autobaseBackend: logPosture(logEntry).autobaseBackend === true,
     hyperbeeIndex: logPosture(logEntry).hyperbeeIndex === true,
