@@ -1,0 +1,34 @@
+{
+  "artifactKind": "testbed_transport_lane_comparison",
+  "schemaVersion": "testbed_transport_lane_comparison.v1",
+  "evidenceId": "testbed-transport-lanes:fixture:hyperdht-direct-plus-swarm-bounded-absence",
+  "createdAt": "2026-05-15T12:05:00.000Z",
+  "directContactLane": {
+    "state": "direct_contact_proven",
+    "transportKind": "protomux-rpc",
+    "contactSeam": "hyperdht_direct_peer",
+    "proofScope": "bounded_direct_participant_contact",
+    "boundedContactClaim": true,
+    "discoveryClaimed": false,
+    "distributedReadinessClaimed": false
+  },
+  "swarmDiscoveryLane": {
+    "state": "swarm_bounded_absence",
+    "transportKind": "hyperswarm",
+    "contactSeam": "hyperswarm_discovery",
+    "observationWindowMs": 45000,
+    "peersObserved": 0,
+    "boundedAbsence": true,
+    "flakeClass": "transport_window_elapsed",
+    "pluralEvidenceClaimed": false,
+    "distributedReadinessClaimed": false
+  },
+  "reviewOnly": true,
+  "evidenceOnly": true,
+  "testbedOwnsTransport": false,
+  "testbedExecutedContact": false,
+  "productionProofClaimed": false,
+  "distributedReadinessProofClaimed": false,
+  "meshTruthClaimed": false,
+  "completionClaimed": false
+}

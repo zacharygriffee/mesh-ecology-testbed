@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 
 import {
   buildTransportLaneComparisonEvidence,
@@ -115,4 +116,29 @@ test("transport lane state vocabulary is bounded", () => {
     "swarm_bounded_absence",
     "swarm_not_observed"
   ]);
+});
+
+test("transport comparison fixtures preserve HyperDHT certainty and Hyperswarm uncertainty", async () => {
+  const observed = JSON.parse(await readFile(
+    new URL("./fixtures/transport-lanes/hyperdht-direct-plus-swarm-observed.json", import.meta.url),
+    "utf8"
+  ));
+  const boundedAbsence = JSON.parse(await readFile(
+    new URL("./fixtures/transport-lanes/hyperdht-direct-plus-swarm-bounded-absence.json", import.meta.url),
+    "utf8"
+  ));
+
+  assert.equal(observed.directContactLane.state, TESTBED_TRANSPORT_LANE_STATES.DIRECT_CONTACT_PROVEN);
+  assert.equal(observed.swarmDiscoveryLane.state, TESTBED_TRANSPORT_LANE_STATES.SWARM_OBSERVED);
+  assert.equal(observed.swarmDiscoveryLane.pluralEvidenceClaimed, true);
+  assert.equal(boundedAbsence.directContactLane.state, TESTBED_TRANSPORT_LANE_STATES.DIRECT_CONTACT_PROVEN);
+  assert.equal(boundedAbsence.swarmDiscoveryLane.state, TESTBED_TRANSPORT_LANE_STATES.SWARM_BOUNDED_ABSENCE);
+  assert.equal(boundedAbsence.swarmDiscoveryLane.boundedAbsence, true);
+  for (const fixture of [observed, boundedAbsence]) {
+    assert.equal(fixture.reviewOnly, true);
+    assert.equal(fixture.evidenceOnly, true);
+    assert.equal(fixture.testbedOwnsTransport, false);
+    assert.equal(fixture.distributedReadinessProofClaimed, false);
+    assert.equal(fixture.meshTruthClaimed, false);
+  }
 });

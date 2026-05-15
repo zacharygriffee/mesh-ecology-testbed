@@ -83,6 +83,11 @@ this distinction:
 - Neither lane becomes production readiness, mesh truth, or completion inside
   Testbed.
 
+Reusable fixture examples live under `test/fixtures/transport-lanes/`. They are
+static evidence fixtures for agent review and ecosystem audits; they do not run
+transport, own a decentralized seam, or convert a bounded Hyperswarm absence
+into failure.
+
 It requires:
 
 - a sibling checkout by default at `../mesh-v0-2`
