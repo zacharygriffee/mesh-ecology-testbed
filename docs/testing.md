@@ -335,6 +335,21 @@ Autobase, HyperDHT, or Protomux; replaying the projection log; writing
 continuity records; accepting canonical history; claiming durable or replicated
 state; or treating HTTP/SSH/local path refs as valid seams.
 
+## Edge Autobase Projection View Review
+
+Testbed consumes causal-substrate's
+`causal-substrate/edge-autobase-projection-view-evidence/v1` output as a
+passive review lane for Edge's sandboxed Autobase-derived projection view. The
+consumer in `src/testbed/edge-autobase-projection-view-evidence.js` requires
+writer refs, head refs, linearized entry refs, causal frontier refs, source
+projection event refs, source entry refs, and source happening refs.
+
+This review accepts the view only as collaborative continuity evidence. It
+blocks causal-substrate or Testbed from opening Autobase/Corestore, writing
+continuity records, accepting canonical history, claiming durable or replicated
+state, granting runtime authority, treating append success as acceptance, or
+allowing HTTP/SSH/local path refs as seams.
+
 It requires:
 
 - a sibling checkout by default at `../mesh-v0-2`
