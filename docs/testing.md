@@ -274,6 +274,22 @@ acceptance, layer settlement claims, truth claims, authority claims, and mesh
 publication claims. This keeps the next Autobase step from inventing
 collaborative causality semantics inside backend code.
 
+## Edge Autobase Optimistic Intake Review
+
+Testbed consumes causal-substrate's
+`causal-substrate/edge-autobase-optimistic-intake-evidence/v1` output as a
+review evidence lane for Edge's sandboxed optimistic non-writer intake lab. The
+consumer in `src/testbed/edge-autobase-optimistic-intake-evidence.js`
+validates the causal-substrate artifact without calling causal-substrate,
+opening Autobase, opening Corestore, writing continuity records, granting writer
+authority, or accepting append success as acceptance.
+
+This review accepts evidence only when the accepted candidate is tied to
+`ackWriter` plus derived-view materialization and the rejected candidate remains
+unmaterialized accepted state. It blocks append-as-acceptance drift, unsafe
+HTTP/SSH/local path refs, boundary overclaims, durable or replicated state
+claims, and any causal truth or authority claim.
+
 ## Resolution Refinement Review
 
 Testbed consumes causal-substrate's
