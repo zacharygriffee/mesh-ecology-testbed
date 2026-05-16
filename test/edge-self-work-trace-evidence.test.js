@@ -14,6 +14,10 @@ const EDGE_FIXTURE_URL = new URL(
   "./fixtures/edge-self-work-trace/edge-self-work-trace-evidence-fixture.json",
   import.meta.url
 );
+const TESTBED_REVIEW_FIXTURE_URL = new URL(
+  "./fixtures/edge-self-work-trace/testbed-edge-self-work-trace-review-fixture.json",
+  import.meta.url
+);
 
 function completeArtifact() {
   return {
@@ -141,6 +145,19 @@ test("committed Edge self-work trace fixture is reviewed as complete evidence", 
   assert.equal(evidence.causalSubstrateExecutesWork, false);
   assert.equal(evidence.causalSubstrateClaimsCompletion, false);
   assert.equal(evidence.causalSubstrateClaimsCausalTruth, false);
+  assertPassiveEvidence(evidence);
+});
+
+test("committed Testbed review fixture matches the Edge fixture review output", async () => {
+  const edgeFixture = JSON.parse(await readFile(EDGE_FIXTURE_URL, "utf8"));
+  const expectedReview = JSON.parse(await readFile(TESTBED_REVIEW_FIXTURE_URL, "utf8"));
+  const evidence = buildTestbedEdgeSelfWorkTraceEvidence({
+    evidenceArtifact: edgeFixture,
+    createdAt: "2026-05-16T13:05:00.000Z",
+    evidenceId: "testbed-edge-self-work-trace:self-work-trace-fixture"
+  });
+
+  assert.deepEqual(expectedReview, evidence);
   assertPassiveEvidence(evidence);
 });
 
