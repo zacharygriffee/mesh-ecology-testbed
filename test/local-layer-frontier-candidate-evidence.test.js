@@ -158,6 +158,30 @@ test("valid causal frontier candidate evidence is consumed as review evidence on
   assertPassiveEvidence(evidence);
 });
 
+test("pre-Autobase frontier fixture evidence remains visible without backend claims", () => {
+  const artifact = validFrontierEvidenceArtifact();
+  artifact.artifactId = "causal-local-layer-frontier-candidate-evidence:fixture";
+  artifact.frontierRefs.frontierId = "local-layer-frontier:6fbd2eeefed242208326ce7f";
+  artifact.orderingEvidence.orderingSource = "frontier_candidate_fixture";
+  artifact.warnings = [
+    "frontier-candidate-preserved-as-evidence-only",
+    "frontier-candidate-fixture-precedes-autobase-backend",
+    "wall-clock-time-is-observation-metadata-not-causal-order"
+  ];
+
+  const evidence = build(artifact);
+
+  assert.equal(evidence.reviewStatus, TESTBED_LOCAL_LAYER_FRONTIER_CANDIDATE_STATUSES.FRONTIER_CANDIDATE_VISIBLE);
+  assert.deepEqual(evidence.reasonCodes, ["frontier_candidate_visible"]);
+  assert.equal(evidence.orderingSource, "frontier_candidate_fixture");
+  assert.equal(evidence.wallClockDefinesCausalOrder, false);
+  assert.equal(evidence.causalSubstrateOpenedAutobase, false);
+  assert.equal(evidence.causalSubstrateOpenedCorestore, false);
+  assert.equal(evidence.causalSubstrateWritesContinuityRecords, false);
+  assert.equal(evidence.causalSubstrateAcceptsCanonicalHistory, false);
+  assertPassiveEvidence(evidence);
+});
+
 test("frontier candidate evidence blocks wall-clock-as-causal-order drift", () => {
   const artifact = validFrontierEvidenceArtifact();
   artifact.orderingEvidence.wallClockDefinesCausalOrder = true;

@@ -107,7 +107,9 @@ function validateFrontierEvidence({ evidenceArtifact, requiredSourceRefs = [] } 
   if (sourceRefs.length === 0) reasonCodes.push("frontier_candidate_source_refs_missing");
   if (collectAllRefs(refs).some(unsafeSeamRef)) reasonCodes.push("frontier_candidate_ref_contains_compat_or_path_seam");
 
-  if (order.orderingSource !== "autobase_linearization") reasonCodes.push("frontier_candidate_ordering_source_invalid");
+  if (!["autobase_linearization", "frontier_candidate_fixture"].includes(order.orderingSource)) {
+    reasonCodes.push("frontier_candidate_ordering_source_invalid");
+  }
   if (order.wallClockDefinesCausalOrder !== false) reasonCodes.push("frontier_candidate_wall_clock_claims_causal_order");
   if (order.collaborativeCausalOrderCandidate !== "autobase-or-equivalent-linearization") {
     reasonCodes.push("frontier_candidate_collaborative_order_candidate_missing");
