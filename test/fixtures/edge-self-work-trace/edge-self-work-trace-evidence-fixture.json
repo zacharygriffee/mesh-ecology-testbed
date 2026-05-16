@@ -1,0 +1,90 @@
+{
+  "artifactKind": "causal-edge-self-work-trace-evidence",
+  "schema": "causal-substrate/edge-self-work-trace-evidence/v1",
+  "schemaVersion": 1,
+  "artifactId": "causal-edge-self-work-trace-evidence:self-work-trace-fixture",
+  "emittedAt": "2026-05-16T13:00:00.000Z",
+  "source": {
+    "sourceRepo": "mesh-ecology-edge",
+    "sourcePath": "test/edgeSelfWorkTraceEvidence.test.js"
+  },
+  "refs": {
+    "operatorIntentRefs": [
+      "edge-operator-intent:edge-cross-project-work-packet:self-work-trace-fixture"
+    ],
+    "workPacketRefs": [
+      "edge-cross-project-work-packet:self-work-trace-fixture"
+    ],
+    "operatorDecisionRefs": [
+      "edge-operator-decision:self-work-trace-fixture"
+    ],
+    "proposalRefs": [
+      "edge-self-work-patch-proposal:self-work-trace-fixture"
+    ],
+    "approvalRefs": [
+      "edge-self-work-patch-approval:self-work-trace-fixture"
+    ],
+    "executorReceiptRefs": [
+      "edge-self-work-patch-executor-receipt:self-work-trace-fixture"
+    ],
+    "verificationRefs": [
+      "declared-check:git_diff_check",
+      "declared-check:npm_lint"
+    ],
+    "causalHappeningRefs": [
+      "happening:edge-self-work-cycle:edge-self-work-cycle-review-bundle:self-work-trace-fixture"
+    ],
+    "causalFrontierRefs": [
+      "causal-frontier:edge-self-work-cycle:edge-self-work-cycle-review-bundle:self-work-trace-fixture"
+    ],
+    "operatorReturnSurfaceRefs": [
+      "edge-operator-return-surface:self-work-trace-fixture"
+    ],
+    "sourceRepoRefs": [
+      "repo:mesh-ecology-edge"
+    ]
+  },
+  "progress": {
+    "observationPresent": true,
+    "workPacketPresent": true,
+    "operatorMediationPresent": true,
+    "executionReceiptPresent": true,
+    "verificationPresent": true,
+    "causalInterpretationPresent": true,
+    "testbedPressureExpected": true,
+    "operatorReturnPresent": true
+  },
+  "boundary": {
+    "reviewOnly": true,
+    "evidenceOnly": true,
+    "opensAutobase": false,
+    "opensCorestore": false,
+    "callsEdge": false,
+    "callsPlatform": false,
+    "callsMesh": false,
+    "executesWork": false,
+    "writesContinuityRecords": false,
+    "acceptsCanonicalHistory": false,
+    "claimsCausalTruth": false,
+    "claimsCompletion": false,
+    "claimsRuntimeAuthority": false,
+    "startsBackend": false
+  },
+  "validation": {
+    "status": "edge-self-work-trace-complete",
+    "parseableObject": true,
+    "requiredLoopRefsPresent": true,
+    "causalRefsPresent": true,
+    "verificationRefsPresent": true,
+    "unsafeSeamRefsBlocked": true,
+    "unsafeClaimsBlocked": true,
+    "issues": []
+  },
+  "reviewStatus": "edge-self-work-trace-evidence-emitted",
+  "warnings": [
+    "self-work-trace-preserved-as-evidence-only",
+    "causal-substrate-interprets-history-without-executing-edge",
+    "testbed-pressure-expected-before-treating-loop-as-proven"
+  ],
+  "rejections": []
+}

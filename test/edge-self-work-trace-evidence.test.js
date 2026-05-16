@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 
 import {
   buildTestbedEdgeSelfWorkTraceEvidence,
@@ -9,6 +10,10 @@ import {
 } from "../src/testbed/edge-self-work-trace-evidence.js";
 
 const CREATED_AT = "2026-05-16T12:15:00.000Z";
+const EDGE_FIXTURE_URL = new URL(
+  "./fixtures/edge-self-work-trace/edge-self-work-trace-evidence-fixture.json",
+  import.meta.url
+);
 
 function completeArtifact() {
   return {
@@ -113,6 +118,29 @@ test("complete Edge self-work trace is visible as passive review evidence", () =
   assert.equal(evidence.verificationRefCount, 1);
   assert.equal(evidence.causalHappeningRefCount, 1);
   assert.equal(evidence.operatorReturnSurfaceRefCount, 1);
+  assertPassiveEvidence(evidence);
+});
+
+test("committed Edge self-work trace fixture is reviewed as complete evidence", async () => {
+  const edgeFixture = JSON.parse(await readFile(EDGE_FIXTURE_URL, "utf8"));
+  const evidence = build(edgeFixture);
+
+  assert.equal(evidence.reviewStatus, TESTBED_EDGE_SELF_WORK_TRACE_STATUSES.COMPLETE);
+  assert.deepEqual(evidence.reasonCodes, ["edge_self_work_trace_complete"]);
+  assert.equal(evidence.sourceArtifactId, "causal-edge-self-work-trace-evidence:self-work-trace-fixture");
+  assert.equal(evidence.operatorIntentRefCount, 1);
+  assert.equal(evidence.workPacketRefCount, 1);
+  assert.equal(evidence.operatorDecisionRefCount, 1);
+  assert.equal(evidence.approvalRefCount, 1);
+  assert.equal(evidence.executorReceiptRefCount, 1);
+  assert.equal(evidence.verificationRefCount, 2);
+  assert.equal(evidence.causalHappeningRefCount, 1);
+  assert.equal(evidence.causalFrontierRefCount, 1);
+  assert.equal(evidence.operatorReturnSurfaceRefCount, 1);
+  assert.equal(evidence.causalSubstrateCallsEdge, false);
+  assert.equal(evidence.causalSubstrateExecutesWork, false);
+  assert.equal(evidence.causalSubstrateClaimsCompletion, false);
+  assert.equal(evidence.causalSubstrateClaimsCausalTruth, false);
   assertPassiveEvidence(evidence);
 });
 
