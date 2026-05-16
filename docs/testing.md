@@ -175,6 +175,47 @@ The review does not prove multi-device replication. It only makes the current
 single-writer Corestore proof harder to accidentally promote into Autobase,
 Hyperbee, HTTP/SSH, or local-file substrate before those lanes exist.
 
+## Projection-Key Exchange Review
+
+Testbed consumes Edge's bounded projection-key exchange proof as passive review
+evidence only. The consumer in
+`src/testbed/projection-key-exchange-evidence.js` validates
+`edge_projection_key_exchange_proof` artifacts from Edge's HyperDHT direct-peer
+/ Protomux RPC proof lane without opening HyperDHT, opening Protomux, opening
+Corestore, running Edge, or treating the exchange as distributed readiness.
+
+This review accepts the proof only when it preserves:
+
+- `transportKind=protomux-rpc`
+- `contactSeam=hyperdht_direct_peer`
+- `transportRole=proof_lane`
+- `scope=isolated_local_hyperdht`
+- a 64-character projection-log `sourceCoreKey`
+- semantic source refs, not URLs, endpoints, SSH strings, or local paths
+- capability posture for `projection-source-core-key.exchange`
+- append-log style refs with `truthClaimed=false` and `completionClaimed=false`
+- `distributedReadinessClaimed=false`
+- `replicatedStateClaimed=false`
+- `autobaseBackend=false`
+- `meshPublicationClaimed=false`
+
+When Edge also supplies a read-only replica-inspection result, Testbed checks
+that the exchanged `sourceCoreKey` is the same key used for replica inspection
+and that the referenced semantic source refs remain visible in the inspected
+latest entry.
+
+The review blocks:
+
+- HTTP, SSH, path, localhost, or IP-shaped source refs
+- transport or capability posture drift away from HyperDHT / Protomux RPC
+- distributed-readiness, replicated-state, Autobase, mesh-publication, truth,
+  completion, or authority overclaims
+- source-core-key mismatches between exchange evidence and replica inspection
+- missing exchanged source refs in the inspected replica entry
+
+This keeps the decentralized key handoff testable outside Edge before any
+Autobase backend is introduced.
+
 ## Local-Layer Projection Happening Map Review
 
 Testbed consumes causal-substrate's
