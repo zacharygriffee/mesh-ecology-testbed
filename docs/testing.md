@@ -320,6 +320,21 @@ completion/truth claims, and HTTP/SSH/local path refs. It proves that the
 self-work loop is traceable without making causal-substrate or Testbed the
 executor.
 
+## Edge Platform Lifecycle Append-Log Join Review
+
+Testbed consumes Edge's `edge_platform_lifecycle_append_log_review_view`
+directly as passive review evidence. The consumer in
+`src/testbed/edge-platform-lifecycle-append-log-review-evidence.js` requires a
+linked append-log posture, source receipt refs, matched receipt refs,
+append-log source receipt refs, the Edge append-log review status ref, the
+source view hash ref, and the upstream Testbed review evidence id.
+
+This review proves only that Edge's operator-visible Platform lifecycle receipt
+join is reviewable. It blocks source authority, Platform calls, append-log
+replay, backend/state claims, causal truth claims, deployment readiness,
+HTTP/SSH/local path refs, and receipt mismatches. It does not make Testbed,
+Edge, or causal-substrate the owner of Platform state or execution.
+
 ## Edge Projection Replica View Review
 
 Testbed consumes causal-substrate's
