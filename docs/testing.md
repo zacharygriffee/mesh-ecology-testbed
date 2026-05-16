@@ -249,6 +249,20 @@ ref. It blocks contradictory refinement until explicit divergence posture is
 present, and it blocks causal-substrate authority, backend, HTTP/SSH/local
 path, and universal-observer overclaims.
 
+## Edge Self-Work Trace Review
+
+Testbed consumes causal-substrate's
+`causal-substrate/edge-self-work-trace-evidence/v1` output as a passive review
+lane for the Edge self-work goal point. The consumer in
+`src/testbed/edge-self-work-trace-evidence.js` requires operator intent refs,
+work packet refs, operator mediation refs, executor receipt refs, verification
+refs, causal refs, and operator return-surface refs.
+
+This review blocks causal-substrate execution, Edge calls, backend ownership,
+completion/truth claims, and HTTP/SSH/local path refs. It proves that the
+self-work loop is traceable without making causal-substrate or Testbed the
+executor.
+
 It requires:
 
 - a sibling checkout by default at `../mesh-v0-2`
