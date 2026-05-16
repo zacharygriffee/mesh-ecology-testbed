@@ -365,6 +365,23 @@ continuity records, accepting canonical history, claiming durable or replicated
 state, granting runtime authority, treating append success as acceptance, or
 allowing HTTP/SSH/local path refs as seams.
 
+## Edge Local-Layer Promotion Pressure Plan
+
+The reversible pressure plan in
+[`docs/edge-local-layer-promotion-pressure-plan.md`](./edge-local-layer-promotion-pressure-plan.md)
+records the fail-closed cases Testbed should enforce before any Edge-local
+projection material is promoted. It keeps current Autobase, replica,
+projection-log, projection-key, causal review, Platform append-log join,
+operator status, and local JSON materials as proof pressure or review evidence
+until Spine records the promotion decision.
+
+The plan is intentionally not a backend plan. It exists so future tests reject
+missing source/causal/writer/reader policy refs, append-success-as-acceptance,
+replica-visibility-as-continuity, review-status-as-authority, HTTP/SSH/path
+seams, wall-clock causal order, imported JSON substrate claims, causal review
+truth claims, Testbed readiness claims, and Platform deployment-authority
+claims.
+
 It requires:
 
 - a sibling checkout by default at `../mesh-v0-2`
