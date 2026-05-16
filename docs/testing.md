@@ -320,6 +320,21 @@ completion/truth claims, and HTTP/SSH/local path refs. It proves that the
 self-work loop is traceable without making causal-substrate or Testbed the
 executor.
 
+## Edge Projection Replica View Review
+
+Testbed consumes causal-substrate's
+`causal-substrate/edge-projection-replica-view-evidence/v1` output as a passive
+review lane for Edge's read-only projection replica view. The consumer in
+`src/testbed/edge-projection-replica-view-evidence.js` requires source core key
+refs, entry refs, projection event refs, semantic source refs, and causal
+branch/segment/happening refs.
+
+This review accepts the replica view only as observer-relative continuity
+evidence. It blocks causal-substrate or Testbed from opening Corestore,
+Autobase, HyperDHT, or Protomux; replaying the projection log; writing
+continuity records; accepting canonical history; claiming durable or replicated
+state; or treating HTTP/SSH/local path refs as valid seams.
+
 It requires:
 
 - a sibling checkout by default at `../mesh-v0-2`
