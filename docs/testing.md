@@ -233,6 +233,22 @@ acceptance, layer settlement claims, truth claims, authority claims, and mesh
 publication claims. This keeps the next Autobase step from inventing
 collaborative causality semantics inside backend code.
 
+## Resolution Refinement Review
+
+Testbed consumes causal-substrate's
+`causal-substrate/resolution-refinement-evidence/v1` output as a passive review
+evidence lane for resolution-relative happenings. The consumer in
+`src/testbed/resolution-refinement-evidence.js` validates compatible
+coarse-to-refined happening evidence without calling causal-substrate, opening
+Autobase, opening Corestore, writing continuity records, or accepting canonical
+history.
+
+This review accepts compatible refinement when refined happenings aggregate
+back to the coarse happening and the coarse happening remains a valid source
+ref. It blocks contradictory refinement until explicit divergence posture is
+present, and it blocks causal-substrate authority, backend, HTTP/SSH/local
+path, and universal-observer overclaims.
+
 It requires:
 
 - a sibling checkout by default at `../mesh-v0-2`
