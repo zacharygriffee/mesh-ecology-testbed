@@ -43,6 +43,20 @@ function validCausalEvidenceArtifact() {
       derivedFromAutobaseView: true,
       collaborativeProjectionViewCandidate: true
     },
+    storageLanePosture: {
+      intendedStorageLane: "bounded_autobase_equivalent_linearization",
+      inputSemanticUnit: "mesh_ecology_local_layer_projection_event",
+      requiresPromotedProjectionEventInput: true,
+      sandboxedOnly: true,
+      productionBackendPromoted: false,
+      storageRecordPromoted: false,
+      edgeStateMigration: false,
+      appendSuccessIsAcceptance: false,
+      linearizationIsTruth: false,
+      replicaVisibilityIsContinuity: false,
+      wallClockDefinesCausalOrder: false,
+      discoveryAbsenceIsFailure: false
+    },
     boundary: {
       reviewOnly: true,
       evidenceOnly: true,
@@ -111,6 +125,16 @@ test("valid causal Autobase projection view is consumed as review evidence only"
   assert.equal(evidence.collaborativeProjectionViewCandidate, true);
   assert.equal(evidence.wallClockDefinesCausalOrder, false);
   assert.equal(evidence.appendSuccessIsAcceptance, false);
+  assert.equal(evidence.intendedStorageLane, "bounded_autobase_equivalent_linearization");
+  assert.equal(evidence.inputSemanticUnit, "mesh_ecology_local_layer_projection_event");
+  assert.equal(evidence.requiresPromotedProjectionEventInput, true);
+  assert.equal(evidence.sandboxedOnly, true);
+  assert.equal(evidence.productionBackendPromoted, false);
+  assert.equal(evidence.storageRecordPromoted, false);
+  assert.equal(evidence.appendSuccessIsAcceptanceStorage, false);
+  assert.equal(evidence.linearizationIsTruth, false);
+  assert.equal(evidence.replicaVisibilityIsContinuity, false);
+  assert.equal(evidence.discoveryAbsenceIsFailure, false);
   assertPassiveEvidence(evidence);
 });
 

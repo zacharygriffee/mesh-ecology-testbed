@@ -43,6 +43,10 @@ function intakePosture(artifact) {
   return isPlainObject(artifact?.intakePosture) ? artifact.intakePosture : {};
 }
 
+function storageLanePosture(artifact) {
+  return isPlainObject(artifact?.storageLanePosture) ? artifact.storageLanePosture : {};
+}
+
 function source(artifact) {
   return isPlainObject(artifact?.source) ? artifact.source : {};
 }
@@ -71,6 +75,7 @@ function validateOptimisticIntakeEvidence({ evidenceArtifact, requiredSourceRefs
 
   const refs = candidateRefs(evidenceArtifact);
   const posture = intakePosture(evidenceArtifact);
+  const storagePosture = storageLanePosture(evidenceArtifact);
   const evidenceBoundary = boundary(evidenceArtifact);
   const evidenceValidation = validation(evidenceArtifact);
   const evidenceSource = source(evidenceArtifact);
@@ -123,6 +128,9 @@ function validateOptimisticIntakeEvidence({ evidenceArtifact, requiredSourceRefs
   ) {
     reasonCodes.push("optimistic_intake_backend_or_seam_overclaim");
   }
+  if (!validStorageLanePosture(storagePosture)) {
+    reasonCodes.push("optimistic_intake_storage_lane_posture_missing_or_unsafe");
+  }
 
   if (
     evidenceBoundary.reviewOnly !== true ||
@@ -162,7 +170,8 @@ function validateOptimisticIntakeEvidence({ evidenceArtifact, requiredSourceRefs
     code.includes("mismatch") ||
     code.includes("overclaim") ||
     code.includes("path_seam") ||
-    code.includes("append_as_acceptance")
+    code.includes("append_as_acceptance") ||
+    code.includes("storage_lane")
   )) {
     return Object.freeze({
       reviewStatus: TESTBED_EDGE_AUTOBASE_OPTIMISTIC_INTAKE_STATUSES.OPTIMISTIC_INTAKE_BLOCKED,
@@ -191,6 +200,7 @@ export function buildTestbedEdgeAutobaseOptimisticIntakeEvidence({
 } = {}) {
   const refs = candidateRefs(evidenceArtifact);
   const posture = intakePosture(evidenceArtifact);
+  const storagePosture = storageLanePosture(evidenceArtifact);
   const evidenceBoundary = boundary(evidenceArtifact);
   const evidenceValidation = validation(evidenceArtifact);
   const validationResult = validateOptimisticIntakeEvidence({ evidenceArtifact, requiredSourceRefs });
@@ -219,6 +229,16 @@ export function buildTestbedEdgeAutobaseOptimisticIntakeEvidence({
     rejectedWithoutAckWriter: posture.rejectedWithoutAckWriter === true,
     appendSuccessIsAcceptance: posture.appendSuccessIsAcceptance === true,
     acceptanceSource: nonEmptyString(posture.acceptanceSource),
+    intendedStorageLane: nonEmptyString(storagePosture.intendedStorageLane),
+    inputSemanticUnit: nonEmptyString(storagePosture.inputSemanticUnit),
+    requiresPromotedProjectionEventInput: storagePosture.requiresPromotedProjectionEventInput === true,
+    sandboxedOnly: storagePosture.sandboxedOnly === true,
+    productionBackendPromoted: storagePosture.productionBackendPromoted === true,
+    storageRecordPromoted: storagePosture.storageRecordPromoted === true,
+    appendSuccessIsAcceptanceStorage: storagePosture.appendSuccessIsAcceptance === true,
+    linearizationIsTruth: storagePosture.linearizationIsTruth === true,
+    replicaVisibilityIsContinuity: storagePosture.replicaVisibilityIsContinuity === true,
+    discoveryAbsenceIsFailure: storagePosture.discoveryAbsenceIsFailure === true,
     reviewOnly: true,
     evidenceOnly: true,
     testbedCalledCausalSubstrate: false,
@@ -251,6 +271,21 @@ export function buildTestbedEdgeAutobaseOptimisticIntakeEvidence({
     liveDiscoveryRequired: false,
     meshPublicationImplied: false
   });
+}
+
+function validStorageLanePosture(posture) {
+  return posture.intendedStorageLane === "bounded_autobase_equivalent_linearization" &&
+    posture.inputSemanticUnit === "mesh_ecology_local_layer_projection_event" &&
+    posture.requiresPromotedProjectionEventInput === true &&
+    posture.sandboxedOnly === true &&
+    posture.productionBackendPromoted === false &&
+    posture.storageRecordPromoted === false &&
+    posture.edgeStateMigration === false &&
+    posture.appendSuccessIsAcceptance === false &&
+    posture.linearizationIsTruth === false &&
+    posture.replicaVisibilityIsContinuity === false &&
+    posture.wallClockDefinesCausalOrder === false &&
+    posture.discoveryAbsenceIsFailure === false;
 }
 
 export function listTestbedEdgeAutobaseOptimisticIntakeStatuses() {

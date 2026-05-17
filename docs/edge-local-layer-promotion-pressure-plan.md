@@ -48,6 +48,10 @@ Any future promoted-material review should fail closed on these cases:
 - review status mistaken for authority
 - HTTP/SSH/local path ref used as seam
 - wall-clock order used as causal order
+- Autobase linearization mistaken for truth
+- production Autobase backend promotion claimed before Spine decision
+- Edge state migration claimed by proof/lab evidence
+- discovery absence treated as failure
 - imported JSON treated as substrate
 - causal review treated as truth
 - Testbed review treated as readiness
@@ -95,6 +99,21 @@ Without that Spine decision, Testbed should emit review evidence only. With the
 projection-event decision recorded, Testbed should accept only projection
 events that preserve semantic source refs, causal refs, writer policy, reader
 policy, and non-promoted storage/backend posture.
+
+Autobase/frontier artifacts must also carry explicit storage-lane posture:
+
+- `intendedStorageLane=bounded_autobase_equivalent_linearization`
+- `inputSemanticUnit=mesh_ecology_local_layer_projection_event`
+- `requiresPromotedProjectionEventInput=true`
+- `sandboxedOnly=true`
+- `productionBackendPromoted=false`
+- `storageRecordPromoted=false`
+- `edgeStateMigration=false`
+- `appendSuccessIsAcceptance=false`
+- `linearizationIsTruth=false`
+- `replicaVisibilityIsContinuity=false`
+- `wallClockDefinesCausalOrder=false`
+- `discoveryAbsenceIsFailure=false`
 
 ## Non-Goals
 

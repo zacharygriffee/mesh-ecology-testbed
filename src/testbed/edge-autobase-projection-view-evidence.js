@@ -43,6 +43,10 @@ function ordering(artifact) {
   return isPlainObject(artifact?.orderingEvidence) ? artifact.orderingEvidence : {};
 }
 
+function storageLanePosture(artifact) {
+  return isPlainObject(artifact?.storageLanePosture) ? artifact.storageLanePosture : {};
+}
+
 function source(artifact) {
   return isPlainObject(artifact?.source) ? artifact.source : {};
 }
@@ -68,6 +72,7 @@ function validateAutobaseProjectionViewEvidence({ evidenceArtifact } = {}) {
   const evidenceBoundary = boundary(evidenceArtifact);
   const evidenceValidation = validation(evidenceArtifact);
   const orderingEvidence = ordering(evidenceArtifact);
+  const storagePosture = storageLanePosture(evidenceArtifact);
   const evidenceSource = source(evidenceArtifact);
 
   if (evidenceArtifact.artifactKind !== EXPECTED_ARTIFACT_KIND) reasonCodes.push("autobase_projection_view_artifact_kind_mismatch");
@@ -114,6 +119,9 @@ function validateAutobaseProjectionViewEvidence({ evidenceArtifact } = {}) {
   ) {
     reasonCodes.push("autobase_projection_view_ordering_posture_overclaim");
   }
+  if (!validStorageLanePosture(storagePosture)) {
+    reasonCodes.push("autobase_projection_view_storage_lane_posture_missing_or_unsafe");
+  }
 
   if (
     evidenceBoundary.reviewOnly !== true ||
@@ -136,7 +144,8 @@ function validateAutobaseProjectionViewEvidence({ evidenceArtifact } = {}) {
   if (reasonCodes.some((code) =>
     code.includes("mismatch") ||
     code.includes("overclaim") ||
-    code.includes("path_seam")
+    code.includes("path_seam") ||
+    code.includes("storage_lane")
   )) {
     return Object.freeze({
       reviewStatus: TESTBED_EDGE_AUTOBASE_PROJECTION_VIEW_STATUSES.BLOCKED,
@@ -165,6 +174,7 @@ export function buildTestbedEdgeAutobaseProjectionViewEvidence({
   const evidenceRefs = refs(evidenceArtifact);
   const evidenceBoundary = boundary(evidenceArtifact);
   const orderingEvidence = ordering(evidenceArtifact);
+  const storagePosture = storageLanePosture(evidenceArtifact);
   const validationResult = validateAutobaseProjectionViewEvidence({ evidenceArtifact });
 
   return Object.freeze({
@@ -193,6 +203,16 @@ export function buildTestbedEdgeAutobaseProjectionViewEvidence({
     appendSuccessIsAcceptance: orderingEvidence.appendSuccessIsAcceptance === true,
     derivedFromAutobaseView: orderingEvidence.derivedFromAutobaseView === true,
     collaborativeProjectionViewCandidate: orderingEvidence.collaborativeProjectionViewCandidate === true,
+    intendedStorageLane: nonEmptyString(storagePosture.intendedStorageLane),
+    inputSemanticUnit: nonEmptyString(storagePosture.inputSemanticUnit),
+    requiresPromotedProjectionEventInput: storagePosture.requiresPromotedProjectionEventInput === true,
+    sandboxedOnly: storagePosture.sandboxedOnly === true,
+    productionBackendPromoted: storagePosture.productionBackendPromoted === true,
+    storageRecordPromoted: storagePosture.storageRecordPromoted === true,
+    appendSuccessIsAcceptanceStorage: storagePosture.appendSuccessIsAcceptance === true,
+    linearizationIsTruth: storagePosture.linearizationIsTruth === true,
+    replicaVisibilityIsContinuity: storagePosture.replicaVisibilityIsContinuity === true,
+    discoveryAbsenceIsFailure: storagePosture.discoveryAbsenceIsFailure === true,
     reviewOnly: true,
     evidenceOnly: true,
     testbedCalledCausalSubstrate: false,
@@ -217,6 +237,21 @@ export function buildTestbedEdgeAutobaseProjectionViewEvidence({
     causalEvidenceClaimedReplicatedState: evidenceBoundary.claimsReplicatedState === true,
     causalEvidenceClaimedRuntimeAuthority: evidenceBoundary.claimsRuntimeAuthority === true
   });
+}
+
+function validStorageLanePosture(posture) {
+  return posture.intendedStorageLane === "bounded_autobase_equivalent_linearization" &&
+    posture.inputSemanticUnit === "mesh_ecology_local_layer_projection_event" &&
+    posture.requiresPromotedProjectionEventInput === true &&
+    posture.sandboxedOnly === true &&
+    posture.productionBackendPromoted === false &&
+    posture.storageRecordPromoted === false &&
+    posture.edgeStateMigration === false &&
+    posture.appendSuccessIsAcceptance === false &&
+    posture.linearizationIsTruth === false &&
+    posture.replicaVisibilityIsContinuity === false &&
+    posture.wallClockDefinesCausalOrder === false &&
+    posture.discoveryAbsenceIsFailure === false;
 }
 
 export function listTestbedEdgeAutobaseProjectionViewStatuses() {

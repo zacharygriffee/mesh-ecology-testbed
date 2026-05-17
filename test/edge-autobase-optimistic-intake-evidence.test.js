@@ -47,6 +47,20 @@ function validOptimisticIntakeEvidenceArtifact() {
       sshSeam: false,
       wallClockDefinesCausalOrder: false
     },
+    storageLanePosture: {
+      intendedStorageLane: "bounded_autobase_equivalent_linearization",
+      inputSemanticUnit: "mesh_ecology_local_layer_projection_event",
+      requiresPromotedProjectionEventInput: true,
+      sandboxedOnly: true,
+      productionBackendPromoted: false,
+      storageRecordPromoted: false,
+      edgeStateMigration: false,
+      appendSuccessIsAcceptance: false,
+      linearizationIsTruth: false,
+      replicaVisibilityIsContinuity: false,
+      wallClockDefinesCausalOrder: false,
+      discoveryAbsenceIsFailure: false
+    },
     boundary: {
       reviewOnly: true,
       evidenceOnly: true,
@@ -72,6 +86,7 @@ function validOptimisticIntakeEvidenceArtifact() {
       nonWriterBeforeAppend: true,
       ackWriterAcceptancePresent: true,
       appendSuccessAcceptanceBlocked: true,
+      storageLanePosturePresent: true,
       unsafeSeamRefsBlocked: true,
       unsafeClaimsBlocked: true,
       issues: []
@@ -138,6 +153,16 @@ test("valid optimistic intake evidence is consumed as review evidence only", () 
   assert.equal(evidence.rejectedWithoutAckWriter, true);
   assert.equal(evidence.appendSuccessIsAcceptance, false);
   assert.equal(evidence.acceptanceSource, "deterministic_apply_ackWriter_and_derived_view_materialization");
+  assert.equal(evidence.intendedStorageLane, "bounded_autobase_equivalent_linearization");
+  assert.equal(evidence.inputSemanticUnit, "mesh_ecology_local_layer_projection_event");
+  assert.equal(evidence.requiresPromotedProjectionEventInput, true);
+  assert.equal(evidence.sandboxedOnly, true);
+  assert.equal(evidence.productionBackendPromoted, false);
+  assert.equal(evidence.storageRecordPromoted, false);
+  assert.equal(evidence.appendSuccessIsAcceptanceStorage, false);
+  assert.equal(evidence.linearizationIsTruth, false);
+  assert.equal(evidence.replicaVisibilityIsContinuity, false);
+  assert.equal(evidence.discoveryAbsenceIsFailure, false);
   assert.equal(evidence.causalSubstrateBoundaryReviewOnly, true);
   assert.equal(evidence.causalSubstrateBoundaryEvidenceOnly, true);
   assert.equal(evidence.causalSubstrateOpenedAutobase, false);

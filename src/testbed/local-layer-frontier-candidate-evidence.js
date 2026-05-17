@@ -42,6 +42,10 @@ function orderingEvidence(artifact) {
   return isPlainObject(artifact?.orderingEvidence) ? artifact.orderingEvidence : {};
 }
 
+function storageLanePosture(artifact) {
+  return isPlainObject(artifact?.storageLanePosture) ? artifact.storageLanePosture : {};
+}
+
 function source(artifact) {
   return isPlainObject(artifact?.source) ? artifact.source : {};
 }
@@ -76,6 +80,7 @@ function validateFrontierEvidence({ evidenceArtifact, requiredSourceRefs = [] } 
 
   const refs = frontierRefs(evidenceArtifact);
   const order = orderingEvidence(evidenceArtifact);
+  const storagePosture = storageLanePosture(evidenceArtifact);
   const evidenceBoundary = boundary(evidenceArtifact);
   const evidenceValidation = validation(evidenceArtifact);
   const evidenceSource = source(evidenceArtifact);
@@ -122,6 +127,9 @@ function validateFrontierEvidence({ evidenceArtifact, requiredSourceRefs = [] } 
   ) {
     reasonCodes.push("frontier_candidate_ordering_required_flags_missing");
   }
+  if (!validStorageLanePosture(storagePosture)) {
+    reasonCodes.push("frontier_candidate_storage_lane_posture_missing_or_unsafe");
+  }
 
   if (
     evidenceBoundary.reviewOnly !== true ||
@@ -163,7 +171,8 @@ function validateFrontierEvidence({ evidenceArtifact, requiredSourceRefs = [] } 
     code.includes("canonical") ||
     code.includes("compat") ||
     code.includes("path_seam") ||
-    code.includes("wall_clock")
+    code.includes("wall_clock") ||
+    code.includes("storage_lane")
   )) {
     return Object.freeze({
       reviewStatus: TESTBED_LOCAL_LAYER_FRONTIER_CANDIDATE_STATUSES.FRONTIER_CANDIDATE_BLOCKED,
@@ -192,6 +201,7 @@ export function buildTestbedLocalLayerFrontierCandidateEvidence({
 } = {}) {
   const refs = frontierRefs(evidenceArtifact);
   const order = orderingEvidence(evidenceArtifact);
+  const storagePosture = storageLanePosture(evidenceArtifact);
   const evidenceBoundary = boundary(evidenceArtifact);
   const evidenceValidation = validation(evidenceArtifact);
   const validationResult = validateFrontierEvidence({ evidenceArtifact, requiredSourceRefs });
@@ -222,6 +232,16 @@ export function buildTestbedLocalLayerFrontierCandidateEvidence({
     orderingSource: nonEmptyString(order.orderingSource),
     wallClockDefinesCausalOrder: order.wallClockDefinesCausalOrder === true,
     collaborativeCausalOrderCandidate: nonEmptyString(order.collaborativeCausalOrderCandidate),
+    intendedStorageLane: nonEmptyString(storagePosture.intendedStorageLane),
+    inputSemanticUnit: nonEmptyString(storagePosture.inputSemanticUnit),
+    requiresPromotedProjectionEventInput: storagePosture.requiresPromotedProjectionEventInput === true,
+    sandboxedOnly: storagePosture.sandboxedOnly === true,
+    productionBackendPromoted: storagePosture.productionBackendPromoted === true,
+    storageRecordPromoted: storagePosture.storageRecordPromoted === true,
+    appendSuccessIsAcceptanceStorage: storagePosture.appendSuccessIsAcceptance === true,
+    linearizationIsTruth: storagePosture.linearizationIsTruth === true,
+    replicaVisibilityIsContinuity: storagePosture.replicaVisibilityIsContinuity === true,
+    discoveryAbsenceIsFailure: storagePosture.discoveryAbsenceIsFailure === true,
     reviewOnly: true,
     evidenceOnly: true,
     testbedCalledCausalSubstrate: false,
@@ -251,6 +271,21 @@ export function buildTestbedLocalLayerFrontierCandidateEvidence({
     liveDiscoveryRequired: false,
     meshPublicationImplied: false
   });
+}
+
+function validStorageLanePosture(posture) {
+  return posture.intendedStorageLane === "bounded_autobase_equivalent_linearization" &&
+    posture.inputSemanticUnit === "mesh_ecology_local_layer_projection_event" &&
+    posture.requiresPromotedProjectionEventInput === true &&
+    posture.sandboxedOnly === true &&
+    posture.productionBackendPromoted === false &&
+    posture.storageRecordPromoted === false &&
+    posture.edgeStateMigration === false &&
+    posture.appendSuccessIsAcceptance === false &&
+    posture.linearizationIsTruth === false &&
+    posture.replicaVisibilityIsContinuity === false &&
+    posture.wallClockDefinesCausalOrder === false &&
+    posture.discoveryAbsenceIsFailure === false;
 }
 
 export function listTestbedLocalLayerFrontierCandidateStatuses() {
