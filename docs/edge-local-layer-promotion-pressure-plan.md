@@ -39,7 +39,8 @@ promoted.
 Any future promoted-material review should fail closed on these cases:
 
 - missing source refs
-- missing causal refs
+- missing causal refs without explicit deferral
+- malformed causal-ref deferral
 - missing writer refs
 - missing reader policy
 - reader without key/proof
@@ -64,7 +65,9 @@ Any future promoted-material review should fail closed on these cases:
 
 The eventual promoted material must be reviewed as a producer-owned artifact
 with explicit schema, version, source refs, causal refs, writer policy, reader
-policy, and non-claims.
+policy, canonical identity posture, and non-claims. Status-only projections may
+defer causal topology only when deferral is represented as data with a reason;
+omission is a blocked review case.
 
 Testbed should keep extending existing review lanes rather than replacing them:
 
@@ -98,7 +101,7 @@ Before Testbed can mark the selected material reviewable, Spine must name:
 Without that Spine decision, Testbed should emit review evidence only. With the
 projection-event decision recorded, Testbed should accept only projection
 events that preserve semantic source refs, causal refs, writer policy, reader
-policy, and non-promoted storage/backend posture.
+policy, identity hash posture, and non-promoted storage/backend posture.
 
 Autobase/frontier artifacts must also carry explicit storage-lane posture:
 

@@ -30,7 +30,10 @@ function validProjectionEvent() {
       segmentRefs: [],
       happeningRefs: [],
       presentPointRef: null,
-      observerRef: null
+      observerRef: "observer:edge-operator",
+      deferred: true,
+      deferredReason: "status_projection_without_history_interpretation",
+      deferralPosture: "explicit_causal_ref_deferral"
     },
     transportRefs: [
       "protomux-rpc:hyperdht_direct_peer"
@@ -42,6 +45,8 @@ function validProjectionEvent() {
     ],
     payloadHash: `sha256:${"a".repeat(64)}`,
     payloadHashAlgorithm: "sha256-canonical-json",
+    identityHash: `sha256:${"c".repeat(64)}`,
+    identityHashAlgorithm: "sha256-canonical-json",
     payloadEmbedded: false,
     derivedOnly: true,
     promotionPosture: {
@@ -146,7 +151,13 @@ test("valid Edge local-layer projection event is consumed as review evidence onl
   assert.equal(evidence.projectionRef, "edge-operator-situation:op-status");
   assert.equal(evidence.payloadHash, `sha256:${"a".repeat(64)}`);
   assert.equal(evidence.payloadHashAlgorithm, "sha256-canonical-json");
+  assert.equal(evidence.identityHash, `sha256:${"c".repeat(64)}`);
+  assert.equal(evidence.identityHashAlgorithm, "sha256-canonical-json");
   assert.equal(evidence.sourceRefCount, 3);
+  assert.equal(evidence.causalRefCount, 0);
+  assert.equal(evidence.causalRefsDeferred, true);
+  assert.equal(evidence.causalRefDeferralReason, "status_projection_without_history_interpretation");
+  assert.equal(evidence.causalRefDeferralValid, true);
   assert.equal(evidence.transportRefCount, 1);
   assert.equal(evidence.currentDurability, "not_durable_state");
   assert.equal(evidence.currentExportOnly, true);
@@ -256,7 +267,7 @@ test("projection event evidence blocks local path source refs for selected promo
   assertPassiveEvidence(evidence);
 });
 
-test("projection event evidence requires causal writer and reader posture", () => {
+test("projection event evidence requires causal refs or explicit deferral plus writer and reader posture", () => {
   const missing = validProjectionEvent();
   delete missing.causalRefs;
   delete missing.writerPolicy;
@@ -269,6 +280,53 @@ test("projection event evidence requires causal writer and reader posture", () =
   assert.equal(incomplete.reasonCodes.includes("projection_event_writer_policy_missing_or_unsafe"), true);
   assert.equal(incomplete.reasonCodes.includes("projection_event_reader_policy_missing_or_unsafe"), true);
   assertPassiveEvidence(incomplete);
+});
+
+test("projection event evidence blocks missing or malformed causal-ref deferral", () => {
+  const missingDeferral = validProjectionEvent();
+  missingDeferral.causalRefs = {
+    branchRefs: [],
+    segmentRefs: [],
+    happeningRefs: [],
+    presentPointRef: null,
+    observerRef: "observer:edge-operator",
+    deferred: false,
+    deferredReason: null
+  };
+  const mixedDeferral = validProjectionEvent();
+  mixedDeferral.causalRefs = {
+    branchRefs: ["branch:edge-local-layer:operator-projection"],
+    segmentRefs: [],
+    happeningRefs: [],
+    presentPointRef: null,
+    observerRef: "observer:edge-operator",
+    deferred: true,
+    deferredReason: "status_projection_without_history_interpretation"
+  };
+
+  const missing = build(missingDeferral);
+  const mixed = build(mixedDeferral);
+
+  assert.equal(missing.reviewStatus, TESTBED_LOCAL_LAYER_PROJECTION_EVENT_STATUSES.PROJECTION_EVENT_BLOCKED);
+  assert.equal(missing.reasonCodes.includes("projection_event_causal_refs_or_deferral_missing"), true);
+  assert.equal(missing.causalRefDeferralValid, false);
+  assert.equal(mixed.reviewStatus, TESTBED_LOCAL_LAYER_PROJECTION_EVENT_STATUSES.PROJECTION_EVENT_BLOCKED);
+  assert.equal(mixed.reasonCodes.includes("projection_event_causal_ref_deferral_malformed"), true);
+  assert.equal(mixed.causalRefCount, 1);
+  assert.equal(mixed.causalRefDeferralValid, false);
+  assertPassiveEvidence(missing);
+  assertPassiveEvidence(mixed);
+});
+
+test("projection event evidence requires identity hash posture", () => {
+  const event = validProjectionEvent();
+  delete event.identityHash;
+
+  const evidence = build(event);
+
+  assert.equal(evidence.reviewStatus, TESTBED_LOCAL_LAYER_PROJECTION_EVENT_STATUSES.PROJECTION_EVENT_BLOCKED);
+  assert.equal(evidence.reasonCodes.includes("projection_event_identity_hash_missing"), true);
+  assertPassiveEvidence(evidence);
 });
 
 test("projection event evidence blocks promotion posture overclaims", () => {

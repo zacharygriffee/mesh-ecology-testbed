@@ -61,6 +61,19 @@ function refContainsUnsafeSeam(ref) {
   return /:\/\/|\/|\\|localhost|127\.0\.0\.1|ssh|http/iu.test(ref);
 }
 
+function causalRefsHaveTopology(causalRefs = {}) {
+  return stringArray(causalRefs.branchRefs).length > 0 ||
+    stringArray(causalRefs.segmentRefs).length > 0 ||
+    stringArray(causalRefs.happeningRefs).length > 0 ||
+    nonEmptyString(causalRefs.presentPointRef) !== null;
+}
+
+function causalRefDeferralValid(causalRefs = {}) {
+  return causalRefs.deferred === true &&
+    nonEmptyString(causalRefs.deferredReason) !== null &&
+    causalRefsHaveTopology(causalRefs) === false;
+}
+
 function missingRequiredRefs(eventRefs, requiredRefs) {
   const refSet = new Set(eventRefs);
   return requiredRefs.filter((ref) => !refSet.has(ref));
@@ -107,9 +120,18 @@ function validateProjectionEvent({ projectionEvent, requiredSourceRefs = [], sta
   if (!Array.isArray(causalRefs.branchRefs)) reasonCodes.push("projection_event_branch_refs_missing");
   if (!Array.isArray(causalRefs.segmentRefs)) reasonCodes.push("projection_event_segment_refs_missing");
   if (!Array.isArray(causalRefs.happeningRefs)) reasonCodes.push("projection_event_happening_refs_missing");
+  if (isPlainObject(projectionEvent.causalRefs)) {
+    const hasTopology = causalRefsHaveTopology(causalRefs);
+    const validDeferral = causalRefDeferralValid(causalRefs);
+    if (!hasTopology && !validDeferral) reasonCodes.push("projection_event_causal_refs_or_deferral_missing");
+    if (causalRefs.deferred === true && !validDeferral) reasonCodes.push("projection_event_causal_ref_deferral_malformed");
+  }
   if (!nonEmptyString(projectionEvent.payloadHash)) reasonCodes.push("projection_event_payload_hash_missing");
   if (nonEmptyString(projectionEvent.payloadHash) && !SHA256_REF.test(projectionEvent.payloadHash)) reasonCodes.push("projection_event_payload_hash_invalid");
   if (projectionEvent.payloadHashAlgorithm !== EXPECTED_PAYLOAD_HASH_ALGORITHM) reasonCodes.push("projection_event_payload_hash_algorithm_mismatch");
+  if (!nonEmptyString(projectionEvent.identityHash)) reasonCodes.push("projection_event_identity_hash_missing");
+  if (nonEmptyString(projectionEvent.identityHash) && !SHA256_REF.test(projectionEvent.identityHash)) reasonCodes.push("projection_event_identity_hash_invalid");
+  if (projectionEvent.identityHashAlgorithm !== EXPECTED_PAYLOAD_HASH_ALGORITHM) reasonCodes.push("projection_event_identity_hash_algorithm_mismatch");
   if (projectionEvent.derivedOnly !== true) reasonCodes.push("projection_event_derived_only_missing");
   if (projectionEvent.payloadEmbedded === true) reasonCodes.push("projection_event_embeds_payload");
   if (transportRefs.some((ref) => /http|ssh|localhost|127\.0\.0\.1/iu.test(ref))) {
@@ -171,6 +193,10 @@ function validateProjectionEvent({ projectionEvent, requiredSourceRefs = [], sta
     code.includes("mismatch") ||
     code.includes("overclaim") ||
     code.includes("claims") ||
+    code.includes("causal_refs_or_deferral_missing") ||
+    code.includes("causal_ref_deferral_malformed") ||
+    code.includes("causal_refs_missing") ||
+    code.includes("identity_hash") ||
     code.includes("embeds_payload") ||
     code.includes("stale") ||
     code.includes("compat_scaffold") ||
@@ -205,6 +231,11 @@ export function buildTestbedLocalLayerProjectionEventEvidence({
 } = {}) {
   const sourceRefs = stringArray(projectionEvent?.sourceRefs);
   const transportRefs = stringArray(projectionEvent?.transportRefs);
+  const causalRefs = isPlainObject(projectionEvent?.causalRefs) ? projectionEvent.causalRefs : {};
+  const causalRefCount = stringArray(causalRefs.branchRefs).length +
+    stringArray(causalRefs.segmentRefs).length +
+    stringArray(causalRefs.happeningRefs).length +
+    (nonEmptyString(causalRefs.presentPointRef) ? 1 : 0);
   const validation = validateProjectionEvent({
     projectionEvent,
     requiredSourceRefs,
@@ -228,8 +259,14 @@ export function buildTestbedLocalLayerProjectionEventEvidence({
     projectionRef: nonEmptyString(projectionEvent?.projectionRef),
     payloadHash: nonEmptyString(projectionEvent?.payloadHash),
     payloadHashAlgorithm: nonEmptyString(projectionEvent?.payloadHashAlgorithm),
+    identityHash: nonEmptyString(projectionEvent?.identityHash),
+    identityHashAlgorithm: nonEmptyString(projectionEvent?.identityHashAlgorithm),
     sourceRefCount: sourceRefs.length,
     sourceRefs: Object.freeze(sourceRefs),
+    causalRefCount,
+    causalRefsDeferred: causalRefs.deferred === true,
+    causalRefDeferralReason: nonEmptyString(causalRefs.deferredReason),
+    causalRefDeferralValid: causalRefDeferralValid(causalRefs),
     transportRefCount: transportRefs.length,
     transportRefs: Object.freeze(transportRefs),
     requiredSourceRefs: Object.freeze(stringArray(requiredSourceRefs)),
