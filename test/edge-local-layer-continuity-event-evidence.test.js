@@ -90,6 +90,81 @@ function validContinuityEvent() {
   };
 }
 
+function validRepoWorkPacketContinuityEvent() {
+  const event = validContinuityEvent();
+  return {
+    ...event,
+    continuityRole: "edge_repo_work_packet_scaffold",
+    continuityCategory: "repo_work_packet",
+    eventId: "continuity:edge-repo-work-packet:edge-cross-project-work-packet:repo-work:continuity-event",
+    sourceEventRef: "edge-repo-work-packet:edge-cross-project-work-packet:repo-work:continuity-event",
+    operationRef: "edge-repo-work-packet:edge-cross-project-work-packet:repo-work:continuity-event",
+    eventKind: "repo_work_packet_proposed",
+    origin: {
+      originRef: "edge-repo-work-packet:edge-cross-project-work-packet:repo-work:continuity-event",
+      sourceRef: "edge-cross-project-work-packet:repo-work:continuity-event",
+      operatorSeatRef: "operator-seat:local",
+      deviceRef: "local-layer-device:operator-laptop",
+      repoRef: "repo:mesh-ecology-edge",
+      targetRepoRef: "repo:mesh-ecology-edge",
+      targetSurfaceRef: "edge-target-surface:mesh-ecology-edge:edge_self_work_review",
+      parentEventRefs: []
+    },
+    provenanceRefs: [
+      "edge-cross-project-work-packet:repo-work:continuity-event",
+      "edge-repo-work-packet:edge-cross-project-work-packet:repo-work:continuity-event",
+      "repo:mesh-ecology-edge",
+      "edge-target-surface:mesh-ecology-edge:edge_self_work_review",
+      "edge-self-work-trace:evidence"
+    ],
+    evidenceRefs: ["edge-self-work-trace:evidence"],
+    receiptRefs: [],
+    membraneCrossing: {
+      crossingKind: "repo_work_packet_proposal",
+      crossingRef: "membrane-crossing:repo_work_packet_proposal:edge-cross-project-work-packet:repo-work:continuity-event",
+      sourceDomain: "edge_operator_loop",
+      targetDomain: "repo_owned_work_review",
+      validationRequired: true
+    },
+    sourceRefPosture: {
+      canonicalRefs: ["edge-self-work-trace:evidence"],
+      scaffoldRefs: {
+        localPathRefs: ["docs/work-packets/edge-repo-work-packet-continuity-event-v0.md"],
+        transportEndpointRefs: ["http://127.0.0.1:8787/status"]
+      },
+      localPathsAreCanonicalSeams: false,
+      transportEndpointsAreCanonicalSeams: false
+    },
+    repoWorkPacketPosture: {
+      sourceWorkPacketRef: "edge-cross-project-work-packet:repo-work:continuity-event",
+      packetMode: "edge_self_work",
+      packetState: "ready_for_operator_export",
+      targetProjectId: "mesh-ecology-edge",
+      targetRepo: "mesh-ecology-edge",
+      targetSurface: "edge_self_work_review",
+      operatorApprovalRequired: true,
+      repoOwnsImplementation: true,
+      workPacketIsAuthority: false,
+      workPacketIsCompletion: false,
+      workPacketIsTruth: false
+    },
+    causalRefs: {
+      branchRefs: [],
+      segmentRefs: [],
+      happeningRefs: [],
+      presentPointRef: null,
+      observerRef: "edge-operator",
+      deferred: true,
+      deferredReason: "repo_work_packet_continuity_event_without_promoted_lane",
+      deferralPosture: "explicit_causal_ref_deferral"
+    },
+    storagePosture: {
+      ...event.storagePosture,
+      storageKind: "local_json_or_exported_work_packet"
+    }
+  };
+}
+
 function build(continuityEvent = validContinuityEvent(), overrides = {}) {
   return buildTestbedEdgeLocalLayerContinuityEventEvidence({
     continuityEvent,
@@ -153,6 +228,29 @@ test("valid Edge continuity-event scaffold is review evidence only", () => {
   assert.equal(evidence.appendSuccessIsAcceptance, false);
   assert.equal(evidence.writeSuccessIsAcceptance, false);
   assert.equal(evidence.storageVisibilityIsContinuity, false);
+  assertPassiveEvidence(evidence);
+});
+
+test("repo-work-packet continuity-event scaffold is review evidence only", () => {
+  const evidence = build(validRepoWorkPacketContinuityEvent());
+
+  assert.equal(evidence.reviewStatus, TESTBED_EDGE_LOCAL_LAYER_CONTINUITY_EVENT_STATUSES.CONTINUITY_EVENT_VISIBLE);
+  assert.deepEqual(evidence.reasonCodes, ["continuity_event_visible"]);
+  assert.equal(evidence.continuityRole, "edge_repo_work_packet_scaffold");
+  assert.equal(evidence.continuityCategory, "repo_work_packet");
+  assert.equal(evidence.sourceEventKind, "repo_work_packet_proposed");
+  assert.equal(evidence.sourceOperationRef, "edge-repo-work-packet:edge-cross-project-work-packet:repo-work:continuity-event");
+  assert.equal(evidence.sourceEventRef, "edge-repo-work-packet:edge-cross-project-work-packet:repo-work:continuity-event");
+  assert.equal(evidence.originRef, "edge-repo-work-packet:edge-cross-project-work-packet:repo-work:continuity-event");
+  assert.equal(evidence.membraneCrossingKind, "repo_work_packet_proposal");
+  assert.equal(evidence.storageKind, "local_json_or_exported_work_packet");
+  assert.equal(evidence.storageRole, "compatibility_scaffold");
+  assert.equal(evidence.scaffoldStorage, true);
+  assert.equal(evidence.localFileStorage, true);
+  assert.equal(evidence.localLayerSubstrate, false);
+  assert.equal(evidence.autobaseBackend, false);
+  assert.equal(evidence.acceptedContinuity, false);
+  assert.equal(evidence.appendSuccessIsAcceptance, false);
   assertPassiveEvidence(evidence);
 });
 

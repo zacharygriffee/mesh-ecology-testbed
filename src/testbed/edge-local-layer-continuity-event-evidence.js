@@ -11,6 +11,18 @@ export const TESTBED_EDGE_LOCAL_LAYER_CONTINUITY_EVENT_STATUSES = Object.freeze(
 const EXPECTED_ARTIFACT_KIND = "mesh_ecology_local_layer_continuity_event";
 const EXPECTED_SCHEMA_VERSION = "mesh-ecology-edge/local-layer-continuity-event-draft/v0";
 const EXPECTED_OPERATION_EVENT_KIND = "edge_operation_event";
+const CONTINUITY_EVENT_ROLE_PROFILES = Object.freeze({
+  edge_operation_event_scaffold: Object.freeze({
+    category: "operation_event",
+    storageKind: "local_json_operation_trail",
+    crossingTargetDomain: "local_layer_continuity_draft"
+  }),
+  edge_repo_work_packet_scaffold: Object.freeze({
+    category: "repo_work_packet",
+    storageKind: "local_json_or_exported_work_packet",
+    crossingTargetDomain: "repo_owned_work_review"
+  })
+});
 
 function isPlainObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
@@ -58,6 +70,11 @@ function extractContinuityEvent({ continuityEvent = null, sourceOperationEvent =
   return null;
 }
 
+function continuityRoleProfile(continuityEvent) {
+  const role = nonEmptyString(continuityEvent?.continuityRole);
+  return CONTINUITY_EVENT_ROLE_PROFILES[role] ?? null;
+}
+
 function validateContinuityEvent(continuityEvent) {
   const reasonCodes = [];
 
@@ -73,6 +90,7 @@ function validateContinuityEvent(continuityEvent) {
   const storage = storagePosture(continuityEvent);
   const acceptance = acceptancePosture(continuityEvent);
   const claims = nonClaims(continuityEvent);
+  const roleProfile = continuityRoleProfile(continuityEvent);
   const provenanceRefs = stringArray(continuityEvent.provenanceRefs);
   const evidenceRefs = stringArray(continuityEvent.evidenceRefs);
   const receiptRefs = stringArray(continuityEvent.receiptRefs);
@@ -99,8 +117,10 @@ function validateContinuityEvent(continuityEvent) {
   if (continuityEvent.schemaVersion !== EXPECTED_SCHEMA_VERSION) reasonCodes.push("continuity_event_schema_mismatch");
   if (continuityEvent.draft !== true) reasonCodes.push("continuity_event_draft_posture_missing");
   if (continuityEvent.promotedContinuity !== false) reasonCodes.push("continuity_event_promotion_overclaim");
-  if (continuityEvent.continuityRole !== "edge_operation_event_scaffold") reasonCodes.push("continuity_event_role_mismatch");
-  if (continuityEvent.continuityCategory !== "operation_event") reasonCodes.push("continuity_event_category_mismatch");
+  if (roleProfile === null) reasonCodes.push("continuity_event_role_mismatch");
+  if (roleProfile !== null && continuityEvent.continuityCategory !== roleProfile.category) {
+    reasonCodes.push("continuity_event_category_mismatch");
+  }
   if (!nonEmptyString(continuityEvent.eventId)) reasonCodes.push("continuity_event_id_missing");
   if (!nonEmptyString(continuityEvent.sourceEventRef)) reasonCodes.push("continuity_event_source_event_ref_missing");
   if (!nonEmptyString(continuityEvent.operationRef)) reasonCodes.push("continuity_event_operation_ref_missing");
@@ -119,10 +139,14 @@ function validateContinuityEvent(continuityEvent) {
   if (!nonEmptyString(crossing.crossingKind)) reasonCodes.push("continuity_event_crossing_kind_missing");
   if (!nonEmptyString(crossing.crossingRef)) reasonCodes.push("continuity_event_crossing_ref_missing");
   if (crossing.sourceDomain !== "edge_operator_loop") reasonCodes.push("continuity_event_crossing_source_domain_mismatch");
-  if (crossing.targetDomain !== "local_layer_continuity_draft") reasonCodes.push("continuity_event_crossing_target_domain_mismatch");
+  if (roleProfile !== null && crossing.targetDomain !== roleProfile.crossingTargetDomain) {
+    reasonCodes.push("continuity_event_crossing_target_domain_mismatch");
+  }
   if (crossing.validationRequired !== true) reasonCodes.push("continuity_event_crossing_validation_missing");
 
-  if (storage.storageKind !== "local_json_operation_trail") reasonCodes.push("continuity_event_storage_kind_mismatch");
+  if (roleProfile !== null && storage.storageKind !== roleProfile.storageKind) {
+    reasonCodes.push("continuity_event_storage_kind_mismatch");
+  }
   if (storage.storageRole !== "compatibility_scaffold") reasonCodes.push("continuity_event_storage_role_mismatch");
   if (storage.scaffoldStorage !== true || storage.localFileStorage !== true) {
     reasonCodes.push("continuity_event_storage_scaffold_missing");
