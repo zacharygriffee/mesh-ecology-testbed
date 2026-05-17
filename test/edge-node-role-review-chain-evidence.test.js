@@ -1,5 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
 import {
   buildTestbedEdgeLocalLayerNodeRoleLabEvidence
@@ -169,6 +171,39 @@ test("node-role review chain pressures causal Testbed and Edge refs together", (
   assert.equal(evidence.testbedExecutedEdge, false);
   assert.equal(evidence.testbedOpenedEdgeStorage, false);
   assert.equal(evidence.authorityGranted, false);
+});
+
+test("committed node-role review chain fixture stays aligned end to end", async () => {
+  const fixturePath = join(
+    process.cwd(),
+    "test",
+    "fixtures",
+    "edge-node-role-review-chain",
+    "edge-node-role-review-chain-fixture.json"
+  );
+  const fixture = JSON.parse(await readFile(fixturePath, "utf8"));
+  const rebuiltTestbedEvidence = buildTestbedEdgeLocalLayerNodeRoleLabEvidence({
+    evidenceArtifact: fixture.causalEvidence,
+    createdAt: fixture.createdAt,
+    evidenceId: fixture.testbedReviewEvidence.evidenceId
+  });
+  const chain = buildTestbedEdgeNodeRoleReviewChainEvidence({
+    causalEvidence: fixture.causalEvidence,
+    testbedReviewEvidence: fixture.testbedReviewEvidence,
+    edgeReviewStatus: fixture.edgeReviewStatus,
+    createdAt: fixture.createdAt
+  });
+
+  assert.deepEqual(rebuiltTestbedEvidence, fixture.testbedReviewEvidence);
+  assert.equal(chain.reviewStatus, fixture.expectedChain.reviewStatus);
+  assert.deepEqual(chain.reasonCodes, fixture.expectedChain.reasonCodes);
+  assert.equal(chain.sourceCausalArtifactId, fixture.causalEvidence.artifactId);
+  assert.equal(chain.sourceTestbedEvidenceId, fixture.testbedReviewEvidence.evidenceId);
+  assert.equal(chain.sourceEdgeStatusViewId, fixture.edgeReviewStatus.viewId);
+  assert.equal(chain.testbedExecutedEdge, false);
+  assert.equal(chain.testbedOpenedEdgeStorage, false);
+  assert.equal(chain.edgeReadyForAutobaseBackend, false);
+  assert.equal(chain.edgeDurableStateClaimed, false);
 });
 
 test("node-role review chain blocks mismatched Edge Testbed refs", () => {
