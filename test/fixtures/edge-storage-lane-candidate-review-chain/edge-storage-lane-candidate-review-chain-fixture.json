@@ -1,0 +1,188 @@
+{
+  "fixtureKind": "edge_storage_lane_candidate_review_chain_fixture",
+  "fixtureVersion": "v1",
+  "createdAt": "2026-05-17T17:00:00.000Z",
+  "causalEvidence": {
+    "artifactKind": "causal-edge-storage-lane-candidate-evidence",
+    "schema": "causal-substrate/edge-storage-lane-candidate-evidence/v1",
+    "schemaVersion": 1,
+    "artifactId": "causal-edge-storage-lane-candidate-evidence:fixturebbbbbbbb",
+    "emittedAt": "2026-05-17T17:00:00.000Z",
+    "source": {
+      "sourceRepo": "mesh-ecology-edge",
+      "sourceArtifactKind": "edge_local_layer_storage_lane_candidate",
+      "sourceSchema": "edge_local_layer_storage_lane_candidate.v0"
+    },
+    "refs": {
+      "candidateId": "edge-local-layer-storage-lane-candidate:fixturebbbbbbbbbbbbbbbb",
+      "layerRef": "local-layer:operator-owned-devices",
+      "projectionLaneRef": "local-layer-projection-lane:edge-operator-situation",
+      "observerRef": "observer:edge-operator",
+      "sourceProjectionEventRefs": [
+        "projection:mesh-ecology-edge:operator_situation_view:fixturebbbbbbbb"
+      ],
+      "sourceEntryRefs": [
+        "projection-log-entry:projection:mesh-ecology-edge:operator_situation_view:fixturebbbbbbbb:0"
+      ],
+      "sourceIdentityHashes": [
+        "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      ],
+      "sourceRefs": [
+        "projection:mesh-ecology-edge:operator_situation_view:fixturebbbbbbbb",
+        "projection-log-entry:projection:mesh-ecology-edge:operator_situation_view:fixturebbbbbbbb:0",
+        "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      ]
+    },
+    "writerAdmission": {
+      "policyKind": "operator_owned_local_layer_explicit_writer_admission",
+      "admittedWriterRefs": [
+        "local-layer-writer:operator-device-a"
+      ],
+      "candidateWriterRefs": [
+        "local-layer-writer:operator-device-b"
+      ],
+      "rejectedWriterRefs": [],
+      "generalWriterAuthorityGranted": false,
+      "nonWriterOptimisticAppendAllowed": true,
+      "optimisticAppendRequiresAcceptanceGate": true,
+      "writerAdmissionRequiredBeforeAcceptance": true,
+      "operatorMediationRequired": true
+    },
+    "acceptanceRule": {
+      "ruleKind": "apply_validation_accepts_projection_lane_entry",
+      "appendSuccessIsAcceptance": false,
+      "replicaVisibilityIsContinuity": false,
+      "linearizationIsTruth": false,
+      "requiresWriterAdmission": true,
+      "requiresCausalSubstrateInterpretation": true,
+      "requiresFailClosedTestbedPressure": true
+    },
+    "storageLanePosture": {
+      "intendedStorageLane": "bounded_autobase_equivalent_projection_lane",
+      "storageDirection": "bounded_autobase_equivalent_linearization",
+      "promotedSemanticUnit": "mesh_ecology_local_layer_projection_event",
+      "storageEnvelopeKind": "edge_local_layer_projection_lane_entry",
+      "storageEnvelopeSchema": "edge_local_layer_projection_lane_entry.v0",
+      "productionBackendPromoted": false,
+      "productionAutobaseStarted": false,
+      "storageRecordPromoted": false,
+      "edgeStateMigration": false,
+      "appendSuccessIsAcceptance": false,
+      "linearizationIsTruth": false,
+      "replicaVisibilityIsContinuity": false,
+      "wallClockDefinesCausalOrder": false,
+      "localPathSeam": false,
+      "httpSeam": false,
+      "sshSeam": false
+    },
+    "boundary": {
+      "reviewOnly": true,
+      "evidenceOnly": true,
+      "opensAutobase": false,
+      "opensCorestore": false,
+      "writesContinuityRecords": false,
+      "acceptsCanonicalHistory": false,
+      "claimsCausalTruth": false,
+      "startsBackend": false,
+      "migratesEdgeState": false
+    },
+    "validation": {
+      "status": "edge-storage-lane-candidate-valid-evidence",
+      "writerAdmissionPresent": true,
+      "acceptanceRulePresent": true,
+      "storageLanePosturePresent": true,
+      "readerPolicyPresent": true,
+      "boundarySafe": true,
+      "noAuthorityOrTruthClaim": true
+    },
+    "reviewStatus": "edge-storage-lane-candidate-evidence-emitted"
+  },
+  "testbedReviewEvidence": {
+    "artifactKind": "testbed_edge_storage_lane_candidate_evidence",
+    "schemaVersion": "testbed_edge_storage_lane_candidate_evidence.v1",
+    "evidenceId": "testbed-edge-storage-lane-candidate:fixturebbbbbbbb",
+    "createdAt": "2026-05-17T17:00:00.000Z",
+    "reviewStatus": "storage_lane_candidate_visible",
+    "reasonCodes": [
+      "storage_lane_candidate_visible"
+    ],
+    "sourceArtifactKind": "causal-edge-storage-lane-candidate-evidence",
+    "sourceSchema": "causal-substrate/edge-storage-lane-candidate-evidence/v1",
+    "sourceSchemaVersion": 1,
+    "sourceArtifactId": "causal-edge-storage-lane-candidate-evidence:fixturebbbbbbbb",
+    "sourceReviewStatus": "edge-storage-lane-candidate-evidence-emitted",
+    "candidateId": "edge-local-layer-storage-lane-candidate:fixturebbbbbbbbbbbbbbbb",
+    "sourceProjectionEventRefCount": 1,
+    "sourceEntryRefCount": 1,
+    "sourceIdentityHashCount": 1,
+    "sourceRefCount": 3,
+    "admittedWriterRefCount": 1,
+    "rejectedWriterRefCount": 0,
+    "writerAdmissionRequiredBeforeAcceptance": true,
+    "operatorMediationRequired": true,
+    "appendSuccessIsAcceptance": false,
+    "replicaVisibilityIsContinuity": false,
+    "linearizationIsTruth": false,
+    "intendedStorageLane": "bounded_autobase_equivalent_projection_lane",
+    "storageDirection": "bounded_autobase_equivalent_linearization",
+    "promotedSemanticUnit": "mesh_ecology_local_layer_projection_event",
+    "productionAutobaseStarted": false,
+    "productionBackendPromoted": false,
+    "edgeStateMigration": false,
+    "reviewOnly": true,
+    "evidenceOnly": true,
+    "testbedOpenedAutobase": false,
+    "testbedOpenedCorestore": false,
+    "testbedWritesContinuityRecords": false,
+    "testbedAcceptsCanonicalHistory": false,
+    "testbedClaimsCausalTruth": false,
+    "causalEvidenceOpenedAutobase": false,
+    "causalEvidenceOpenedCorestore": false,
+    "causalEvidenceWritesContinuityRecords": false,
+    "causalEvidenceAcceptsCanonicalHistory": false,
+    "productionProofClaimed": false,
+    "durableStateClaimed": false,
+    "replicatedStateClaimed": false,
+    "authorityGranted": false,
+    "meshTruthClaimed": false,
+    "completionClaimed": false
+  },
+  "edgeReviewStatus": {
+    "artifactKind": "edge_local_layer_storage_lane_candidate_review_status",
+    "ecosystemSeamId": "testbed",
+    "viewId": "edge-local-layer-storage-lane-candidate-review-status:fixturebbbbbbbb",
+    "createdAt": "2026-05-17T17:00:00.000Z",
+    "readinessInputKind": "local_layer_storage_lane_candidate_review",
+    "selfWorkReadinessInput": true,
+    "localLayerStorageLaneCandidateReviewed": true,
+    "readyForSelfWorkReadiness": true,
+    "candidateId": "edge-local-layer-storage-lane-candidate:fixturebbbbbbbbbbbbbbbb",
+    "causalArtifactId": "causal-edge-storage-lane-candidate-evidence:fixturebbbbbbbb",
+    "testbedReviewEvidenceId": "testbed-edge-storage-lane-candidate:fixturebbbbbbbb",
+    "testbedReviewStatus": "storage_lane_candidate_visible",
+    "testbedReviewImportStatus": "imported",
+    "storageLaneCandidateReviewState": "local_layer_storage_lane_candidate_review_available",
+    "readyForOperatorReview": true,
+    "readyForWriterAuthority": false,
+    "readyForAppendAcceptance": false,
+    "readyForAutobaseBackend": false,
+    "readyForDurableLocalLayerState": false,
+    "readyForReplicatedState": false,
+    "appendSuccessIsAcceptance": false,
+    "replicaVisibilityIsContinuity": false,
+    "linearizationIsTruth": false,
+    "productionAutobaseStarted": false,
+    "productionBackendPromoted": false,
+    "writerAuthorityGranted": false,
+    "durableStateClaimed": false,
+    "replicatedStateClaimed": false,
+    "causalTruthClaimed": false,
+    "runtimeAuthorityClaimed": false
+  },
+  "expectedChain": {
+    "reviewStatus": "storage_lane_candidate_review_chain_visible",
+    "reasonCodes": [
+      "storage_lane_candidate_review_chain_visible"
+    ]
+  }
+}
