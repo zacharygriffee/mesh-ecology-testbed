@@ -44,6 +44,31 @@ function validProjectionEvent() {
     payloadHashAlgorithm: "sha256-canonical-json",
     payloadEmbedded: false,
     derivedOnly: true,
+    promotionPosture: {
+      promotedMaterial: true,
+      promotionRole: "semantic_continuity_input",
+      decisionRef: "mesh-ecology-spine/docs/edge-state-promotion-decision-packet.md",
+      storageRecordPromoted: false,
+      backendPromoted: false,
+      derivedViewPromoted: false,
+      reviewStatusPromoted: false,
+      replicatedLocalLayerContinuityClaimed: false
+    },
+    writerPolicy: {
+      writerKind: "edge_producer_operator_owned_local_layer_participant",
+      writerRepo: "mesh-ecology-edge",
+      producerParticipantRef: "local-layer-participant:edge-operator",
+      boundedMultiwriterDeferred: true,
+      autobaseWriterPolicyPromoted: false
+    },
+    readerPolicy: {
+      readerKind: "operator_owned_local_layer_readers_by_explicit_refs",
+      explicitKeyOrProofRequired: true,
+      publicRead: false,
+      localPathReadSeam: false,
+      httpReadSeam: false,
+      sshReadSeam: false
+    },
     singleWriterProof: {
       proofOnly: true,
       writerRepo: "mesh-ecology-edge",
@@ -72,6 +97,8 @@ function validProjectionEvent() {
       payloadHashPresent: true,
       projectionIsDerivedOnly: true,
       cliJsonRenderingOnly: true,
+      promotedSemanticInput: true,
+      sourceRefsSemantic: true,
       localFileTruth: false,
       durableState: false
     }
@@ -127,6 +154,13 @@ test("valid Edge local-layer projection event is consumed as review evidence onl
   assert.equal(evidence.singleWriterProofOnly, true);
   assert.equal(evidence.writesProjectionLog, false);
   assert.equal(evidence.backend, "none");
+  assert.equal(evidence.promotedMaterial, true);
+  assert.equal(evidence.promotionRole, "semantic_continuity_input");
+  assert.equal(evidence.storageRecordPromoted, false);
+  assert.equal(evidence.backendPromoted, false);
+  assert.equal(evidence.writerPolicyKind, "edge_producer_operator_owned_local_layer_participant");
+  assert.equal(evidence.readerPolicyKind, "operator_owned_local_layer_readers_by_explicit_refs");
+  assert.equal(evidence.explicitKeyOrProofRequired, true);
   assertPassiveEvidence(evidence);
 });
 
@@ -208,6 +242,48 @@ test("projection event evidence blocks HTTP or SSH compatibility refs as transpo
 
   assert.equal(evidence.reviewStatus, TESTBED_LOCAL_LAYER_PROJECTION_EVENT_STATUSES.PROJECTION_EVENT_BLOCKED);
   assert.equal(evidence.reasonCodes.includes("projection_event_transport_ref_contains_compat_scaffold"), true);
+  assertPassiveEvidence(evidence);
+});
+
+test("projection event evidence blocks local path source refs for selected promotion input", () => {
+  const event = validProjectionEvent();
+  event.sourceRefs = ["/tmp/edge-status.json"];
+
+  const evidence = build(event);
+
+  assert.equal(evidence.reviewStatus, TESTBED_LOCAL_LAYER_PROJECTION_EVENT_STATUSES.PROJECTION_EVENT_BLOCKED);
+  assert.equal(evidence.reasonCodes.includes("projection_event_source_ref_contains_compat_or_path_seam"), true);
+  assertPassiveEvidence(evidence);
+});
+
+test("projection event evidence requires causal writer and reader posture", () => {
+  const missing = validProjectionEvent();
+  delete missing.causalRefs;
+  delete missing.writerPolicy;
+  delete missing.readerPolicy;
+
+  const incomplete = build(missing);
+
+  assert.equal(incomplete.reviewStatus, TESTBED_LOCAL_LAYER_PROJECTION_EVENT_STATUSES.PROJECTION_EVENT_BLOCKED);
+  assert.equal(incomplete.reasonCodes.includes("projection_event_causal_refs_missing"), true);
+  assert.equal(incomplete.reasonCodes.includes("projection_event_writer_policy_missing_or_unsafe"), true);
+  assert.equal(incomplete.reasonCodes.includes("projection_event_reader_policy_missing_or_unsafe"), true);
+  assertPassiveEvidence(incomplete);
+});
+
+test("projection event evidence blocks promotion posture overclaims", () => {
+  const event = validProjectionEvent();
+  event.promotionPosture.storageRecordPromoted = true;
+  event.promotionPosture.backendPromoted = true;
+  event.readerPolicy.localPathReadSeam = true;
+
+  const evidence = build(event);
+
+  assert.equal(evidence.reviewStatus, TESTBED_LOCAL_LAYER_PROJECTION_EVENT_STATUSES.PROJECTION_EVENT_BLOCKED);
+  assert.equal(evidence.reasonCodes.includes("projection_event_promotion_overclaim"), true);
+  assert.equal(evidence.reasonCodes.includes("projection_event_reader_policy_missing_or_unsafe"), true);
+  assert.equal(evidence.storageRecordPromoted, true);
+  assert.equal(evidence.backendPromoted, true);
   assertPassiveEvidence(evidence);
 });
 

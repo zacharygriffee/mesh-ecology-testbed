@@ -1,6 +1,6 @@
 # Edge Local-Layer Promotion Pressure Plan
 
-Status: reversible pressure plan; no Edge state promotion.
+Status: projection event selected; storage/backend promotion still blocked.
 Owner: `mesh-ecology-testbed`.
 Purpose: define fail-closed review cases for the eventual Edge-local material
 before any backend work, durable state migration, or promotion decision.
@@ -11,17 +11,18 @@ Testbed pressures producer-owned artifacts. It does not run Edge, open Edge
 storage, open Autobase, open Corestore, write continuity records, decide local
 layer readiness, grant authority, or make review status into truth.
 
-Until Spine records an explicit promotion decision, Edge Autobase labs,
-replica views, projection logs, projection-key exchange, causal reviews,
-Platform append-log joins, local JSON exports, and operator-visible statuses
-remain proof pressure, review evidence, candidate artifacts, scaffold material,
-or derived projections.
+Spine has selected `mesh_ecology_local_layer_projection_event` as the first
+semantic continuity input. Edge Autobase labs, replica views, projection logs,
+projection-key exchange, causal reviews, Platform append-log joins, local JSON
+exports, and operator-visible statuses remain proof pressure, review evidence,
+candidate artifacts, scaffold material, or derived projections until separately
+promoted.
 
 ## Candidate Surfaces To Pressure
 
 | Surface | Pressure posture | Promotion posture |
 | --- | --- | --- |
-| Local-layer projection event | semantic continuity candidate | eligible for future promotion discussion |
+| Local-layer projection event | semantic continuity input | selected first promoted material |
 | Projection event log entry | append-only preservation record | possible storage unit, not semantic truth by itself |
 | Projection event replica view | observer-visible replica evidence | not continuity by visibility alone |
 | Projection-key exchange evidence | bounded contact proof | not readiness or replicated continuity |
@@ -51,6 +52,9 @@ Any future promoted-material review should fail closed on these cases:
 - causal review treated as truth
 - Testbed review treated as readiness
 - Platform append-log join treated as deployment authority
+- source refs contain local paths, HTTP, SSH, ports, or local endpoint seams
+- promotion posture promotes storage record, backend, derived view, review
+  status, or replicated state by implication
 
 ## Review Discipline
 
@@ -73,7 +77,7 @@ Testbed should keep extending existing review lanes rather than replacing them:
 
 ## Promotion Readiness Gate
 
-Before Testbed can mark a promoted material reviewable, Spine must name:
+Before Testbed can mark the selected material reviewable, Spine must name:
 
 - promoted artifact kind
 - schema/version
@@ -87,9 +91,10 @@ Before Testbed can mark a promoted material reviewable, Spine must name:
 - non-promoted adjacent materials
 - stop conditions
 
-Without that Spine decision, Testbed should continue to emit review evidence
-only and should reject any fixture or source artifact that claims promoted
-local-layer continuity.
+Without that Spine decision, Testbed should emit review evidence only. With the
+projection-event decision recorded, Testbed should accept only projection
+events that preserve semantic source refs, causal refs, writer policy, reader
+policy, and non-promoted storage/backend posture.
 
 ## Non-Goals
 

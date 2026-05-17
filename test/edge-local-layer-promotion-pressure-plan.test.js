@@ -30,7 +30,8 @@ test("Edge local-layer promotion pressure plan covers required failure cases", (
 
 test("Edge local-layer promotion pressure plan keeps Testbed review-only", () => {
   for (const phrase of [
-    "no Edge state promotion",
+    "projection event selected",
+    "storage/backend promotion still blocked",
     "does not run Edge",
     "open Edge storage",
     "open Autobase",

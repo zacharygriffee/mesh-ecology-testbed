@@ -112,11 +112,12 @@ into failure.
 
 ## Local-Layer Projection Event Review
 
-Testbed also consumes Edge's Spine-shaped local-layer projection event as
-review evidence only. The consumer in
+Testbed consumes Edge's selected Spine-shaped local-layer projection event as
+review evidence for the promoted semantic continuity input. The consumer in
 `src/testbed/local-layer-projection-event-evidence.js` checks that the event
-preserves producer refs, source refs, transport refs, a `sha256-canonical-json`
-payload hash, single-writer proof posture, storage posture, and explicit
+preserves producer refs, semantic source refs, causal refs, writer policy,
+reader policy, transport refs, a `sha256-canonical-json` payload hash,
+single-writer proof posture, storage posture, promotion posture, and explicit
 non-claims.
 
 This review intentionally runs before any Hypercore/Corestore or Autobase
@@ -124,10 +125,16 @@ backend exists. It blocks:
 
 - malformed projection events
 - missing required source refs
+- missing causal refs
+- missing writer or reader policy
 - stale source refs supplied by the reviewer
 - truth, completion, authority, durable-state, or replicated-state claims
 - storage backend overclaims
 - HTTP/SSH/localhost compatibility refs presented as transport proof
+- local path, HTTP, SSH, port, or endpoint refs presented as promoted source
+  refs
+- storage-record, backend, derived-view, review-status, or replicated-state
+  promotion overclaims
 
 The Testbed evidence does not write a projection log, install a storage backend,
 claim local-layer durability, execute Edge, or make the local JSON status export

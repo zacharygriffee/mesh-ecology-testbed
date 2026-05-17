@@ -45,6 +45,22 @@ function validationPosture(event) {
   return isPlainObject(event?.validation) ? event.validation : {};
 }
 
+function promotionPosture(event) {
+  return isPlainObject(event?.promotionPosture) ? event.promotionPosture : {};
+}
+
+function writerPolicy(event) {
+  return isPlainObject(event?.writerPolicy) ? event.writerPolicy : {};
+}
+
+function readerPolicy(event) {
+  return isPlainObject(event?.readerPolicy) ? event.readerPolicy : {};
+}
+
+function refContainsUnsafeSeam(ref) {
+  return /:\/\/|\/|\\|localhost|127\.0\.0\.1|ssh|http/iu.test(ref);
+}
+
 function missingRequiredRefs(eventRefs, requiredRefs) {
   const refSet = new Set(eventRefs);
   return requiredRefs.filter((ref) => !refSet.has(ref));
@@ -70,6 +86,10 @@ function validateProjectionEvent({ projectionEvent, requiredSourceRefs = [], sta
   const storage = storagePosture(projectionEvent);
   const writer = singleWriterProof(projectionEvent);
   const validation = validationPosture(projectionEvent);
+  const promotion = promotionPosture(projectionEvent);
+  const writerPolicyShape = writerPolicy(projectionEvent);
+  const readerPolicyShape = readerPolicy(projectionEvent);
+  const causalRefs = isPlainObject(projectionEvent.causalRefs) ? projectionEvent.causalRefs : {};
   const missingRefs = missingRequiredRefs(sourceRefs, stringArray(requiredSourceRefs));
   const stale = staleRefs(sourceRefs, stringArray(staleSourceRefs));
 
@@ -82,6 +102,11 @@ function validateProjectionEvent({ projectionEvent, requiredSourceRefs = [], sta
   if (!nonEmptyString(projectionEvent.projectionSchema)) reasonCodes.push("projection_event_projection_schema_missing");
   if (!nonEmptyString(projectionEvent.projectionRef)) reasonCodes.push("projection_event_projection_ref_missing");
   if (sourceRefs.length === 0) reasonCodes.push("projection_event_source_refs_missing");
+  if (sourceRefs.some(refContainsUnsafeSeam)) reasonCodes.push("projection_event_source_ref_contains_compat_or_path_seam");
+  if (!isPlainObject(projectionEvent.causalRefs)) reasonCodes.push("projection_event_causal_refs_missing");
+  if (!Array.isArray(causalRefs.branchRefs)) reasonCodes.push("projection_event_branch_refs_missing");
+  if (!Array.isArray(causalRefs.segmentRefs)) reasonCodes.push("projection_event_segment_refs_missing");
+  if (!Array.isArray(causalRefs.happeningRefs)) reasonCodes.push("projection_event_happening_refs_missing");
   if (!nonEmptyString(projectionEvent.payloadHash)) reasonCodes.push("projection_event_payload_hash_missing");
   if (nonEmptyString(projectionEvent.payloadHash) && !SHA256_REF.test(projectionEvent.payloadHash)) reasonCodes.push("projection_event_payload_hash_invalid");
   if (projectionEvent.payloadHashAlgorithm !== EXPECTED_PAYLOAD_HASH_ALGORITHM) reasonCodes.push("projection_event_payload_hash_algorithm_mismatch");
@@ -102,6 +127,31 @@ function validateProjectionEvent({ projectionEvent, requiredSourceRefs = [], sta
 
   if (writer.proofOnly !== true) reasonCodes.push("projection_event_single_writer_proof_missing");
   if (writer.writesProjectionLog === true || writer.backend !== "none") reasonCodes.push("projection_event_storage_backend_overclaim");
+  if (promotion.promotedMaterial !== true ||
+    promotion.promotionRole !== "semantic_continuity_input") {
+    reasonCodes.push("projection_event_promotion_posture_missing");
+  }
+  if (promotion.storageRecordPromoted === true ||
+    promotion.backendPromoted === true ||
+    promotion.derivedViewPromoted === true ||
+    promotion.reviewStatusPromoted === true ||
+    promotion.replicatedLocalLayerContinuityClaimed === true) {
+    reasonCodes.push("projection_event_promotion_overclaim");
+  }
+  if (writerPolicyShape.writerKind !== "edge_producer_operator_owned_local_layer_participant" ||
+    writerPolicyShape.writerRepo !== "mesh-ecology-edge" ||
+    writerPolicyShape.boundedMultiwriterDeferred !== true ||
+    writerPolicyShape.autobaseWriterPolicyPromoted !== false) {
+    reasonCodes.push("projection_event_writer_policy_missing_or_unsafe");
+  }
+  if (readerPolicyShape.readerKind !== "operator_owned_local_layer_readers_by_explicit_refs" ||
+    readerPolicyShape.explicitKeyOrProofRequired !== true ||
+    readerPolicyShape.publicRead !== false ||
+    readerPolicyShape.localPathReadSeam !== false ||
+    readerPolicyShape.httpReadSeam !== false ||
+    readerPolicyShape.sshReadSeam !== false) {
+    reasonCodes.push("projection_event_reader_policy_missing_or_unsafe");
+  }
   if (storage.currentDurability !== "not_durable_state") reasonCodes.push("projection_event_current_durability_overclaim");
   if (storage.currentExportOnly !== true) reasonCodes.push("projection_event_export_only_missing");
   if (storage.intendedDurableLane !== "autobase_compatible_local_layer_projection_log") {
@@ -109,6 +159,9 @@ function validateProjectionEvent({ projectionEvent, requiredSourceRefs = [], sta
   }
   if (validation.localFileTruth === true || validation.durableState === true) {
     reasonCodes.push("projection_event_validation_claims_local_file_or_durable_state");
+  }
+  if (validation.promotedSemanticInput !== true || validation.sourceRefsSemantic !== true) {
+    reasonCodes.push("projection_event_promotion_validation_missing");
   }
 
   if (missingRefs.length > 0) reasonCodes.push("projection_event_required_source_refs_missing");
@@ -120,7 +173,9 @@ function validateProjectionEvent({ projectionEvent, requiredSourceRefs = [], sta
     code.includes("claims") ||
     code.includes("embeds_payload") ||
     code.includes("stale") ||
-    code.includes("compat_scaffold")
+    code.includes("compat_scaffold") ||
+    code.includes("path_seam") ||
+    code.includes("unsafe")
   )) {
     return Object.freeze({
       reviewStatus: TESTBED_LOCAL_LAYER_PROJECTION_EVENT_STATUSES.PROJECTION_EVENT_BLOCKED,
@@ -185,6 +240,13 @@ export function buildTestbedLocalLayerProjectionEventEvidence({
     singleWriterProofOnly: singleWriterProof(projectionEvent).proofOnly === true,
     writesProjectionLog: singleWriterProof(projectionEvent).writesProjectionLog === true,
     backend: nonEmptyString(singleWriterProof(projectionEvent).backend),
+    promotionRole: nonEmptyString(promotionPosture(projectionEvent).promotionRole),
+    promotedMaterial: promotionPosture(projectionEvent).promotedMaterial === true,
+    storageRecordPromoted: promotionPosture(projectionEvent).storageRecordPromoted === true,
+    backendPromoted: promotionPosture(projectionEvent).backendPromoted === true,
+    writerPolicyKind: nonEmptyString(writerPolicy(projectionEvent).writerKind),
+    readerPolicyKind: nonEmptyString(readerPolicy(projectionEvent).readerKind),
+    explicitKeyOrProofRequired: readerPolicy(projectionEvent).explicitKeyOrProofRequired === true,
     reviewOnly: true,
     evidenceOnly: true,
     testbedExecutedProjection: false,
