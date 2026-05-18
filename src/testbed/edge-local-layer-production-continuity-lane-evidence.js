@@ -52,6 +52,9 @@ function validate({ evidenceArtifact }) {
   const backend = isPlainObject(evidenceArtifact.backend) ? evidenceArtifact.backend : {};
   const laneEntry = isPlainObject(evidenceArtifact.laneEntry) ? evidenceArtifact.laneEntry : {};
   const view = isPlainObject(evidenceArtifact.acceptedEventsView) ? evidenceArtifact.acceptedEventsView : {};
+  const readerObservation = isPlainObject(evidenceArtifact.readerObservation) ? evidenceArtifact.readerObservation : {};
+  const readerTransportPosture = isPlainObject(readerObservation.transportPosture) ? readerObservation.transportPosture : {};
+  const readerNonClaims = isPlainObject(readerObservation.nonClaims) ? readerObservation.nonClaims : {};
   const productionPosture = isPlainObject(evidenceArtifact.productionPosture) ? evidenceArtifact.productionPosture : {};
   const causal = isPlainObject(evidenceArtifact.causalInterpretation) ? evidenceArtifact.causalInterpretation : {};
   const boundary = isPlainObject(evidenceArtifact.boundary) ? evidenceArtifact.boundary : {};
@@ -73,7 +76,13 @@ function validate({ evidenceArtifact }) {
     laneEntry.semanticEventRef,
     ...stringArray(laneEntry.sourceRefs),
     view.viewRef,
-    ...stringArray(view.acceptedEventRefs)
+    ...stringArray(view.acceptedEventRefs),
+    readerObservation.observationRef,
+    readerObservation.readerRef,
+    readerObservation.readerDeviceRef,
+    readerObservation.sourceViewKey,
+    readerObservation.observerViewKey,
+    ...stringArray(readerObservation.observedAcceptedEventRefs)
   ].filter(Boolean);
 
   if (evidenceArtifact.artifactKind !== EXPECTED_KIND) reasonCodes.push("edge_local_layer_production_continuity_lane_artifact_kind_mismatch");
@@ -148,6 +157,39 @@ function validate({ evidenceArtifact }) {
     reasonCodes.push("edge_local_layer_production_continuity_lane_view_missing_or_unsafe");
   }
   if (
+    readerObservation.artifactKind !== "edge_local_layer_production_reader_observation" ||
+    readerObservation.schemaVersion !== "edge_local_layer_production_reader_observation.v0" ||
+    readerObservation.observerPath !== "read-only-observer-view-replica-proof" ||
+    readerObservation.realReplicaProof !== true ||
+    !nonEmptyString(readerObservation.observationRef) ||
+    !nonEmptyString(readerObservation.readerRef) ||
+    !nonEmptyString(readerObservation.readerDeviceRef) ||
+    !nonEmptyString(readerObservation.sourceViewKey) ||
+    !nonEmptyString(readerObservation.observerViewKey) ||
+    readerObservation.observedResultCount < 1 ||
+    readerObservation.observedAcceptedEventCount < 1 ||
+    !stringArray(readerObservation.observedAcceptedEventRefs).includes(laneEntry.entryId) ||
+    readerObservation.readOnlyObserverCanReadAllowedView !== true ||
+    readerObservation.observerAppendBlocked !== true ||
+    readerObservation.readOnlyObserverCannotWriteAcceptedContinuity !== true ||
+    readerObservation.replicaVisibilityIsContinuity !== false ||
+    readerObservation.viewOutputIsSourceContinuity !== false ||
+    readerObservation.authorityGranted !== false ||
+    readerTransportPosture.transportKind !== "corestore-protocol-stream" ||
+    readerTransportPosture.readOnlyReplica !== true ||
+    readerTransportPosture.httpSeam !== false ||
+    readerTransportPosture.sshSeam !== false ||
+    readerTransportPosture.localPathIsCanonicalSeam !== false ||
+    readerNonClaims.truthClaimed !== false ||
+    readerNonClaims.authorityGranted !== false ||
+    readerNonClaims.writerGranted !== false ||
+    readerNonClaims.continuityAcceptanceClaimed !== false ||
+    readerNonClaims.sourceContinuityClaimed !== false ||
+    readerNonClaims.readinessClaimed !== false
+  ) {
+    reasonCodes.push("edge_local_layer_production_continuity_lane_reader_observation_missing_or_unsafe");
+  }
+  if (
     productionPosture.productionLanePromoted !== true ||
     productionPosture.productionLocalLayerContinuity !== true ||
     productionPosture.acceptedContinuityInputs < 1 ||
@@ -196,6 +238,7 @@ function validate({ evidenceArtifact }) {
     validation.backendSafe !== true ||
     validation.laneEntrySafe !== true ||
     validation.acceptedEventsViewSafe !== true ||
+    validation.readerObservationSafe !== true ||
     validation.productionPostureSafe !== true ||
     validation.refsSafe !== true ||
     validation.noAuthorityOrTruthOverclaim !== true
@@ -230,6 +273,7 @@ export function buildTestbedEdgeLocalLayerProductionContinuityLaneEvidence({
   const refs = isPlainObject(evidenceArtifact?.refs) ? evidenceArtifact.refs : {};
   const backend = isPlainObject(evidenceArtifact?.backend) ? evidenceArtifact.backend : {};
   const laneEntry = isPlainObject(evidenceArtifact?.laneEntry) ? evidenceArtifact.laneEntry : {};
+  const readerObservation = isPlainObject(evidenceArtifact?.readerObservation) ? evidenceArtifact.readerObservation : {};
   const productionPosture = isPlainObject(evidenceArtifact?.productionPosture) ? evidenceArtifact.productionPosture : {};
 
   return Object.freeze({
@@ -246,6 +290,11 @@ export function buildTestbedEdgeLocalLayerProductionContinuityLaneEvidence({
     laneEntryRef: nonEmptyString(refs.laneEntryRef),
     semanticEventRef: nonEmptyString(refs.semanticEventRef),
     eventKind: nonEmptyString(laneEntry.semanticEventEventKind),
+    readerObservationRef: nonEmptyString(readerObservation.observationRef),
+    readOnlyObserverReplicaProof: readerObservation.realReplicaProof === true,
+    readOnlyObserverCanReadAllowedView: readerObservation.readOnlyObserverCanReadAllowedView === true,
+    readOnlyObserverCannotWriteAcceptedContinuity: readerObservation.readOnlyObserverCannotWriteAcceptedContinuity === true,
+    readerObservationIsContinuityAcceptance: false,
     backendKind: nonEmptyString(backend.backendKind),
     namespaceRef: nonEmptyString(backend.namespaceRef),
     laneRef: nonEmptyString(backend.laneRef),

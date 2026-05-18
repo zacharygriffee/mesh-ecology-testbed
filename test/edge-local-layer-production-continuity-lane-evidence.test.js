@@ -94,6 +94,45 @@ function causalEvidence(overrides = {}) {
       authorityGranted: false,
       sourceContinuityClaimed: false
     },
+    readerObservation: {
+      artifactKind: "edge_local_layer_production_reader_observation",
+      schemaVersion: "edge_local_layer_production_reader_observation.v0",
+      observationRef: "edge-local-layer-production-reader-observation:9999999999999999",
+      observerPath: "read-only-observer-view-replica-proof",
+      realReplicaProof: true,
+      readerRef: "local-layer-reader:operator-laptop",
+      readerDeviceRef: "edge-device:operator-laptop",
+      sourceViewKey: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      observerViewKey: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      observedResultCount: 1,
+      observedAcceptedEventCount: 1,
+      observedAcceptedEventRefs: [laneEntry.entryId],
+      observedRejectedDiagnosticCount: 0,
+      readOnlyObserverCanReadAllowedView: true,
+      observerAppendBlocked: true,
+      readOnlyObserverCannotWriteAcceptedContinuity: true,
+      replicaVisibilityIsContinuity: false,
+      viewOutputIsSourceContinuity: false,
+      authorityGranted: false,
+      transportPosture: {
+        transportKind: "corestore-protocol-stream",
+        proofScope: "in_process_second_device_shape",
+        readOnlyReplica: true,
+        liveDiscoveryRequired: false,
+        hyperswarmRequired: false,
+        httpSeam: false,
+        sshSeam: false,
+        localPathIsCanonicalSeam: false
+      },
+      nonClaims: {
+        truthClaimed: false,
+        authorityGranted: false,
+        writerGranted: false,
+        continuityAcceptanceClaimed: false,
+        sourceContinuityClaimed: false,
+        readinessClaimed: false
+      }
+    },
     productionPosture: {
       productionLanePromoted: true,
       productionLocalLayerContinuity: true,
@@ -137,6 +176,7 @@ function causalEvidence(overrides = {}) {
       backendSafe: true,
       laneEntrySafe: true,
       acceptedEventsViewSafe: true,
+      readerObservationSafe: true,
       productionPostureSafe: true,
       refsSafe: true,
       noAuthorityOrTruthOverclaim: true
@@ -159,6 +199,10 @@ test("safe causal production lane evidence is visible as Testbed pressure only",
   assert.equal(review.reviewStatus, TESTBED_EDGE_LOCAL_LAYER_PRODUCTION_CONTINUITY_LANE_STATUSES.VISIBLE);
   assert.equal(review.sourceResultRef, "edge-local-layer-production-continuity-lane:eeeeeeeeeeeeeeeeeeeeeeee");
   assert.equal(review.eventKind, "repo_work_packet_continuity_event");
+  assert.equal(review.readOnlyObserverReplicaProof, true);
+  assert.equal(review.readOnlyObserverCanReadAllowedView, true);
+  assert.equal(review.readOnlyObserverCannotWriteAcceptedContinuity, true);
+  assert.equal(review.readerObservationIsContinuityAcceptance, false);
   assert.equal(review.productionLanePromoted, true);
   assert.equal(review.testbedReviewIsReadiness, false);
   assert.equal(review.causalReviewIsTruth, false);
@@ -222,6 +266,51 @@ test("Testbed blocks local path or HTTP seams and view-as-source claims", () => 
   assert.equal(review.reviewStatus, TESTBED_EDGE_LOCAL_LAYER_PRODUCTION_CONTINUITY_LANE_STATUSES.BLOCKED);
   assert.equal(review.reasonCodes.includes("edge_local_layer_production_continuity_lane_ref_contains_compat_or_path_seam"), true);
   assert.equal(review.reasonCodes.includes("edge_local_layer_production_continuity_lane_view_missing_or_unsafe"), true);
+});
+
+test("Testbed blocks unsafe read-only observer replica proof", () => {
+  const base = causalEvidence();
+  const review = buildTestbedEdgeLocalLayerProductionContinuityLaneEvidence({
+    evidenceArtifact: {
+      ...base,
+      readerObservation: {
+        ...base.readerObservation,
+        observerAppendBlocked: false,
+        readOnlyObserverCannotWriteAcceptedContinuity: false,
+        authorityGranted: true
+      },
+      validation: {
+        ...base.validation,
+        readerObservationSafe: false
+      }
+    },
+    createdAt: CREATED_AT
+  });
+
+  assert.equal(review.reviewStatus, TESTBED_EDGE_LOCAL_LAYER_PRODUCTION_CONTINUITY_LANE_STATUSES.BLOCKED);
+  assert.equal(review.reasonCodes.includes("edge_local_layer_production_continuity_lane_reader_observation_missing_or_unsafe"), true);
+  assert.equal(review.reasonCodes.includes("edge_local_layer_production_continuity_lane_validation_not_ready"), true);
+});
+
+test("Testbed blocks reader observation claiming replica visibility as continuity", () => {
+  const base = causalEvidence();
+  const review = buildTestbedEdgeLocalLayerProductionContinuityLaneEvidence({
+    evidenceArtifact: {
+      ...base,
+      readerObservation: {
+        ...base.readerObservation,
+        replicaVisibilityIsContinuity: true,
+        nonClaims: {
+          ...base.readerObservation.nonClaims,
+          continuityAcceptanceClaimed: true
+        }
+      }
+    },
+    createdAt: CREATED_AT
+  });
+
+  assert.equal(review.reviewStatus, TESTBED_EDGE_LOCAL_LAYER_PRODUCTION_CONTINUITY_LANE_STATUSES.BLOCKED);
+  assert.equal(review.reasonCodes.includes("edge_local_layer_production_continuity_lane_reader_observation_missing_or_unsafe"), true);
 });
 
 test("Testbed malformed production lane evidence fails closed", () => {
