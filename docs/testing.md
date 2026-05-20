@@ -372,6 +372,22 @@ continuity records, accepting canonical history, claiming durable or replicated
 state, granting runtime authority, treating append success as acceptance, or
 allowing HTTP/SSH/local path refs as seams.
 
+## Edge Validated Resource-Ref Result Evidence Review
+
+Testbed consumes causal-substrate's
+`causal-substrate/edge-validated-resource-ref-result-evidence/v1` output as
+review-only pressure for Edge's pending resource-ref import path. The consumer
+in `src/testbed/edge-validated-resource-ref-result-evidence.js` requires the
+Edge validation ref, Bytes external resource pointer ref, Bytes resolution
+receipt ref, handoff/work-packet refs, and the optional operator-mediated
+result evidence ref.
+
+This review accepts the chain only as external evidence posture. It blocks
+payload fetch/parse claims, success or approval inference, result-receipt
+continuity claims, Bytes authority, causal truth, Testbed readiness, and
+HTTP/SSH/local path seams. Testbed does not call Edge or Bytes and does not
+create result evidence.
+
 ## Edge Local-Layer Promotion Pressure Plan
 
 The reversible pressure plan in
