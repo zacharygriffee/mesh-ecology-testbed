@@ -43,7 +43,13 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "packs_accepted_result_treated_as_application_merge",
   "packs_accepted_result_treated_as_reported_truth",
   "packs_accepted_result_treated_as_platform_mutation",
-  "packs_accepted_result_treated_as_storage_write_authority"
+  "packs_accepted_result_treated_as_storage_write_authority",
+  "platform_dispatch_candidate_treated_as_dispatch_approval",
+  "platform_dispatch_candidate_treated_as_host_local_activation",
+  "platform_dispatch_candidate_treated_as_platform_mutation",
+  "platform_dispatch_candidate_treated_as_layer_continuity_truth",
+  "platform_dispatch_candidate_treated_as_storage_write_authority",
+  "platform_dispatch_candidate_treated_as_deployment_ownership"
 ]);
 
 const REQUIRED_CASES = Object.freeze([
@@ -256,6 +262,42 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "packs",
     attemptedOverclaim: "Packs accepted result evidence treated as storage write or authority",
     reasonCode: "blocked_case:packs_accepted_result_treated_as_storage_write_authority"
+  }),
+  Object.freeze({
+    caseId: "platform_dispatch_candidate_treated_as_dispatch_approval",
+    sourceFamily: "platform",
+    attemptedOverclaim: "Platform dispatch candidate treated as dispatch approval",
+    reasonCode: "blocked_case:platform_dispatch_candidate_treated_as_dispatch_approval"
+  }),
+  Object.freeze({
+    caseId: "platform_dispatch_candidate_treated_as_host_local_activation",
+    sourceFamily: "platform",
+    attemptedOverclaim: "Platform dispatch candidate treated as host-local activation",
+    reasonCode: "blocked_case:platform_dispatch_candidate_treated_as_host_local_activation"
+  }),
+  Object.freeze({
+    caseId: "platform_dispatch_candidate_treated_as_platform_mutation",
+    sourceFamily: "platform",
+    attemptedOverclaim: "Platform dispatch candidate treated as Platform mutation",
+    reasonCode: "blocked_case:platform_dispatch_candidate_treated_as_platform_mutation"
+  }),
+  Object.freeze({
+    caseId: "platform_dispatch_candidate_treated_as_layer_continuity_truth",
+    sourceFamily: "platform",
+    attemptedOverclaim: "Platform dispatch candidate treated as Layer continuity or truth",
+    reasonCode: "blocked_case:platform_dispatch_candidate_treated_as_layer_continuity_truth"
+  }),
+  Object.freeze({
+    caseId: "platform_dispatch_candidate_treated_as_storage_write_authority",
+    sourceFamily: "platform",
+    attemptedOverclaim: "Platform dispatch candidate treated as storage write or authority",
+    reasonCode: "blocked_case:platform_dispatch_candidate_treated_as_storage_write_authority"
+  }),
+  Object.freeze({
+    caseId: "platform_dispatch_candidate_treated_as_deployment_ownership",
+    sourceFamily: "platform",
+    attemptedOverclaim: "Platform dispatch candidate treated as deployment ownership",
+    reasonCode: "blocked_case:platform_dispatch_candidate_treated_as_deployment_ownership"
   })
 ]);
 
