@@ -105,6 +105,31 @@ test("Lane D report never creates authority, executes adjacent behavior, or writ
   assert.equal(report.repoAgentReportIsTruth, false);
 });
 
+test("Lane D keeps Studio dispatch and Virtualia review boundaries fail-closed", () => {
+  const report = build();
+  const packet = packetFixture();
+  const studioDispatchCase = packet.cases.find((entry) =>
+    entry.caseId === "studio_dispatch_treated_as_result_acceptance_application"
+  );
+  const virtualiaReviewCase = packet.cases.find((entry) =>
+    entry.caseId === "virtualia_review_treated_as_queue_action_or_authority"
+  );
+
+  assert.equal(report.blockedCaseIds.includes("studio_dispatch_treated_as_result_acceptance_application"), true);
+  assert.equal(report.blockedCaseIds.includes("virtualia_review_treated_as_queue_action_or_authority"), true);
+  assert.equal(studioDispatchCase.stopStatus, "blocked");
+  assert.equal(studioDispatchCase.admitted, false);
+  assert.equal(studioDispatchCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(studioDispatchCase.boundary.mutatesSourceRepo, false);
+  assert.equal(studioDispatchCase.boundary.claimsTruth, false);
+  assert.equal(virtualiaReviewCase.stopStatus, "blocked");
+  assert.equal(virtualiaReviewCase.admitted, false);
+  assert.equal(virtualiaReviewCase.boundary.callsVirtualia, false);
+  assert.equal(virtualiaReviewCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(virtualiaReviewCase.boundary.createsAuthority, false);
+  assert.equal(virtualiaReviewCase.boundary.claimsSourceSemantics, false);
+});
+
 test("Lane D fails closed when a required blocked case is missing", () => {
   const packet = packetFixture({
     cases: packetFixture().cases.filter((pressureCase) =>

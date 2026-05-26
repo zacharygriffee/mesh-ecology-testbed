@@ -19,7 +19,9 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "packs_verification_treated_as_accepted_layer_state",
   "platform_receipt_treated_as_accepted_continuity",
   "repo_agent_reported_commit_test_treated_as_truth",
-  "storage_index_view_treated_as_truth"
+  "storage_index_view_treated_as_truth",
+  "studio_dispatch_treated_as_result_acceptance_application",
+  "virtualia_review_treated_as_queue_action_or_authority"
 ]);
 
 const REQUIRED_CASES = Object.freeze([
@@ -88,6 +90,18 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "testbed",
     attemptedOverclaim: "Storage, index, or view treated as truth",
     reasonCode: "blocked_case:storage_index_view_treated_as_truth"
+  }),
+  Object.freeze({
+    caseId: "studio_dispatch_treated_as_result_acceptance_application",
+    sourceFamily: "studio",
+    attemptedOverclaim: "Studio dispatch observation treated as result acceptance, application, merge, or work success",
+    reasonCode: "blocked_case:studio_dispatch_treated_as_result_acceptance_application"
+  }),
+  Object.freeze({
+    caseId: "virtualia_review_treated_as_queue_action_or_authority",
+    sourceFamily: "virtualia",
+    attemptedOverclaim: "Virtualia pressure review treated as queue action, authority, or repo-agent dispatch approval",
+    reasonCode: "blocked_case:virtualia_review_treated_as_queue_action_or_authority"
   })
 ]);
 
