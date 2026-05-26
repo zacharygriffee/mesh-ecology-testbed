@@ -59,7 +59,11 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "candidate_export_treated_as_dispatch_decision_request_creation",
   "copy_ready_text_treated_as_authority",
   "repo_agent_prompt_treated_as_repo_mutation_approval",
-  "operator_decision_text_treated_as_decision_capture"
+  "operator_decision_text_treated_as_decision_capture",
+  "export_result_intake_candidate_treated_as_result_intake",
+  "export_result_intake_candidate_treated_as_operator_decision_capture",
+  "export_result_intake_candidate_treated_as_acceptance_truth",
+  "export_result_intake_candidate_treated_as_execution_or_mutation"
 ]);
 
 const REQUIRED_CASES = Object.freeze([
@@ -368,6 +372,30 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "Operator decision request text candidate treated as captured operator decision",
     reasonCode: "blocked_case:operator_decision_text_treated_as_decision_capture"
+  }),
+  Object.freeze({
+    caseId: "export_result_intake_candidate_treated_as_result_intake",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Export result intake candidate treated as performed result intake",
+    reasonCode: "blocked_case:export_result_intake_candidate_treated_as_result_intake"
+  }),
+  Object.freeze({
+    caseId: "export_result_intake_candidate_treated_as_operator_decision_capture",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Export result intake candidate treated as operator decision capture or approval",
+    reasonCode: "blocked_case:export_result_intake_candidate_treated_as_operator_decision_capture"
+  }),
+  Object.freeze({
+    caseId: "export_result_intake_candidate_treated_as_acceptance_truth",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Export result intake candidate treated as result acceptance or reported truth",
+    reasonCode: "blocked_case:export_result_intake_candidate_treated_as_acceptance_truth"
+  }),
+  Object.freeze({
+    caseId: "export_result_intake_candidate_treated_as_execution_or_mutation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Export result intake candidate treated as execution, repo mutation, Layer mutation, or storage write",
+    reasonCode: "blocked_case:export_result_intake_candidate_treated_as_execution_or_mutation"
   })
 ]);
 

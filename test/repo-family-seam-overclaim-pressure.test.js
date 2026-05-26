@@ -523,6 +523,48 @@ test("Lane D keeps candidate export and copy-ready text boundaries fail-closed",
   assert.equal(operatorDecisionTextCase.boundary.executesBehavior, false);
 });
 
+test("Lane D keeps export result intake candidate boundaries fail-closed", () => {
+  const report = build();
+  const packet = packetFixture();
+  const resultIntakeCase = packet.cases.find((entry) =>
+    entry.caseId === "export_result_intake_candidate_treated_as_result_intake"
+  );
+  const decisionCaptureCase = packet.cases.find((entry) =>
+    entry.caseId === "export_result_intake_candidate_treated_as_operator_decision_capture"
+  );
+  const acceptanceTruthCase = packet.cases.find((entry) =>
+    entry.caseId === "export_result_intake_candidate_treated_as_acceptance_truth"
+  );
+  const executionMutationCase = packet.cases.find((entry) =>
+    entry.caseId === "export_result_intake_candidate_treated_as_execution_or_mutation"
+  );
+
+  assert.equal(report.blockedCaseIds.includes("export_result_intake_candidate_treated_as_result_intake"), true);
+  assert.equal(
+    report.blockedCaseIds.includes("export_result_intake_candidate_treated_as_operator_decision_capture"),
+    true
+  );
+  assert.equal(report.blockedCaseIds.includes("export_result_intake_candidate_treated_as_acceptance_truth"), true);
+  assert.equal(report.blockedCaseIds.includes("export_result_intake_candidate_treated_as_execution_or_mutation"), true);
+  assert.equal(resultIntakeCase.stopStatus, "blocked");
+  assert.equal(resultIntakeCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(resultIntakeCase.boundary.executesBehavior, false);
+  assert.equal(resultIntakeCase.boundary.createsAuthority, false);
+  assert.equal(decisionCaptureCase.stopStatus, "blocked");
+  assert.equal(decisionCaptureCase.boundary.callsEdge, false);
+  assert.equal(decisionCaptureCase.boundary.createsAuthority, false);
+  assert.equal(decisionCaptureCase.boundary.claimsTruth, false);
+  assert.equal(acceptanceTruthCase.stopStatus, "blocked");
+  assert.equal(acceptanceTruthCase.boundary.claimsTruth, false);
+  assert.equal(acceptanceTruthCase.boundary.acceptsContinuity, false);
+  assert.equal(acceptanceTruthCase.boundary.createsAuthority, false);
+  assert.equal(executionMutationCase.stopStatus, "blocked");
+  assert.equal(executionMutationCase.boundary.executesBehavior, false);
+  assert.equal(executionMutationCase.boundary.mutatesSourceRepo, false);
+  assert.equal(executionMutationCase.boundary.mutatesLayer, false);
+  assert.equal(executionMutationCase.boundary.writesProductionStorage, false);
+});
+
 test("Lane D fails closed when a required blocked case is missing", () => {
   const packet = packetFixture({
     cases: packetFixture().cases.filter((pressureCase) =>
