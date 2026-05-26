@@ -49,7 +49,12 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "platform_dispatch_candidate_treated_as_platform_mutation",
   "platform_dispatch_candidate_treated_as_layer_continuity_truth",
   "platform_dispatch_candidate_treated_as_storage_write_authority",
-  "platform_dispatch_candidate_treated_as_deployment_ownership"
+  "platform_dispatch_candidate_treated_as_deployment_ownership",
+  "attention_queue_projection_treated_as_scheduler",
+  "work_cell_candidate_treated_as_work_cell_creation",
+  "work_cell_creation_treated_as_execution",
+  "dispatch_decision_request_treated_as_dispatch_approval",
+  "tui_visibility_treated_as_authority"
 ]);
 
 const REQUIRED_CASES = Object.freeze([
@@ -298,6 +303,36 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "platform",
     attemptedOverclaim: "Platform dispatch candidate treated as deployment ownership",
     reasonCode: "blocked_case:platform_dispatch_candidate_treated_as_deployment_ownership"
+  }),
+  Object.freeze({
+    caseId: "attention_queue_projection_treated_as_scheduler",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Safe-continuation attention queue projection treated as scheduler, runner, dispatch queue, or execution queue",
+    reasonCode: "blocked_case:attention_queue_projection_treated_as_scheduler"
+  }),
+  Object.freeze({
+    caseId: "work_cell_candidate_treated_as_work_cell_creation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Review-only work-cell candidate treated as created work cell, scheduled work, or repo-agent assignment",
+    reasonCode: "blocked_case:work_cell_candidate_treated_as_work_cell_creation"
+  }),
+  Object.freeze({
+    caseId: "work_cell_creation_treated_as_execution",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Review-only work-cell creation treated as execution, repo mutation, or result acceptance",
+    reasonCode: "blocked_case:work_cell_creation_treated_as_execution"
+  }),
+  Object.freeze({
+    caseId: "dispatch_decision_request_treated_as_dispatch_approval",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Dispatch-decision request candidate treated as dispatch approval, Platform call, or host-local consequence",
+    reasonCode: "blocked_case:dispatch_decision_request_treated_as_dispatch_approval"
+  }),
+  Object.freeze({
+    caseId: "tui_visibility_treated_as_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI visibility treated as operator decision, approval, authority, or execution readiness",
+    reasonCode: "blocked_case:tui_visibility_treated_as_authority"
   })
 ]);
 
