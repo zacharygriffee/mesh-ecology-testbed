@@ -54,7 +54,12 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "work_cell_candidate_treated_as_work_cell_creation",
   "work_cell_creation_treated_as_execution",
   "dispatch_decision_request_treated_as_dispatch_approval",
-  "tui_visibility_treated_as_authority"
+  "tui_visibility_treated_as_authority",
+  "candidate_export_treated_as_work_cell_creation",
+  "candidate_export_treated_as_dispatch_decision_request_creation",
+  "copy_ready_text_treated_as_authority",
+  "repo_agent_prompt_treated_as_repo_mutation_approval",
+  "operator_decision_text_treated_as_decision_capture"
 ]);
 
 const REQUIRED_CASES = Object.freeze([
@@ -333,6 +338,36 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "TUI visibility treated as operator decision, approval, authority, or execution readiness",
     reasonCode: "blocked_case:tui_visibility_treated_as_authority"
+  }),
+  Object.freeze({
+    caseId: "candidate_export_treated_as_work_cell_creation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Candidate export view treated as review-only work-cell creation",
+    reasonCode: "blocked_case:candidate_export_treated_as_work_cell_creation"
+  }),
+  Object.freeze({
+    caseId: "candidate_export_treated_as_dispatch_decision_request_creation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Candidate export view treated as dispatch-decision-request creation",
+    reasonCode: "blocked_case:candidate_export_treated_as_dispatch_decision_request_creation"
+  }),
+  Object.freeze({
+    caseId: "copy_ready_text_treated_as_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Copy-ready handoff text treated as authority, approval, or readiness conversion",
+    reasonCode: "blocked_case:copy_ready_text_treated_as_authority"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_prompt_treated_as_repo_mutation_approval",
+    sourceFamily: "repo_agent",
+    attemptedOverclaim: "Repo-agent prompt candidate treated as repo mutation approval",
+    reasonCode: "blocked_case:repo_agent_prompt_treated_as_repo_mutation_approval"
+  }),
+  Object.freeze({
+    caseId: "operator_decision_text_treated_as_decision_capture",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Operator decision request text candidate treated as captured operator decision",
+    reasonCode: "blocked_case:operator_decision_text_treated_as_decision_capture"
   })
 ]);
 

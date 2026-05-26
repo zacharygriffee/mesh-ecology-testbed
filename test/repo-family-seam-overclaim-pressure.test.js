@@ -474,6 +474,55 @@ test("Lane D keeps operator-burden visibility and candidate boundaries fail-clos
   assert.equal(tuiVisibilityCase.boundary.claimsTruth, false);
 });
 
+test("Lane D keeps candidate export and copy-ready text boundaries fail-closed", () => {
+  const report = build();
+  const packet = packetFixture();
+  const candidateExportWorkCellCase = packet.cases.find((entry) =>
+    entry.caseId === "candidate_export_treated_as_work_cell_creation"
+  );
+  const candidateExportDispatchRequestCase = packet.cases.find((entry) =>
+    entry.caseId === "candidate_export_treated_as_dispatch_decision_request_creation"
+  );
+  const copyReadyAuthorityCase = packet.cases.find((entry) =>
+    entry.caseId === "copy_ready_text_treated_as_authority"
+  );
+  const repoAgentPromptCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_prompt_treated_as_repo_mutation_approval"
+  );
+  const operatorDecisionTextCase = packet.cases.find((entry) =>
+    entry.caseId === "operator_decision_text_treated_as_decision_capture"
+  );
+
+  assert.equal(report.blockedCaseIds.includes("candidate_export_treated_as_work_cell_creation"), true);
+  assert.equal(
+    report.blockedCaseIds.includes("candidate_export_treated_as_dispatch_decision_request_creation"),
+    true
+  );
+  assert.equal(report.blockedCaseIds.includes("copy_ready_text_treated_as_authority"), true);
+  assert.equal(report.blockedCaseIds.includes("repo_agent_prompt_treated_as_repo_mutation_approval"), true);
+  assert.equal(report.blockedCaseIds.includes("operator_decision_text_treated_as_decision_capture"), true);
+  assert.equal(candidateExportWorkCellCase.stopStatus, "blocked");
+  assert.equal(candidateExportWorkCellCase.boundary.executesBehavior, false);
+  assert.equal(candidateExportWorkCellCase.boundary.mutatesSourceRepo, false);
+  assert.equal(candidateExportWorkCellCase.boundary.createsAuthority, false);
+  assert.equal(candidateExportDispatchRequestCase.stopStatus, "blocked");
+  assert.equal(candidateExportDispatchRequestCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(candidateExportDispatchRequestCase.boundary.callsPlatform, false);
+  assert.equal(candidateExportDispatchRequestCase.boundary.createsAuthority, false);
+  assert.equal(copyReadyAuthorityCase.stopStatus, "blocked");
+  assert.equal(copyReadyAuthorityCase.boundary.createsAuthority, false);
+  assert.equal(copyReadyAuthorityCase.boundary.claimsTruth, false);
+  assert.equal(copyReadyAuthorityCase.boundary.acceptsContinuity, false);
+  assert.equal(repoAgentPromptCase.stopStatus, "blocked");
+  assert.equal(repoAgentPromptCase.boundary.mutatesSourceRepo, false);
+  assert.equal(repoAgentPromptCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(repoAgentPromptCase.boundary.createsAuthority, false);
+  assert.equal(operatorDecisionTextCase.stopStatus, "blocked");
+  assert.equal(operatorDecisionTextCase.boundary.callsEdge, false);
+  assert.equal(operatorDecisionTextCase.boundary.createsAuthority, false);
+  assert.equal(operatorDecisionTextCase.boundary.executesBehavior, false);
+});
+
 test("Lane D fails closed when a required blocked case is missing", () => {
   const packet = packetFixture({
     cases: packetFixture().cases.filter((pressureCase) =>
