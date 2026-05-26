@@ -31,7 +31,12 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "result_intake_visibility_treated_as_authority_admission_continuity",
   "result_intake_edge_review_treated_as_authority",
   "bytes_result_acceptance_candidate_treated_as_acceptance_or_payload_validity",
-  "packs_result_acceptance_candidate_treated_as_acceptance_or_accepted_layer_state"
+  "packs_result_acceptance_candidate_treated_as_acceptance_or_accepted_layer_state",
+  "bytes_accepted_result_treated_as_payload_validity",
+  "bytes_accepted_result_treated_as_payload_fetch_materialization",
+  "bytes_accepted_result_treated_as_application_merge",
+  "bytes_accepted_result_treated_as_layer_truth_continuity",
+  "bytes_accepted_result_treated_as_storage_write_authority"
 ]);
 
 const REQUIRED_CASES = Object.freeze([
@@ -172,6 +177,36 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "packs",
     attemptedOverclaim: "Packs result-acceptance candidate treated as acceptance, accepted Layer state, runtime activation, or deployment authority",
     reasonCode: "blocked_case:packs_result_acceptance_candidate_treated_as_acceptance_or_accepted_layer_state"
+  }),
+  Object.freeze({
+    caseId: "bytes_accepted_result_treated_as_payload_validity",
+    sourceFamily: "bytes",
+    attemptedOverclaim: "Bytes accepted result evidence treated as payload validity",
+    reasonCode: "blocked_case:bytes_accepted_result_treated_as_payload_validity"
+  }),
+  Object.freeze({
+    caseId: "bytes_accepted_result_treated_as_payload_fetch_materialization",
+    sourceFamily: "bytes",
+    attemptedOverclaim: "Bytes accepted result evidence treated as payload fetch or materialization",
+    reasonCode: "blocked_case:bytes_accepted_result_treated_as_payload_fetch_materialization"
+  }),
+  Object.freeze({
+    caseId: "bytes_accepted_result_treated_as_application_merge",
+    sourceFamily: "bytes",
+    attemptedOverclaim: "Bytes accepted result evidence treated as result application or merge",
+    reasonCode: "blocked_case:bytes_accepted_result_treated_as_application_merge"
+  }),
+  Object.freeze({
+    caseId: "bytes_accepted_result_treated_as_layer_truth_continuity",
+    sourceFamily: "bytes",
+    attemptedOverclaim: "Bytes accepted result evidence treated as Layer truth or continuity",
+    reasonCode: "blocked_case:bytes_accepted_result_treated_as_layer_truth_continuity"
+  }),
+  Object.freeze({
+    caseId: "bytes_accepted_result_treated_as_storage_write_authority",
+    sourceFamily: "bytes",
+    attemptedOverclaim: "Bytes accepted result evidence treated as storage write or authority",
+    reasonCode: "blocked_case:bytes_accepted_result_treated_as_storage_write_authority"
   })
 ]);
 

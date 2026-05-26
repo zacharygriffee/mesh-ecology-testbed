@@ -260,6 +260,58 @@ test("Lane D keeps Bytes/Packs result-acceptance candidate boundaries fail-close
   assert.equal(packsAcceptanceCandidateCase.boundary.createsAuthority, false);
 });
 
+test("Lane D keeps Bytes accepted-result evidence boundaries fail-closed", () => {
+  const report = build();
+  const packet = packetFixture();
+  const payloadValidityCase = packet.cases.find((entry) =>
+    entry.caseId === "bytes_accepted_result_treated_as_payload_validity"
+  );
+  const payloadFetchCase = packet.cases.find((entry) =>
+    entry.caseId === "bytes_accepted_result_treated_as_payload_fetch_materialization"
+  );
+  const applicationMergeCase = packet.cases.find((entry) =>
+    entry.caseId === "bytes_accepted_result_treated_as_application_merge"
+  );
+  const layerTruthCase = packet.cases.find((entry) =>
+    entry.caseId === "bytes_accepted_result_treated_as_layer_truth_continuity"
+  );
+  const storageAuthorityCase = packet.cases.find((entry) =>
+    entry.caseId === "bytes_accepted_result_treated_as_storage_write_authority"
+  );
+
+  assert.equal(report.blockedCaseIds.includes("bytes_accepted_result_treated_as_payload_validity"), true);
+  assert.equal(
+    report.blockedCaseIds.includes("bytes_accepted_result_treated_as_payload_fetch_materialization"),
+    true
+  );
+  assert.equal(report.blockedCaseIds.includes("bytes_accepted_result_treated_as_application_merge"), true);
+  assert.equal(report.blockedCaseIds.includes("bytes_accepted_result_treated_as_layer_truth_continuity"), true);
+  assert.equal(report.blockedCaseIds.includes("bytes_accepted_result_treated_as_storage_write_authority"), true);
+  assert.equal(payloadValidityCase.stopStatus, "blocked");
+  assert.equal(payloadValidityCase.admitted, false);
+  assert.equal(payloadValidityCase.boundary.callsBytes, false);
+  assert.equal(payloadValidityCase.boundary.claimsPayloadValidity, false);
+  assert.equal(payloadFetchCase.stopStatus, "blocked");
+  assert.equal(payloadFetchCase.admitted, false);
+  assert.equal(payloadFetchCase.boundary.callsBytes, false);
+  assert.equal(payloadFetchCase.boundary.executesBehavior, false);
+  assert.equal(payloadFetchCase.boundary.mutatesSourceRepo, false);
+  assert.equal(applicationMergeCase.stopStatus, "blocked");
+  assert.equal(applicationMergeCase.admitted, false);
+  assert.equal(applicationMergeCase.boundary.executesBehavior, false);
+  assert.equal(applicationMergeCase.boundary.mutatesSourceRepo, false);
+  assert.equal(applicationMergeCase.boundary.claimsTruth, false);
+  assert.equal(layerTruthCase.stopStatus, "blocked");
+  assert.equal(layerTruthCase.admitted, false);
+  assert.equal(layerTruthCase.boundary.mutatesLayer, false);
+  assert.equal(layerTruthCase.boundary.acceptsContinuity, false);
+  assert.equal(layerTruthCase.boundary.claimsTruth, false);
+  assert.equal(storageAuthorityCase.stopStatus, "blocked");
+  assert.equal(storageAuthorityCase.admitted, false);
+  assert.equal(storageAuthorityCase.boundary.writesProductionStorage, false);
+  assert.equal(storageAuthorityCase.boundary.createsAuthority, false);
+});
+
 test("Lane D fails closed when a required blocked case is missing", () => {
   const packet = packetFixture({
     cases: packetFixture().cases.filter((pressureCase) =>
