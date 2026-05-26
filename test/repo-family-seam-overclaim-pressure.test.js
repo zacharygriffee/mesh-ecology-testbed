@@ -167,6 +167,65 @@ test("Lane D keeps Bytes/Packs dispatch and Platform queue boundaries fail-close
   assert.equal(platformQueueCase.boundary.createsAuthority, false);
 });
 
+test("Lane D keeps Bytes/Packs result-intake evidence boundaries fail-closed", () => {
+  const report = build();
+  const packet = packetFixture();
+  const bytesResultIntakeCase = packet.cases.find((entry) =>
+    entry.caseId === "bytes_result_intake_treated_as_payload_validity_or_acceptance"
+  );
+  const packsResultIntakeCase = packet.cases.find((entry) =>
+    entry.caseId === "packs_result_intake_treated_as_accepted_layer_state_or_acceptance"
+  );
+  const reportedRefsCase = packet.cases.find((entry) =>
+    entry.caseId === "result_intake_reported_refs_treated_as_truth"
+  );
+  const visibilityCase = packet.cases.find((entry) =>
+    entry.caseId === "result_intake_visibility_treated_as_authority_admission_continuity"
+  );
+  const edgeReviewCase = packet.cases.find((entry) =>
+    entry.caseId === "result_intake_edge_review_treated_as_authority"
+  );
+
+  assert.equal(
+    report.blockedCaseIds.includes("bytes_result_intake_treated_as_payload_validity_or_acceptance"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("packs_result_intake_treated_as_accepted_layer_state_or_acceptance"),
+    true
+  );
+  assert.equal(report.blockedCaseIds.includes("result_intake_reported_refs_treated_as_truth"), true);
+  assert.equal(
+    report.blockedCaseIds.includes("result_intake_visibility_treated_as_authority_admission_continuity"),
+    true
+  );
+  assert.equal(report.blockedCaseIds.includes("result_intake_edge_review_treated_as_authority"), true);
+  assert.equal(bytesResultIntakeCase.stopStatus, "blocked");
+  assert.equal(bytesResultIntakeCase.admitted, false);
+  assert.equal(bytesResultIntakeCase.boundary.callsBytes, false);
+  assert.equal(bytesResultIntakeCase.boundary.claimsPayloadValidity, false);
+  assert.equal(bytesResultIntakeCase.boundary.claimsTruth, false);
+  assert.equal(bytesResultIntakeCase.boundary.mutatesSourceRepo, false);
+  assert.equal(packsResultIntakeCase.stopStatus, "blocked");
+  assert.equal(packsResultIntakeCase.admitted, false);
+  assert.equal(packsResultIntakeCase.boundary.callsPacks, false);
+  assert.equal(packsResultIntakeCase.boundary.acceptsLayerState, false);
+  assert.equal(packsResultIntakeCase.boundary.claimsTruth, false);
+  assert.equal(packsResultIntakeCase.boundary.executesBehavior, false);
+  assert.equal(reportedRefsCase.stopStatus, "blocked");
+  assert.equal(reportedRefsCase.boundary.claimsTruth, false);
+  assert.equal(reportedRefsCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(reportedRefsCase.boundary.createsAuthority, false);
+  assert.equal(visibilityCase.stopStatus, "blocked");
+  assert.equal(visibilityCase.boundary.acceptsAdmission, false);
+  assert.equal(visibilityCase.boundary.acceptsContinuity, false);
+  assert.equal(visibilityCase.boundary.createsAuthority, false);
+  assert.equal(edgeReviewCase.stopStatus, "blocked");
+  assert.equal(edgeReviewCase.boundary.callsEdge, false);
+  assert.equal(edgeReviewCase.boundary.createsAuthority, false);
+  assert.equal(edgeReviewCase.boundary.claimsTruth, false);
+});
+
 test("Lane D fails closed when a required blocked case is missing", () => {
   const packet = packetFixture({
     cases: packetFixture().cases.filter((pressureCase) =>

@@ -24,7 +24,12 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "virtualia_review_treated_as_queue_action_or_authority",
   "bytes_dispatch_treated_as_payload_fetch_or_result_acceptance",
   "packs_dispatch_treated_as_runtime_activation_or_result_acceptance",
-  "platform_queued_action_treated_as_dispatch_or_host_consequence"
+  "platform_queued_action_treated_as_dispatch_or_host_consequence",
+  "bytes_result_intake_treated_as_payload_validity_or_acceptance",
+  "packs_result_intake_treated_as_accepted_layer_state_or_acceptance",
+  "result_intake_reported_refs_treated_as_truth",
+  "result_intake_visibility_treated_as_authority_admission_continuity",
+  "result_intake_edge_review_treated_as_authority"
 ]);
 
 const REQUIRED_CASES = Object.freeze([
@@ -123,6 +128,36 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "platform",
     attemptedOverclaim: "Platform pressure queued action treated as dispatch approval, host-local consequence, or deployment ownership",
     reasonCode: "blocked_case:platform_queued_action_treated_as_dispatch_or_host_consequence"
+  }),
+  Object.freeze({
+    caseId: "bytes_result_intake_treated_as_payload_validity_or_acceptance",
+    sourceFamily: "bytes",
+    attemptedOverclaim: "Bytes pressure result intake treated as payload validity, payload materialization, or result acceptance",
+    reasonCode: "blocked_case:bytes_result_intake_treated_as_payload_validity_or_acceptance"
+  }),
+  Object.freeze({
+    caseId: "packs_result_intake_treated_as_accepted_layer_state_or_acceptance",
+    sourceFamily: "packs",
+    attemptedOverclaim: "Packs pressure result intake treated as accepted Layer state, runtime activation, deployment authority, or result acceptance",
+    reasonCode: "blocked_case:packs_result_intake_treated_as_accepted_layer_state_or_acceptance"
+  }),
+  Object.freeze({
+    caseId: "result_intake_reported_refs_treated_as_truth",
+    sourceFamily: "repo_agent",
+    attemptedOverclaim: "Repo-agent reported commit, test, or status refs from result intake treated as truth",
+    reasonCode: "blocked_case:result_intake_reported_refs_treated_as_truth"
+  }),
+  Object.freeze({
+    caseId: "result_intake_visibility_treated_as_authority_admission_continuity",
+    sourceFamily: "repo_family",
+    attemptedOverclaim: "Result-intake visibility treated as authority, admission, or continuity",
+    reasonCode: "blocked_case:result_intake_visibility_treated_as_authority_admission_continuity"
+  }),
+  Object.freeze({
+    caseId: "result_intake_edge_review_treated_as_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Edge result-intake review treated as authority",
+    reasonCode: "blocked_case:result_intake_edge_review_treated_as_authority"
   })
 ]);
 
