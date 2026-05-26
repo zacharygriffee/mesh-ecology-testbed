@@ -312,6 +312,66 @@ test("Lane D keeps Bytes accepted-result evidence boundaries fail-closed", () =>
   assert.equal(storageAuthorityCase.boundary.createsAuthority, false);
 });
 
+test("Lane D keeps Packs accepted-result evidence boundaries fail-closed", () => {
+  const report = build();
+  const packet = packetFixture();
+  const acceptedLayerStateCase = packet.cases.find((entry) =>
+    entry.caseId === "packs_accepted_result_treated_as_accepted_layer_state"
+  );
+  const runtimeActivationCase = packet.cases.find((entry) =>
+    entry.caseId === "packs_accepted_result_treated_as_runtime_activation"
+  );
+  const deploymentAuthorityCase = packet.cases.find((entry) =>
+    entry.caseId === "packs_accepted_result_treated_as_deployment_authority"
+  );
+  const applicationMergeCase = packet.cases.find((entry) =>
+    entry.caseId === "packs_accepted_result_treated_as_application_merge"
+  );
+  const reportedTruthCase = packet.cases.find((entry) =>
+    entry.caseId === "packs_accepted_result_treated_as_reported_truth"
+  );
+  const platformMutationCase = packet.cases.find((entry) =>
+    entry.caseId === "packs_accepted_result_treated_as_platform_mutation"
+  );
+  const storageAuthorityCase = packet.cases.find((entry) =>
+    entry.caseId === "packs_accepted_result_treated_as_storage_write_authority"
+  );
+
+  assert.equal(report.blockedCaseIds.includes("packs_accepted_result_treated_as_accepted_layer_state"), true);
+  assert.equal(report.blockedCaseIds.includes("packs_accepted_result_treated_as_runtime_activation"), true);
+  assert.equal(report.blockedCaseIds.includes("packs_accepted_result_treated_as_deployment_authority"), true);
+  assert.equal(report.blockedCaseIds.includes("packs_accepted_result_treated_as_application_merge"), true);
+  assert.equal(report.blockedCaseIds.includes("packs_accepted_result_treated_as_reported_truth"), true);
+  assert.equal(report.blockedCaseIds.includes("packs_accepted_result_treated_as_platform_mutation"), true);
+  assert.equal(report.blockedCaseIds.includes("packs_accepted_result_treated_as_storage_write_authority"), true);
+  assert.equal(acceptedLayerStateCase.stopStatus, "blocked");
+  assert.equal(acceptedLayerStateCase.admitted, false);
+  assert.equal(acceptedLayerStateCase.boundary.acceptsLayerState, false);
+  assert.equal(acceptedLayerStateCase.boundary.mutatesLayer, false);
+  assert.equal(runtimeActivationCase.stopStatus, "blocked");
+  assert.equal(runtimeActivationCase.admitted, false);
+  assert.equal(runtimeActivationCase.boundary.callsPacks, false);
+  assert.equal(runtimeActivationCase.boundary.executesBehavior, false);
+  assert.equal(deploymentAuthorityCase.stopStatus, "blocked");
+  assert.equal(deploymentAuthorityCase.admitted, false);
+  assert.equal(deploymentAuthorityCase.boundary.createsAuthority, false);
+  assert.equal(applicationMergeCase.stopStatus, "blocked");
+  assert.equal(applicationMergeCase.admitted, false);
+  assert.equal(applicationMergeCase.boundary.executesBehavior, false);
+  assert.equal(applicationMergeCase.boundary.mutatesSourceRepo, false);
+  assert.equal(reportedTruthCase.stopStatus, "blocked");
+  assert.equal(reportedTruthCase.admitted, false);
+  assert.equal(reportedTruthCase.boundary.claimsTruth, false);
+  assert.equal(platformMutationCase.stopStatus, "blocked");
+  assert.equal(platformMutationCase.admitted, false);
+  assert.equal(platformMutationCase.boundary.callsPlatform, false);
+  assert.equal(platformMutationCase.boundary.mutatesSourceRepo, false);
+  assert.equal(storageAuthorityCase.stopStatus, "blocked");
+  assert.equal(storageAuthorityCase.admitted, false);
+  assert.equal(storageAuthorityCase.boundary.writesProductionStorage, false);
+  assert.equal(storageAuthorityCase.boundary.createsAuthority, false);
+});
+
 test("Lane D fails closed when a required blocked case is missing", () => {
   const packet = packetFixture({
     cases: packetFixture().cases.filter((pressureCase) =>

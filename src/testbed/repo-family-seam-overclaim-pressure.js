@@ -36,7 +36,14 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "bytes_accepted_result_treated_as_payload_fetch_materialization",
   "bytes_accepted_result_treated_as_application_merge",
   "bytes_accepted_result_treated_as_layer_truth_continuity",
-  "bytes_accepted_result_treated_as_storage_write_authority"
+  "bytes_accepted_result_treated_as_storage_write_authority",
+  "packs_accepted_result_treated_as_accepted_layer_state",
+  "packs_accepted_result_treated_as_runtime_activation",
+  "packs_accepted_result_treated_as_deployment_authority",
+  "packs_accepted_result_treated_as_application_merge",
+  "packs_accepted_result_treated_as_reported_truth",
+  "packs_accepted_result_treated_as_platform_mutation",
+  "packs_accepted_result_treated_as_storage_write_authority"
 ]);
 
 const REQUIRED_CASES = Object.freeze([
@@ -207,6 +214,48 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "bytes",
     attemptedOverclaim: "Bytes accepted result evidence treated as storage write or authority",
     reasonCode: "blocked_case:bytes_accepted_result_treated_as_storage_write_authority"
+  }),
+  Object.freeze({
+    caseId: "packs_accepted_result_treated_as_accepted_layer_state",
+    sourceFamily: "packs",
+    attemptedOverclaim: "Packs accepted result evidence treated as accepted Layer state",
+    reasonCode: "blocked_case:packs_accepted_result_treated_as_accepted_layer_state"
+  }),
+  Object.freeze({
+    caseId: "packs_accepted_result_treated_as_runtime_activation",
+    sourceFamily: "packs",
+    attemptedOverclaim: "Packs accepted result evidence treated as runtime activation",
+    reasonCode: "blocked_case:packs_accepted_result_treated_as_runtime_activation"
+  }),
+  Object.freeze({
+    caseId: "packs_accepted_result_treated_as_deployment_authority",
+    sourceFamily: "packs",
+    attemptedOverclaim: "Packs accepted result evidence treated as deployment authority",
+    reasonCode: "blocked_case:packs_accepted_result_treated_as_deployment_authority"
+  }),
+  Object.freeze({
+    caseId: "packs_accepted_result_treated_as_application_merge",
+    sourceFamily: "packs",
+    attemptedOverclaim: "Packs accepted result evidence treated as result application or merge",
+    reasonCode: "blocked_case:packs_accepted_result_treated_as_application_merge"
+  }),
+  Object.freeze({
+    caseId: "packs_accepted_result_treated_as_reported_truth",
+    sourceFamily: "packs",
+    attemptedOverclaim: "Packs accepted result evidence treated as reported commit, test, or status truth",
+    reasonCode: "blocked_case:packs_accepted_result_treated_as_reported_truth"
+  }),
+  Object.freeze({
+    caseId: "packs_accepted_result_treated_as_platform_mutation",
+    sourceFamily: "packs",
+    attemptedOverclaim: "Packs accepted result evidence treated as Platform mutation",
+    reasonCode: "blocked_case:packs_accepted_result_treated_as_platform_mutation"
+  }),
+  Object.freeze({
+    caseId: "packs_accepted_result_treated_as_storage_write_authority",
+    sourceFamily: "packs",
+    attemptedOverclaim: "Packs accepted result evidence treated as storage write or authority",
+    reasonCode: "blocked_case:packs_accepted_result_treated_as_storage_write_authority"
   })
 ]);
 
