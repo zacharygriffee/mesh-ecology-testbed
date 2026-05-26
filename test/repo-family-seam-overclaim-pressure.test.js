@@ -130,6 +130,43 @@ test("Lane D keeps Studio dispatch and Virtualia review boundaries fail-closed",
   assert.equal(virtualiaReviewCase.boundary.claimsSourceSemantics, false);
 });
 
+test("Lane D keeps Bytes/Packs dispatch and Platform queue boundaries fail-closed", () => {
+  const report = build();
+  const packet = packetFixture();
+  const bytesDispatchCase = packet.cases.find((entry) =>
+    entry.caseId === "bytes_dispatch_treated_as_payload_fetch_or_result_acceptance"
+  );
+  const packsDispatchCase = packet.cases.find((entry) =>
+    entry.caseId === "packs_dispatch_treated_as_runtime_activation_or_result_acceptance"
+  );
+  const platformQueueCase = packet.cases.find((entry) =>
+    entry.caseId === "platform_queued_action_treated_as_dispatch_or_host_consequence"
+  );
+
+  assert.equal(report.blockedCaseIds.includes("bytes_dispatch_treated_as_payload_fetch_or_result_acceptance"), true);
+  assert.equal(report.blockedCaseIds.includes("packs_dispatch_treated_as_runtime_activation_or_result_acceptance"), true);
+  assert.equal(report.blockedCaseIds.includes("platform_queued_action_treated_as_dispatch_or_host_consequence"), true);
+  assert.equal(bytesDispatchCase.stopStatus, "blocked");
+  assert.equal(bytesDispatchCase.admitted, false);
+  assert.equal(bytesDispatchCase.boundary.callsBytes, false);
+  assert.equal(bytesDispatchCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(bytesDispatchCase.boundary.claimsPayloadValidity, false);
+  assert.equal(bytesDispatchCase.boundary.claimsTruth, false);
+  assert.equal(packsDispatchCase.stopStatus, "blocked");
+  assert.equal(packsDispatchCase.admitted, false);
+  assert.equal(packsDispatchCase.boundary.callsPacks, false);
+  assert.equal(packsDispatchCase.boundary.executesBehavior, false);
+  assert.equal(packsDispatchCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(packsDispatchCase.boundary.claimsTruth, false);
+  assert.equal(platformQueueCase.stopStatus, "blocked");
+  assert.equal(platformQueueCase.admitted, false);
+  assert.equal(platformQueueCase.boundary.callsPlatform, false);
+  assert.equal(platformQueueCase.boundary.executesBehavior, false);
+  assert.equal(platformQueueCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(platformQueueCase.boundary.mutatesSourceRepo, false);
+  assert.equal(platformQueueCase.boundary.createsAuthority, false);
+});
+
 test("Lane D fails closed when a required blocked case is missing", () => {
   const packet = packetFixture({
     cases: packetFixture().cases.filter((pressureCase) =>

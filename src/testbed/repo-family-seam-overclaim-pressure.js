@@ -21,7 +21,10 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "repo_agent_reported_commit_test_treated_as_truth",
   "storage_index_view_treated_as_truth",
   "studio_dispatch_treated_as_result_acceptance_application",
-  "virtualia_review_treated_as_queue_action_or_authority"
+  "virtualia_review_treated_as_queue_action_or_authority",
+  "bytes_dispatch_treated_as_payload_fetch_or_result_acceptance",
+  "packs_dispatch_treated_as_runtime_activation_or_result_acceptance",
+  "platform_queued_action_treated_as_dispatch_or_host_consequence"
 ]);
 
 const REQUIRED_CASES = Object.freeze([
@@ -102,6 +105,24 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "virtualia",
     attemptedOverclaim: "Virtualia pressure review treated as queue action, authority, or repo-agent dispatch approval",
     reasonCode: "blocked_case:virtualia_review_treated_as_queue_action_or_authority"
+  }),
+  Object.freeze({
+    caseId: "bytes_dispatch_treated_as_payload_fetch_or_result_acceptance",
+    sourceFamily: "bytes",
+    attemptedOverclaim: "Bytes pressure dispatch observation treated as payload fetch, materialization, or result acceptance",
+    reasonCode: "blocked_case:bytes_dispatch_treated_as_payload_fetch_or_result_acceptance"
+  }),
+  Object.freeze({
+    caseId: "packs_dispatch_treated_as_runtime_activation_or_result_acceptance",
+    sourceFamily: "packs",
+    attemptedOverclaim: "Packs pressure dispatch observation treated as runtime activation, deployment authority, or result acceptance",
+    reasonCode: "blocked_case:packs_dispatch_treated_as_runtime_activation_or_result_acceptance"
+  }),
+  Object.freeze({
+    caseId: "platform_queued_action_treated_as_dispatch_or_host_consequence",
+    sourceFamily: "platform",
+    attemptedOverclaim: "Platform pressure queued action treated as dispatch approval, host-local consequence, or deployment ownership",
+    reasonCode: "blocked_case:platform_queued_action_treated_as_dispatch_or_host_consequence"
   })
 ]);
 
