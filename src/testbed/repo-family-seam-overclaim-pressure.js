@@ -29,7 +29,9 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "packs_result_intake_treated_as_accepted_layer_state_or_acceptance",
   "result_intake_reported_refs_treated_as_truth",
   "result_intake_visibility_treated_as_authority_admission_continuity",
-  "result_intake_edge_review_treated_as_authority"
+  "result_intake_edge_review_treated_as_authority",
+  "bytes_result_acceptance_candidate_treated_as_acceptance_or_payload_validity",
+  "packs_result_acceptance_candidate_treated_as_acceptance_or_accepted_layer_state"
 ]);
 
 const REQUIRED_CASES = Object.freeze([
@@ -158,6 +160,18 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "Edge result-intake review treated as authority",
     reasonCode: "blocked_case:result_intake_edge_review_treated_as_authority"
+  }),
+  Object.freeze({
+    caseId: "bytes_result_acceptance_candidate_treated_as_acceptance_or_payload_validity",
+    sourceFamily: "bytes",
+    attemptedOverclaim: "Bytes result-acceptance candidate treated as acceptance, payload validity, payload fetch, or materialization",
+    reasonCode: "blocked_case:bytes_result_acceptance_candidate_treated_as_acceptance_or_payload_validity"
+  }),
+  Object.freeze({
+    caseId: "packs_result_acceptance_candidate_treated_as_acceptance_or_accepted_layer_state",
+    sourceFamily: "packs",
+    attemptedOverclaim: "Packs result-acceptance candidate treated as acceptance, accepted Layer state, runtime activation, or deployment authority",
+    reasonCode: "blocked_case:packs_result_acceptance_candidate_treated_as_acceptance_or_accepted_layer_state"
   })
 ]);
 

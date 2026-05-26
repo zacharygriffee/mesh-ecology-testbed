@@ -226,6 +226,40 @@ test("Lane D keeps Bytes/Packs result-intake evidence boundaries fail-closed", (
   assert.equal(edgeReviewCase.boundary.claimsTruth, false);
 });
 
+test("Lane D keeps Bytes/Packs result-acceptance candidate boundaries fail-closed", () => {
+  const report = build();
+  const packet = packetFixture();
+  const bytesAcceptanceCandidateCase = packet.cases.find((entry) =>
+    entry.caseId === "bytes_result_acceptance_candidate_treated_as_acceptance_or_payload_validity"
+  );
+  const packsAcceptanceCandidateCase = packet.cases.find((entry) =>
+    entry.caseId === "packs_result_acceptance_candidate_treated_as_acceptance_or_accepted_layer_state"
+  );
+
+  assert.equal(
+    report.blockedCaseIds.includes("bytes_result_acceptance_candidate_treated_as_acceptance_or_payload_validity"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("packs_result_acceptance_candidate_treated_as_acceptance_or_accepted_layer_state"),
+    true
+  );
+  assert.equal(bytesAcceptanceCandidateCase.stopStatus, "blocked");
+  assert.equal(bytesAcceptanceCandidateCase.admitted, false);
+  assert.equal(bytesAcceptanceCandidateCase.boundary.callsBytes, false);
+  assert.equal(bytesAcceptanceCandidateCase.boundary.claimsPayloadValidity, false);
+  assert.equal(bytesAcceptanceCandidateCase.boundary.claimsTruth, false);
+  assert.equal(bytesAcceptanceCandidateCase.boundary.mutatesSourceRepo, false);
+  assert.equal(bytesAcceptanceCandidateCase.boundary.createsAuthority, false);
+  assert.equal(packsAcceptanceCandidateCase.stopStatus, "blocked");
+  assert.equal(packsAcceptanceCandidateCase.admitted, false);
+  assert.equal(packsAcceptanceCandidateCase.boundary.callsPacks, false);
+  assert.equal(packsAcceptanceCandidateCase.boundary.acceptsLayerState, false);
+  assert.equal(packsAcceptanceCandidateCase.boundary.executesBehavior, false);
+  assert.equal(packsAcceptanceCandidateCase.boundary.mutatesSourceRepo, false);
+  assert.equal(packsAcceptanceCandidateCase.boundary.createsAuthority, false);
+});
+
 test("Lane D fails closed when a required blocked case is missing", () => {
   const packet = packetFixture({
     cases: packetFixture().cases.filter((pressureCase) =>
