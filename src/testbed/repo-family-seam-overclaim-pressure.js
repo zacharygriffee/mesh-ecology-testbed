@@ -246,6 +246,12 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "repo_agent_outbox_report_expectation_profile_treated_as_application_merge_mutation_or_storage",
   "repo_agent_outbox_report_expectation_profile_treated_as_platform_authority_event_or_auto_execute",
   "repo_agent_outbox_report_expectation_profile_tui_treated_as_action_authority",
+  "repo_agent_outbox_report_body_visibility_treated_as_result_intake_or_acceptance",
+  "repo_agent_outbox_report_body_visibility_treated_as_report_truth_or_payload",
+  "repo_agent_outbox_report_body_visibility_treated_as_application_merge_mutation_or_storage",
+  "repo_agent_outbox_report_body_visibility_treated_as_dispatch_execution_agent_or_platform",
+  "repo_agent_outbox_report_body_visibility_treated_as_authority_event_auto_execute_or_enclosure",
+  "repo_agent_outbox_report_body_visibility_tui_treated_as_action_authority",
   "repo_agent_outbox_report_expectation_sidecar_review_profile_treated_as_result_intake_or_acceptance",
   "repo_agent_outbox_report_expectation_sidecar_review_profile_treated_as_report_truth_or_payload",
   "repo_agent_outbox_report_expectation_sidecar_review_profile_treated_as_application_merge_mutation_or_storage",
@@ -1689,6 +1695,42 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "Repo-agent outbox report expectation profile TUI visibility treated as import, decision, dispatch, execution, mutation, acceptance, or action authority",
     reasonCode: "blocked_case:repo_agent_outbox_report_expectation_profile_tui_treated_as_action_authority"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_outbox_report_body_visibility_treated_as_result_intake_or_acceptance",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent outbox report body visibility treated as result-intake creation, result-intake performance, result acceptance, report acceptance, operator decision capture, or approval",
+    reasonCode: "blocked_case:repo_agent_outbox_report_body_visibility_treated_as_result_intake_or_acceptance"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_outbox_report_body_visibility_treated_as_report_truth_or_payload",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent outbox report body visibility treated as report truth, body truth, agent correctness proof, payload validity, payload fetch, payload materialization, Layer truth, or Layer continuity",
+    reasonCode: "blocked_case:repo_agent_outbox_report_body_visibility_treated_as_report_truth_or_payload"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_outbox_report_body_visibility_treated_as_application_merge_mutation_or_storage",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent outbox report body visibility treated as result application, merge, repo mutation, Layer mutation, or storage write",
+    reasonCode: "blocked_case:repo_agent_outbox_report_body_visibility_treated_as_application_merge_mutation_or_storage"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_outbox_report_body_visibility_treated_as_dispatch_execution_agent_or_platform",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent outbox report body visibility treated as dispatch, scheduling, launch, execution, repo-agent invocation, watcher behavior, Platform call, or host-local consequence",
+    reasonCode: "blocked_case:repo_agent_outbox_report_body_visibility_treated_as_dispatch_execution_agent_or_platform"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_outbox_report_body_visibility_treated_as_authority_event_auto_execute_or_enclosure",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent outbox report body visibility treated as authority transition, accepted continuity, event-family expansion, auto-execute, full Edge enclosure proof, or autonomy proof",
+    reasonCode: "blocked_case:repo_agent_outbox_report_body_visibility_treated_as_authority_event_auto_execute_or_enclosure"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_outbox_report_body_visibility_tui_treated_as_action_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent outbox report body visibility TUI visibility treated as action authority, result-intake authority, acceptance authority, mutation authority, dispatch authority, or execution authority",
+    reasonCode: "blocked_case:repo_agent_outbox_report_body_visibility_tui_treated_as_action_authority"
   }),
   Object.freeze({
     caseId: "repo_agent_outbox_report_expectation_sidecar_review_profile_treated_as_result_intake_or_acceptance",
