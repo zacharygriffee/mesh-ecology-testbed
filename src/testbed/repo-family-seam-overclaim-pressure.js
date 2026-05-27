@@ -220,6 +220,11 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "tui_triggered_receipt_action_treated_as_scheduler_dispatch_or_agent_execution",
   "tui_triggered_receipt_action_treated_as_acceptance_truth_or_payload",
   "tui_triggered_receipt_action_treated_as_application_merge_mutation_or_authority",
+  "tui_triggered_receipt_action_burden_measurement_treated_as_action_or_receipt",
+  "tui_triggered_receipt_action_burden_measurement_treated_as_acceptance_truth_or_payload",
+  "tui_triggered_receipt_action_burden_measurement_treated_as_application_merge_mutation_or_authority",
+  "tui_triggered_receipt_action_burden_measurement_treated_as_wall_clock_autonomy_or_enclosure_proof",
+  "tui_triggered_receipt_action_burden_measurement_tui_treated_as_action_authority",
   "repo_agent_seat_exchange_tui_treated_as_action_authority"
 ]);
 
@@ -1489,6 +1494,36 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "TUI-triggered receipt-producing action treated as result application, merge, repo mutation beyond explicit inbox copy, Layer mutation, storage write, authority, event-family expansion, or auto-execute",
     reasonCode: "blocked_case:tui_triggered_receipt_action_treated_as_application_merge_mutation_or_authority"
+  }),
+  Object.freeze({
+    caseId: "tui_triggered_receipt_action_burden_measurement_treated_as_action_or_receipt",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-triggered receipt action burden measurement treated as performing a receipt action, creating a receipt observation/result, handoff, import, result intake, scheduling, dispatch, execution, or agent invocation",
+    reasonCode: "blocked_case:tui_triggered_receipt_action_burden_measurement_treated_as_action_or_receipt"
+  }),
+  Object.freeze({
+    caseId: "tui_triggered_receipt_action_burden_measurement_treated_as_acceptance_truth_or_payload",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-triggered receipt action burden measurement treated as result acceptance, reported truth, receipt truth, payload validity/fetch/materialization, or Layer truth",
+    reasonCode: "blocked_case:tui_triggered_receipt_action_burden_measurement_treated_as_acceptance_truth_or_payload"
+  }),
+  Object.freeze({
+    caseId: "tui_triggered_receipt_action_burden_measurement_treated_as_application_merge_mutation_or_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-triggered receipt action burden measurement treated as result application, merge, repo mutation, Layer mutation, storage write, authority transition, event-family expansion, or auto-execute",
+    reasonCode: "blocked_case:tui_triggered_receipt_action_burden_measurement_treated_as_application_merge_mutation_or_authority"
+  }),
+  Object.freeze({
+    caseId: "tui_triggered_receipt_action_burden_measurement_treated_as_wall_clock_autonomy_or_enclosure_proof",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-triggered receipt action burden task-count measurement treated as wall-clock savings, autonomy proof, full Edge enclosure proof, agent correctness proof, delivery proof, read proof, or execution proof",
+    reasonCode: "blocked_case:tui_triggered_receipt_action_burden_measurement_treated_as_wall_clock_autonomy_or_enclosure_proof"
+  }),
+  Object.freeze({
+    caseId: "tui_triggered_receipt_action_burden_measurement_tui_treated_as_action_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-triggered receipt action burden measurement visibility treated as approval, action authority, receipt authority, dispatch authority, or auto-execute authority",
+    reasonCode: "blocked_case:tui_triggered_receipt_action_burden_measurement_tui_treated_as_action_authority"
   }),
   Object.freeze({
     caseId: "repo_agent_seat_exchange_tui_treated_as_action_authority",
