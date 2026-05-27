@@ -134,6 +134,12 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "repo_agent_seat_inbox_handoff_observation_treated_as_dispatch_execution_or_work_cell",
   "repo_agent_seat_inbox_handoff_observation_treated_as_result_import_acceptance_truth",
   "repo_agent_seat_inbox_handoff_observation_treated_as_repo_layer_storage_authority",
+  "repo_agent_seat_outbox_import_decision_treated_as_import_or_result_intake",
+  "repo_agent_seat_outbox_import_decision_treated_as_acceptance_truth_or_payload",
+  "repo_agent_seat_outbox_import_decision_treated_as_application_merge_or_mutation",
+  "repo_agent_seat_outbox_import_decision_treated_as_dispatch_execution_or_platform",
+  "repo_agent_seat_outbox_import_decision_treated_as_authority_event_or_auto_execute",
+  "repo_agent_seat_inbox_handoff_receipt_treated_as_delivery_read_or_execution_proof",
   "repo_agent_seat_exchange_tui_treated_as_action_authority"
 ]);
 
@@ -887,6 +893,42 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "Repo-agent seat inbox handoff observation treated as broad repo mutation, Layer mutation, storage write, Platform consequence, authority, accepted continuity, event-family expansion, or auto-execute",
     reasonCode: "blocked_case:repo_agent_seat_inbox_handoff_observation_treated_as_repo_layer_storage_authority"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_outbox_import_decision_treated_as_import_or_result_intake",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat outbox import operator decision treated as outbox report import, outbox import observation/result, or result intake",
+    reasonCode: "blocked_case:repo_agent_seat_outbox_import_decision_treated_as_import_or_result_intake"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_outbox_import_decision_treated_as_acceptance_truth_or_payload",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat outbox import operator decision treated as result acceptance, reported truth, payload validity, payload fetch, or payload materialization",
+    reasonCode: "blocked_case:repo_agent_seat_outbox_import_decision_treated_as_acceptance_truth_or_payload"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_outbox_import_decision_treated_as_application_merge_or_mutation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat outbox import operator decision treated as result application, merge, repo mutation, Layer mutation, Layer truth, Layer continuity, or storage write",
+    reasonCode: "blocked_case:repo_agent_seat_outbox_import_decision_treated_as_application_merge_or_mutation"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_outbox_import_decision_treated_as_dispatch_execution_or_platform",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat outbox import operator decision treated as scheduling, launch, dispatch, execution, agent invocation, Platform call, host-local consequence, or activation",
+    reasonCode: "blocked_case:repo_agent_seat_outbox_import_decision_treated_as_dispatch_execution_or_platform"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_outbox_import_decision_treated_as_authority_event_or_auto_execute",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat outbox import operator decision treated as authority transition, accepted continuity, event-family expansion, or auto-execute",
+    reasonCode: "blocked_case:repo_agent_seat_outbox_import_decision_treated_as_authority_event_or_auto_execute"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_inbox_handoff_receipt_treated_as_delivery_read_or_execution_proof",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat inbox handoff receipt treated as delivery proof, agent read proof, or execution proof",
+    reasonCode: "blocked_case:repo_agent_seat_inbox_handoff_receipt_treated_as_delivery_read_or_execution_proof"
   }),
   Object.freeze({
     caseId: "repo_agent_seat_exchange_tui_treated_as_action_authority",
