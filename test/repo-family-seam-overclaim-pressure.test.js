@@ -1287,6 +1287,55 @@ test("Lane D keeps export result intake decision observation and board boundarie
   assert.equal(platformReviewCase.boundary.createsAuthority, false);
 });
 
+test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", () => {
+  const report = build();
+  const packet = packetFixture();
+  const conventionCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_seat_exchange_convention_treated_as_transport_scheduler_or_authority"
+  );
+  const inboxCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_seat_inbox_packet_candidate_treated_as_delivery_invocation_or_work_cell"
+  );
+  const outboxCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_seat_outbox_report_candidate_treated_as_import_acceptance_truth_or_mutation"
+  );
+  const tuiCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_seat_exchange_tui_treated_as_action_authority"
+  );
+
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_seat_exchange_convention_treated_as_transport_scheduler_or_authority"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_seat_inbox_packet_candidate_treated_as_delivery_invocation_or_work_cell"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_seat_outbox_report_candidate_treated_as_import_acceptance_truth_or_mutation"),
+    true
+  );
+  assert.equal(report.blockedCaseIds.includes("repo_agent_seat_exchange_tui_treated_as_action_authority"), true);
+  assert.equal(conventionCase.stopStatus, "blocked");
+  assert.equal(conventionCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(conventionCase.boundary.executesBehavior, false);
+  assert.equal(conventionCase.boundary.createsAuthority, false);
+  assert.equal(inboxCase.stopStatus, "blocked");
+  assert.equal(inboxCase.boundary.callsEdge, false);
+  assert.equal(inboxCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(inboxCase.boundary.executesBehavior, false);
+  assert.equal(inboxCase.boundary.createsAuthority, false);
+  assert.equal(outboxCase.stopStatus, "blocked");
+  assert.equal(outboxCase.boundary.claimsTruth, false);
+  assert.equal(outboxCase.boundary.mutatesSourceRepo, false);
+  assert.equal(outboxCase.boundary.mutatesLayer, false);
+  assert.equal(outboxCase.boundary.writesProductionStorage, false);
+  assert.equal(tuiCase.stopStatus, "blocked");
+  assert.equal(tuiCase.boundary.callsEdge, false);
+  assert.equal(tuiCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(tuiCase.boundary.createsAuthority, false);
+});
+
 test("Lane D fails closed when a required blocked case is missing", () => {
   const packet = packetFixture({
     cases: packetFixture().cases.filter((pressureCase) =>

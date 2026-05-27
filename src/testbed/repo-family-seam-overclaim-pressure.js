@@ -121,7 +121,11 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "platform_returned_operator_review_treated_as_dispatch_approval",
   "repo_agent_operational_board_prompt_candidate_treated_as_prompt_delivery_or_dispatch",
   "repo_agent_operational_board_prompt_candidate_treated_as_decision_or_authority",
-  "repo_agent_operational_board_prompt_candidate_treated_as_result_truth_mutation_or_auto_execute"
+  "repo_agent_operational_board_prompt_candidate_treated_as_result_truth_mutation_or_auto_execute",
+  "repo_agent_seat_exchange_convention_treated_as_transport_scheduler_or_authority",
+  "repo_agent_seat_inbox_packet_candidate_treated_as_delivery_invocation_or_work_cell",
+  "repo_agent_seat_outbox_report_candidate_treated_as_import_acceptance_truth_or_mutation",
+  "repo_agent_seat_exchange_tui_treated_as_action_authority"
 ]);
 
 const REQUIRED_CASES = Object.freeze([
@@ -802,6 +806,30 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "Operational board prompt candidate treated as result truth, acceptance, application, merge, repo or Layer mutation, storage write, or auto-execute",
     reasonCode: "blocked_case:repo_agent_operational_board_prompt_candidate_treated_as_result_truth_mutation_or_auto_execute"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_exchange_convention_treated_as_transport_scheduler_or_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat exchange convention treated as prompt transport, scheduler, dispatch, execution, authority, or RBC enforcement proof",
+    reasonCode: "blocked_case:repo_agent_seat_exchange_convention_treated_as_transport_scheduler_or_authority"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_inbox_packet_candidate_treated_as_delivery_invocation_or_work_cell",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat inbox packet candidate treated as prompt delivery, inbox write, agent invocation, work-cell creation, or dispatch approval",
+    reasonCode: "blocked_case:repo_agent_seat_inbox_packet_candidate_treated_as_delivery_invocation_or_work_cell"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_outbox_report_candidate_treated_as_import_acceptance_truth_or_mutation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat outbox report candidate treated as report import, result acceptance, reported truth, application, merge, repo mutation, Layer mutation, or storage write",
+    reasonCode: "blocked_case:repo_agent_seat_outbox_report_candidate_treated_as_import_acceptance_truth_or_mutation"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_exchange_tui_treated_as_action_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat exchange TUI visibility treated as send, dispatch, import, decision, mutation, or action authority",
+    reasonCode: "blocked_case:repo_agent_seat_exchange_tui_treated_as_action_authority"
   })
 ]);
 
