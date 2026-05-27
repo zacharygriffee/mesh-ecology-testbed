@@ -98,6 +98,10 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "repo_agent_operational_board_treated_as_result_acceptance_truth_application",
   "repo_agent_operational_board_treated_as_repo_layer_storage_authority",
   "repo_agent_operational_board_tui_treated_as_action_surface",
+  "repo_agent_operational_board_field_use_report_treated_as_scheduling_dispatch_execution",
+  "repo_agent_operational_board_field_use_report_treated_as_decision_or_authority",
+  "repo_agent_operational_board_field_use_report_treated_as_result_truth_or_mutation",
+  "repo_agent_operational_board_field_use_report_treated_as_general_enclosure_or_auto_execute",
   "tui_visibility_treated_as_authority",
   "candidate_export_treated_as_work_cell_creation",
   "candidate_export_treated_as_dispatch_decision_request_creation",
@@ -648,6 +652,30 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "Repo-agent operational board TUI projection treated as action controls, scheduling, dispatch, execution, decision capture, or auto-execute",
     reasonCode: "blocked_case:repo_agent_operational_board_tui_treated_as_action_surface"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_operational_board_field_use_report_treated_as_scheduling_dispatch_execution",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent operational board field-use report treated as scheduling, launch, dispatch, execution, Platform call, or auto-execute",
+    reasonCode: "blocked_case:repo_agent_operational_board_field_use_report_treated_as_scheduling_dispatch_execution"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_operational_board_field_use_report_treated_as_decision_or_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent operational board field-use report treated as operator decision capture, approval, authority, or work-cell creation",
+    reasonCode: "blocked_case:repo_agent_operational_board_field_use_report_treated_as_decision_or_authority"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_operational_board_field_use_report_treated_as_result_truth_or_mutation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent operational board field-use report treated as result acceptance, reported commit/test truth, application, merge, repo mutation, or Layer mutation",
+    reasonCode: "blocked_case:repo_agent_operational_board_field_use_report_treated_as_result_truth_or_mutation"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_operational_board_field_use_report_treated_as_general_enclosure_or_auto_execute",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent operational board field-use report treated as general enclosure, wall-clock automation proof, storage write, event-family expansion, or auto-execute",
+    reasonCode: "blocked_case:repo_agent_operational_board_field_use_report_treated_as_general_enclosure_or_auto_execute"
   }),
   Object.freeze({
     caseId: "tui_visibility_treated_as_authority",
