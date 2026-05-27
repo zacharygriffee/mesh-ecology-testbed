@@ -478,6 +478,21 @@ test("Lane D keeps operator-burden visibility and candidate boundaries fail-clos
   const workCellAcceptanceCandidateAuthorityCase = packet.cases.find((entry) =>
     entry.caseId === "review_only_work_cell_result_acceptance_candidate_treated_as_layer_storage_authority"
   );
+  const workCellAcceptanceDecisionApplicationCase = packet.cases.find((entry) =>
+    entry.caseId === "review_only_work_cell_result_acceptance_decision_treated_as_application_merge_mutation"
+  );
+  const workCellAcceptanceDecisionAuthorityCase = packet.cases.find((entry) =>
+    entry.caseId === "review_only_work_cell_result_acceptance_decision_treated_as_layer_storage_authority"
+  );
+  const workCellAcceptanceDecisionPayloadCase = packet.cases.find((entry) =>
+    entry.caseId === "review_only_work_cell_result_acceptance_decision_treated_as_payload_validity"
+  );
+  const workCellAcceptanceDecisionDispatchCase = packet.cases.find((entry) =>
+    entry.caseId === "review_only_work_cell_result_acceptance_decision_treated_as_dispatch_execution_platform"
+  );
+  const workCellAcceptanceDecisionAutoCase = packet.cases.find((entry) =>
+    entry.caseId === "review_only_work_cell_result_acceptance_decision_treated_as_event_family_auto_execute"
+  );
   const tuiVisibilityCase = packet.cases.find((entry) =>
     entry.caseId === "tui_visibility_treated_as_authority"
   );
@@ -532,6 +547,26 @@ test("Lane D keeps operator-burden visibility and candidate boundaries fail-clos
   );
   assert.equal(
     report.blockedCaseIds.includes("review_only_work_cell_result_acceptance_candidate_treated_as_layer_storage_authority"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("review_only_work_cell_result_acceptance_decision_treated_as_application_merge_mutation"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("review_only_work_cell_result_acceptance_decision_treated_as_layer_storage_authority"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("review_only_work_cell_result_acceptance_decision_treated_as_payload_validity"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("review_only_work_cell_result_acceptance_decision_treated_as_dispatch_execution_platform"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("review_only_work_cell_result_acceptance_decision_treated_as_event_family_auto_execute"),
     true
   );
   assert.equal(report.blockedCaseIds.includes("tui_visibility_treated_as_authority"), true);
@@ -610,6 +645,25 @@ test("Lane D keeps operator-burden visibility and candidate boundaries fail-clos
   assert.equal(workCellAcceptanceCandidateAuthorityCase.boundary.writesProductionStorage, false);
   assert.equal(workCellAcceptanceCandidateAuthorityCase.boundary.createsAuthority, false);
   assert.equal(workCellAcceptanceCandidateAuthorityCase.boundary.claimsPayloadValidity, false);
+  assert.equal(workCellAcceptanceDecisionApplicationCase.stopStatus, "blocked");
+  assert.equal(workCellAcceptanceDecisionApplicationCase.boundary.executesBehavior, false);
+  assert.equal(workCellAcceptanceDecisionApplicationCase.boundary.mutatesSourceRepo, false);
+  assert.equal(workCellAcceptanceDecisionApplicationCase.boundary.mutatesLayer, false);
+  assert.equal(workCellAcceptanceDecisionAuthorityCase.stopStatus, "blocked");
+  assert.equal(workCellAcceptanceDecisionAuthorityCase.boundary.acceptsContinuity, false);
+  assert.equal(workCellAcceptanceDecisionAuthorityCase.boundary.claimsTruth, false);
+  assert.equal(workCellAcceptanceDecisionAuthorityCase.boundary.writesProductionStorage, false);
+  assert.equal(workCellAcceptanceDecisionAuthorityCase.boundary.createsAuthority, false);
+  assert.equal(workCellAcceptanceDecisionPayloadCase.stopStatus, "blocked");
+  assert.equal(workCellAcceptanceDecisionPayloadCase.boundary.callsBytes, false);
+  assert.equal(workCellAcceptanceDecisionPayloadCase.boundary.claimsPayloadValidity, false);
+  assert.equal(workCellAcceptanceDecisionDispatchCase.stopStatus, "blocked");
+  assert.equal(workCellAcceptanceDecisionDispatchCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(workCellAcceptanceDecisionDispatchCase.boundary.executesBehavior, false);
+  assert.equal(workCellAcceptanceDecisionDispatchCase.boundary.callsPlatform, false);
+  assert.equal(workCellAcceptanceDecisionAutoCase.stopStatus, "blocked");
+  assert.equal(workCellAcceptanceDecisionAutoCase.boundary.autoExecutes, false);
+  assert.equal(workCellAcceptanceDecisionAutoCase.boundary.createsAuthority, false);
   assert.equal(tuiVisibilityCase.stopStatus, "blocked");
   assert.equal(tuiVisibilityCase.boundary.callsEdge, false);
   assert.equal(tuiVisibilityCase.boundary.createsAuthority, false);
