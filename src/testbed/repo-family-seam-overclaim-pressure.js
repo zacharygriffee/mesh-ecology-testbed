@@ -217,6 +217,9 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "tui_receipt_action_candidate_projection_treated_as_action_or_receipt",
   "tui_receipt_action_candidate_projection_treated_as_acceptance_truth_or_mutation",
   "tui_receipt_action_candidate_projection_treated_as_approval_authority_or_auto_execute",
+  "tui_triggered_receipt_action_treated_as_scheduler_dispatch_or_agent_execution",
+  "tui_triggered_receipt_action_treated_as_acceptance_truth_or_payload",
+  "tui_triggered_receipt_action_treated_as_application_merge_mutation_or_authority",
   "repo_agent_seat_exchange_tui_treated_as_action_authority"
 ]);
 
@@ -1468,6 +1471,24 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "TUI receipt action candidate projection treated as approval, action authority, Platform consequence, authority transition, event-family expansion, or auto-execute",
     reasonCode: "blocked_case:tui_receipt_action_candidate_projection_treated_as_approval_authority_or_auto_execute"
+  }),
+  Object.freeze({
+    caseId: "tui_triggered_receipt_action_treated_as_scheduler_dispatch_or_agent_execution",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-triggered receipt-producing action treated as scheduler, dispatch, agent invocation, execution, Platform call, or future authorization",
+    reasonCode: "blocked_case:tui_triggered_receipt_action_treated_as_scheduler_dispatch_or_agent_execution"
+  }),
+  Object.freeze({
+    caseId: "tui_triggered_receipt_action_treated_as_acceptance_truth_or_payload",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-triggered receipt-producing action receipt treated as result acceptance, reported truth, payload validity/fetch/materialization, or Layer truth",
+    reasonCode: "blocked_case:tui_triggered_receipt_action_treated_as_acceptance_truth_or_payload"
+  }),
+  Object.freeze({
+    caseId: "tui_triggered_receipt_action_treated_as_application_merge_mutation_or_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-triggered receipt-producing action treated as result application, merge, repo mutation beyond explicit inbox copy, Layer mutation, storage write, authority, event-family expansion, or auto-execute",
+    reasonCode: "blocked_case:tui_triggered_receipt_action_treated_as_application_merge_mutation_or_authority"
   }),
   Object.freeze({
     caseId: "repo_agent_seat_exchange_tui_treated_as_action_authority",
