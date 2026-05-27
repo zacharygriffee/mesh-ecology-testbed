@@ -193,6 +193,11 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "tui_outbox_import_decision_capture_treated_as_dispatch_platform_authority_or_auto_execute",
   "tui_outbox_import_decision_capture_receipt_treated_as_delivery_read_or_execution_proof",
   "tui_outbox_import_decision_capture_visibility_treated_as_action_authority",
+  "tui_outbox_result_intake_decision_capture_treated_as_result_intake",
+  "tui_outbox_result_intake_decision_capture_treated_as_acceptance_truth_or_payload",
+  "tui_outbox_result_intake_decision_capture_treated_as_application_merge_or_mutation",
+  "tui_outbox_result_intake_decision_capture_treated_as_dispatch_platform_authority_or_auto_execute",
+  "tui_outbox_result_intake_decision_capture_visibility_treated_as_action_authority",
   "repo_agent_seat_exchange_tui_treated_as_action_authority"
 ]);
 
@@ -1300,6 +1305,36 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "TUI outbox import decision capture visibility treated as post-capture action controls, import/result-intake/dispatch controls, mutation, or authority",
     reasonCode: "blocked_case:tui_outbox_import_decision_capture_visibility_treated_as_action_authority"
+  }),
+  Object.freeze({
+    caseId: "tui_outbox_result_intake_decision_capture_treated_as_result_intake",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI outbox result-intake decision capture treated as result-intake attempt or result-intake observation/result creation",
+    reasonCode: "blocked_case:tui_outbox_result_intake_decision_capture_treated_as_result_intake"
+  }),
+  Object.freeze({
+    caseId: "tui_outbox_result_intake_decision_capture_treated_as_acceptance_truth_or_payload",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI outbox result-intake decision capture treated as result acceptance, reported result truth, payload validity, fetch, or materialization",
+    reasonCode: "blocked_case:tui_outbox_result_intake_decision_capture_treated_as_acceptance_truth_or_payload"
+  }),
+  Object.freeze({
+    caseId: "tui_outbox_result_intake_decision_capture_treated_as_application_merge_or_mutation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI outbox result-intake decision capture treated as result application, merge, repo mutation, Layer mutation/truth/continuity, or storage write",
+    reasonCode: "blocked_case:tui_outbox_result_intake_decision_capture_treated_as_application_merge_or_mutation"
+  }),
+  Object.freeze({
+    caseId: "tui_outbox_result_intake_decision_capture_treated_as_dispatch_platform_authority_or_auto_execute",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI outbox result-intake decision capture treated as scheduling, launch, dispatch, execution, agent invocation, Platform consequence, authority transition, event-family expansion, or auto-execute",
+    reasonCode: "blocked_case:tui_outbox_result_intake_decision_capture_treated_as_dispatch_platform_authority_or_auto_execute"
+  }),
+  Object.freeze({
+    caseId: "tui_outbox_result_intake_decision_capture_visibility_treated_as_action_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI outbox result-intake decision capture visibility treated as post-capture action controls, result-intake/acceptance/dispatch controls, mutation, or authority",
+    reasonCode: "blocked_case:tui_outbox_result_intake_decision_capture_visibility_treated_as_action_authority"
   }),
   Object.freeze({
     caseId: "repo_agent_seat_exchange_tui_treated_as_action_authority",
