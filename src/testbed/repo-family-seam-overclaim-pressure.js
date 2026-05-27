@@ -168,6 +168,13 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "repo_agent_seat_exchange_loop_burden_measurement_treated_as_dispatch_platform_authority_or_auto_execute",
   "repo_agent_seat_exchange_loop_burden_measurement_treated_as_wall_clock_autonomy_or_enclosure_proof",
   "repo_agent_seat_exchange_loop_burden_measurement_tui_treated_as_action_authority",
+  "repo_agent_seat_exchange_mediation_bundle_treated_as_scheduler_runner_or_workflow",
+  "repo_agent_seat_exchange_mediation_bundle_treated_as_decision_or_handoff",
+  "repo_agent_seat_exchange_mediation_bundle_treated_as_import_intake_or_acceptance",
+  "repo_agent_seat_exchange_mediation_bundle_treated_as_payload_or_mutation",
+  "repo_agent_seat_exchange_mediation_bundle_treated_as_dispatch_platform_authority_or_auto_execute",
+  "repo_agent_seat_exchange_mediation_bundle_points_treated_as_approval_or_proof",
+  "repo_agent_seat_exchange_mediation_bundle_tui_treated_as_action_authority",
   "repo_agent_seat_exchange_tui_treated_as_action_authority"
 ]);
 
@@ -1125,6 +1132,48 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "Repo-agent seat exchange loop burden measurement TUI or cockpit visibility treated as action controls, decision capture, dispatch, import, result acceptance, mutation, or authority",
     reasonCode: "blocked_case:repo_agent_seat_exchange_loop_burden_measurement_tui_treated_as_action_authority"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_exchange_mediation_bundle_treated_as_scheduler_runner_or_workflow",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat exchange mediation bundle treated as scheduler, runner, workflow execution, or automatic loop progression",
+    reasonCode: "blocked_case:repo_agent_seat_exchange_mediation_bundle_treated_as_scheduler_runner_or_workflow"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_exchange_mediation_bundle_treated_as_decision_or_handoff",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat exchange mediation bundle treated as operator decision creation/capture, inbox handoff, inbox write, or prompt delivery",
+    reasonCode: "blocked_case:repo_agent_seat_exchange_mediation_bundle_treated_as_decision_or_handoff"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_exchange_mediation_bundle_treated_as_import_intake_or_acceptance",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat exchange mediation bundle treated as outbox import, result intake, result acceptance, or reported-result truth",
+    reasonCode: "blocked_case:repo_agent_seat_exchange_mediation_bundle_treated_as_import_intake_or_acceptance"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_exchange_mediation_bundle_treated_as_payload_or_mutation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat exchange mediation bundle treated as payload validity/fetch/materialization, application, merge, repo mutation, Layer mutation/truth/continuity, or storage write",
+    reasonCode: "blocked_case:repo_agent_seat_exchange_mediation_bundle_treated_as_payload_or_mutation"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_exchange_mediation_bundle_treated_as_dispatch_platform_authority_or_auto_execute",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat exchange mediation bundle treated as scheduling, launch, dispatch, execution, agent invocation, Platform consequence, authority transition, event-family expansion, or auto-execute",
+    reasonCode: "blocked_case:repo_agent_seat_exchange_mediation_bundle_treated_as_dispatch_platform_authority_or_auto_execute"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_exchange_mediation_bundle_points_treated_as_approval_or_proof",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Pending mediation point treated as approval, or completed mediation point treated as delivery, read, or execution proof",
+    reasonCode: "blocked_case:repo_agent_seat_exchange_mediation_bundle_points_treated_as_approval_or_proof"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_exchange_mediation_bundle_tui_treated_as_action_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat exchange mediation bundle TUI or cockpit visibility treated as action controls, decision capture, handoff, import, dispatch, result acceptance, mutation, or authority",
+    reasonCode: "blocked_case:repo_agent_seat_exchange_mediation_bundle_tui_treated_as_action_authority"
   }),
   Object.freeze({
     caseId: "repo_agent_seat_exchange_tui_treated_as_action_authority",
