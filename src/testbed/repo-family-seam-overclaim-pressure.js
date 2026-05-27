@@ -240,6 +240,12 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "tui_mediated_local_seat_loop_operational_readiness_treated_as_acceptance_truth_or_payload",
   "tui_mediated_local_seat_loop_operational_readiness_treated_as_application_merge_mutation_or_authority",
   "tui_mediated_local_seat_loop_operational_readiness_tui_treated_as_action_authority",
+  "repo_agent_outbox_report_expectation_profile_treated_as_agent_invocation_scheduler_or_dispatch",
+  "repo_agent_outbox_report_expectation_profile_treated_as_report_import_or_result_intake",
+  "repo_agent_outbox_report_expectation_profile_treated_as_acceptance_truth_or_payload",
+  "repo_agent_outbox_report_expectation_profile_treated_as_application_merge_mutation_or_storage",
+  "repo_agent_outbox_report_expectation_profile_treated_as_platform_authority_event_or_auto_execute",
+  "repo_agent_outbox_report_expectation_profile_tui_treated_as_action_authority",
   "repo_agent_seat_exchange_tui_treated_as_action_authority"
 ]);
 
@@ -1629,6 +1635,42 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "TUI-mediated local seat-loop operational readiness visibility treated as action authority, decision authority, dispatch authority, execution authority, import authority, mutation authority, or approval",
     reasonCode: "blocked_case:tui_mediated_local_seat_loop_operational_readiness_tui_treated_as_action_authority"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_outbox_report_expectation_profile_treated_as_agent_invocation_scheduler_or_dispatch",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent outbox report expectation profile treated as agent invocation, scheduler, watcher, dispatch, launch, or execution behavior",
+    reasonCode: "blocked_case:repo_agent_outbox_report_expectation_profile_treated_as_agent_invocation_scheduler_or_dispatch"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_outbox_report_expectation_profile_treated_as_report_import_or_result_intake",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent outbox report expectation profile treated as outbox report import, report truth validation, or result-intake creation",
+    reasonCode: "blocked_case:repo_agent_outbox_report_expectation_profile_treated_as_report_import_or_result_intake"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_outbox_report_expectation_profile_treated_as_acceptance_truth_or_payload",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent outbox report expectation profile treated as result acceptance, reported truth, payload validity/fetch/materialization, Layer truth, or Layer continuity",
+    reasonCode: "blocked_case:repo_agent_outbox_report_expectation_profile_treated_as_acceptance_truth_or_payload"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_outbox_report_expectation_profile_treated_as_application_merge_mutation_or_storage",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent outbox report expectation profile treated as result application, merge, repo mutation, Layer mutation, or storage write",
+    reasonCode: "blocked_case:repo_agent_outbox_report_expectation_profile_treated_as_application_merge_mutation_or_storage"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_outbox_report_expectation_profile_treated_as_platform_authority_event_or_auto_execute",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent outbox report expectation profile treated as Platform consequence, authority transition, event-family expansion, auto-execute, full Edge enclosure proof, or agent correctness proof",
+    reasonCode: "blocked_case:repo_agent_outbox_report_expectation_profile_treated_as_platform_authority_event_or_auto_execute"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_outbox_report_expectation_profile_tui_treated_as_action_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent outbox report expectation profile TUI visibility treated as import, decision, dispatch, execution, mutation, acceptance, or action authority",
+    reasonCode: "blocked_case:repo_agent_outbox_report_expectation_profile_tui_treated_as_action_authority"
   }),
   Object.freeze({
     caseId: "repo_agent_seat_exchange_tui_treated_as_action_authority",
