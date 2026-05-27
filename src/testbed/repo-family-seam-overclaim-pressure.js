@@ -181,6 +181,12 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "repo_agent_seat_exchange_mediation_decision_projection_treated_as_application_merge_or_mutation",
   "repo_agent_seat_exchange_mediation_decision_projection_treated_as_dispatch_platform_authority_or_auto_execute",
   "repo_agent_seat_exchange_mediation_decision_projection_tui_treated_as_action_authority",
+  "tui_inbox_handoff_decision_capture_treated_as_handoff_attempt",
+  "tui_inbox_handoff_decision_capture_treated_as_delivery_or_execution",
+  "tui_inbox_handoff_decision_capture_treated_as_import_intake_or_acceptance",
+  "tui_inbox_handoff_decision_capture_treated_as_payload_application_or_mutation",
+  "tui_inbox_handoff_decision_capture_treated_as_authority_event_or_auto_execute",
+  "tui_inbox_handoff_decision_capture_visibility_treated_as_action_authority",
   "repo_agent_seat_exchange_tui_treated_as_action_authority"
 ]);
 
@@ -1216,6 +1222,42 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "Repo-agent seat exchange mediation decision candidate projection TUI or cockpit visibility treated as action controls, decision capture, handoff, import, dispatch, result acceptance, mutation, or authority",
     reasonCode: "blocked_case:repo_agent_seat_exchange_mediation_decision_projection_tui_treated_as_action_authority"
+  }),
+  Object.freeze({
+    caseId: "tui_inbox_handoff_decision_capture_treated_as_handoff_attempt",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI inbox handoff decision capture treated as the local inbox handoff attempt itself",
+    reasonCode: "blocked_case:tui_inbox_handoff_decision_capture_treated_as_handoff_attempt"
+  }),
+  Object.freeze({
+    caseId: "tui_inbox_handoff_decision_capture_treated_as_delivery_or_execution",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI inbox handoff decision capture treated as prompt delivery, inbox write, scheduling, launch, dispatch, agent invocation, or execution",
+    reasonCode: "blocked_case:tui_inbox_handoff_decision_capture_treated_as_delivery_or_execution"
+  }),
+  Object.freeze({
+    caseId: "tui_inbox_handoff_decision_capture_treated_as_import_intake_or_acceptance",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI inbox handoff decision capture treated as outbox import, result intake, result acceptance, result truth, application, or merge",
+    reasonCode: "blocked_case:tui_inbox_handoff_decision_capture_treated_as_import_intake_or_acceptance"
+  }),
+  Object.freeze({
+    caseId: "tui_inbox_handoff_decision_capture_treated_as_payload_application_or_mutation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI inbox handoff decision capture treated as payload validity/fetch/materialization, repo mutation, Layer mutation/truth/continuity, or storage write",
+    reasonCode: "blocked_case:tui_inbox_handoff_decision_capture_treated_as_payload_application_or_mutation"
+  }),
+  Object.freeze({
+    caseId: "tui_inbox_handoff_decision_capture_treated_as_authority_event_or_auto_execute",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI inbox handoff decision capture treated as Platform consequence, authority transition, accepted continuity, event-family expansion, or auto-execute",
+    reasonCode: "blocked_case:tui_inbox_handoff_decision_capture_treated_as_authority_event_or_auto_execute"
+  }),
+  Object.freeze({
+    caseId: "tui_inbox_handoff_decision_capture_visibility_treated_as_action_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI inbox handoff decision capture visibility treated as post-capture action controls, handoff/import/dispatch controls, mutation, or authority",
+    reasonCode: "blocked_case:tui_inbox_handoff_decision_capture_visibility_treated_as_action_authority"
   }),
   Object.freeze({
     caseId: "repo_agent_seat_exchange_tui_treated_as_action_authority",

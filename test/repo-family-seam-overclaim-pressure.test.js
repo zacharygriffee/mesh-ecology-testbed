@@ -1458,6 +1458,24 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
   const mediationDecisionProjectionAuthorityCase = packet.cases.find((entry) =>
     entry.caseId === "repo_agent_seat_exchange_mediation_decision_projection_treated_as_dispatch_platform_authority_or_auto_execute"
   );
+  const tuiInboxDecisionCaptureHandoffCase = packet.cases.find((entry) =>
+    entry.caseId === "tui_inbox_handoff_decision_capture_treated_as_handoff_attempt"
+  );
+  const tuiInboxDecisionCaptureDeliveryCase = packet.cases.find((entry) =>
+    entry.caseId === "tui_inbox_handoff_decision_capture_treated_as_delivery_or_execution"
+  );
+  const tuiInboxDecisionCaptureImportCase = packet.cases.find((entry) =>
+    entry.caseId === "tui_inbox_handoff_decision_capture_treated_as_import_intake_or_acceptance"
+  );
+  const tuiInboxDecisionCaptureMutationCase = packet.cases.find((entry) =>
+    entry.caseId === "tui_inbox_handoff_decision_capture_treated_as_payload_application_or_mutation"
+  );
+  const tuiInboxDecisionCaptureAuthorityCase = packet.cases.find((entry) =>
+    entry.caseId === "tui_inbox_handoff_decision_capture_treated_as_authority_event_or_auto_execute"
+  );
+  const tuiInboxDecisionCaptureVisibilityCase = packet.cases.find((entry) =>
+    entry.caseId === "tui_inbox_handoff_decision_capture_visibility_treated_as_action_authority"
+  );
   const tuiCase = packet.cases.find((entry) =>
     entry.caseId === "repo_agent_seat_exchange_tui_treated_as_action_authority"
   );
@@ -1698,6 +1716,30 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
     report.blockedCaseIds.includes("repo_agent_seat_exchange_mediation_decision_projection_tui_treated_as_action_authority"),
     true
   );
+  assert.equal(
+    report.blockedCaseIds.includes("tui_inbox_handoff_decision_capture_treated_as_handoff_attempt"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("tui_inbox_handoff_decision_capture_treated_as_delivery_or_execution"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("tui_inbox_handoff_decision_capture_treated_as_import_intake_or_acceptance"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("tui_inbox_handoff_decision_capture_treated_as_payload_application_or_mutation"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("tui_inbox_handoff_decision_capture_treated_as_authority_event_or_auto_execute"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("tui_inbox_handoff_decision_capture_visibility_treated_as_action_authority"),
+    true
+  );
   assert.equal(report.blockedCaseIds.includes("repo_agent_seat_exchange_tui_treated_as_action_authority"), true);
   assert.equal(conventionCase.stopStatus, "blocked");
   assert.equal(conventionCase.boundary.dispatchesRepoAgents, false);
@@ -1928,6 +1970,28 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
   assert.equal(mediationDecisionProjectionAuthorityCase.boundary.executesBehavior, false);
   assert.equal(mediationDecisionProjectionAuthorityCase.boundary.callsPlatform, false);
   assert.equal(mediationDecisionProjectionAuthorityCase.boundary.createsAuthority, false);
+  assert.equal(tuiInboxDecisionCaptureHandoffCase.stopStatus, "blocked");
+  assert.equal(tuiInboxDecisionCaptureHandoffCase.boundary.callsEdge, false);
+  assert.equal(tuiInboxDecisionCaptureHandoffCase.boundary.executesBehavior, false);
+  assert.equal(tuiInboxDecisionCaptureDeliveryCase.stopStatus, "blocked");
+  assert.equal(tuiInboxDecisionCaptureDeliveryCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(tuiInboxDecisionCaptureDeliveryCase.boundary.executesBehavior, false);
+  assert.equal(tuiInboxDecisionCaptureImportCase.stopStatus, "blocked");
+  assert.equal(tuiInboxDecisionCaptureImportCase.boundary.claimsTruth, false);
+  assert.equal(tuiInboxDecisionCaptureImportCase.boundary.mutatesSourceRepo, false);
+  assert.equal(tuiInboxDecisionCaptureMutationCase.stopStatus, "blocked");
+  assert.equal(tuiInboxDecisionCaptureMutationCase.boundary.claimsPayloadValidity, false);
+  assert.equal(tuiInboxDecisionCaptureMutationCase.boundary.mutatesSourceRepo, false);
+  assert.equal(tuiInboxDecisionCaptureMutationCase.boundary.mutatesLayer, false);
+  assert.equal(tuiInboxDecisionCaptureMutationCase.boundary.writesProductionStorage, false);
+  assert.equal(tuiInboxDecisionCaptureAuthorityCase.stopStatus, "blocked");
+  assert.equal(tuiInboxDecisionCaptureAuthorityCase.boundary.callsPlatform, false);
+  assert.equal(tuiInboxDecisionCaptureAuthorityCase.boundary.createsAuthority, false);
+  assert.equal(tuiInboxDecisionCaptureAuthorityCase.boundary.autoExecutes, false);
+  assert.equal(tuiInboxDecisionCaptureVisibilityCase.stopStatus, "blocked");
+  assert.equal(tuiInboxDecisionCaptureVisibilityCase.boundary.callsEdge, false);
+  assert.equal(tuiInboxDecisionCaptureVisibilityCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(tuiInboxDecisionCaptureVisibilityCase.boundary.createsAuthority, false);
   assert.equal(tuiCase.stopStatus, "blocked");
   assert.equal(tuiCase.boundary.callsEdge, false);
   assert.equal(tuiCase.boundary.dispatchesRepoAgents, false);
