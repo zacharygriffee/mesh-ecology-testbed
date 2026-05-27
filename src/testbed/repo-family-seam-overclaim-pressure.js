@@ -235,6 +235,11 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "tui_mediated_receipt_action_loop_summary_burden_measurement_treated_as_application_merge_mutation_or_authority",
   "tui_mediated_receipt_action_loop_summary_burden_measurement_treated_as_wall_clock_autonomy_or_enclosure_proof",
   "tui_mediated_receipt_action_loop_summary_burden_measurement_tui_treated_as_action_authority",
+  "tui_mediated_local_seat_loop_operational_readiness_treated_as_enclosure_or_autonomy_proof",
+  "tui_mediated_local_seat_loop_operational_readiness_treated_as_dispatch_execution_or_delivery_proof",
+  "tui_mediated_local_seat_loop_operational_readiness_treated_as_acceptance_truth_or_payload",
+  "tui_mediated_local_seat_loop_operational_readiness_treated_as_application_merge_mutation_or_authority",
+  "tui_mediated_local_seat_loop_operational_readiness_tui_treated_as_action_authority",
   "repo_agent_seat_exchange_tui_treated_as_action_authority"
 ]);
 
@@ -1594,6 +1599,36 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "TUI-mediated receipt action loop summary burden measurement visibility treated as approval, action authority, receipt authority, dispatch authority, or auto-execute authority",
     reasonCode: "blocked_case:tui_mediated_receipt_action_loop_summary_burden_measurement_tui_treated_as_action_authority"
+  }),
+  Object.freeze({
+    caseId: "tui_mediated_local_seat_loop_operational_readiness_treated_as_enclosure_or_autonomy_proof",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-mediated local seat-loop operational readiness treated as full Edge enclosure proof, autonomy proof, agent correctness proof, wall-clock proof, or default external agent control",
+    reasonCode: "blocked_case:tui_mediated_local_seat_loop_operational_readiness_treated_as_enclosure_or_autonomy_proof"
+  }),
+  Object.freeze({
+    caseId: "tui_mediated_local_seat_loop_operational_readiness_treated_as_dispatch_execution_or_delivery_proof",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-mediated local seat-loop operational readiness treated as dispatch proof, execution proof, delivery proof, read proof, agent invocation, scheduler, or runner",
+    reasonCode: "blocked_case:tui_mediated_local_seat_loop_operational_readiness_treated_as_dispatch_execution_or_delivery_proof"
+  }),
+  Object.freeze({
+    caseId: "tui_mediated_local_seat_loop_operational_readiness_treated_as_acceptance_truth_or_payload",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-mediated local seat-loop operational readiness treated as result acceptance, reported truth, payload validity/fetch/materialization, Layer truth, or Layer continuity",
+    reasonCode: "blocked_case:tui_mediated_local_seat_loop_operational_readiness_treated_as_acceptance_truth_or_payload"
+  }),
+  Object.freeze({
+    caseId: "tui_mediated_local_seat_loop_operational_readiness_treated_as_application_merge_mutation_or_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-mediated local seat-loop operational readiness treated as result application, merge, repo mutation, Layer mutation, storage write, Platform consequence, authority transition, event-family expansion, or auto-execute",
+    reasonCode: "blocked_case:tui_mediated_local_seat_loop_operational_readiness_treated_as_application_merge_mutation_or_authority"
+  }),
+  Object.freeze({
+    caseId: "tui_mediated_local_seat_loop_operational_readiness_tui_treated_as_action_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-mediated local seat-loop operational readiness visibility treated as action authority, decision authority, dispatch authority, execution authority, import authority, mutation authority, or approval",
+    reasonCode: "blocked_case:tui_mediated_local_seat_loop_operational_readiness_tui_treated_as_action_authority"
   }),
   Object.freeze({
     caseId: "repo_agent_seat_exchange_tui_treated_as_action_authority",
