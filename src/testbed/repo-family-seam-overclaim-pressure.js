@@ -83,6 +83,11 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "review_only_work_cell_loop_field_trial_treated_as_application_merge_mutation",
   "review_only_work_cell_loop_field_trial_treated_as_payload_or_storage",
   "review_only_work_cell_loop_field_trial_tui_treated_as_action_surface",
+  "review_only_work_cell_loop_repetition_batch_treated_as_wall_clock_or_general_enclosure",
+  "review_only_work_cell_loop_repetition_batch_treated_as_scheduling_dispatch_execution",
+  "review_only_work_cell_loop_repetition_batch_treated_as_application_merge_mutation",
+  "review_only_work_cell_loop_repetition_batch_treated_as_payload_storage_authority",
+  "review_only_work_cell_loop_repetition_batch_tui_treated_as_action_surface",
   "tui_visibility_treated_as_authority",
   "candidate_export_treated_as_work_cell_creation",
   "candidate_export_treated_as_dispatch_decision_request_creation",
@@ -543,6 +548,36 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "Review-only work-cell loop field trial cockpit/TUI projection treated as action controls, scheduling, dispatch, execution, or auto-execute",
     reasonCode: "blocked_case:review_only_work_cell_loop_field_trial_tui_treated_as_action_surface"
+  }),
+  Object.freeze({
+    caseId: "review_only_work_cell_loop_repetition_batch_treated_as_wall_clock_or_general_enclosure",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Review-only work-cell loop repetition batch treated as wall-clock reduction, general Edge enclosure proof, autonomy, readiness conversion, or authority",
+    reasonCode: "blocked_case:review_only_work_cell_loop_repetition_batch_treated_as_wall_clock_or_general_enclosure"
+  }),
+  Object.freeze({
+    caseId: "review_only_work_cell_loop_repetition_batch_treated_as_scheduling_dispatch_execution",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Review-only work-cell loop repetition batch treated as scheduling, launch, dispatch, execution, Platform call, or auto-execute",
+    reasonCode: "blocked_case:review_only_work_cell_loop_repetition_batch_treated_as_scheduling_dispatch_execution"
+  }),
+  Object.freeze({
+    caseId: "review_only_work_cell_loop_repetition_batch_treated_as_application_merge_mutation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Review-only work-cell loop repetition batch treated as result application, merge, repo mutation, or Layer mutation",
+    reasonCode: "blocked_case:review_only_work_cell_loop_repetition_batch_treated_as_application_merge_mutation"
+  }),
+  Object.freeze({
+    caseId: "review_only_work_cell_loop_repetition_batch_treated_as_payload_storage_authority",
+    sourceFamily: "bytes",
+    attemptedOverclaim: "Review-only work-cell loop repetition batch treated as payload validity, payload fetch, payload materialization, storage write, accepted continuity, or authority",
+    reasonCode: "blocked_case:review_only_work_cell_loop_repetition_batch_treated_as_payload_storage_authority"
+  }),
+  Object.freeze({
+    caseId: "review_only_work_cell_loop_repetition_batch_tui_treated_as_action_surface",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Review-only work-cell loop repetition batch cockpit/TUI projection treated as action controls, scheduling, dispatch, execution, or auto-execute",
+    reasonCode: "blocked_case:review_only_work_cell_loop_repetition_batch_tui_treated_as_action_surface"
   }),
   Object.freeze({
     caseId: "tui_visibility_treated_as_authority",
