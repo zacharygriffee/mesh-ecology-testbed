@@ -129,6 +129,11 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "repo_agent_seat_inbox_handoff_decision_treated_as_delivery_dispatch_execution",
   "repo_agent_seat_inbox_handoff_decision_treated_as_result_import_acceptance_truth",
   "repo_agent_seat_inbox_handoff_decision_treated_as_repo_layer_storage_authority",
+  "repo_agent_seat_inbox_handoff_observation_treated_as_implicit_path_or_repo_discovery",
+  "repo_agent_seat_inbox_handoff_observation_treated_as_shell_network_or_agent_invocation",
+  "repo_agent_seat_inbox_handoff_observation_treated_as_dispatch_execution_or_work_cell",
+  "repo_agent_seat_inbox_handoff_observation_treated_as_result_import_acceptance_truth",
+  "repo_agent_seat_inbox_handoff_observation_treated_as_repo_layer_storage_authority",
   "repo_agent_seat_exchange_tui_treated_as_action_authority"
 ]);
 
@@ -852,6 +857,36 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "Repo-agent seat inbox handoff operator decision treated as repo mutation, Layer mutation, storage write, Platform consequence, authority, accepted continuity, event-family expansion, or auto-execute",
     reasonCode: "blocked_case:repo_agent_seat_inbox_handoff_decision_treated_as_repo_layer_storage_authority"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_inbox_handoff_observation_treated_as_implicit_path_or_repo_discovery",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat inbox handoff observation treated as default cwd, repo discovery, implicit path, missing destination, unsafe path, or multi-packet handoff",
+    reasonCode: "blocked_case:repo_agent_seat_inbox_handoff_observation_treated_as_implicit_path_or_repo_discovery"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_inbox_handoff_observation_treated_as_shell_network_or_agent_invocation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat inbox handoff observation treated as shell use, network use, agent launch, agent invocation, or scheduler behavior",
+    reasonCode: "blocked_case:repo_agent_seat_inbox_handoff_observation_treated_as_shell_network_or_agent_invocation"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_inbox_handoff_observation_treated_as_dispatch_execution_or_work_cell",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat inbox handoff observation treated as dispatch, execution, work-cell creation, or dispatch-decision request creation",
+    reasonCode: "blocked_case:repo_agent_seat_inbox_handoff_observation_treated_as_dispatch_execution_or_work_cell"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_inbox_handoff_observation_treated_as_result_import_acceptance_truth",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat inbox handoff observation treated as outbox import, result intake, result acceptance, application, merge, or reported-result truth",
+    reasonCode: "blocked_case:repo_agent_seat_inbox_handoff_observation_treated_as_result_import_acceptance_truth"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_inbox_handoff_observation_treated_as_repo_layer_storage_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat inbox handoff observation treated as broad repo mutation, Layer mutation, storage write, Platform consequence, authority, accepted continuity, event-family expansion, or auto-execute",
+    reasonCode: "blocked_case:repo_agent_seat_inbox_handoff_observation_treated_as_repo_layer_storage_authority"
   }),
   Object.freeze({
     caseId: "repo_agent_seat_exchange_tui_treated_as_action_authority",

@@ -1311,6 +1311,21 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
   const handoffAuthorityCase = packet.cases.find((entry) =>
     entry.caseId === "repo_agent_seat_inbox_handoff_decision_treated_as_repo_layer_storage_authority"
   );
+  const handoffObservationPathCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_seat_inbox_handoff_observation_treated_as_implicit_path_or_repo_discovery"
+  );
+  const handoffObservationTransportCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_seat_inbox_handoff_observation_treated_as_shell_network_or_agent_invocation"
+  );
+  const handoffObservationDispatchCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_seat_inbox_handoff_observation_treated_as_dispatch_execution_or_work_cell"
+  );
+  const handoffObservationResultCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_seat_inbox_handoff_observation_treated_as_result_import_acceptance_truth"
+  );
+  const handoffObservationAuthorityCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_seat_inbox_handoff_observation_treated_as_repo_layer_storage_authority"
+  );
   const tuiCase = packet.cases.find((entry) =>
     entry.caseId === "repo_agent_seat_exchange_tui_treated_as_action_authority"
   );
@@ -1341,6 +1356,26 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
   );
   assert.equal(
     report.blockedCaseIds.includes("repo_agent_seat_inbox_handoff_decision_treated_as_repo_layer_storage_authority"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_seat_inbox_handoff_observation_treated_as_implicit_path_or_repo_discovery"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_seat_inbox_handoff_observation_treated_as_shell_network_or_agent_invocation"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_seat_inbox_handoff_observation_treated_as_dispatch_execution_or_work_cell"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_seat_inbox_handoff_observation_treated_as_result_import_acceptance_truth"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_seat_inbox_handoff_observation_treated_as_repo_layer_storage_authority"),
     true
   );
   assert.equal(report.blockedCaseIds.includes("repo_agent_seat_exchange_tui_treated_as_action_authority"), true);
@@ -1374,6 +1409,25 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
   assert.equal(handoffAuthorityCase.boundary.createsAuthority, false);
   assert.equal(handoffAuthorityCase.boundary.mutatesLayer, false);
   assert.equal(handoffAuthorityCase.boundary.writesProductionStorage, false);
+  assert.equal(handoffObservationPathCase.stopStatus, "blocked");
+  assert.equal(handoffObservationPathCase.boundary.mutatesSourceRepo, false);
+  assert.equal(handoffObservationPathCase.boundary.createsAuthority, false);
+  assert.equal(handoffObservationTransportCase.stopStatus, "blocked");
+  assert.equal(handoffObservationTransportCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(handoffObservationTransportCase.boundary.executesBehavior, false);
+  assert.equal(handoffObservationTransportCase.boundary.createsAuthority, false);
+  assert.equal(handoffObservationDispatchCase.stopStatus, "blocked");
+  assert.equal(handoffObservationDispatchCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(handoffObservationDispatchCase.boundary.executesBehavior, false);
+  assert.equal(handoffObservationDispatchCase.boundary.mutatesSourceRepo, false);
+  assert.equal(handoffObservationResultCase.stopStatus, "blocked");
+  assert.equal(handoffObservationResultCase.boundary.claimsTruth, false);
+  assert.equal(handoffObservationResultCase.boundary.mutatesSourceRepo, false);
+  assert.equal(handoffObservationResultCase.boundary.mutatesLayer, false);
+  assert.equal(handoffObservationAuthorityCase.stopStatus, "blocked");
+  assert.equal(handoffObservationAuthorityCase.boundary.createsAuthority, false);
+  assert.equal(handoffObservationAuthorityCase.boundary.mutatesLayer, false);
+  assert.equal(handoffObservationAuthorityCase.boundary.writesProductionStorage, false);
   assert.equal(tuiCase.stopStatus, "blocked");
   assert.equal(tuiCase.boundary.callsEdge, false);
   assert.equal(tuiCase.boundary.dispatchesRepoAgents, false);
