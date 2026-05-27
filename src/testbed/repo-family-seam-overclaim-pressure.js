@@ -125,6 +125,10 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "repo_agent_seat_exchange_convention_treated_as_transport_scheduler_or_authority",
   "repo_agent_seat_inbox_packet_candidate_treated_as_delivery_invocation_or_work_cell",
   "repo_agent_seat_outbox_report_candidate_treated_as_import_acceptance_truth_or_mutation",
+  "repo_agent_seat_inbox_handoff_decision_treated_as_handoff_attempt",
+  "repo_agent_seat_inbox_handoff_decision_treated_as_delivery_dispatch_execution",
+  "repo_agent_seat_inbox_handoff_decision_treated_as_result_import_acceptance_truth",
+  "repo_agent_seat_inbox_handoff_decision_treated_as_repo_layer_storage_authority",
   "repo_agent_seat_exchange_tui_treated_as_action_authority"
 ]);
 
@@ -824,6 +828,30 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "Repo-agent seat outbox report candidate treated as report import, result acceptance, reported truth, application, merge, repo mutation, Layer mutation, or storage write",
     reasonCode: "blocked_case:repo_agent_seat_outbox_report_candidate_treated_as_import_acceptance_truth_or_mutation"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_inbox_handoff_decision_treated_as_handoff_attempt",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat inbox handoff operator decision treated as the local inbox handoff attempt itself",
+    reasonCode: "blocked_case:repo_agent_seat_inbox_handoff_decision_treated_as_handoff_attempt"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_inbox_handoff_decision_treated_as_delivery_dispatch_execution",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat inbox handoff operator decision treated as prompt delivery, inbox write, dispatch, scheduling, launch, invocation, or execution",
+    reasonCode: "blocked_case:repo_agent_seat_inbox_handoff_decision_treated_as_delivery_dispatch_execution"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_inbox_handoff_decision_treated_as_result_import_acceptance_truth",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat inbox handoff operator decision treated as outbox import, result intake, result acceptance, application, merge, or reported-result truth",
+    reasonCode: "blocked_case:repo_agent_seat_inbox_handoff_decision_treated_as_result_import_acceptance_truth"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_inbox_handoff_decision_treated_as_repo_layer_storage_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat inbox handoff operator decision treated as repo mutation, Layer mutation, storage write, Platform consequence, authority, accepted continuity, event-family expansion, or auto-execute",
+    reasonCode: "blocked_case:repo_agent_seat_inbox_handoff_decision_treated_as_repo_layer_storage_authority"
   }),
   Object.freeze({
     caseId: "repo_agent_seat_exchange_tui_treated_as_action_authority",
