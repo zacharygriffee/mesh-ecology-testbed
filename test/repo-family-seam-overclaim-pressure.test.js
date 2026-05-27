@@ -976,6 +976,67 @@ test("Lane D keeps repo-agent seat descriptor readiness and TUI cards fail-close
   assert.equal(tuiCardCase.boundary.autoExecutes, false);
 });
 
+test("Lane D keeps repo-agent operational board fail-closed", () => {
+  const report = build();
+  const packet = packetFixture();
+  const schedulingCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_operational_board_treated_as_scheduling_dispatch_execution"
+  );
+  const decisionCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_operational_board_treated_as_decision_capture_or_approval"
+  );
+  const resultCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_operational_board_treated_as_result_acceptance_truth_application"
+  );
+  const authorityCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_operational_board_treated_as_repo_layer_storage_authority"
+  );
+  const tuiCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_operational_board_tui_treated_as_action_surface"
+  );
+
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_operational_board_treated_as_scheduling_dispatch_execution"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_operational_board_treated_as_decision_capture_or_approval"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_operational_board_treated_as_result_acceptance_truth_application"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_operational_board_treated_as_repo_layer_storage_authority"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_operational_board_tui_treated_as_action_surface"),
+    true
+  );
+  assert.equal(schedulingCase.stopStatus, "blocked");
+  assert.equal(schedulingCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(schedulingCase.boundary.executesBehavior, false);
+  assert.equal(schedulingCase.boundary.autoExecutes, false);
+  assert.equal(decisionCase.stopStatus, "blocked");
+  assert.equal(decisionCase.boundary.callsEdge, false);
+  assert.equal(decisionCase.boundary.createsAuthority, false);
+  assert.equal(resultCase.stopStatus, "blocked");
+  assert.equal(resultCase.boundary.claimsTruth, false);
+  assert.equal(resultCase.boundary.mutatesSourceRepo, false);
+  assert.equal(resultCase.boundary.acceptsContinuity, false);
+  assert.equal(authorityCase.stopStatus, "blocked");
+  assert.equal(authorityCase.boundary.mutatesSourceRepo, false);
+  assert.equal(authorityCase.boundary.mutatesLayer, false);
+  assert.equal(authorityCase.boundary.writesProductionStorage, false);
+  assert.equal(authorityCase.boundary.createsAuthority, false);
+  assert.equal(tuiCase.stopStatus, "blocked");
+  assert.equal(tuiCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(tuiCase.boundary.executesBehavior, false);
+  assert.equal(tuiCase.boundary.autoExecutes, false);
+});
+
 test("Lane D keeps export result intake candidate boundaries fail-closed", () => {
   const report = build();
   const packet = packetFixture();
