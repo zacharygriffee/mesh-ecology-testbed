@@ -1530,6 +1530,15 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
   const tuiMediatedMeasurementVisibilityCase = packet.cases.find((entry) =>
     entry.caseId === "tui_mediated_seat_loop_burden_measurement_tui_treated_as_action_authority"
   );
+  const remainingBurdenAnalysisActionCase = packet.cases.find((entry) =>
+    entry.caseId === "tui_mediated_seat_loop_remaining_burden_analysis_treated_as_decision_or_action"
+  );
+  const remainingBurdenAnalysisAuthorityCase = packet.cases.find((entry) =>
+    entry.caseId === "tui_mediated_seat_loop_remaining_burden_analysis_treated_as_acceptance_mutation_or_authority"
+  );
+  const remainingBurdenAnalysisRecommendationCase = packet.cases.find((entry) =>
+    entry.caseId === "tui_mediated_seat_loop_remaining_burden_analysis_recommendation_treated_as_approval"
+  );
   const tuiCase = packet.cases.find((entry) =>
     entry.caseId === "repo_agent_seat_exchange_tui_treated_as_action_authority"
   );
@@ -1866,6 +1875,18 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
     report.blockedCaseIds.includes("tui_mediated_seat_loop_burden_measurement_tui_treated_as_action_authority"),
     true
   );
+  assert.equal(
+    report.blockedCaseIds.includes("tui_mediated_seat_loop_remaining_burden_analysis_treated_as_decision_or_action"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("tui_mediated_seat_loop_remaining_burden_analysis_treated_as_acceptance_mutation_or_authority"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("tui_mediated_seat_loop_remaining_burden_analysis_recommendation_treated_as_approval"),
+    true
+  );
   assert.equal(report.blockedCaseIds.includes("repo_agent_seat_exchange_tui_treated_as_action_authority"), true);
   assert.equal(conventionCase.stopStatus, "blocked");
   assert.equal(conventionCase.boundary.dispatchesRepoAgents, false);
@@ -2191,6 +2212,21 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
   assert.equal(tuiMediatedMeasurementVisibilityCase.boundary.callsEdge, false);
   assert.equal(tuiMediatedMeasurementVisibilityCase.boundary.dispatchesRepoAgents, false);
   assert.equal(tuiMediatedMeasurementVisibilityCase.boundary.createsAuthority, false);
+  assert.equal(remainingBurdenAnalysisActionCase.stopStatus, "blocked");
+  assert.equal(remainingBurdenAnalysisActionCase.boundary.callsEdge, false);
+  assert.equal(remainingBurdenAnalysisActionCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(remainingBurdenAnalysisActionCase.boundary.executesBehavior, false);
+  assert.equal(remainingBurdenAnalysisAuthorityCase.stopStatus, "blocked");
+  assert.equal(remainingBurdenAnalysisAuthorityCase.boundary.claimsPayloadValidity, false);
+  assert.equal(remainingBurdenAnalysisAuthorityCase.boundary.claimsTruth, false);
+  assert.equal(remainingBurdenAnalysisAuthorityCase.boundary.mutatesSourceRepo, false);
+  assert.equal(remainingBurdenAnalysisAuthorityCase.boundary.mutatesLayer, false);
+  assert.equal(remainingBurdenAnalysisAuthorityCase.boundary.writesProductionStorage, false);
+  assert.equal(remainingBurdenAnalysisAuthorityCase.boundary.createsAuthority, false);
+  assert.equal(remainingBurdenAnalysisRecommendationCase.stopStatus, "blocked");
+  assert.equal(remainingBurdenAnalysisRecommendationCase.boundary.callsEdge, false);
+  assert.equal(remainingBurdenAnalysisRecommendationCase.boundary.executesBehavior, false);
+  assert.equal(remainingBurdenAnalysisRecommendationCase.boundary.createsAuthority, false);
   assert.equal(tuiCase.stopStatus, "blocked");
   assert.equal(tuiCase.boundary.callsEdge, false);
   assert.equal(tuiCase.boundary.dispatchesRepoAgents, false);

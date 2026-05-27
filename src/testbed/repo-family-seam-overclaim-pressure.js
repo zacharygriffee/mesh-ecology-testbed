@@ -205,6 +205,9 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "tui_mediated_seat_loop_burden_measurement_treated_as_wall_clock_autonomy_or_enclosure_proof",
   "tui_mediated_seat_loop_burden_measurement_decision_capture_treated_as_action_execution",
   "tui_mediated_seat_loop_burden_measurement_tui_treated_as_action_authority",
+  "tui_mediated_seat_loop_remaining_burden_analysis_treated_as_decision_or_action",
+  "tui_mediated_seat_loop_remaining_burden_analysis_treated_as_acceptance_mutation_or_authority",
+  "tui_mediated_seat_loop_remaining_burden_analysis_recommendation_treated_as_approval",
   "repo_agent_seat_exchange_tui_treated_as_action_authority"
 ]);
 
@@ -1384,6 +1387,24 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "TUI-mediated seat-loop burden measurement cockpit visibility treated as action controls, decision authority, dispatch, import, result acceptance, mutation, or authority",
     reasonCode: "blocked_case:tui_mediated_seat_loop_burden_measurement_tui_treated_as_action_authority"
+  }),
+  Object.freeze({
+    caseId: "tui_mediated_seat_loop_remaining_burden_analysis_treated_as_decision_or_action",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-mediated seat-loop remaining burden analysis treated as operator decision creation/capture, handoff, import, result intake, dispatch, execution, or agent invocation",
+    reasonCode: "blocked_case:tui_mediated_seat_loop_remaining_burden_analysis_treated_as_decision_or_action"
+  }),
+  Object.freeze({
+    caseId: "tui_mediated_seat_loop_remaining_burden_analysis_treated_as_acceptance_mutation_or_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-mediated seat-loop remaining burden analysis treated as result acceptance, truth, payload validity, application, merge, repo/Layer/storage mutation, or authority",
+    reasonCode: "blocked_case:tui_mediated_seat_loop_remaining_burden_analysis_treated_as_acceptance_mutation_or_authority"
+  }),
+  Object.freeze({
+    caseId: "tui_mediated_seat_loop_remaining_burden_analysis_recommendation_treated_as_approval",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-mediated seat-loop remaining burden recommendation treated as approval, readiness, auto-continuation, auto-execute, or TUI action authority",
+    reasonCode: "blocked_case:tui_mediated_seat_loop_remaining_burden_analysis_recommendation_treated_as_approval"
   }),
   Object.freeze({
     caseId: "repo_agent_seat_exchange_tui_treated_as_action_authority",
