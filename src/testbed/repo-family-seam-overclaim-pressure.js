@@ -52,8 +52,10 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "platform_dispatch_candidate_treated_as_deployment_ownership",
   "attention_queue_projection_treated_as_scheduler",
   "work_cell_candidate_treated_as_work_cell_creation",
+  "work_cell_operator_decision_treated_as_scheduling_or_execution",
   "work_cell_creation_treated_as_execution",
   "dispatch_decision_request_treated_as_dispatch_approval",
+  "dispatch_decision_request_observation_treated_as_platform_call",
   "tui_visibility_treated_as_authority",
   "candidate_export_treated_as_work_cell_creation",
   "candidate_export_treated_as_dispatch_decision_request_creation",
@@ -63,7 +65,11 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "export_result_intake_candidate_treated_as_result_intake",
   "export_result_intake_candidate_treated_as_operator_decision_capture",
   "export_result_intake_candidate_treated_as_acceptance_truth",
-  "export_result_intake_candidate_treated_as_execution_or_mutation"
+  "export_result_intake_candidate_treated_as_execution_or_mutation",
+  "export_result_intake_operator_decision_treated_as_acceptance_or_execution",
+  "export_result_intake_observation_treated_as_acceptance_truth_mutation",
+  "export_result_intake_board_projection_treated_as_authority_or_action",
+  "platform_returned_operator_review_treated_as_dispatch_approval"
 ]);
 
 const REQUIRED_CASES = Object.freeze([
@@ -326,6 +332,12 @@ const REQUIRED_CASES = Object.freeze([
     reasonCode: "blocked_case:work_cell_candidate_treated_as_work_cell_creation"
   }),
   Object.freeze({
+    caseId: "work_cell_operator_decision_treated_as_scheduling_or_execution",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Review-only work-cell operator decision treated as scheduling, dispatch, execution, repo mutation, or authority",
+    reasonCode: "blocked_case:work_cell_operator_decision_treated_as_scheduling_or_execution"
+  }),
+  Object.freeze({
     caseId: "work_cell_creation_treated_as_execution",
     sourceFamily: "edge",
     attemptedOverclaim: "Review-only work-cell creation treated as execution, repo mutation, or result acceptance",
@@ -336,6 +348,12 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "Dispatch-decision request candidate treated as dispatch approval, Platform call, or host-local consequence",
     reasonCode: "blocked_case:dispatch_decision_request_treated_as_dispatch_approval"
+  }),
+  Object.freeze({
+    caseId: "dispatch_decision_request_observation_treated_as_platform_call",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Dispatch-decision request observation treated as dispatch approval, Platform call, host-local consequence, activation, or deployment authority",
+    reasonCode: "blocked_case:dispatch_decision_request_observation_treated_as_platform_call"
   }),
   Object.freeze({
     caseId: "tui_visibility_treated_as_authority",
@@ -396,6 +414,30 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "Export result intake candidate treated as execution, repo mutation, Layer mutation, or storage write",
     reasonCode: "blocked_case:export_result_intake_candidate_treated_as_execution_or_mutation"
+  }),
+  Object.freeze({
+    caseId: "export_result_intake_operator_decision_treated_as_acceptance_or_execution",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Export result intake operator decision treated as result acceptance, dispatch, execution, or mutation approval",
+    reasonCode: "blocked_case:export_result_intake_operator_decision_treated_as_acceptance_or_execution"
+  }),
+  Object.freeze({
+    caseId: "export_result_intake_observation_treated_as_acceptance_truth_mutation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Export result intake observation treated as result acceptance, reported truth, repo mutation, Layer mutation, or storage write",
+    reasonCode: "blocked_case:export_result_intake_observation_treated_as_acceptance_truth_mutation"
+  }),
+  Object.freeze({
+    caseId: "export_result_intake_board_projection_treated_as_authority_or_action",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Export result intake board projection treated as authority, decision capture, scheduling, dispatch, execution, or mutation",
+    reasonCode: "blocked_case:export_result_intake_board_projection_treated_as_authority_or_action"
+  }),
+  Object.freeze({
+    caseId: "platform_returned_operator_review_treated_as_dispatch_approval",
+    sourceFamily: "platform",
+    attemptedOverclaim: "Returned Platform operator-review response treated as dispatch approval, Platform call, host-local consequence, or activation",
+    reasonCode: "blocked_case:platform_returned_operator_review_treated_as_dispatch_approval"
   })
 ]);
 

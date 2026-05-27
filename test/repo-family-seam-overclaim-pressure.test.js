@@ -436,11 +436,17 @@ test("Lane D keeps operator-burden visibility and candidate boundaries fail-clos
   const workCellCandidateCase = packet.cases.find((entry) =>
     entry.caseId === "work_cell_candidate_treated_as_work_cell_creation"
   );
+  const workCellOperatorDecisionCase = packet.cases.find((entry) =>
+    entry.caseId === "work_cell_operator_decision_treated_as_scheduling_or_execution"
+  );
   const workCellCreationCase = packet.cases.find((entry) =>
     entry.caseId === "work_cell_creation_treated_as_execution"
   );
   const dispatchDecisionRequestCase = packet.cases.find((entry) =>
     entry.caseId === "dispatch_decision_request_treated_as_dispatch_approval"
+  );
+  const dispatchDecisionRequestObservationCase = packet.cases.find((entry) =>
+    entry.caseId === "dispatch_decision_request_observation_treated_as_platform_call"
   );
   const tuiVisibilityCase = packet.cases.find((entry) =>
     entry.caseId === "tui_visibility_treated_as_authority"
@@ -448,8 +454,16 @@ test("Lane D keeps operator-burden visibility and candidate boundaries fail-clos
 
   assert.equal(report.blockedCaseIds.includes("attention_queue_projection_treated_as_scheduler"), true);
   assert.equal(report.blockedCaseIds.includes("work_cell_candidate_treated_as_work_cell_creation"), true);
+  assert.equal(
+    report.blockedCaseIds.includes("work_cell_operator_decision_treated_as_scheduling_or_execution"),
+    true
+  );
   assert.equal(report.blockedCaseIds.includes("work_cell_creation_treated_as_execution"), true);
   assert.equal(report.blockedCaseIds.includes("dispatch_decision_request_treated_as_dispatch_approval"), true);
+  assert.equal(
+    report.blockedCaseIds.includes("dispatch_decision_request_observation_treated_as_platform_call"),
+    true
+  );
   assert.equal(report.blockedCaseIds.includes("tui_visibility_treated_as_authority"), true);
   assert.equal(attentionQueueCase.stopStatus, "blocked");
   assert.equal(attentionQueueCase.boundary.dispatchesRepoAgents, false);
@@ -459,6 +473,11 @@ test("Lane D keeps operator-burden visibility and candidate boundaries fail-clos
   assert.equal(workCellCandidateCase.boundary.dispatchesRepoAgents, false);
   assert.equal(workCellCandidateCase.boundary.executesBehavior, false);
   assert.equal(workCellCandidateCase.boundary.mutatesSourceRepo, false);
+  assert.equal(workCellOperatorDecisionCase.stopStatus, "blocked");
+  assert.equal(workCellOperatorDecisionCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(workCellOperatorDecisionCase.boundary.executesBehavior, false);
+  assert.equal(workCellOperatorDecisionCase.boundary.mutatesSourceRepo, false);
+  assert.equal(workCellOperatorDecisionCase.boundary.createsAuthority, false);
   assert.equal(workCellCreationCase.stopStatus, "blocked");
   assert.equal(workCellCreationCase.boundary.executesBehavior, false);
   assert.equal(workCellCreationCase.boundary.mutatesSourceRepo, false);
@@ -468,6 +487,12 @@ test("Lane D keeps operator-burden visibility and candidate boundaries fail-clos
   assert.equal(dispatchDecisionRequestCase.boundary.callsPlatform, false);
   assert.equal(dispatchDecisionRequestCase.boundary.executesBehavior, false);
   assert.equal(dispatchDecisionRequestCase.boundary.createsAuthority, false);
+  assert.equal(dispatchDecisionRequestObservationCase.stopStatus, "blocked");
+  assert.equal(dispatchDecisionRequestObservationCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(dispatchDecisionRequestObservationCase.boundary.callsPlatform, false);
+  assert.equal(dispatchDecisionRequestObservationCase.boundary.executesBehavior, false);
+  assert.equal(dispatchDecisionRequestObservationCase.boundary.mutatesSourceRepo, false);
+  assert.equal(dispatchDecisionRequestObservationCase.boundary.createsAuthority, false);
   assert.equal(tuiVisibilityCase.stopStatus, "blocked");
   assert.equal(tuiVisibilityCase.boundary.callsEdge, false);
   assert.equal(tuiVisibilityCase.boundary.createsAuthority, false);
@@ -563,6 +588,57 @@ test("Lane D keeps export result intake candidate boundaries fail-closed", () =>
   assert.equal(executionMutationCase.boundary.mutatesSourceRepo, false);
   assert.equal(executionMutationCase.boundary.mutatesLayer, false);
   assert.equal(executionMutationCase.boundary.writesProductionStorage, false);
+});
+
+test("Lane D keeps export result intake decision observation and board boundaries fail-closed", () => {
+  const report = build();
+  const packet = packetFixture();
+  const operatorDecisionCase = packet.cases.find((entry) =>
+    entry.caseId === "export_result_intake_operator_decision_treated_as_acceptance_or_execution"
+  );
+  const observationCase = packet.cases.find((entry) =>
+    entry.caseId === "export_result_intake_observation_treated_as_acceptance_truth_mutation"
+  );
+  const boardCase = packet.cases.find((entry) =>
+    entry.caseId === "export_result_intake_board_projection_treated_as_authority_or_action"
+  );
+  const platformReviewCase = packet.cases.find((entry) =>
+    entry.caseId === "platform_returned_operator_review_treated_as_dispatch_approval"
+  );
+
+  assert.equal(
+    report.blockedCaseIds.includes("export_result_intake_operator_decision_treated_as_acceptance_or_execution"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("export_result_intake_observation_treated_as_acceptance_truth_mutation"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("export_result_intake_board_projection_treated_as_authority_or_action"),
+    true
+  );
+  assert.equal(report.blockedCaseIds.includes("platform_returned_operator_review_treated_as_dispatch_approval"), true);
+  assert.equal(operatorDecisionCase.stopStatus, "blocked");
+  assert.equal(operatorDecisionCase.boundary.executesBehavior, false);
+  assert.equal(operatorDecisionCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(operatorDecisionCase.boundary.mutatesSourceRepo, false);
+  assert.equal(operatorDecisionCase.boundary.createsAuthority, false);
+  assert.equal(observationCase.stopStatus, "blocked");
+  assert.equal(observationCase.boundary.claimsTruth, false);
+  assert.equal(observationCase.boundary.mutatesSourceRepo, false);
+  assert.equal(observationCase.boundary.mutatesLayer, false);
+  assert.equal(observationCase.boundary.writesProductionStorage, false);
+  assert.equal(boardCase.stopStatus, "blocked");
+  assert.equal(boardCase.boundary.callsEdge, false);
+  assert.equal(boardCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(boardCase.boundary.executesBehavior, false);
+  assert.equal(boardCase.boundary.createsAuthority, false);
+  assert.equal(platformReviewCase.stopStatus, "blocked");
+  assert.equal(platformReviewCase.boundary.callsPlatform, false);
+  assert.equal(platformReviewCase.boundary.executesBehavior, false);
+  assert.equal(platformReviewCase.boundary.mutatesSourceRepo, false);
+  assert.equal(platformReviewCase.boundary.createsAuthority, false);
 });
 
 test("Lane D fails closed when a required blocked case is missing", () => {
