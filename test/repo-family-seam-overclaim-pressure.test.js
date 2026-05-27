@@ -1605,6 +1605,21 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
   const tuiReceiptLoopSummaryTuiCase = packet.cases.find((entry) =>
     entry.caseId === "tui_mediated_receipt_action_loop_summary_tui_treated_as_action_authority"
   );
+  const tuiReceiptLoopSummaryMeasurementActionCase = packet.cases.find((entry) =>
+    entry.caseId === "tui_mediated_receipt_action_loop_summary_burden_measurement_treated_as_action_or_receipt"
+  );
+  const tuiReceiptLoopSummaryMeasurementAcceptanceCase = packet.cases.find((entry) =>
+    entry.caseId === "tui_mediated_receipt_action_loop_summary_burden_measurement_treated_as_acceptance_truth_or_payload"
+  );
+  const tuiReceiptLoopSummaryMeasurementMutationCase = packet.cases.find((entry) =>
+    entry.caseId === "tui_mediated_receipt_action_loop_summary_burden_measurement_treated_as_application_merge_mutation_or_authority"
+  );
+  const tuiReceiptLoopSummaryMeasurementProofCase = packet.cases.find((entry) =>
+    entry.caseId === "tui_mediated_receipt_action_loop_summary_burden_measurement_treated_as_wall_clock_autonomy_or_enclosure_proof"
+  );
+  const tuiReceiptLoopSummaryMeasurementTuiCase = packet.cases.find((entry) =>
+    entry.caseId === "tui_mediated_receipt_action_loop_summary_burden_measurement_tui_treated_as_action_authority"
+  );
   const tuiCase = packet.cases.find((entry) =>
     entry.caseId === "repo_agent_seat_exchange_tui_treated_as_action_authority"
   );
@@ -2029,6 +2044,26 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
     report.blockedCaseIds.includes("tui_mediated_receipt_action_loop_summary_tui_treated_as_action_authority"),
     true
   );
+  assert.equal(
+    report.blockedCaseIds.includes("tui_mediated_receipt_action_loop_summary_burden_measurement_treated_as_action_or_receipt"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("tui_mediated_receipt_action_loop_summary_burden_measurement_treated_as_acceptance_truth_or_payload"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("tui_mediated_receipt_action_loop_summary_burden_measurement_treated_as_application_merge_mutation_or_authority"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("tui_mediated_receipt_action_loop_summary_burden_measurement_treated_as_wall_clock_autonomy_or_enclosure_proof"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("tui_mediated_receipt_action_loop_summary_burden_measurement_tui_treated_as_action_authority"),
+    true
+  );
   assert.equal(report.blockedCaseIds.includes("repo_agent_seat_exchange_tui_treated_as_action_authority"), true);
   assert.equal(conventionCase.stopStatus, "blocked");
   assert.equal(conventionCase.boundary.dispatchesRepoAgents, false);
@@ -2079,6 +2114,27 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
   assert.equal(handoffObservationAuthorityCase.boundary.createsAuthority, false);
   assert.equal(handoffObservationAuthorityCase.boundary.mutatesLayer, false);
   assert.equal(handoffObservationAuthorityCase.boundary.writesProductionStorage, false);
+  assert.equal(tuiReceiptLoopSummaryMeasurementActionCase.stopStatus, "blocked");
+  assert.equal(tuiReceiptLoopSummaryMeasurementActionCase.boundary.callsEdge, false);
+  assert.equal(tuiReceiptLoopSummaryMeasurementActionCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(tuiReceiptLoopSummaryMeasurementActionCase.boundary.executesBehavior, false);
+  assert.equal(tuiReceiptLoopSummaryMeasurementAcceptanceCase.stopStatus, "blocked");
+  assert.equal(tuiReceiptLoopSummaryMeasurementAcceptanceCase.boundary.claimsTruth, false);
+  assert.equal(tuiReceiptLoopSummaryMeasurementAcceptanceCase.boundary.mutatesLayer, false);
+  assert.equal(tuiReceiptLoopSummaryMeasurementAcceptanceCase.boundary.createsAuthority, false);
+  assert.equal(tuiReceiptLoopSummaryMeasurementMutationCase.stopStatus, "blocked");
+  assert.equal(tuiReceiptLoopSummaryMeasurementMutationCase.boundary.mutatesSourceRepo, false);
+  assert.equal(tuiReceiptLoopSummaryMeasurementMutationCase.boundary.mutatesLayer, false);
+  assert.equal(tuiReceiptLoopSummaryMeasurementMutationCase.boundary.writesProductionStorage, false);
+  assert.equal(tuiReceiptLoopSummaryMeasurementMutationCase.boundary.createsAuthority, false);
+  assert.equal(tuiReceiptLoopSummaryMeasurementProofCase.stopStatus, "blocked");
+  assert.equal(tuiReceiptLoopSummaryMeasurementProofCase.boundary.claimsTruth, false);
+  assert.equal(tuiReceiptLoopSummaryMeasurementProofCase.boundary.executesBehavior, false);
+  assert.equal(tuiReceiptLoopSummaryMeasurementProofCase.boundary.createsAuthority, false);
+  assert.equal(tuiReceiptLoopSummaryMeasurementTuiCase.stopStatus, "blocked");
+  assert.equal(tuiReceiptLoopSummaryMeasurementTuiCase.boundary.callsEdge, false);
+  assert.equal(tuiReceiptLoopSummaryMeasurementTuiCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(tuiReceiptLoopSummaryMeasurementTuiCase.boundary.createsAuthority, false);
   assert.equal(outboxImportDecisionImportCase.stopStatus, "blocked");
   assert.equal(outboxImportDecisionImportCase.boundary.callsEdge, false);
   assert.equal(outboxImportDecisionImportCase.boundary.claimsTruth, false);
