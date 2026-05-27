@@ -913,6 +913,69 @@ test("Lane D keeps candidate export and copy-ready text boundaries fail-closed",
   assert.equal(operatorDecisionTextCase.boundary.executesBehavior, false);
 });
 
+test("Lane D keeps repo-agent seat descriptor readiness and TUI cards fail-closed", () => {
+  const report = build();
+  const packet = packetFixture();
+  const descriptorCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_seat_descriptor_treated_as_identity_or_admission"
+  );
+  const readinessDispatchCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_seat_readiness_treated_as_scheduling_dispatch_execution"
+  );
+  const readinessTruthCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_seat_readiness_treated_as_result_truth_or_acceptance"
+  );
+  const readinessAuthorityCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_seat_readiness_treated_as_repo_layer_storage_authority"
+  );
+  const tuiCardCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_seat_tui_card_treated_as_action_surface"
+  );
+
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_seat_descriptor_treated_as_identity_or_admission"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_seat_readiness_treated_as_scheduling_dispatch_execution"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_seat_readiness_treated_as_result_truth_or_acceptance"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_seat_readiness_treated_as_repo_layer_storage_authority"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_seat_tui_card_treated_as_action_surface"),
+    true
+  );
+  assert.equal(descriptorCase.stopStatus, "blocked");
+  assert.equal(descriptorCase.boundary.createsAuthority, false);
+  assert.equal(descriptorCase.boundary.mutatesSourceRepo, false);
+  assert.equal(descriptorCase.boundary.mutatesLayer, false);
+  assert.equal(readinessDispatchCase.stopStatus, "blocked");
+  assert.equal(readinessDispatchCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(readinessDispatchCase.boundary.executesBehavior, false);
+  assert.equal(readinessDispatchCase.boundary.autoExecutes, false);
+  assert.equal(readinessTruthCase.stopStatus, "blocked");
+  assert.equal(readinessTruthCase.boundary.claimsTruth, false);
+  assert.equal(readinessTruthCase.boundary.executesBehavior, false);
+  assert.equal(readinessTruthCase.boundary.mutatesSourceRepo, false);
+  assert.equal(readinessAuthorityCase.stopStatus, "blocked");
+  assert.equal(readinessAuthorityCase.boundary.mutatesSourceRepo, false);
+  assert.equal(readinessAuthorityCase.boundary.mutatesLayer, false);
+  assert.equal(readinessAuthorityCase.boundary.writesProductionStorage, false);
+  assert.equal(readinessAuthorityCase.boundary.createsAuthority, false);
+  assert.equal(tuiCardCase.stopStatus, "blocked");
+  assert.equal(tuiCardCase.boundary.callsEdge, false);
+  assert.equal(tuiCardCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(tuiCardCase.boundary.executesBehavior, false);
+  assert.equal(tuiCardCase.boundary.autoExecutes, false);
+});
+
 test("Lane D keeps export result intake candidate boundaries fail-closed", () => {
   const report = build();
   const packet = packetFixture();

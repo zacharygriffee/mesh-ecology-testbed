@@ -88,6 +88,11 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "review_only_work_cell_loop_repetition_batch_treated_as_application_merge_mutation",
   "review_only_work_cell_loop_repetition_batch_treated_as_payload_storage_authority",
   "review_only_work_cell_loop_repetition_batch_tui_treated_as_action_surface",
+  "repo_agent_seat_descriptor_treated_as_identity_or_admission",
+  "repo_agent_seat_readiness_treated_as_scheduling_dispatch_execution",
+  "repo_agent_seat_readiness_treated_as_result_truth_or_acceptance",
+  "repo_agent_seat_readiness_treated_as_repo_layer_storage_authority",
+  "repo_agent_seat_tui_card_treated_as_action_surface",
   "tui_visibility_treated_as_authority",
   "candidate_export_treated_as_work_cell_creation",
   "candidate_export_treated_as_dispatch_decision_request_creation",
@@ -578,6 +583,36 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "Review-only work-cell loop repetition batch cockpit/TUI projection treated as action controls, scheduling, dispatch, execution, or auto-execute",
     reasonCode: "blocked_case:review_only_work_cell_loop_repetition_batch_tui_treated_as_action_surface"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_descriptor_treated_as_identity_or_admission",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat descriptor treated as identity authority, writer admission, reader admission, or mutation permission",
+    reasonCode: "blocked_case:repo_agent_seat_descriptor_treated_as_identity_or_admission"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_readiness_treated_as_scheduling_dispatch_execution",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat readiness projection treated as scheduling permission, agent launch, work packet dispatch, execution, or auto-execute",
+    reasonCode: "blocked_case:repo_agent_seat_readiness_treated_as_scheduling_dispatch_execution"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_readiness_treated_as_result_truth_or_acceptance",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat readiness projection treated as result acceptance, reported commit/test truth, result application, or merge",
+    reasonCode: "blocked_case:repo_agent_seat_readiness_treated_as_result_truth_or_acceptance"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_readiness_treated_as_repo_layer_storage_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat readiness projection treated as repo mutation, Layer mutation, storage write, authority, or repo-specific Layer API",
+    reasonCode: "blocked_case:repo_agent_seat_readiness_treated_as_repo_layer_storage_authority"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_tui_card_treated_as_action_surface",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat TUI read-only card treated as action controls, decision capture, scheduling, dispatch, execution, or auto-execute",
+    reasonCode: "blocked_case:repo_agent_seat_tui_card_treated_as_action_surface"
   }),
   Object.freeze({
     caseId: "tui_visibility_treated_as_authority",
