@@ -1548,6 +1548,15 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
   const receiptVisibilityActionCase = packet.cases.find((entry) =>
     entry.caseId === "tui_receipt_visibility_hardening_treated_as_action_authority_or_proof"
   );
+  const receiptNextPostureDecisionCase = packet.cases.find((entry) =>
+    entry.caseId === "tui_receipt_visibility_next_posture_panel_treated_as_decision_or_action"
+  );
+  const receiptNextPostureMutationCase = packet.cases.find((entry) =>
+    entry.caseId === "tui_receipt_visibility_next_posture_panel_treated_as_acceptance_truth_or_mutation"
+  );
+  const receiptNextPostureAuthorityCase = packet.cases.find((entry) =>
+    entry.caseId === "tui_receipt_visibility_next_posture_panel_treated_as_approval_authority_or_proof"
+  );
   const tuiCase = packet.cases.find((entry) =>
     entry.caseId === "repo_agent_seat_exchange_tui_treated_as_action_authority"
   );
@@ -1894,6 +1903,18 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
   );
   assert.equal(
     report.blockedCaseIds.includes("tui_mediated_seat_loop_remaining_burden_analysis_recommendation_treated_as_approval"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("tui_receipt_visibility_next_posture_panel_treated_as_decision_or_action"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("tui_receipt_visibility_next_posture_panel_treated_as_acceptance_truth_or_mutation"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("tui_receipt_visibility_next_posture_panel_treated_as_approval_authority_or_proof"),
     true
   );
   assert.equal(report.blockedCaseIds.includes("repo_agent_seat_exchange_tui_treated_as_action_authority"), true);
@@ -2252,6 +2273,21 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
   assert.equal(receiptVisibilityActionCase.boundary.executesBehavior, false);
   assert.equal(receiptVisibilityActionCase.boundary.claimsTruth, false);
   assert.equal(receiptVisibilityActionCase.boundary.createsAuthority, false);
+  assert.equal(receiptNextPostureDecisionCase.stopStatus, "blocked");
+  assert.equal(receiptNextPostureDecisionCase.boundary.callsEdge, false);
+  assert.equal(receiptNextPostureDecisionCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(receiptNextPostureDecisionCase.boundary.executesBehavior, false);
+  assert.equal(receiptNextPostureMutationCase.stopStatus, "blocked");
+  assert.equal(receiptNextPostureMutationCase.boundary.claimsPayloadValidity, false);
+  assert.equal(receiptNextPostureMutationCase.boundary.claimsTruth, false);
+  assert.equal(receiptNextPostureMutationCase.boundary.mutatesSourceRepo, false);
+  assert.equal(receiptNextPostureMutationCase.boundary.mutatesLayer, false);
+  assert.equal(receiptNextPostureMutationCase.boundary.writesProductionStorage, false);
+  assert.equal(receiptNextPostureAuthorityCase.stopStatus, "blocked");
+  assert.equal(receiptNextPostureAuthorityCase.boundary.callsEdge, false);
+  assert.equal(receiptNextPostureAuthorityCase.boundary.executesBehavior, false);
+  assert.equal(receiptNextPostureAuthorityCase.boundary.claimsTruth, false);
+  assert.equal(receiptNextPostureAuthorityCase.boundary.createsAuthority, false);
   assert.equal(tuiCase.stopStatus, "blocked");
   assert.equal(tuiCase.boundary.callsEdge, false);
   assert.equal(tuiCase.boundary.dispatchesRepoAgents, false);
