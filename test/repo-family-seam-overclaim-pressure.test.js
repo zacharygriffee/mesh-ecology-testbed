@@ -1097,6 +1097,54 @@ test("Lane D keeps repo-agent operational board field-use report fail-closed", (
   assert.equal(enclosureCase.boundary.autoExecutes, false);
 });
 
+test("Lane D keeps hardened board field-use measurement fail-closed", () => {
+  const report = build();
+  const packet = packetFixture();
+  const schedulingCase = packet.cases.find((entry) =>
+    entry.caseId ===
+      "repo_agent_operational_board_hardened_field_measurement_treated_as_scheduling_dispatch_execution"
+  );
+  const decisionCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_operational_board_hardened_field_measurement_treated_as_decision_or_authority"
+  );
+  const resultCase = packet.cases.find((entry) =>
+    entry.caseId ===
+      "repo_agent_operational_board_hardened_field_measurement_treated_as_result_truth_mutation_or_auto_execute"
+  );
+
+  assert.equal(
+    report.blockedCaseIds.includes(
+      "repo_agent_operational_board_hardened_field_measurement_treated_as_scheduling_dispatch_execution"
+    ),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes(
+      "repo_agent_operational_board_hardened_field_measurement_treated_as_decision_or_authority"
+    ),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes(
+      "repo_agent_operational_board_hardened_field_measurement_treated_as_result_truth_mutation_or_auto_execute"
+    ),
+    true
+  );
+  assert.equal(schedulingCase.stopStatus, "blocked");
+  assert.equal(schedulingCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(schedulingCase.boundary.executesBehavior, false);
+  assert.equal(schedulingCase.boundary.autoExecutes, false);
+  assert.equal(decisionCase.stopStatus, "blocked");
+  assert.equal(decisionCase.boundary.callsEdge, false);
+  assert.equal(decisionCase.boundary.createsAuthority, false);
+  assert.equal(resultCase.stopStatus, "blocked");
+  assert.equal(resultCase.boundary.claimsTruth, false);
+  assert.equal(resultCase.boundary.mutatesSourceRepo, false);
+  assert.equal(resultCase.boundary.mutatesLayer, false);
+  assert.equal(resultCase.boundary.writesProductionStorage, false);
+  assert.equal(resultCase.boundary.autoExecutes, false);
+});
+
 test("Lane D keeps export result intake candidate boundaries fail-closed", () => {
   const report = build();
   const packet = packetFixture();

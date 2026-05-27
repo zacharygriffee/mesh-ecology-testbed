@@ -102,6 +102,9 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "repo_agent_operational_board_field_use_report_treated_as_decision_or_authority",
   "repo_agent_operational_board_field_use_report_treated_as_result_truth_or_mutation",
   "repo_agent_operational_board_field_use_report_treated_as_general_enclosure_or_auto_execute",
+  "repo_agent_operational_board_hardened_field_measurement_treated_as_scheduling_dispatch_execution",
+  "repo_agent_operational_board_hardened_field_measurement_treated_as_decision_or_authority",
+  "repo_agent_operational_board_hardened_field_measurement_treated_as_result_truth_mutation_or_auto_execute",
   "tui_visibility_treated_as_authority",
   "candidate_export_treated_as_work_cell_creation",
   "candidate_export_treated_as_dispatch_decision_request_creation",
@@ -676,6 +679,24 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "Repo-agent operational board field-use report treated as general enclosure, wall-clock automation proof, storage write, event-family expansion, or auto-execute",
     reasonCode: "blocked_case:repo_agent_operational_board_field_use_report_treated_as_general_enclosure_or_auto_execute"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_operational_board_hardened_field_measurement_treated_as_scheduling_dispatch_execution",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Hardened board field-use measurement treated as scheduling, launch, dispatch, execution, Platform call, or auto-execute",
+    reasonCode: "blocked_case:repo_agent_operational_board_hardened_field_measurement_treated_as_scheduling_dispatch_execution"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_operational_board_hardened_field_measurement_treated_as_decision_or_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Hardened board field-use measurement treated as decision capture, approval, work-cell creation, or authority",
+    reasonCode: "blocked_case:repo_agent_operational_board_hardened_field_measurement_treated_as_decision_or_authority"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_operational_board_hardened_field_measurement_treated_as_result_truth_mutation_or_auto_execute",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Hardened board field-use measurement treated as result truth, result acceptance, application, merge, repo mutation, Layer mutation, storage write, or auto-execute",
+    reasonCode: "blocked_case:repo_agent_operational_board_hardened_field_measurement_treated_as_result_truth_mutation_or_auto_execute"
   }),
   Object.freeze({
     caseId: "tui_visibility_treated_as_authority",
