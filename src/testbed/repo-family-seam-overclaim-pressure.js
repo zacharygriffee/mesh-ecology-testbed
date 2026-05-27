@@ -60,6 +60,12 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "review_only_work_cell_dispatch_observation_treated_as_execution_or_success",
   "review_only_work_cell_result_intake_treated_as_acceptance_truth",
   "review_only_work_cell_result_intake_treated_as_payload_or_mutation",
+  "review_only_work_cell_result_sidecar_treated_as_acceptance_or_decision",
+  "review_only_work_cell_result_sidecar_treated_as_application_merge_mutation",
+  "review_only_work_cell_result_sidecar_treated_as_payload_validity_materialization",
+  "review_only_work_cell_result_acceptance_candidate_treated_as_decision_or_acceptance",
+  "review_only_work_cell_result_acceptance_candidate_treated_as_application_merge_mutation",
+  "review_only_work_cell_result_acceptance_candidate_treated_as_layer_storage_authority",
   "tui_visibility_treated_as_authority",
   "candidate_export_treated_as_work_cell_creation",
   "candidate_export_treated_as_dispatch_decision_request_creation",
@@ -382,6 +388,42 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "bytes",
     attemptedOverclaim: "Review-only work-cell result intake treated as Bytes payload fetch, payload materialization, payload validity, repo mutation, Layer mutation, or storage write",
     reasonCode: "blocked_case:review_only_work_cell_result_intake_treated_as_payload_or_mutation"
+  }),
+  Object.freeze({
+    caseId: "review_only_work_cell_result_sidecar_treated_as_acceptance_or_decision",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Review-only work-cell result sidecar review treated as result acceptance or operator decision capture",
+    reasonCode: "blocked_case:review_only_work_cell_result_sidecar_treated_as_acceptance_or_decision"
+  }),
+  Object.freeze({
+    caseId: "review_only_work_cell_result_sidecar_treated_as_application_merge_mutation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Review-only work-cell result sidecar review treated as result application, merge, repo mutation, Layer mutation, or storage write",
+    reasonCode: "blocked_case:review_only_work_cell_result_sidecar_treated_as_application_merge_mutation"
+  }),
+  Object.freeze({
+    caseId: "review_only_work_cell_result_sidecar_treated_as_payload_validity_materialization",
+    sourceFamily: "bytes",
+    attemptedOverclaim: "Review-only work-cell result sidecar review treated as payload validity, payload fetch, or payload materialization",
+    reasonCode: "blocked_case:review_only_work_cell_result_sidecar_treated_as_payload_validity_materialization"
+  }),
+  Object.freeze({
+    caseId: "review_only_work_cell_result_acceptance_candidate_treated_as_decision_or_acceptance",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Review-only work-cell result acceptance candidate treated as operator decision, accepted result, or result acceptance observation",
+    reasonCode: "blocked_case:review_only_work_cell_result_acceptance_candidate_treated_as_decision_or_acceptance"
+  }),
+  Object.freeze({
+    caseId: "review_only_work_cell_result_acceptance_candidate_treated_as_application_merge_mutation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Review-only work-cell result acceptance candidate treated as result application, merge, repo mutation, Layer mutation, or auto-execute",
+    reasonCode: "blocked_case:review_only_work_cell_result_acceptance_candidate_treated_as_application_merge_mutation"
+  }),
+  Object.freeze({
+    caseId: "review_only_work_cell_result_acceptance_candidate_treated_as_layer_storage_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Review-only work-cell result acceptance candidate treated as Layer continuity, Layer truth, storage write, authority, payload validity, or payload materialization",
+    reasonCode: "blocked_case:review_only_work_cell_result_acceptance_candidate_treated_as_layer_storage_authority"
   }),
   Object.freeze({
     caseId: "tui_visibility_treated_as_authority",

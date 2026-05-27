@@ -460,6 +460,24 @@ test("Lane D keeps operator-burden visibility and candidate boundaries fail-clos
   const workCellResultIntakePayloadCase = packet.cases.find((entry) =>
     entry.caseId === "review_only_work_cell_result_intake_treated_as_payload_or_mutation"
   );
+  const workCellSidecarAcceptanceDecisionCase = packet.cases.find((entry) =>
+    entry.caseId === "review_only_work_cell_result_sidecar_treated_as_acceptance_or_decision"
+  );
+  const workCellSidecarApplicationMutationCase = packet.cases.find((entry) =>
+    entry.caseId === "review_only_work_cell_result_sidecar_treated_as_application_merge_mutation"
+  );
+  const workCellSidecarPayloadCase = packet.cases.find((entry) =>
+    entry.caseId === "review_only_work_cell_result_sidecar_treated_as_payload_validity_materialization"
+  );
+  const workCellAcceptanceCandidateDecisionCase = packet.cases.find((entry) =>
+    entry.caseId === "review_only_work_cell_result_acceptance_candidate_treated_as_decision_or_acceptance"
+  );
+  const workCellAcceptanceCandidateApplicationCase = packet.cases.find((entry) =>
+    entry.caseId === "review_only_work_cell_result_acceptance_candidate_treated_as_application_merge_mutation"
+  );
+  const workCellAcceptanceCandidateAuthorityCase = packet.cases.find((entry) =>
+    entry.caseId === "review_only_work_cell_result_acceptance_candidate_treated_as_layer_storage_authority"
+  );
   const tuiVisibilityCase = packet.cases.find((entry) =>
     entry.caseId === "tui_visibility_treated_as_authority"
   );
@@ -490,6 +508,30 @@ test("Lane D keeps operator-burden visibility and candidate boundaries fail-clos
   );
   assert.equal(
     report.blockedCaseIds.includes("review_only_work_cell_result_intake_treated_as_payload_or_mutation"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("review_only_work_cell_result_sidecar_treated_as_acceptance_or_decision"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("review_only_work_cell_result_sidecar_treated_as_application_merge_mutation"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("review_only_work_cell_result_sidecar_treated_as_payload_validity_materialization"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("review_only_work_cell_result_acceptance_candidate_treated_as_decision_or_acceptance"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("review_only_work_cell_result_acceptance_candidate_treated_as_application_merge_mutation"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("review_only_work_cell_result_acceptance_candidate_treated_as_layer_storage_authority"),
     true
   );
   assert.equal(report.blockedCaseIds.includes("tui_visibility_treated_as_authority"), true);
@@ -541,6 +583,33 @@ test("Lane D keeps operator-burden visibility and candidate boundaries fail-clos
   assert.equal(workCellResultIntakePayloadCase.boundary.mutatesSourceRepo, false);
   assert.equal(workCellResultIntakePayloadCase.boundary.mutatesLayer, false);
   assert.equal(workCellResultIntakePayloadCase.boundary.writesProductionStorage, false);
+  assert.equal(workCellSidecarAcceptanceDecisionCase.stopStatus, "blocked");
+  assert.equal(workCellSidecarAcceptanceDecisionCase.boundary.callsEdge, false);
+  assert.equal(workCellSidecarAcceptanceDecisionCase.boundary.createsAuthority, false);
+  assert.equal(workCellSidecarAcceptanceDecisionCase.boundary.claimsTruth, false);
+  assert.equal(workCellSidecarApplicationMutationCase.stopStatus, "blocked");
+  assert.equal(workCellSidecarApplicationMutationCase.boundary.executesBehavior, false);
+  assert.equal(workCellSidecarApplicationMutationCase.boundary.mutatesSourceRepo, false);
+  assert.equal(workCellSidecarApplicationMutationCase.boundary.mutatesLayer, false);
+  assert.equal(workCellSidecarApplicationMutationCase.boundary.writesProductionStorage, false);
+  assert.equal(workCellSidecarPayloadCase.stopStatus, "blocked");
+  assert.equal(workCellSidecarPayloadCase.boundary.callsBytes, false);
+  assert.equal(workCellSidecarPayloadCase.boundary.claimsPayloadValidity, false);
+  assert.equal(workCellAcceptanceCandidateDecisionCase.stopStatus, "blocked");
+  assert.equal(workCellAcceptanceCandidateDecisionCase.boundary.callsEdge, false);
+  assert.equal(workCellAcceptanceCandidateDecisionCase.boundary.createsAuthority, false);
+  assert.equal(workCellAcceptanceCandidateDecisionCase.boundary.claimsTruth, false);
+  assert.equal(workCellAcceptanceCandidateApplicationCase.stopStatus, "blocked");
+  assert.equal(workCellAcceptanceCandidateApplicationCase.boundary.executesBehavior, false);
+  assert.equal(workCellAcceptanceCandidateApplicationCase.boundary.mutatesSourceRepo, false);
+  assert.equal(workCellAcceptanceCandidateApplicationCase.boundary.mutatesLayer, false);
+  assert.equal(workCellAcceptanceCandidateApplicationCase.boundary.autoExecutes, false);
+  assert.equal(workCellAcceptanceCandidateAuthorityCase.stopStatus, "blocked");
+  assert.equal(workCellAcceptanceCandidateAuthorityCase.boundary.acceptsContinuity, false);
+  assert.equal(workCellAcceptanceCandidateAuthorityCase.boundary.claimsTruth, false);
+  assert.equal(workCellAcceptanceCandidateAuthorityCase.boundary.writesProductionStorage, false);
+  assert.equal(workCellAcceptanceCandidateAuthorityCase.boundary.createsAuthority, false);
+  assert.equal(workCellAcceptanceCandidateAuthorityCase.boundary.claimsPayloadValidity, false);
   assert.equal(tuiVisibilityCase.stopStatus, "blocked");
   assert.equal(tuiVisibilityCase.boundary.callsEdge, false);
   assert.equal(tuiVisibilityCase.boundary.createsAuthority, false);
