@@ -140,6 +140,12 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "repo_agent_seat_outbox_import_decision_treated_as_dispatch_execution_or_platform",
   "repo_agent_seat_outbox_import_decision_treated_as_authority_event_or_auto_execute",
   "repo_agent_seat_inbox_handoff_receipt_treated_as_delivery_read_or_execution_proof",
+  "repo_agent_seat_outbox_import_observation_treated_as_implicit_path_or_repo_discovery",
+  "repo_agent_seat_outbox_import_observation_treated_as_shell_network_or_agent_invocation",
+  "repo_agent_seat_outbox_import_observation_treated_as_result_intake_acceptance_truth",
+  "repo_agent_seat_outbox_import_observation_treated_as_payload_validity_or_materialization",
+  "repo_agent_seat_outbox_import_observation_treated_as_application_merge_or_mutation",
+  "repo_agent_seat_outbox_import_observation_treated_as_dispatch_platform_authority_or_auto_execute",
   "repo_agent_seat_exchange_tui_treated_as_action_authority"
 ]);
 
@@ -929,6 +935,42 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "Repo-agent seat inbox handoff receipt treated as delivery proof, agent read proof, or execution proof",
     reasonCode: "blocked_case:repo_agent_seat_inbox_handoff_receipt_treated_as_delivery_read_or_execution_proof"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_outbox_import_observation_treated_as_implicit_path_or_repo_discovery",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat outbox report import observation treated as default cwd, repo discovery, implicit path, missing explicit path, or multi-report import",
+    reasonCode: "blocked_case:repo_agent_seat_outbox_import_observation_treated_as_implicit_path_or_repo_discovery"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_outbox_import_observation_treated_as_shell_network_or_agent_invocation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat outbox report import observation treated as shell use, network use, agent launch, agent invocation, scheduler, dispatch, or execution",
+    reasonCode: "blocked_case:repo_agent_seat_outbox_import_observation_treated_as_shell_network_or_agent_invocation"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_outbox_import_observation_treated_as_result_intake_acceptance_truth",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat outbox report import observation treated as result intake, result acceptance, reported result truth, or parsed report truth",
+    reasonCode: "blocked_case:repo_agent_seat_outbox_import_observation_treated_as_result_intake_acceptance_truth"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_outbox_import_observation_treated_as_payload_validity_or_materialization",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat outbox report import observation treated as payload validity, payload fetch, payload materialization, or Bytes material truth",
+    reasonCode: "blocked_case:repo_agent_seat_outbox_import_observation_treated_as_payload_validity_or_materialization"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_outbox_import_observation_treated_as_application_merge_or_mutation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat outbox report import observation treated as result application, merge, repo mutation, Layer mutation, Layer truth, Layer continuity, or storage write",
+    reasonCode: "blocked_case:repo_agent_seat_outbox_import_observation_treated_as_application_merge_or_mutation"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_outbox_import_observation_treated_as_dispatch_platform_authority_or_auto_execute",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat outbox report import observation treated as dispatch, execution, agent invocation, Platform consequence, authority transition, event-family expansion, or auto-execute",
+    reasonCode: "blocked_case:repo_agent_seat_outbox_import_observation_treated_as_dispatch_platform_authority_or_auto_execute"
   }),
   Object.freeze({
     caseId: "repo_agent_seat_exchange_tui_treated_as_action_authority",
