@@ -288,6 +288,12 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "repo_agent_outbox_report_repair_guidance_export_view_treated_as_application_merge_mutation_or_storage",
   "repo_agent_outbox_report_repair_guidance_export_view_treated_as_authority_event_auto_execute_or_enclosure",
   "repo_agent_outbox_report_repair_guidance_export_view_tui_treated_as_action_authority",
+  "repo_agent_outbox_report_repair_request_inbox_packet_candidate_treated_as_delivery_invocation_or_dispatch",
+  "repo_agent_outbox_report_repair_request_inbox_packet_candidate_treated_as_import_intake_or_acceptance",
+  "repo_agent_outbox_report_repair_request_inbox_packet_candidate_treated_as_report_truth_or_payload",
+  "repo_agent_outbox_report_repair_request_inbox_packet_candidate_treated_as_application_merge_mutation_or_storage",
+  "repo_agent_outbox_report_repair_request_inbox_packet_candidate_treated_as_authority_event_auto_execute_or_enclosure",
+  "repo_agent_outbox_report_repair_request_inbox_packet_candidate_tui_treated_as_action_authority",
   "repo_agent_seat_exchange_tui_treated_as_action_authority"
 ]);
 
@@ -1965,6 +1971,42 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "Repo-agent outbox report repair guidance export view TUI visibility treated as action authority, delivery authority, repair request execution, result-intake authority, acceptance authority, mutation authority, dispatch authority, or execution authority",
     reasonCode: "blocked_case:repo_agent_outbox_report_repair_guidance_export_view_tui_treated_as_action_authority"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_outbox_report_repair_request_inbox_packet_candidate_treated_as_delivery_invocation_or_dispatch",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent outbox report repair request inbox packet candidate treated as repair request delivery, prompt delivery, inbox write, repo-agent invocation, scheduling, launch, dispatch, execution, Platform call, or host-local consequence",
+    reasonCode: "blocked_case:repo_agent_outbox_report_repair_request_inbox_packet_candidate_treated_as_delivery_invocation_or_dispatch"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_outbox_report_repair_request_inbox_packet_candidate_treated_as_import_intake_or_acceptance",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent outbox report repair request inbox packet candidate treated as outbox read, report import, result-intake creation, result acceptance, report acceptance, operator decision capture, or approval",
+    reasonCode: "blocked_case:repo_agent_outbox_report_repair_request_inbox_packet_candidate_treated_as_import_intake_or_acceptance"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_outbox_report_repair_request_inbox_packet_candidate_treated_as_report_truth_or_payload",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent outbox report repair request inbox packet candidate treated as report truth, report body truth, agent correctness proof, payload validity, payload fetch, payload materialization, Layer truth, or Layer continuity",
+    reasonCode: "blocked_case:repo_agent_outbox_report_repair_request_inbox_packet_candidate_treated_as_report_truth_or_payload"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_outbox_report_repair_request_inbox_packet_candidate_treated_as_application_merge_mutation_or_storage",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent outbox report repair request inbox packet candidate treated as result application, merge, repo mutation, Layer mutation, or storage write",
+    reasonCode: "blocked_case:repo_agent_outbox_report_repair_request_inbox_packet_candidate_treated_as_application_merge_mutation_or_storage"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_outbox_report_repair_request_inbox_packet_candidate_treated_as_authority_event_auto_execute_or_enclosure",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent outbox report repair request inbox packet candidate treated as authority transition, accepted continuity, event-family expansion, auto-execute, full Edge enclosure proof, autonomy proof, or wall-clock proof",
+    reasonCode: "blocked_case:repo_agent_outbox_report_repair_request_inbox_packet_candidate_treated_as_authority_event_auto_execute_or_enclosure"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_outbox_report_repair_request_inbox_packet_candidate_tui_treated_as_action_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent outbox report repair request inbox packet candidate TUI visibility treated as action authority, delivery authority, repair request execution, inbox write, result-intake authority, acceptance authority, mutation authority, dispatch authority, or execution authority",
+    reasonCode: "blocked_case:repo_agent_outbox_report_repair_request_inbox_packet_candidate_tui_treated_as_action_authority"
   }),
   Object.freeze({
     caseId: "repo_agent_seat_exchange_tui_treated_as_action_authority",
