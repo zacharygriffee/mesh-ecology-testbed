@@ -1449,6 +1449,15 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
   const mediationBundleTuiCase = packet.cases.find((entry) =>
     entry.caseId === "repo_agent_seat_exchange_mediation_bundle_tui_treated_as_action_authority"
   );
+  const mediationDecisionProjectionCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_seat_exchange_mediation_decision_projection_treated_as_operator_decision"
+  );
+  const mediationDecisionProjectionActionCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_seat_exchange_mediation_decision_projection_treated_as_handoff_import_or_intake"
+  );
+  const mediationDecisionProjectionAuthorityCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_seat_exchange_mediation_decision_projection_treated_as_dispatch_platform_authority_or_auto_execute"
+  );
   const tuiCase = packet.cases.find((entry) =>
     entry.caseId === "repo_agent_seat_exchange_tui_treated_as_action_authority"
   );
@@ -1663,6 +1672,30 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
   );
   assert.equal(
     report.blockedCaseIds.includes("repo_agent_seat_exchange_mediation_bundle_tui_treated_as_action_authority"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_seat_exchange_mediation_decision_projection_treated_as_operator_decision"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_seat_exchange_mediation_decision_projection_treated_as_handoff_import_or_intake"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_seat_exchange_mediation_decision_projection_treated_as_acceptance_truth_or_payload"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_seat_exchange_mediation_decision_projection_treated_as_application_merge_or_mutation"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_seat_exchange_mediation_decision_projection_treated_as_dispatch_platform_authority_or_auto_execute"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_seat_exchange_mediation_decision_projection_tui_treated_as_action_authority"),
     true
   );
   assert.equal(report.blockedCaseIds.includes("repo_agent_seat_exchange_tui_treated_as_action_authority"), true);
@@ -1883,6 +1916,18 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
   assert.equal(mediationBundleTuiCase.boundary.callsEdge, false);
   assert.equal(mediationBundleTuiCase.boundary.dispatchesRepoAgents, false);
   assert.equal(mediationBundleTuiCase.boundary.createsAuthority, false);
+  assert.equal(mediationDecisionProjectionCase.stopStatus, "blocked");
+  assert.equal(mediationDecisionProjectionCase.boundary.callsEdge, false);
+  assert.equal(mediationDecisionProjectionCase.boundary.executesBehavior, false);
+  assert.equal(mediationDecisionProjectionActionCase.stopStatus, "blocked");
+  assert.equal(mediationDecisionProjectionActionCase.boundary.callsEdge, false);
+  assert.equal(mediationDecisionProjectionActionCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(mediationDecisionProjectionActionCase.boundary.executesBehavior, false);
+  assert.equal(mediationDecisionProjectionAuthorityCase.stopStatus, "blocked");
+  assert.equal(mediationDecisionProjectionAuthorityCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(mediationDecisionProjectionAuthorityCase.boundary.executesBehavior, false);
+  assert.equal(mediationDecisionProjectionAuthorityCase.boundary.callsPlatform, false);
+  assert.equal(mediationDecisionProjectionAuthorityCase.boundary.createsAuthority, false);
   assert.equal(tuiCase.stopStatus, "blocked");
   assert.equal(tuiCase.boundary.callsEdge, false);
   assert.equal(tuiCase.boundary.dispatchesRepoAgents, false);
