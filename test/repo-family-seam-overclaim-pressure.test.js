@@ -1743,6 +1743,24 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
   const outboxComplianceMeasurementTuiCase = packet.cases.find((entry) =>
     entry.caseId === "repo_agent_outbox_report_expectation_compliance_measurement_tui_treated_as_action_authority"
   );
+  const outboxRepairGuidanceImportCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_outbox_report_repair_guidance_treated_as_import_intake_or_acceptance"
+  );
+  const outboxRepairGuidanceAgentCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_outbox_report_repair_guidance_treated_as_agent_invocation_or_dispatch"
+  );
+  const outboxRepairGuidanceTruthCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_outbox_report_repair_guidance_treated_as_report_truth_or_payload"
+  );
+  const outboxRepairGuidanceMutationCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_outbox_report_repair_guidance_treated_as_application_merge_mutation_or_storage"
+  );
+  const outboxRepairGuidanceAuthorityCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_outbox_report_repair_guidance_treated_as_authority_event_auto_execute_or_enclosure"
+  );
+  const outboxRepairGuidanceTuiCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_outbox_report_repair_guidance_tui_treated_as_action_authority"
+  );
   const tuiCase = packet.cases.find((entry) =>
     entry.caseId === "repo_agent_seat_exchange_tui_treated_as_action_authority"
   );
@@ -2351,7 +2369,54 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
     report.blockedCaseIds.includes("repo_agent_outbox_report_expectation_compliance_measurement_tui_treated_as_action_authority"),
     true
   );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_outbox_report_repair_guidance_treated_as_import_intake_or_acceptance"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_outbox_report_repair_guidance_treated_as_agent_invocation_or_dispatch"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_outbox_report_repair_guidance_treated_as_report_truth_or_payload"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_outbox_report_repair_guidance_treated_as_application_merge_mutation_or_storage"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_outbox_report_repair_guidance_treated_as_authority_event_auto_execute_or_enclosure"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_outbox_report_repair_guidance_tui_treated_as_action_authority"),
+    true
+  );
   assert.equal(report.blockedCaseIds.includes("repo_agent_seat_exchange_tui_treated_as_action_authority"), true);
+  assert.equal(outboxRepairGuidanceImportCase.stopStatus, "blocked");
+  assert.equal(outboxRepairGuidanceImportCase.boundary.callsEdge, false);
+  assert.equal(outboxRepairGuidanceImportCase.boundary.claimsTruth, false);
+  assert.equal(outboxRepairGuidanceImportCase.boundary.createsAuthority, false);
+  assert.equal(outboxRepairGuidanceAgentCase.stopStatus, "blocked");
+  assert.equal(outboxRepairGuidanceAgentCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(outboxRepairGuidanceAgentCase.boundary.executesBehavior, false);
+  assert.equal(outboxRepairGuidanceAgentCase.boundary.callsPlatform, false);
+  assert.equal(outboxRepairGuidanceTruthCase.stopStatus, "blocked");
+  assert.equal(outboxRepairGuidanceTruthCase.boundary.claimsTruth, false);
+  assert.equal(outboxRepairGuidanceTruthCase.boundary.claimsPayloadValidity, false);
+  assert.equal(outboxRepairGuidanceTruthCase.boundary.mutatesLayer, false);
+  assert.equal(outboxRepairGuidanceMutationCase.stopStatus, "blocked");
+  assert.equal(outboxRepairGuidanceMutationCase.boundary.mutatesSourceRepo, false);
+  assert.equal(outboxRepairGuidanceMutationCase.boundary.mutatesLayer, false);
+  assert.equal(outboxRepairGuidanceMutationCase.boundary.writesProductionStorage, false);
+  assert.equal(outboxRepairGuidanceAuthorityCase.stopStatus, "blocked");
+  assert.equal(outboxRepairGuidanceAuthorityCase.boundary.createsAuthority, false);
+  assert.equal(outboxRepairGuidanceAuthorityCase.boundary.autoExecutes, false);
+  assert.equal(outboxRepairGuidanceTuiCase.stopStatus, "blocked");
+  assert.equal(outboxRepairGuidanceTuiCase.boundary.callsEdge, false);
+  assert.equal(outboxRepairGuidanceTuiCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(outboxRepairGuidanceTuiCase.boundary.createsAuthority, false);
   assert.equal(conventionCase.stopStatus, "blocked");
   assert.equal(conventionCase.boundary.dispatchesRepoAgents, false);
   assert.equal(conventionCase.boundary.executesBehavior, false);
