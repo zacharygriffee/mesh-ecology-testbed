@@ -79,6 +79,10 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "review_only_work_cell_loop_summary_treated_as_payload_validity",
   "review_only_work_cell_loop_summary_treated_as_authority_or_next_approval",
   "review_only_work_cell_loop_summary_tui_treated_as_action_surface",
+  "review_only_work_cell_loop_field_trial_treated_as_general_enclosure_or_authority",
+  "review_only_work_cell_loop_field_trial_treated_as_application_merge_mutation",
+  "review_only_work_cell_loop_field_trial_treated_as_payload_or_storage",
+  "review_only_work_cell_loop_field_trial_tui_treated_as_action_surface",
   "tui_visibility_treated_as_authority",
   "candidate_export_treated_as_work_cell_creation",
   "candidate_export_treated_as_dispatch_decision_request_creation",
@@ -515,6 +519,30 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "Review-only work-cell loop summary cockpit/TUI projection treated as action controls, dispatch, execution, or auto-execute",
     reasonCode: "blocked_case:review_only_work_cell_loop_summary_tui_treated_as_action_surface"
+  }),
+  Object.freeze({
+    caseId: "review_only_work_cell_loop_field_trial_treated_as_general_enclosure_or_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Review-only work-cell loop field trial treated as general Edge enclosure proof, authority, next-step approval, or readiness conversion",
+    reasonCode: "blocked_case:review_only_work_cell_loop_field_trial_treated_as_general_enclosure_or_authority"
+  }),
+  Object.freeze({
+    caseId: "review_only_work_cell_loop_field_trial_treated_as_application_merge_mutation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Review-only work-cell loop field trial treated as result application, merge, repo mutation, or Layer mutation",
+    reasonCode: "blocked_case:review_only_work_cell_loop_field_trial_treated_as_application_merge_mutation"
+  }),
+  Object.freeze({
+    caseId: "review_only_work_cell_loop_field_trial_treated_as_payload_or_storage",
+    sourceFamily: "bytes",
+    attemptedOverclaim: "Review-only work-cell loop field trial treated as payload validity, payload fetch, payload materialization, storage write, or accepted continuity",
+    reasonCode: "blocked_case:review_only_work_cell_loop_field_trial_treated_as_payload_or_storage"
+  }),
+  Object.freeze({
+    caseId: "review_only_work_cell_loop_field_trial_tui_treated_as_action_surface",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Review-only work-cell loop field trial cockpit/TUI projection treated as action controls, scheduling, dispatch, execution, or auto-execute",
+    reasonCode: "blocked_case:review_only_work_cell_loop_field_trial_tui_treated_as_action_surface"
   }),
   Object.freeze({
     caseId: "tui_visibility_treated_as_authority",
