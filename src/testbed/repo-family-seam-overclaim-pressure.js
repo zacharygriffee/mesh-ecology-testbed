@@ -214,6 +214,9 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "tui_receipt_visibility_next_posture_panel_treated_as_decision_or_action",
   "tui_receipt_visibility_next_posture_panel_treated_as_acceptance_truth_or_mutation",
   "tui_receipt_visibility_next_posture_panel_treated_as_approval_authority_or_proof",
+  "tui_receipt_action_candidate_projection_treated_as_action_or_receipt",
+  "tui_receipt_action_candidate_projection_treated_as_acceptance_truth_or_mutation",
+  "tui_receipt_action_candidate_projection_treated_as_approval_authority_or_auto_execute",
   "repo_agent_seat_exchange_tui_treated_as_action_authority"
 ]);
 
@@ -1447,6 +1450,24 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "TUI receipt visibility next-posture panel recommendation, decision projection, or receipt refs treated as approval, authority, delivery/read/execution proof, event-family expansion, or auto-execute",
     reasonCode: "blocked_case:tui_receipt_visibility_next_posture_panel_treated_as_approval_authority_or_proof"
+  }),
+  Object.freeze({
+    caseId: "tui_receipt_action_candidate_projection_treated_as_action_or_receipt",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI receipt action candidate projection treated as performing inbox handoff, outbox import, result intake, creating receipt observation/result, scheduling, dispatch, execution, or invoking an agent",
+    reasonCode: "blocked_case:tui_receipt_action_candidate_projection_treated_as_action_or_receipt"
+  }),
+  Object.freeze({
+    caseId: "tui_receipt_action_candidate_projection_treated_as_acceptance_truth_or_mutation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI receipt action candidate projection treated as result acceptance, reported truth, payload validity/fetch/materialization, application, merge, repo/Layer/storage mutation, or accepted continuity",
+    reasonCode: "blocked_case:tui_receipt_action_candidate_projection_treated_as_acceptance_truth_or_mutation"
+  }),
+  Object.freeze({
+    caseId: "tui_receipt_action_candidate_projection_treated_as_approval_authority_or_auto_execute",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI receipt action candidate projection treated as approval, action authority, Platform consequence, authority transition, event-family expansion, or auto-execute",
+    reasonCode: "blocked_case:tui_receipt_action_candidate_projection_treated_as_approval_authority_or_auto_execute"
   }),
   Object.freeze({
     caseId: "repo_agent_seat_exchange_tui_treated_as_action_authority",
