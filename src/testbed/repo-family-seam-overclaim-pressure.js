@@ -198,6 +198,13 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "tui_outbox_result_intake_decision_capture_treated_as_application_merge_or_mutation",
   "tui_outbox_result_intake_decision_capture_treated_as_dispatch_platform_authority_or_auto_execute",
   "tui_outbox_result_intake_decision_capture_visibility_treated_as_action_authority",
+  "tui_mediated_seat_loop_burden_measurement_treated_as_handoff_import_or_intake",
+  "tui_mediated_seat_loop_burden_measurement_treated_as_acceptance_truth_or_payload",
+  "tui_mediated_seat_loop_burden_measurement_treated_as_application_merge_or_mutation",
+  "tui_mediated_seat_loop_burden_measurement_treated_as_dispatch_platform_authority_or_auto_execute",
+  "tui_mediated_seat_loop_burden_measurement_treated_as_wall_clock_autonomy_or_enclosure_proof",
+  "tui_mediated_seat_loop_burden_measurement_decision_capture_treated_as_action_execution",
+  "tui_mediated_seat_loop_burden_measurement_tui_treated_as_action_authority",
   "repo_agent_seat_exchange_tui_treated_as_action_authority"
 ]);
 
@@ -1335,6 +1342,48 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "TUI outbox result-intake decision capture visibility treated as post-capture action controls, result-intake/acceptance/dispatch controls, mutation, or authority",
     reasonCode: "blocked_case:tui_outbox_result_intake_decision_capture_visibility_treated_as_action_authority"
+  }),
+  Object.freeze({
+    caseId: "tui_mediated_seat_loop_burden_measurement_treated_as_handoff_import_or_intake",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-mediated seat-loop burden measurement treated as inbox handoff, outbox import, result intake, or new loop mechanic",
+    reasonCode: "blocked_case:tui_mediated_seat_loop_burden_measurement_treated_as_handoff_import_or_intake"
+  }),
+  Object.freeze({
+    caseId: "tui_mediated_seat_loop_burden_measurement_treated_as_acceptance_truth_or_payload",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-mediated seat-loop burden measurement treated as result acceptance, reported-result truth, payload validity, payload fetch, or payload materialization",
+    reasonCode: "blocked_case:tui_mediated_seat_loop_burden_measurement_treated_as_acceptance_truth_or_payload"
+  }),
+  Object.freeze({
+    caseId: "tui_mediated_seat_loop_burden_measurement_treated_as_application_merge_or_mutation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-mediated seat-loop burden measurement treated as result application, merge, repo mutation, Layer mutation/truth/continuity, or storage write",
+    reasonCode: "blocked_case:tui_mediated_seat_loop_burden_measurement_treated_as_application_merge_or_mutation"
+  }),
+  Object.freeze({
+    caseId: "tui_mediated_seat_loop_burden_measurement_treated_as_dispatch_platform_authority_or_auto_execute",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-mediated seat-loop burden measurement treated as scheduling, launch, dispatch, execution, agent invocation, Platform consequence, authority transition, event-family expansion, or auto-execute",
+    reasonCode: "blocked_case:tui_mediated_seat_loop_burden_measurement_treated_as_dispatch_platform_authority_or_auto_execute"
+  }),
+  Object.freeze({
+    caseId: "tui_mediated_seat_loop_burden_measurement_treated_as_wall_clock_autonomy_or_enclosure_proof",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Task-count reduction in TUI-mediated seat-loop burden measurement treated as wall-clock proof, autonomy proof, full Edge enclosure proof, delivery proof, or agent correctness proof",
+    reasonCode: "blocked_case:tui_mediated_seat_loop_burden_measurement_treated_as_wall_clock_autonomy_or_enclosure_proof"
+  }),
+  Object.freeze({
+    caseId: "tui_mediated_seat_loop_burden_measurement_decision_capture_treated_as_action_execution",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-mediated seat-loop decision capture treated as handoff, import, result intake, dispatch, execution, mutation, or authority action",
+    reasonCode: "blocked_case:tui_mediated_seat_loop_burden_measurement_decision_capture_treated_as_action_execution"
+  }),
+  Object.freeze({
+    caseId: "tui_mediated_seat_loop_burden_measurement_tui_treated_as_action_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-mediated seat-loop burden measurement cockpit visibility treated as action controls, decision authority, dispatch, import, result acceptance, mutation, or authority",
+    reasonCode: "blocked_case:tui_mediated_seat_loop_burden_measurement_tui_treated_as_action_authority"
   }),
   Object.freeze({
     caseId: "repo_agent_seat_exchange_tui_treated_as_action_authority",
