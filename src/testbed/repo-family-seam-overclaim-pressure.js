@@ -118,7 +118,10 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "export_result_intake_operator_decision_treated_as_acceptance_or_execution",
   "export_result_intake_observation_treated_as_acceptance_truth_mutation",
   "export_result_intake_board_projection_treated_as_authority_or_action",
-  "platform_returned_operator_review_treated_as_dispatch_approval"
+  "platform_returned_operator_review_treated_as_dispatch_approval",
+  "repo_agent_operational_board_prompt_candidate_treated_as_prompt_delivery_or_dispatch",
+  "repo_agent_operational_board_prompt_candidate_treated_as_decision_or_authority",
+  "repo_agent_operational_board_prompt_candidate_treated_as_result_truth_mutation_or_auto_execute"
 ]);
 
 const REQUIRED_CASES = Object.freeze([
@@ -781,6 +784,24 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "platform",
     attemptedOverclaim: "Returned Platform operator-review response treated as dispatch approval, Platform call, host-local consequence, or activation",
     reasonCode: "blocked_case:platform_returned_operator_review_treated_as_dispatch_approval"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_operational_board_prompt_candidate_treated_as_prompt_delivery_or_dispatch",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Operational board prompt candidate treated as prompt delivery, scheduling, agent launch, dispatch, or execution",
+    reasonCode: "blocked_case:repo_agent_operational_board_prompt_candidate_treated_as_prompt_delivery_or_dispatch"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_operational_board_prompt_candidate_treated_as_decision_or_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Operational board prompt candidate treated as operator decision capture, approval, or authority grant",
+    reasonCode: "blocked_case:repo_agent_operational_board_prompt_candidate_treated_as_decision_or_authority"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_operational_board_prompt_candidate_treated_as_result_truth_mutation_or_auto_execute",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Operational board prompt candidate treated as result truth, acceptance, application, merge, repo or Layer mutation, storage write, or auto-execute",
+    reasonCode: "blocked_case:repo_agent_operational_board_prompt_candidate_treated_as_result_truth_mutation_or_auto_execute"
   })
 ]);
 
