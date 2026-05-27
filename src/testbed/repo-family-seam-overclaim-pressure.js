@@ -208,6 +208,9 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "tui_mediated_seat_loop_remaining_burden_analysis_treated_as_decision_or_action",
   "tui_mediated_seat_loop_remaining_burden_analysis_treated_as_acceptance_mutation_or_authority",
   "tui_mediated_seat_loop_remaining_burden_analysis_recommendation_treated_as_approval",
+  "tui_receipt_visibility_hardening_treated_as_handoff_import_or_intake",
+  "tui_receipt_visibility_hardening_treated_as_acceptance_truth_or_payload",
+  "tui_receipt_visibility_hardening_treated_as_action_authority_or_proof",
   "repo_agent_seat_exchange_tui_treated_as_action_authority"
 ]);
 
@@ -1405,6 +1408,24 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "TUI-mediated seat-loop remaining burden recommendation treated as approval, readiness, auto-continuation, auto-execute, or TUI action authority",
     reasonCode: "blocked_case:tui_mediated_seat_loop_remaining_burden_analysis_recommendation_treated_as_approval"
+  }),
+  Object.freeze({
+    caseId: "tui_receipt_visibility_hardening_treated_as_handoff_import_or_intake",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI receipt visibility hardening treated as inbox handoff, outbox import, result intake, scheduling, dispatch, execution, or agent invocation",
+    reasonCode: "blocked_case:tui_receipt_visibility_hardening_treated_as_handoff_import_or_intake"
+  }),
+  Object.freeze({
+    caseId: "tui_receipt_visibility_hardening_treated_as_acceptance_truth_or_payload",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI receipt visibility hardening treated as result acceptance, reported truth, payload validity, payload fetch/materialization, application, merge, repo/Layer/storage mutation, or authority",
+    reasonCode: "blocked_case:tui_receipt_visibility_hardening_treated_as_acceptance_truth_or_payload"
+  }),
+  Object.freeze({
+    caseId: "tui_receipt_visibility_hardening_treated_as_action_authority_or_proof",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI receipt visibility hardening panels or recommendations treated as action controls, approvals, delivery/read/execution proof, authority, event-family expansion, or auto-execute",
+    reasonCode: "blocked_case:tui_receipt_visibility_hardening_treated_as_action_authority_or_proof"
   }),
   Object.freeze({
     caseId: "repo_agent_seat_exchange_tui_treated_as_action_authority",
