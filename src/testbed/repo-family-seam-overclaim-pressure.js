@@ -162,6 +162,12 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "repo_agent_seat_exchange_loop_summary_treated_as_application_merge_or_mutation",
   "repo_agent_seat_exchange_loop_summary_treated_as_dispatch_platform_authority_or_auto_execute",
   "repo_agent_seat_exchange_loop_board_tui_burden_treated_as_action_authority",
+  "repo_agent_seat_exchange_loop_burden_measurement_treated_as_handoff_import_or_intake",
+  "repo_agent_seat_exchange_loop_burden_measurement_treated_as_acceptance_truth_or_payload",
+  "repo_agent_seat_exchange_loop_burden_measurement_treated_as_application_merge_or_mutation",
+  "repo_agent_seat_exchange_loop_burden_measurement_treated_as_dispatch_platform_authority_or_auto_execute",
+  "repo_agent_seat_exchange_loop_burden_measurement_treated_as_wall_clock_autonomy_or_enclosure_proof",
+  "repo_agent_seat_exchange_loop_burden_measurement_tui_treated_as_action_authority",
   "repo_agent_seat_exchange_tui_treated_as_action_authority"
 ]);
 
@@ -1083,6 +1089,42 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "Repo-agent seat exchange loop board, TUI, or burden measurement treated as action controls, decision capture, dispatch, result acceptance, mutation, or authority",
     reasonCode: "blocked_case:repo_agent_seat_exchange_loop_board_tui_burden_treated_as_action_authority"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_exchange_loop_burden_measurement_treated_as_handoff_import_or_intake",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat exchange loop burden measurement treated as inbox handoff, outbox import, result intake, or new exchange mechanic",
+    reasonCode: "blocked_case:repo_agent_seat_exchange_loop_burden_measurement_treated_as_handoff_import_or_intake"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_exchange_loop_burden_measurement_treated_as_acceptance_truth_or_payload",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat exchange loop burden measurement treated as result acceptance, reported-result truth, payload validity, payload fetch, or payload materialization",
+    reasonCode: "blocked_case:repo_agent_seat_exchange_loop_burden_measurement_treated_as_acceptance_truth_or_payload"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_exchange_loop_burden_measurement_treated_as_application_merge_or_mutation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat exchange loop burden measurement treated as result application, merge, repo mutation, Layer mutation, Layer truth, Layer continuity, or storage write",
+    reasonCode: "blocked_case:repo_agent_seat_exchange_loop_burden_measurement_treated_as_application_merge_or_mutation"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_exchange_loop_burden_measurement_treated_as_dispatch_platform_authority_or_auto_execute",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat exchange loop burden measurement treated as scheduling, agent launch, dispatch, execution, Platform consequence, authority transition, event-family expansion, or auto-execute",
+    reasonCode: "blocked_case:repo_agent_seat_exchange_loop_burden_measurement_treated_as_dispatch_platform_authority_or_auto_execute"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_exchange_loop_burden_measurement_treated_as_wall_clock_autonomy_or_enclosure_proof",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Task-count reduction in repo-agent seat exchange loop burden measurement treated as wall-clock proof, autonomy proof, full Edge enclosure proof, delivery proof, or agent correctness proof",
+    reasonCode: "blocked_case:repo_agent_seat_exchange_loop_burden_measurement_treated_as_wall_clock_autonomy_or_enclosure_proof"
+  }),
+  Object.freeze({
+    caseId: "repo_agent_seat_exchange_loop_burden_measurement_tui_treated_as_action_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Repo-agent seat exchange loop burden measurement TUI or cockpit visibility treated as action controls, decision capture, dispatch, import, result acceptance, mutation, or authority",
+    reasonCode: "blocked_case:repo_agent_seat_exchange_loop_burden_measurement_tui_treated_as_action_authority"
   }),
   Object.freeze({
     caseId: "repo_agent_seat_exchange_tui_treated_as_action_authority",
