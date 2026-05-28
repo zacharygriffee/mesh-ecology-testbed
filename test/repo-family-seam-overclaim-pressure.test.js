@@ -2105,6 +2105,22 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
     tui:
       "edge_node_capability_profile_tui_treated_as_action_authority"
   });
+  const nodeProfileReadinessCases = findPressureCases(packet, {
+    endpoint:
+      "edge_node_profile_readiness_candidate_treated_as_endpoint_implementation",
+    authority:
+      "edge_node_profile_readiness_candidate_treated_as_identity_admission_or_authority",
+    truth:
+      "edge_node_profile_readiness_candidate_treated_as_report_truth_result_acceptance_or_payload_validity",
+    mutation:
+      "edge_node_profile_readiness_candidate_treated_as_repo_layer_storage_mutation",
+    execution:
+      "edge_node_profile_readiness_candidate_treated_as_scheduler_dispatch_execution_or_platform",
+    enclosure:
+      "edge_node_profile_readiness_candidate_treated_as_full_enclosure_or_auto_execute",
+    tui:
+      "edge_node_profile_readiness_candidate_tui_treated_as_action_authority"
+  });
   const tuiCase = packet.cases.find((entry) =>
     entry.caseId === "repo_agent_seat_exchange_tui_treated_as_action_authority"
   );
@@ -3661,6 +3677,41 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
     "autoExecutes"
   ]);
   assertBlockedBoundary(nodeCapabilityCases.tui, [
+    "callsEdge",
+    "dispatchesRepoAgents",
+    "createsAuthority"
+  ]);
+  assertBlockedBoundary(nodeProfileReadinessCases.endpoint, [
+    "callsEdge",
+    "executesBehavior",
+    "createsAuthority"
+  ]);
+  assertBlockedBoundary(nodeProfileReadinessCases.authority, [
+    "acceptsAdmission",
+    "acceptsContinuity",
+    "createsAuthority"
+  ]);
+  assertBlockedBoundary(nodeProfileReadinessCases.truth, [
+    "claimsTruth",
+    "claimsPayloadValidity",
+    "createsAuthority"
+  ]);
+  assertBlockedBoundary(nodeProfileReadinessCases.mutation, [
+    "mutatesSourceRepo",
+    "mutatesLayer",
+    "writesProductionStorage"
+  ]);
+  assertBlockedBoundary(nodeProfileReadinessCases.execution, [
+    "dispatchesRepoAgents",
+    "executesBehavior",
+    "callsPlatform"
+  ]);
+  assertBlockedBoundary(nodeProfileReadinessCases.enclosure, [
+    "claimsTruth",
+    "createsAuthority",
+    "autoExecutes"
+  ]);
+  assertBlockedBoundary(nodeProfileReadinessCases.tui, [
     "callsEdge",
     "dispatchesRepoAgents",
     "createsAuthority"
