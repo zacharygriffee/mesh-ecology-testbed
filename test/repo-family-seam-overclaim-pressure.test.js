@@ -2085,6 +2085,27 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
   const withRepairRepeatMeasurementTuiCase = packet.cases.find((entry) =>
     entry.caseId === "tui_mediated_local_seat_loop_with_repair_repeat_measurement_tui_treated_as_action_authority"
   );
+  const nodeCapabilityEndpointCase = packet.cases.find((entry) =>
+    entry.caseId === "edge_node_capability_profile_treated_as_endpoint_or_network_service"
+  );
+  const nodeCapabilityAuthorityCase = packet.cases.find((entry) =>
+    entry.caseId === "edge_node_capability_profile_treated_as_identity_admission_or_authority"
+  );
+  const nodeCapabilityTruthCase = packet.cases.find((entry) =>
+    entry.caseId === "edge_node_capability_profile_treated_as_report_truth_result_acceptance_or_payload_validity"
+  );
+  const nodeCapabilityMutationCase = packet.cases.find((entry) =>
+    entry.caseId === "edge_node_capability_profile_treated_as_repo_layer_storage_mutation"
+  );
+  const nodeCapabilityExecutionCase = packet.cases.find((entry) =>
+    entry.caseId === "edge_node_capability_profile_treated_as_scheduler_dispatch_execution_or_platform"
+  );
+  const nodeCapabilityEnclosureCase = packet.cases.find((entry) =>
+    entry.caseId === "edge_node_capability_profile_treated_as_full_enclosure_or_auto_execute"
+  );
+  const nodeCapabilityTuiCase = packet.cases.find((entry) =>
+    entry.caseId === "edge_node_capability_profile_tui_treated_as_action_authority"
+  );
   const tuiCase = packet.cases.find((entry) =>
     entry.caseId === "repo_agent_seat_exchange_tui_treated_as_action_authority"
   );
@@ -3610,6 +3631,34 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
   assert.equal(withRepairRepeatMeasurementTuiCase.boundary.callsEdge, false);
   assert.equal(withRepairRepeatMeasurementTuiCase.boundary.dispatchesRepoAgents, false);
   assert.equal(withRepairRepeatMeasurementTuiCase.boundary.createsAuthority, false);
+  assert.equal(nodeCapabilityEndpointCase.stopStatus, "blocked");
+  assert.equal(nodeCapabilityEndpointCase.boundary.callsEdge, false);
+  assert.equal(nodeCapabilityEndpointCase.boundary.executesBehavior, false);
+  assert.equal(nodeCapabilityEndpointCase.boundary.createsAuthority, false);
+  assert.equal(nodeCapabilityAuthorityCase.stopStatus, "blocked");
+  assert.equal(nodeCapabilityAuthorityCase.boundary.acceptsAdmission, false);
+  assert.equal(nodeCapabilityAuthorityCase.boundary.acceptsContinuity, false);
+  assert.equal(nodeCapabilityAuthorityCase.boundary.createsAuthority, false);
+  assert.equal(nodeCapabilityTruthCase.stopStatus, "blocked");
+  assert.equal(nodeCapabilityTruthCase.boundary.claimsTruth, false);
+  assert.equal(nodeCapabilityTruthCase.boundary.claimsPayloadValidity, false);
+  assert.equal(nodeCapabilityTruthCase.boundary.createsAuthority, false);
+  assert.equal(nodeCapabilityMutationCase.stopStatus, "blocked");
+  assert.equal(nodeCapabilityMutationCase.boundary.mutatesSourceRepo, false);
+  assert.equal(nodeCapabilityMutationCase.boundary.mutatesLayer, false);
+  assert.equal(nodeCapabilityMutationCase.boundary.writesProductionStorage, false);
+  assert.equal(nodeCapabilityExecutionCase.stopStatus, "blocked");
+  assert.equal(nodeCapabilityExecutionCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(nodeCapabilityExecutionCase.boundary.executesBehavior, false);
+  assert.equal(nodeCapabilityExecutionCase.boundary.callsPlatform, false);
+  assert.equal(nodeCapabilityEnclosureCase.stopStatus, "blocked");
+  assert.equal(nodeCapabilityEnclosureCase.boundary.claimsTruth, false);
+  assert.equal(nodeCapabilityEnclosureCase.boundary.createsAuthority, false);
+  assert.equal(nodeCapabilityEnclosureCase.boundary.autoExecutes, false);
+  assert.equal(nodeCapabilityTuiCase.stopStatus, "blocked");
+  assert.equal(nodeCapabilityTuiCase.boundary.callsEdge, false);
+  assert.equal(nodeCapabilityTuiCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(nodeCapabilityTuiCase.boundary.createsAuthority, false);
   assert.equal(conventionCase.stopStatus, "blocked");
   assert.equal(conventionCase.boundary.dispatchesRepoAgents, false);
   assert.equal(conventionCase.boundary.executesBehavior, false);
