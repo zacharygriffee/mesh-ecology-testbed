@@ -2034,6 +2034,24 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
   const repairedOutboxLoopSummaryTuiCase = packet.cases.find((entry) =>
     entry.caseId === "repo_agent_repaired_outbox_report_loop_summary_tui_treated_as_action_authority"
   );
+  const withRepairReadinessTruthCase = packet.cases.find((entry) =>
+    entry.caseId === "tui_mediated_local_seat_loop_with_repair_readiness_treated_as_acceptance_or_truth"
+  );
+  const withRepairReadinessProofCase = packet.cases.find((entry) =>
+    entry.caseId === "tui_mediated_local_seat_loop_with_repair_readiness_treated_as_repair_success_or_agent_correctness"
+  );
+  const withRepairReadinessPayloadCase = packet.cases.find((entry) =>
+    entry.caseId === "tui_mediated_local_seat_loop_with_repair_readiness_treated_as_payload_layer_or_mutation"
+  );
+  const withRepairReadinessAuthorityCase = packet.cases.find((entry) =>
+    entry.caseId === "tui_mediated_local_seat_loop_with_repair_readiness_treated_as_dispatch_execution_authority_or_auto_execute"
+  );
+  const withRepairReadinessEnclosureCase = packet.cases.find((entry) =>
+    entry.caseId === "tui_mediated_local_seat_loop_with_repair_readiness_treated_as_enclosure_or_autonomy_proof"
+  );
+  const withRepairReadinessTuiCase = packet.cases.find((entry) =>
+    entry.caseId === "tui_mediated_local_seat_loop_with_repair_readiness_tui_treated_as_action_authority"
+  );
   const tuiCase = packet.cases.find((entry) =>
     entry.caseId === "repo_agent_seat_exchange_tui_treated_as_action_authority"
   );
@@ -3030,6 +3048,30 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
     report.blockedCaseIds.includes("repo_agent_repaired_outbox_report_loop_summary_tui_treated_as_action_authority"),
     true
   );
+  assert.equal(
+    report.blockedCaseIds.includes("tui_mediated_local_seat_loop_with_repair_readiness_treated_as_acceptance_or_truth"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("tui_mediated_local_seat_loop_with_repair_readiness_treated_as_repair_success_or_agent_correctness"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("tui_mediated_local_seat_loop_with_repair_readiness_treated_as_payload_layer_or_mutation"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("tui_mediated_local_seat_loop_with_repair_readiness_treated_as_dispatch_execution_authority_or_auto_execute"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("tui_mediated_local_seat_loop_with_repair_readiness_treated_as_enclosure_or_autonomy_proof"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("tui_mediated_local_seat_loop_with_repair_readiness_tui_treated_as_action_authority"),
+    true
+  );
   assert.equal(report.blockedCaseIds.includes("repo_agent_seat_exchange_tui_treated_as_action_authority"), true);
   assert.equal(outboxRepairGuidanceImportCase.stopStatus, "blocked");
   assert.equal(outboxRepairGuidanceImportCase.boundary.callsEdge, false);
@@ -3417,6 +3459,32 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
   assert.equal(repairedOutboxLoopSummaryTuiCase.boundary.callsEdge, false);
   assert.equal(repairedOutboxLoopSummaryTuiCase.boundary.dispatchesRepoAgents, false);
   assert.equal(repairedOutboxLoopSummaryTuiCase.boundary.createsAuthority, false);
+  assert.equal(withRepairReadinessTruthCase.stopStatus, "blocked");
+  assert.equal(withRepairReadinessTruthCase.boundary.claimsTruth, false);
+  assert.equal(withRepairReadinessTruthCase.boundary.acceptsContinuity, false);
+  assert.equal(withRepairReadinessTruthCase.boundary.createsAuthority, false);
+  assert.equal(withRepairReadinessProofCase.stopStatus, "blocked");
+  assert.equal(withRepairReadinessProofCase.boundary.claimsTruth, false);
+  assert.equal(withRepairReadinessProofCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(withRepairReadinessProofCase.boundary.executesBehavior, false);
+  assert.equal(withRepairReadinessPayloadCase.stopStatus, "blocked");
+  assert.equal(withRepairReadinessPayloadCase.boundary.claimsPayloadValidity, false);
+  assert.equal(withRepairReadinessPayloadCase.boundary.mutatesSourceRepo, false);
+  assert.equal(withRepairReadinessPayloadCase.boundary.mutatesLayer, false);
+  assert.equal(withRepairReadinessPayloadCase.boundary.writesProductionStorage, false);
+  assert.equal(withRepairReadinessAuthorityCase.stopStatus, "blocked");
+  assert.equal(withRepairReadinessAuthorityCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(withRepairReadinessAuthorityCase.boundary.executesBehavior, false);
+  assert.equal(withRepairReadinessAuthorityCase.boundary.callsPlatform, false);
+  assert.equal(withRepairReadinessAuthorityCase.boundary.createsAuthority, false);
+  assert.equal(withRepairReadinessEnclosureCase.stopStatus, "blocked");
+  assert.equal(withRepairReadinessEnclosureCase.boundary.claimsTruth, false);
+  assert.equal(withRepairReadinessEnclosureCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(withRepairReadinessEnclosureCase.boundary.createsAuthority, false);
+  assert.equal(withRepairReadinessTuiCase.stopStatus, "blocked");
+  assert.equal(withRepairReadinessTuiCase.boundary.callsEdge, false);
+  assert.equal(withRepairReadinessTuiCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(withRepairReadinessTuiCase.boundary.createsAuthority, false);
   assert.equal(conventionCase.stopStatus, "blocked");
   assert.equal(conventionCase.boundary.dispatchesRepoAgents, false);
   assert.equal(conventionCase.boundary.executesBehavior, false);
