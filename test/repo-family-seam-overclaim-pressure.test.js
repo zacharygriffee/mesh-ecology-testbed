@@ -2167,6 +2167,20 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
     tui:
       "edge_report_only_endpoint_implementation_plan_tui_treated_as_action_authority"
   });
+  const reportOnlyEndpointRuntimeCandidateCases = findPressureCases(packet, {
+    endpoint:
+      "edge_report_only_endpoint_runtime_candidate_treated_as_runtime_endpoint_or_transport",
+    truth:
+      "edge_report_only_endpoint_runtime_candidate_treated_as_report_truth_acceptance_or_payload_validity",
+    mutation:
+      "edge_report_only_endpoint_runtime_candidate_treated_as_repo_layer_storage_mutation",
+    execution:
+      "edge_report_only_endpoint_runtime_candidate_treated_as_scheduler_dispatch_execution_or_platform",
+    authority:
+      "edge_report_only_endpoint_runtime_candidate_treated_as_authority_enclosure_or_auto_execute",
+    tui:
+      "edge_report_only_endpoint_runtime_candidate_tui_treated_as_action_authority"
+  });
   const tuiCase = packet.cases.find((entry) =>
     entry.caseId === "repo_agent_seat_exchange_tui_treated_as_action_authority"
   );
@@ -3858,6 +3872,36 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
     "autoExecutes"
   ]);
   assertBlockedBoundary(reportOnlyEndpointImplementationPlanCases.tui, [
+    "callsEdge",
+    "dispatchesRepoAgents",
+    "createsAuthority"
+  ]);
+  assertBlockedBoundary(reportOnlyEndpointRuntimeCandidateCases.endpoint, [
+    "callsEdge",
+    "executesBehavior",
+    "createsAuthority"
+  ]);
+  assertBlockedBoundary(reportOnlyEndpointRuntimeCandidateCases.truth, [
+    "claimsTruth",
+    "claimsPayloadValidity",
+    "createsAuthority"
+  ]);
+  assertBlockedBoundary(reportOnlyEndpointRuntimeCandidateCases.mutation, [
+    "mutatesSourceRepo",
+    "mutatesLayer",
+    "writesProductionStorage"
+  ]);
+  assertBlockedBoundary(reportOnlyEndpointRuntimeCandidateCases.execution, [
+    "dispatchesRepoAgents",
+    "executesBehavior",
+    "callsPlatform"
+  ]);
+  assertBlockedBoundary(reportOnlyEndpointRuntimeCandidateCases.authority, [
+    "acceptsAdmission",
+    "createsAuthority",
+    "autoExecutes"
+  ]);
+  assertBlockedBoundary(reportOnlyEndpointRuntimeCandidateCases.tui, [
     "callsEdge",
     "dispatchesRepoAgents",
     "createsAuthority"
