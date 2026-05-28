@@ -2001,6 +2001,24 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
   const repairedOutboxResultIntakeDecisionTuiCase = packet.cases.find((entry) =>
     entry.caseId === "repo_agent_repaired_outbox_report_result_intake_operator_decision_tui_treated_as_action_authority"
   );
+  const repairedOutboxResultIntakeObservationTruthCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_repaired_outbox_report_result_intake_observation_treated_as_compliance_acceptance_or_result_truth"
+  );
+  const repairedOutboxResultIntakeObservationProofCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_repaired_outbox_report_result_intake_observation_treated_as_repair_success_or_agent_correctness"
+  );
+  const repairedOutboxResultIntakeObservationPayloadCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_repaired_outbox_report_result_intake_observation_treated_as_payload_or_layer_truth"
+  );
+  const repairedOutboxResultIntakeObservationMutationCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_repaired_outbox_report_result_intake_observation_treated_as_application_merge_mutation_or_storage"
+  );
+  const repairedOutboxResultIntakeObservationAuthorityCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_repaired_outbox_report_result_intake_observation_treated_as_dispatch_execution_authority_or_auto_execute"
+  );
+  const repairedOutboxResultIntakeObservationTuiCase = packet.cases.find((entry) =>
+    entry.caseId === "repo_agent_repaired_outbox_report_result_intake_observation_tui_treated_as_action_authority"
+  );
   const tuiCase = packet.cases.find((entry) =>
     entry.caseId === "repo_agent_seat_exchange_tui_treated_as_action_authority"
   );
@@ -2953,6 +2971,30 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
     report.blockedCaseIds.includes("repo_agent_repaired_outbox_report_result_intake_operator_decision_tui_treated_as_action_authority"),
     true
   );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_repaired_outbox_report_result_intake_observation_treated_as_compliance_acceptance_or_result_truth"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_repaired_outbox_report_result_intake_observation_treated_as_repair_success_or_agent_correctness"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_repaired_outbox_report_result_intake_observation_treated_as_payload_or_layer_truth"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_repaired_outbox_report_result_intake_observation_treated_as_application_merge_mutation_or_storage"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_repaired_outbox_report_result_intake_observation_treated_as_dispatch_execution_authority_or_auto_execute"),
+    true
+  );
+  assert.equal(
+    report.blockedCaseIds.includes("repo_agent_repaired_outbox_report_result_intake_observation_tui_treated_as_action_authority"),
+    true
+  );
   assert.equal(report.blockedCaseIds.includes("repo_agent_seat_exchange_tui_treated_as_action_authority"), true);
   assert.equal(outboxRepairGuidanceImportCase.stopStatus, "blocked");
   assert.equal(outboxRepairGuidanceImportCase.boundary.callsEdge, false);
@@ -3295,6 +3337,29 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
   assert.equal(repairedOutboxResultIntakeDecisionTuiCase.boundary.callsEdge, false);
   assert.equal(repairedOutboxResultIntakeDecisionTuiCase.boundary.dispatchesRepoAgents, false);
   assert.equal(repairedOutboxResultIntakeDecisionTuiCase.boundary.createsAuthority, false);
+  assert.equal(repairedOutboxResultIntakeObservationTruthCase.stopStatus, "blocked");
+  assert.equal(repairedOutboxResultIntakeObservationTruthCase.boundary.claimsTruth, false);
+  assert.equal(repairedOutboxResultIntakeObservationTruthCase.boundary.createsAuthority, false);
+  assert.equal(repairedOutboxResultIntakeObservationProofCase.stopStatus, "blocked");
+  assert.equal(repairedOutboxResultIntakeObservationProofCase.boundary.claimsTruth, false);
+  assert.equal(repairedOutboxResultIntakeObservationProofCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(repairedOutboxResultIntakeObservationProofCase.boundary.executesBehavior, false);
+  assert.equal(repairedOutboxResultIntakeObservationPayloadCase.stopStatus, "blocked");
+  assert.equal(repairedOutboxResultIntakeObservationPayloadCase.boundary.claimsPayloadValidity, false);
+  assert.equal(repairedOutboxResultIntakeObservationPayloadCase.boundary.mutatesLayer, false);
+  assert.equal(repairedOutboxResultIntakeObservationMutationCase.stopStatus, "blocked");
+  assert.equal(repairedOutboxResultIntakeObservationMutationCase.boundary.mutatesSourceRepo, false);
+  assert.equal(repairedOutboxResultIntakeObservationMutationCase.boundary.mutatesLayer, false);
+  assert.equal(repairedOutboxResultIntakeObservationMutationCase.boundary.writesProductionStorage, false);
+  assert.equal(repairedOutboxResultIntakeObservationAuthorityCase.stopStatus, "blocked");
+  assert.equal(repairedOutboxResultIntakeObservationAuthorityCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(repairedOutboxResultIntakeObservationAuthorityCase.boundary.executesBehavior, false);
+  assert.equal(repairedOutboxResultIntakeObservationAuthorityCase.boundary.callsPlatform, false);
+  assert.equal(repairedOutboxResultIntakeObservationAuthorityCase.boundary.createsAuthority, false);
+  assert.equal(repairedOutboxResultIntakeObservationTuiCase.stopStatus, "blocked");
+  assert.equal(repairedOutboxResultIntakeObservationTuiCase.boundary.callsEdge, false);
+  assert.equal(repairedOutboxResultIntakeObservationTuiCase.boundary.dispatchesRepoAgents, false);
+  assert.equal(repairedOutboxResultIntakeObservationTuiCase.boundary.createsAuthority, false);
   assert.equal(conventionCase.stopStatus, "blocked");
   assert.equal(conventionCase.boundary.dispatchesRepoAgents, false);
   assert.equal(conventionCase.boundary.executesBehavior, false);
