@@ -2153,6 +2153,20 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
     tui:
       "edge_node_profile_implementation_decision_tui_treated_as_action_authority"
   });
+  const reportOnlyEndpointImplementationPlanCases = findPressureCases(packet, {
+    endpoint:
+      "edge_report_only_endpoint_implementation_plan_treated_as_runtime_endpoint_or_transport",
+    truth:
+      "edge_report_only_endpoint_implementation_plan_treated_as_report_truth_acceptance_or_payload_validity",
+    mutation:
+      "edge_report_only_endpoint_implementation_plan_treated_as_repo_layer_storage_mutation",
+    execution:
+      "edge_report_only_endpoint_implementation_plan_treated_as_scheduler_dispatch_execution_or_platform",
+    authority:
+      "edge_report_only_endpoint_implementation_plan_treated_as_authority_enclosure_or_auto_execute",
+    tui:
+      "edge_report_only_endpoint_implementation_plan_tui_treated_as_action_authority"
+  });
   const tuiCase = packet.cases.find((entry) =>
     entry.caseId === "repo_agent_seat_exchange_tui_treated_as_action_authority"
   );
@@ -3814,6 +3828,36 @@ test("Lane D keeps repo-agent seat exchange convention boundaries fail-closed", 
     "autoExecutes"
   ]);
   assertBlockedBoundary(nodeProfileImplementationDecisionCases.tui, [
+    "callsEdge",
+    "dispatchesRepoAgents",
+    "createsAuthority"
+  ]);
+  assertBlockedBoundary(reportOnlyEndpointImplementationPlanCases.endpoint, [
+    "callsEdge",
+    "executesBehavior",
+    "createsAuthority"
+  ]);
+  assertBlockedBoundary(reportOnlyEndpointImplementationPlanCases.truth, [
+    "claimsTruth",
+    "claimsPayloadValidity",
+    "createsAuthority"
+  ]);
+  assertBlockedBoundary(reportOnlyEndpointImplementationPlanCases.mutation, [
+    "mutatesSourceRepo",
+    "mutatesLayer",
+    "writesProductionStorage"
+  ]);
+  assertBlockedBoundary(reportOnlyEndpointImplementationPlanCases.execution, [
+    "dispatchesRepoAgents",
+    "executesBehavior",
+    "callsPlatform"
+  ]);
+  assertBlockedBoundary(reportOnlyEndpointImplementationPlanCases.authority, [
+    "acceptsAdmission",
+    "createsAuthority",
+    "autoExecutes"
+  ]);
+  assertBlockedBoundary(reportOnlyEndpointImplementationPlanCases.tui, [
     "callsEdge",
     "dispatchesRepoAgents",
     "createsAuthority"

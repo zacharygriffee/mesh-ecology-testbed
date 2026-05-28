@@ -418,6 +418,12 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "edge_node_profile_implementation_decision_treated_as_scheduler_dispatch_execution_or_platform",
   "edge_node_profile_implementation_decision_treated_as_full_enclosure_or_auto_execute",
   "edge_node_profile_implementation_decision_tui_treated_as_action_authority",
+  "edge_report_only_endpoint_implementation_plan_treated_as_runtime_endpoint_or_transport",
+  "edge_report_only_endpoint_implementation_plan_treated_as_report_truth_acceptance_or_payload_validity",
+  "edge_report_only_endpoint_implementation_plan_treated_as_repo_layer_storage_mutation",
+  "edge_report_only_endpoint_implementation_plan_treated_as_scheduler_dispatch_execution_or_platform",
+  "edge_report_only_endpoint_implementation_plan_treated_as_authority_enclosure_or_auto_execute",
+  "edge_report_only_endpoint_implementation_plan_tui_treated_as_action_authority",
   "repo_agent_seat_exchange_tui_treated_as_action_authority"
 ]);
 
@@ -2875,6 +2881,42 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "Edge node profile implementation operator decision TUI projection treated as action authority, endpoint implementation authority, mutation authority, dispatch authority, execution authority, or approval",
     reasonCode: "blocked_case:edge_node_profile_implementation_decision_tui_treated_as_action_authority"
+  }),
+  Object.freeze({
+    caseId: "edge_report_only_endpoint_implementation_plan_treated_as_runtime_endpoint_or_transport",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Edge report-only endpoint implementation plan treated as runtime implementation, endpoint implementation, endpoint service, HTTP server, CLI command, watcher, network service, port binding, transport, inbox write, outbox import, result intake, or live endpoint behavior",
+    reasonCode: "blocked_case:edge_report_only_endpoint_implementation_plan_treated_as_runtime_endpoint_or_transport"
+  }),
+  Object.freeze({
+    caseId: "edge_report_only_endpoint_implementation_plan_treated_as_report_truth_acceptance_or_payload_validity",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Edge report-only endpoint implementation plan treated as report truth, result truth, result acceptance, payload validity, payload fetch, payload materialization, result application, or merge",
+    reasonCode: "blocked_case:edge_report_only_endpoint_implementation_plan_treated_as_report_truth_acceptance_or_payload_validity"
+  }),
+  Object.freeze({
+    caseId: "edge_report_only_endpoint_implementation_plan_treated_as_repo_layer_storage_mutation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Edge report-only endpoint implementation plan treated as repo mutation, Layer mutation, Layer truth, storage write, or production storage authority",
+    reasonCode: "blocked_case:edge_report_only_endpoint_implementation_plan_treated_as_repo_layer_storage_mutation"
+  }),
+  Object.freeze({
+    caseId: "edge_report_only_endpoint_implementation_plan_treated_as_scheduler_dispatch_execution_or_platform",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Edge report-only endpoint implementation plan treated as scheduler, runner, repo-agent invocation, dispatch, execution, Platform call, host-local consequence, or activation",
+    reasonCode: "blocked_case:edge_report_only_endpoint_implementation_plan_treated_as_scheduler_dispatch_execution_or_platform"
+  }),
+  Object.freeze({
+    caseId: "edge_report_only_endpoint_implementation_plan_treated_as_authority_enclosure_or_auto_execute",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Edge report-only endpoint implementation plan treated as identity authority, seat admission, authority transition, accepted continuity, full Edge enclosure proof, autonomy proof, event-family expansion, implementation authority, or auto-execute",
+    reasonCode: "blocked_case:edge_report_only_endpoint_implementation_plan_treated_as_authority_enclosure_or_auto_execute"
+  }),
+  Object.freeze({
+    caseId: "edge_report_only_endpoint_implementation_plan_tui_treated_as_action_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Edge report-only endpoint implementation plan TUI projection treated as action authority, endpoint implementation authority, mutation authority, dispatch authority, execution authority, or approval",
+    reasonCode: "blocked_case:edge_report_only_endpoint_implementation_plan_tui_treated_as_action_authority"
   }),
   Object.freeze({
     caseId: "repo_agent_seat_exchange_tui_treated_as_action_authority",
