@@ -384,6 +384,12 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "tui_mediated_local_seat_loop_with_repair_readiness_treated_as_dispatch_execution_authority_or_auto_execute",
   "tui_mediated_local_seat_loop_with_repair_readiness_treated_as_enclosure_or_autonomy_proof",
   "tui_mediated_local_seat_loop_with_repair_readiness_tui_treated_as_action_authority",
+  "tui_mediated_local_seat_loop_with_repair_repeat_measurement_treated_as_acceptance_or_truth",
+  "tui_mediated_local_seat_loop_with_repair_repeat_measurement_treated_as_repair_success_or_agent_correctness",
+  "tui_mediated_local_seat_loop_with_repair_repeat_measurement_treated_as_payload_layer_or_mutation",
+  "tui_mediated_local_seat_loop_with_repair_repeat_measurement_treated_as_dispatch_execution_authority_or_auto_execute",
+  "tui_mediated_local_seat_loop_with_repair_repeat_measurement_treated_as_enclosure_or_autonomy_proof",
+  "tui_mediated_local_seat_loop_with_repair_repeat_measurement_tui_treated_as_action_authority",
   "repo_agent_seat_exchange_tui_treated_as_action_authority"
 ]);
 
@@ -2637,6 +2643,42 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "TUI-mediated local seat loop with repair readiness TUI projection treated as action authority, acceptance authority, mutation authority, dispatch authority, execution authority, or approval",
     reasonCode: "blocked_case:tui_mediated_local_seat_loop_with_repair_readiness_tui_treated_as_action_authority"
+  }),
+  Object.freeze({
+    caseId: "tui_mediated_local_seat_loop_with_repair_repeat_measurement_treated_as_acceptance_or_truth",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-mediated local seat loop with repair repeat measurement treated as compliance acceptance, result acceptance, report truth, repaired report truth, accepted continuity, or result truth",
+    reasonCode: "blocked_case:tui_mediated_local_seat_loop_with_repair_repeat_measurement_treated_as_acceptance_or_truth"
+  }),
+  Object.freeze({
+    caseId: "tui_mediated_local_seat_loop_with_repair_repeat_measurement_treated_as_repair_success_or_agent_correctness",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-mediated local seat loop with repair repeat measurement treated as repair success proof, external agent correctness proof, delivery/read proof, or report correctness proof",
+    reasonCode: "blocked_case:tui_mediated_local_seat_loop_with_repair_repeat_measurement_treated_as_repair_success_or_agent_correctness"
+  }),
+  Object.freeze({
+    caseId: "tui_mediated_local_seat_loop_with_repair_repeat_measurement_treated_as_payload_layer_or_mutation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-mediated local seat loop with repair repeat measurement treated as payload validity, payload fetch, payload materialization, result application, merge, repo mutation, Layer mutation, Layer truth, Layer continuity, or storage write",
+    reasonCode: "blocked_case:tui_mediated_local_seat_loop_with_repair_repeat_measurement_treated_as_payload_layer_or_mutation"
+  }),
+  Object.freeze({
+    caseId: "tui_mediated_local_seat_loop_with_repair_repeat_measurement_treated_as_dispatch_execution_authority_or_auto_execute",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-mediated local seat loop with repair repeat measurement treated as scheduling, runner creation, launch, agent invocation, dispatch, execution, Platform call, host-local consequence, authority transition, event-family expansion, or auto-execute",
+    reasonCode: "blocked_case:tui_mediated_local_seat_loop_with_repair_repeat_measurement_treated_as_dispatch_execution_authority_or_auto_execute"
+  }),
+  Object.freeze({
+    caseId: "tui_mediated_local_seat_loop_with_repair_repeat_measurement_treated_as_enclosure_or_autonomy_proof",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-mediated local seat loop with repair repeat measurement treated as full Edge enclosure proof, autonomy proof, default authority, or Edge control of external repo-agent behavior",
+    reasonCode: "blocked_case:tui_mediated_local_seat_loop_with_repair_repeat_measurement_treated_as_enclosure_or_autonomy_proof"
+  }),
+  Object.freeze({
+    caseId: "tui_mediated_local_seat_loop_with_repair_repeat_measurement_tui_treated_as_action_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "TUI-mediated local seat loop with repair repeat measurement TUI projection treated as action authority, acceptance authority, mutation authority, dispatch authority, execution authority, or approval",
+    reasonCode: "blocked_case:tui_mediated_local_seat_loop_with_repair_repeat_measurement_tui_treated_as_action_authority"
   }),
   Object.freeze({
     caseId: "repo_agent_seat_exchange_tui_treated_as_action_authority",
