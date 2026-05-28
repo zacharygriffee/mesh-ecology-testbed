@@ -411,6 +411,13 @@ export const REQUIRED_REPO_FAMILY_SEAM_OVERCLAIM_CASES = Object.freeze([
   "edge_node_profile_implementation_candidate_treated_as_scheduler_dispatch_execution_or_platform",
   "edge_node_profile_implementation_candidate_treated_as_full_enclosure_or_auto_execute",
   "edge_node_profile_implementation_candidate_tui_treated_as_action_authority",
+  "edge_node_profile_implementation_decision_treated_as_planning_observation_or_implementation",
+  "edge_node_profile_implementation_decision_treated_as_identity_admission_or_authority",
+  "edge_node_profile_implementation_decision_treated_as_report_truth_result_acceptance_or_payload_validity",
+  "edge_node_profile_implementation_decision_treated_as_repo_layer_storage_mutation",
+  "edge_node_profile_implementation_decision_treated_as_scheduler_dispatch_execution_or_platform",
+  "edge_node_profile_implementation_decision_treated_as_full_enclosure_or_auto_execute",
+  "edge_node_profile_implementation_decision_tui_treated_as_action_authority",
   "repo_agent_seat_exchange_tui_treated_as_action_authority"
 ]);
 
@@ -2826,6 +2833,48 @@ const REQUIRED_CASES = Object.freeze([
     sourceFamily: "edge",
     attemptedOverclaim: "Edge node profile implementation candidate TUI projection treated as action authority, endpoint implementation authority, mutation authority, dispatch authority, execution authority, or approval",
     reasonCode: "blocked_case:edge_node_profile_implementation_candidate_tui_treated_as_action_authority"
+  }),
+  Object.freeze({
+    caseId: "edge_node_profile_implementation_decision_treated_as_planning_observation_or_implementation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Edge node profile implementation operator decision treated as planning observation/result, implementation, node profile runtime, endpoint implementation, endpoint creation, network service startup, port binding, transport, inbox write, outbox import, result intake, or live endpoint behavior",
+    reasonCode: "blocked_case:edge_node_profile_implementation_decision_treated_as_planning_observation_or_implementation"
+  }),
+  Object.freeze({
+    caseId: "edge_node_profile_implementation_decision_treated_as_identity_admission_or_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Edge node profile implementation operator decision treated as identity authority, seat admission, authority transition, accepted continuity, or Layer continuity",
+    reasonCode: "blocked_case:edge_node_profile_implementation_decision_treated_as_identity_admission_or_authority"
+  }),
+  Object.freeze({
+    caseId: "edge_node_profile_implementation_decision_treated_as_report_truth_result_acceptance_or_payload_validity",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Edge node profile implementation operator decision treated as report truth, result truth, result acceptance, payload validity, payload fetch, payload materialization, result application, or merge",
+    reasonCode: "blocked_case:edge_node_profile_implementation_decision_treated_as_report_truth_result_acceptance_or_payload_validity"
+  }),
+  Object.freeze({
+    caseId: "edge_node_profile_implementation_decision_treated_as_repo_layer_storage_mutation",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Edge node profile implementation operator decision treated as repo mutation, Layer mutation, Layer truth, storage write, or production storage authority",
+    reasonCode: "blocked_case:edge_node_profile_implementation_decision_treated_as_repo_layer_storage_mutation"
+  }),
+  Object.freeze({
+    caseId: "edge_node_profile_implementation_decision_treated_as_scheduler_dispatch_execution_or_platform",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Edge node profile implementation operator decision treated as scheduler, runner, repo-agent invocation, dispatch, execution, Platform call, host-local consequence, or activation",
+    reasonCode: "blocked_case:edge_node_profile_implementation_decision_treated_as_scheduler_dispatch_execution_or_platform"
+  }),
+  Object.freeze({
+    caseId: "edge_node_profile_implementation_decision_treated_as_full_enclosure_or_auto_execute",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Edge node profile implementation operator decision treated as full Edge enclosure proof, autonomy proof, event-family expansion, implementation authority, or auto-execute",
+    reasonCode: "blocked_case:edge_node_profile_implementation_decision_treated_as_full_enclosure_or_auto_execute"
+  }),
+  Object.freeze({
+    caseId: "edge_node_profile_implementation_decision_tui_treated_as_action_authority",
+    sourceFamily: "edge",
+    attemptedOverclaim: "Edge node profile implementation operator decision TUI projection treated as action authority, endpoint implementation authority, mutation authority, dispatch authority, execution authority, or approval",
+    reasonCode: "blocked_case:edge_node_profile_implementation_decision_tui_treated_as_action_authority"
   }),
   Object.freeze({
     caseId: "repo_agent_seat_exchange_tui_treated_as_action_authority",
